@@ -1,0 +1,44 @@
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+td,
+th {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+}
+
+tr {
+    background-color: white;
+}
+
+tr th {
+    color: #3f3f44;
+    background-color: #F2F4F8 !important;
+    padding: 0 0 0 10px;
+}
+
+tr td {
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.acciones .enlace {
+    width: 40px;
+    height: 40px;
+    color: #3f3f44;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F4F8 !important;
+}
+
+.acciones a:hover,
+.acciones a:link,
+.acciones a:focus {
+    outline: none !important;
+}

@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .container .left .enlace {
+    margin: 0 10px;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+    color: black;
+}
+
+nav .container .left .enlace:hover {
+    background-color: rgba(255, 193, 7, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+nav .container .left .enlace.active {
+    background-color: #ffc107;
+    transition: all 0.2s ease-in-out;
+    color: black;
+    font-weight: bold;
+}
+
+.count {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: #e97171;
+    top: 0;
+    right: 0;
+    transform: translate(10px, -8px);
+    border-radius: 50%;
+}
+
+.fa-bars {
+    display: none !important;
+}
+
+.card-detalle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-detalle .left {
+    width: 65%;
+}
+
+.card-detalle .right {
+    width: 35%;
+}
+
+.menu-mobile {
+    width: 100% !important;
+    height: 100vh !important;
+    position: fixed !important;
+    z-index: 100000 !important;
+    top: 0;
+    transform: translateY(120vh);
+    transition: all 0.5s ease-in-out;
+}
+
+.menu-mobile.active {
+    transform: translateY(0);
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-float-menu {
+    display: none !important;
+}
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {}
+
+/* Large devices (desktops, 992px and up)*/
+@media (max-width: 992px) {
+
+    /* Ciudadanos */
+    .left .enlace {
+        display: none;
+    }
+
+    .container-search {
+        display: flex;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+
+    .search {
+        width: 280px !important;
+    }
+
+    .search::placeholder {
+        font-size: 10px;
+    }
+
+    #content {
+        padding: 0 20px;
+    }
+
+    /* Detalle ciudadano */
+    .card-detalle {
+        display: block;
+    }
+
+    .card-detalle .left {
+        width: 100% !important;
+    }
+
+    .card-detalle .right {
+        width: 100% !important;
+    }
+
+    .btn-float-menu {
+        display: flex !important;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (max-width: 1200px) {}
