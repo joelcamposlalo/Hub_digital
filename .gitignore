@@ -12,3 +12,7 @@ npm-debug.log
 yarn-error.log
 /config/app.php
 .vscode
+public_html/storage
+public_html/hot
+/.vagrant
+
