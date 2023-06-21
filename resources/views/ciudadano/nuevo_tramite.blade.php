@@ -283,6 +283,30 @@
                 </div>
             </a>
         </div>
+
+
+        {{-- Card Bomberos --}}
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite">
+            <a style="text-decoration: none; color: gray;" href="{{url('ciudadano/tramites_bomberos')}}">
+                <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <div style="height: 110px" class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="{{asset('media/ilustrator/proteccion_civil.png')}}" width="120px" alt="Dirección Proteccion Civil y bomberos" aria-hidden="true">
+                            <span class="badge badge-warning mt-4 f-13">Dirección Proteccion Civil y bomberos</span>
+                        </div>
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <small class="text-center mt-3 f-13">Consulta los trámites</small>
+                            <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
+                                <i class="fas fa-arrow-right text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+
+
     </div>
 </div>
 <!-- Modal -->

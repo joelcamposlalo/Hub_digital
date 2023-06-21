@@ -76,7 +76,6 @@ Route::get('ciudadano/obras_publicas', 'ciudadano@obras_publicas')->middleware('
 Route::get('ciudadano/catastro', 'ciudadano@catastro')->middleware('ciudadano');
 Route::get('ciudadano/ordenamiento_territorio', 'ciudadano@ordenamiento_territorio')->middleware('ciudadano');
 route::get('ciudadano/expediente_unico_municipal','ciudadano@expediente_unico_municipal')->middleware('ciudadano');
-
 Route::get('ciudadano/medio_ambiente', 'ciudadano@medio_ambiente')->middleware('ciudadano');
 
 
@@ -557,3 +556,8 @@ Route::post('dictamen_rea/actualiza_solicitud', 'dictamen_rea@actualiza_solicitu
 Route::post('dictamen_rea/ingresa_tramite', 'dictamen_rea@ingresa_tramite')->middleware('ciudadano');
 Route::get('dictamen_rea/descargarPlano', 'dictamen_rea@descargarPlano')->middleware('ciudadano');
 Route::get('dictamen_rea/carta/{fecha}/{id_captura}', 'dictamen_rea@carta');
+
+/*
+* Rutas para tramites para bomberos
+*/
+Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');                                                                                  

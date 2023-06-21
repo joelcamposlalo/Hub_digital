@@ -194,6 +194,17 @@ class Ciudadano extends Controller
         return view('ciudadano/medio_ambiente', $vars);
     }
 
+    public function tramites_bomberos()
+    {
+        if (!session('primera_vista')) {
+            Redirect::to(url('ciudadano/tramites_bomberos'))->send();
+        }
+        session(['lastpage' => __FILE__]);
+        return view('ciudadano/tramites_bomberos');
+    }
+
+
+
     /**
      * Función para cambiar la foto 
      * de perfil 
