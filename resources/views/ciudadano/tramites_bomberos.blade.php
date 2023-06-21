@@ -48,7 +48,80 @@
                     </div>
                 </div>
             </a>
-        </div>    
+        </div>  
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos" data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+            <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal" data-target="#modal-carta">
+                <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="{{asset('media/ilustrator/proteccion_civil.png')}}"width="90px" alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                            <span class="badge badge-warning mt-4" aria-hidden="true">Segundo tramite</span>
+                        </div>
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <small class="text-center mt-2">Aqui es un nuevo tramite</small>
+                            <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
+                                <i class="fas fa-arrow-right text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>  
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos" data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+            <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal" data-target="#modal-carta">
+                <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="{{asset('media/ilustrator/proteccion_civil.png')}}"width="90px" alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                            <span class="badge badge-warning mt-4" aria-hidden="true">Tercer tramite</span>
+                        </div>
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <small class="text-center mt-2">Aqui es un nuevo tramite</small>
+                            <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
+                                <i class="fas fa-arrow-right text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos" data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+            <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal" data-target="#modal-carta">
+                <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="{{asset('media/ilustrator/proteccion_civil.png')}}"width="90px" alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                            <span class="badge badge-warning mt-4" aria-hidden="true">Cuarto tramite</span>
+                        </div>
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <small class="text-center mt-2">Aqui es un nuevo tramite</small>
+                            <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
+                                <i class="fas fa-arrow-right text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>  
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos" data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+            <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal" data-target="#modal-carta">
+                <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="{{asset('media/ilustrator/proteccion_civil.png')}}"width="90px" alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                            <span class="badge badge-warning mt-4" aria-hidden="true">Quinto tramite</span>
+                        </div>
+                        <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <small class="text-center mt-2">Aqui es un nuevo tramite</small>
+                            <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
+                                <i class="fas fa-arrow-right text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>  
+            
     </div>
 </div>
 

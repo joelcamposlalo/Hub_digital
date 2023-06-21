@@ -560,4 +560,9 @@ Route::get('dictamen_rea/carta/{fecha}/{id_captura}', 'dictamen_rea@carta');
 /*
 * Rutas para tramites para bomberos
 */
-Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');                                                                                  
+Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');   
+Route::get('bombero_uno/solicitud', 'bombero_uno@solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/ingresa_solicitud', 'bombero_uno@ingresa_solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/actualiza_solicitud', 'bombero_uno@actualiza_solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/ingresa_tramite', 'bombero_uno@ingresa_tramite')->middleware('ciudadano');
+                                                                               

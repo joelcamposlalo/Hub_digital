@@ -874,7 +874,7 @@ class Solicitudes_model extends Model
 
         $result = DB::table('solicitudes as s')
             ->select(DB::raw('ru.id_usuario, count(s.id_revisor) as total'))
-            ->rightJoin('roles_usuarijos as ru', 'ru.id_usuario', '=', 's.id_revisor')
+            ->rightJoin('roles_usuarios as ru', 'ru.id_usuario', '=', 's.id_revisor')
             ->join('roles_etapas as re', 're.id_rol_etapa', '=', 'ru.id_rol_etapa')
             ->join('usuarios as u', 'u.id_usuario', '=', 'ru.id_usuario')
             ->where('re.id_etapa',  $id_etapa)
