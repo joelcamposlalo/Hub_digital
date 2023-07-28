@@ -295,6 +295,7 @@
                             <span class="badge badge-warning mt-4 f-13">Dirección Proteccion Civil y bomberos</span>
                         </div>
                         <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <br>
                             <small class="text-center mt-3 f-13">Consulta los trámites</small>
                             <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;" class="circle mt-4 d-flex justify-content-center align-items-center">
                                 <i class="fas fa-arrow-right text-white"></i>
@@ -304,7 +305,7 @@
                 </div>
             </a>
         </div>
-        
+
 
 
     </div>
@@ -444,7 +445,7 @@
         var url = '{{url()->current()}}';
 
         /**
-            Menu         
+            Menu
          */
         $('#nav .menu').click(function() {
             $('.menu-mobile').addClass('open');
@@ -492,7 +493,7 @@
             $('#modal-terminos').modal('hide');
         });
 
-        /** 
+        /**
            Terminos y condiciones dinamicos
         */
 
@@ -515,9 +516,9 @@
         });
 
         /*
-         * 
+         *
          * Tutorial
-         * 
+         *
          */
 
         $('#tutorial').click(function() {

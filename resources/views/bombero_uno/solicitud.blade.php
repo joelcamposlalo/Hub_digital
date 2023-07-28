@@ -11,15 +11,20 @@
 @endsection
 
 @section('container')
-<h1 class="text-muted font m-0 bold c-primary-color">Tramite uno Bombero @isset($id_captura)@endisset</h1>
-<small class="font text-muted mb-5">Folio de trámite: {{$folio}}</small>
+<h1 class="text-muted text-center font m-0 bold c-primary-color">Trámite para capacitación @isset($id_captura)@endisset</h1>
+<br>
+<p class="font text-center text-muted mb-5">Folio de trámite: {{$folio}}</p>
+<div class="text-center">
+    <p>Por medio de este medio solicitarás una capacitación para incendios y primeros auxilios</p>
+    <p>Llena los siguientes campos y sigue los pasos a seguir</p>
+</div>
 
-<div class="row mt-5 etapas_info">
+<div class="d-flex justify-content-center etapas_info">
     <div class="col-md-9">
         <div class="etapas d-flex justify-content-center align-items-center">
             <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
-                <div class="etapa border @if($id_etapa == 65) process @else active @endif d-flex justify-content-center align-items-center">
-                    @if($id_etapa != 65 && $id_etapa != 72)
+                <div class="etapa border @if($id_etapa == 169) process @else active @endif d-flex justify-content-center align-items-center">
+                    @if($id_etapa != 169 && $id_etapa != 169)
                     <div class="success d-flex justify-content-center align-items-center">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
@@ -30,22 +35,22 @@
                 </div>
                 <small class="mt-1 mb-1 font c-carbon f-10">Solicitud</small>
             </div>
-            <div class="@if($id_etapa != 65) line @else line_off @endif"></div>
+            <div class="@if($id_etapa != 169) line @else line_off @endif"></div>
             <div style="width: 60px; transform: translateY(7px);" class="d-flex flex-column justify-content-center align-items-center">
-                <div class="etapa  @if($id_etapa == 67 || $id_etapa == 86) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
-                    @if($id_etapa == 67 || $id_etapa == 86)
+                <div class="etapa  @if($id_etapa == 169 || $id_etapa == 169) active text-white @elseif($id_etapa == 169) process @endif  border d-flex justify-content-center align-items-center">
+                    @if($id_etapa == 169 || $id_etapa == 169)
                     <div class="success d-flex justify-content-center align-items-center">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
                     </div>
                     @endif
-                    <small class="font f-15 bold @if($id_etapa == 67 || $id_etapa == 86) text-white @else text-muted @endif ">2</small>
+                    <small class="font f-15 bold @if($id_etapa == 169 || $id_etapa == 169) text-white @else text-muted @endif ">2</small>
                 </div>
-                <small class="mt-1 mb-1 font c-carbon f-10 text-center">Adjuntar requisitos</small>
+                <small class="mt-1 mb-1 font c-carbon f-10 text-center">Participaciones</small>
             </div>
-            <div class="@if($id_etapa == 69 || $id_etapa == 86) line @else line_off @endif"></div>
-            <div style="width: 60px; transform: translateY(7px);" class="d-flex flex-column justify-content-center align-items-center">
+            {{-- <div class="@if($id_etapa == 69 || $id_etapa == 86) line @else line_off @endif"></div> --}}
+            {{-- <div style="width: 60px; transform: translateY(7px);" class="d-flex flex-column justify-content-center align-items-center">
                 <div class="etapa  @if($id_etapa == 69) active @elseif($id_etapa == 18) process @endif border d-flex justify-content-center align-items-center">
                     @if($id_etapa == 69)
                     <div class="success d-flex justify-content-center align-items-center">
@@ -57,18 +62,18 @@
                     <small class="font f-15 bold @if($id_etapa == 69) text-white @else text-muted @endif">3</small>
                 </div>
                 <small class="mt-1 mb-1 font c-carbon f-10 text-center">Carta responsiva</small>
-            </div>
-            <div class="@if($id_etapa == 69) line @else line_off @endif"></div>
+            </div> --}}
+            <div class="@if($id_etapa == 169) line @else line_off @endif"></div>
             <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
-                <div class="etapa  @if($id_etapa == 69) active @endif border d-flex justify-content-center align-items-center">
-                    @if($id_etapa == 69)
+                <div class="etapa  @if($id_etapa == 169) active @endif border d-flex justify-content-center align-items-center">
+                    @if($id_etapa == 169)
                     <div class="success d-flex justify-content-center align-items-center">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        {{-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
+                        </svg> --}}
                     </div>
                     @endif
-                    <small class="font f-15 bold @if($id_etapa == 69) text-white @else text-muted @endif">4</small>
+                    <small class="font f-15 bold @if($id_etapa == 169) text-white @else text-muted @endif">3</small>
                 </div>
                 <small class="mt-1 mb-1 font c-carbon f-10 text-center">Terminado</small>
             </div>
@@ -76,8 +81,9 @@
 
     </div>
 </div>
+<br><br>
 
-<!-- Muestra la observacion cuando se regresa al ciudadano en movil-->
+{{-- <!-- Muestra la observacion cuando se regresa al ciudadano en movil-->
 @if($id_etapa == 72)
 <div class="card mt-3 d-block d-sm-none">
     <div class="card-header">
@@ -91,7 +97,7 @@
 @endif
 @if($id_etapa == 86)
 <div class="row descarga ocultar">
-    <div class="col-md-9 mt-4" id="top-5">
+    <div class="col" id="top-5">
         <div class="card  shadow-sm card_5 rounded border-none">
             <div class="card-header">
                 <small>Solicitud en cotejo</small>
@@ -115,10 +121,10 @@
         </div>
     </div>
 </div>
-@endif
-<div class="row position-relative">
+@endif --}}
+{{-- <div class="row position-relative">
 
-    <div class="col-md-3 mt-4 position-absolute" style="right: 0;">
+     <div class="col-md-3 mt-4 position-absolute" style="right: 0;">
         <!-- Aqui va un mapa -->
         <div class="border rounded mapa1" id="map"></div>
 
@@ -140,54 +146,50 @@
         </div>
         @endif
     </div>
-</div>
+</div> --}}
 
 <div class="row position-relative">
-    <div class="col-md-9 mt-4" id="top-2">
+    <div class="col" id="top-2">
+
         <div class="card  shadow-sm card_1 rounded border-none">
+
             <div class="card-header">
-                <small>Datos del predio</small>
+                <small>Datos del solicitante</small>
             </div>
             <div class="card-body">
                 <form id=form_2 method="post">
                     <div class="row">
-                        <div class="col-md-12 mt-2">
-                            <label for="calle"><small>Calle</small></label>
-                            <input name="calle" id="calle" value="{{((isset($calle))?$calle:'')}}" class="ab-form background-color rounded border capitalize calle" type="text" required>
+                        <div class="col">
+                            <label for="Nombre"><small>Nombre</small></label>
+                            <input name="Nombre" id="Nombre" value="{{((isset($Nombre))?$calle:'')}}" class="ab-form background-color rounded border capitalize nombre" type="text" required>
+                        </div>
+                        <div class="col">
+                            <label for="apellido"><small>Apellidos</small></label>
+                            <input name="apellido" id="apellido" value="{{((isset($apellido))?$calle:'')}}" class="ab-form background-color rounded border capitalize apellido" type="text" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 mt-2">
-                            <label for="numero"><small>Número exterior</small></label>
-                            <input name="numero" id="numero" value="{{((isset($numero))?$numero:'')}}" class="ab-form background-color rounded border numero" type="text" data-parsley-type="number" required>
+                        <div class="col">
+                            <label for="email"><small>Correo Electronico</small></label>
+                            <input name="email" id="email" value="{{((isset($email))?$numero:'')}}" class="ab-form background-color rounded border email" type="email" data-parsley-type="email" required>
                         </div>
-                        <div class="col-md-3 mt-2">
-                            <label for="interior"><small>Número interior</small></label>
-                            <input name="interior" id="interior" value="{{((isset($interior))?$interior:'')}}" class="ab-form background-color rounded border capitalize interior" type="text">
-                        </div>
-                        <div class="col-md-3 mt-2">
-                            <label for="manzana"><small>Manzana</small></label>
-                            <input name="manzana" id="manzana" value="{{((isset($manzana))?$manzana:'')}}" class="ab-form background-color rounded border capitalize manzana" type="text" data-parsley-maxlength="10">
-                        </div>
-                        <div class="col-md-3 mt-2">
-                            <label for="lote"><small>Lote</small></label>
-                            <input name="lote" id="lote" value="{{((isset($lote))?$lote:'')}}" class="ab-form background-color rounded border capitalize lote" data-parsley-maxlength="10" type="text">
+                        <div class="col">
+                            <label for="telefono"><small>Teléfono</small></label>
+                            <input name="telefono" id="telefono" value="{{((isset($telefono))?$interior:'')}}" class="ab-form background-color rounded border capitalize telefono" type="number">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 mt-2">
-                            <label for="fraccionamiento"><small>Población/Fraccionamiento/Colonia</small></label>
-                            <input name="fraccionamiento" id="fraccionamiento" value="{{((isset($fraccionamiento))?$fraccionamiento:'')}}" class="ab-form background-color rounded border capitalize fraccionamiento" type="text" required>
+                        <div class="col">
+                            <label for="colonia"><small>Colonia</small></label>
+                            <input name="colonia" id="colonia" value="{{((isset($colonia))?$fraccionamiento:'')}}" class="ab-form background-color rounded border capitalize fraccionamiento" type="text" required>
                         </div>
-                        <div class="col-md-6 mt-2">
-                            <label for="condominio"><small>Condominio</small></label>
-                            <input name="condominio" id="condominio" value="{{((isset($condominio))?$condominio:'')}}" class="ab-form background-color rounded border capitalize condominio" type="text">
+                        <div class="col">
+                            <label for="municipio"><small>municipio</small></label>
+                            <input name="municipio" id="municipio" value="{{((isset($municipio))?$condominio:'')}}" class="ab-form background-color rounded border capitalize condominio" type="text">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mt-2">
-                            <label for="cuenta"><small>Cuenta Predial</small></label>
-                            <input name="cuenta" id="cuenta" value="{{((isset($cuenta))?$cuenta:'')}}" class="ab-form background-color rounded border capitalize cuenta" type="text" required>
+                        <div class="col">
+                            <label for="domicilio"><small>domicilio</small></label>
+                            <input name="domicilio" id="domicilio" value="{{((isset($domicilio))?$condominio:'')}}" class="ab-form background-color rounded border capitalize condominio" type="text">
                         </div>
                     </div>
                     <div class="row">
@@ -198,15 +200,6 @@
                         <div class="col-md-6 mt-2">
                             <label for="calle_2"><small>Y la calle</small></label>
                             <input name="calle_2" id="calle_2" value="{{((isset($calle_2))?$calle_2:'')}}" class="ab-form background-color rounded border capitalize calle_2" type="text">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mt-2">
-                            <label for="tipo_tramite"><small></small></label>
-                            <select name="tipo_tramite" id="tipo_tramite" class="ab-form background-color rounded border tipo_tramite" required>
-                                <option value="condominios">Tipo de tramite uno</option>
-                                <option value="subdivision">Tipo de tramite dos</option>
-                            </select>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -222,9 +215,9 @@
         </div>
     </div>
 </div>
-
+{{--
 <div class="row">
-    <div class="col-md-9 mt-4" id="top-3">
+    <div class="col" id="top-3">
         <div class="card  shadow-sm card_3 rounded border-none">
             <div class="card-header">
                 <small>Datos del propietario</small>
@@ -275,14 +268,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <div class="row">
-    <div class="col-md-9 mt-4" id="top-4">
+    <div class="col" id="top-4">
         <div class="card  shadow-sm card_4 rounded border-none">
             <div class="card-header">
-                <small>Archivos requeridos</small>
+                <small>Participantes</small>
             </div>
             <div class="card-body">
                 <div class="alert alert-warning alert-dismissible fade show mt-4 notas" role="alert">
@@ -299,7 +292,7 @@
                     @csrf
                     <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
                         <table class="w-100">
-                            @foreach($files['terminados'] as $file)
+                             @foreach($files['terminados'] as $file)
                             <tr class="w-100 predio">
                                 <td class="f-14">
                                     @if($file->extension == 'pdf')
@@ -352,7 +345,7 @@
                                 </td>
                             </tr>
                             @endforeach
-                            @foreach($files['pendientes'] as $key => $file)
+                             @foreach($files['pendientes'] as $key => $file)
                             <tr class="w-100 predio">
                                 <td class="f-14">
                                     <a class="enlace_box" href="#!">
@@ -450,8 +443,8 @@
     var map;
     var n = 0;
 
-    //Valida si esta en la versión mobile 
-    //Valida si esta en la versión mobile 
+    //Valida si esta en la versión mobile
+    //Valida si esta en la versión mobile
     if (is_mobile()) {
         $('.mapa1').remove();
     } else {
@@ -533,9 +526,9 @@
             'wrapAround': true
         })
 
-        /** 
+        /**
          * Menu de optiones
-         * 
+         *
          */
 
         $('#nav .menu').click(function() {
@@ -547,9 +540,9 @@
         });
 
         /**
-         * 
+         *
          * Paginado de prediales
-         * 
+         *
          */
 
         $('.anterior').click(function() {
@@ -584,19 +577,19 @@
         });
 
         /**
-         * 
-         * Inicializamos la validación de 
+         *
+         * Inicializamos la validación de
          * los formularios
-         * 
+         *
          */
 
         $('#form_2').parsley();
         $('#form_3').parsley();
 
         /**
-         * 
+         *
          * Completando la primera parte
-         * 
+         *
          */
 
 
@@ -621,9 +614,9 @@
         });
 
         /**
-         * 
+         *
          * Completando la segunda parte
-         * 
+         *
          */
 
         $('#form_2').submit(async function(e) {
@@ -640,9 +633,9 @@
         });
 
         /**
-         * 
+         *
          * Completando la tercera parte
-         * 
+         *
          */
 
         $('#form_3').submit(async function(e) {
@@ -675,7 +668,7 @@
             $('.btn-form4').html('Guardar');
             if (id_solicitud > 0) {
                 //console.log(tipo_tramite);
-                //formdata.append('id_solicitud', id_solicitud);                
+                //formdata.append('id_solicitud', id_solicitud);
                 var formdata = new FormData();
                 formdata.append('cuenta', cuenta);
                 formdata.append('calle', calle);
@@ -702,7 +695,7 @@
                 } else {
                     formdata.append('etapa', id_etapa);
                 }
-               
+
                 if ($('#id_captura').val() == "") {
                     //console.log(formdata);
                     var res = await axios.post('{{url("dictamen_finca_antigua/ingresa_solicitud")}}',
@@ -857,9 +850,9 @@
     });
 
     /**
-     * 
+     *
      * Paginado de prediales
-     * 
+     *
      */
 
     function agregar_poligono(geopolygon) {
@@ -982,7 +975,7 @@
         $('.correo').val('');
 
         $('.suelo').val('');
-        //agregar_poligono(null);        
+        //agregar_poligono(null);
     }
 
 
@@ -1008,15 +1001,15 @@
         $('.correo').val('');
 
         $('.suelo').val('');
-        //agregar_poligono(null);        
+        //agregar_poligono(null);
     }
 
 
     /**
-     * 
-     * Total de archivos requeridos 
+     *
+     * Total de archivos requeridos
      * faltantes
-     * 
+     *
      */
 
     function fileIsRequired() {

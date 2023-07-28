@@ -105,7 +105,7 @@
         </form>
         <div class="right b-primary-color">
             <img src="{{asset('media/undraw/login.svg')}}" width="200px" alt="iniciar sesión">
-            <h4 class="font text-white text-center mt-4">Tus trámites dondequiera que estés</h4>
+            <h4 class="font text-white text-center mt-4">Tus trámites <br> donde quiera que estés</h4>
             <small class="text-center text-white font">Gestiona y da seguimiento desde cualquier lugar.</small>
         </div>
     </div>

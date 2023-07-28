@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
  * -----------------------------------------------------------
  * Rutas de cuenta
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con inicio de sesión
- * crear cuenta, recuperar contraseña, etc 
+ * crear cuenta, recuperar contraseña, etc
  */
 
 Route::get('/', 'cuenta@index');
@@ -49,9 +49,9 @@ Route::get('cuenta/preguntas_respuestas', 'cuenta@preguntas_respuestas');
  * -----------------------------------------------------------
  * Rutas de ciudadano
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con el ciudadano, 
- * trámites, expedientes, etc.  
+ *
+ * Todas las rutas que tengan que ver con el ciudadano,
+ * trámites, expedientes, etc.
  */
 
 Route::get('ciudadano/expediente', 'ciudadano@expediente')->middleware('ciudadano');
@@ -88,9 +88,9 @@ Route::get('ciudadano/medio_ambiente', 'ciudadano@medio_ambiente')->middleware('
  * -----------------------------------------------------------
  * Rutas de acreditación
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con el trámite de Acreditación de movilidad
- * 
+ *
  */
 
 Route::get('acreditaciones/solicitud', 'acreditaciones@solicitud')->middleware('ciudadano');
@@ -107,10 +107,10 @@ Route::get('acreditaciones/acreditacion_movilidad/{id_solicitud}', 'acreditacion
 
 /**
  * -----------------------------------------------------------
- * Rutas de Trabajos menores 
+ * Rutas de Trabajos menores
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con el trámite de Trabajos 
+ *
+ * Todas las rutas que tengan que ver con el trámite de Trabajos
  * menores
  */
 
@@ -126,8 +126,8 @@ Route::get('trabajos_menores/carta/{fecha}/{id_captura}', 'trabajos_menores@cart
  * -----------------------------------------------------------
  * Rutas de Licencia de contruccion
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con el trámite de Trabajos 
+ *
+ * Todas las rutas que tengan que ver con el trámite de Trabajos
  * menores
  */
 
@@ -148,8 +148,8 @@ Route::get('licencia_construccion/carta/{fecha}/{id_captura}', 'licencia_constru
  * -----------------------------------------------------------
  * Rutas de Certificado de Alineamiento y No. Oficial
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con el trámite de 
+ *
+ * Todas las rutas que tengan que ver con el trámite de
  * Certificado de Alineamiento y No. Oficial
  */
 
@@ -171,7 +171,7 @@ Route::get('alineamiento_num_oficial/solicitud_multi', 'alineamiento_num_oficial
  * -----------------------------------------------------------
  * Rutas de Revisión de Proyecto en Línea
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con el trámite de revisión de proyecto
  * en línea de obra pública
  */
@@ -194,8 +194,8 @@ Route::get('revision_proyecto/carta/{fecha}/{id_captura}', 'revision_proyecto@ca
  * -----------------------------------------------------------
  * Rutas de revisor
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con los usuarios revisor 
+ *
+ * Todas las rutas que tengan que ver con los usuarios revisor
  */
 
 Route::get('revisor/solicitudes', 'revisor@solicitudes')->middleware('revisor');
@@ -215,8 +215,8 @@ Route::post('revisor/put', 'revisor@put');
  * -----------------------------------------------------------
  * Rutas de Dias inhabiles
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con los usuarios revisor 
+ *
+ * Todas las rutas que tengan que ver con los usuarios revisor
  */
 
 
@@ -233,9 +233,9 @@ Route::post('dias_inhabiles/remove', 'dias_inhabiles@remove');
  * -----------------------------------------------------------
  * Administrador
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con los usuarios
- *  administrador 
+ *  administrador
  */
 
 Route::get('administrador/ciudadanos', 'administrador@ciudadanos')->middleware('administrador');
@@ -253,10 +253,10 @@ Route::get('administrador/dias_inhabiles', 'administrador@dias_inhabiles')->midd
  * -----------------------------------------------------------
  * Catastro
  * -----------------------------------------------------------
- * 
- * Todas las rutas que tengan que ver con 
+ *
+ * Todas las rutas que tengan que ver con
  * catastro
- * 
+ *
  */
 
 Route::post('catastro/get_by_cuenta', 'catastro@get_by_cuenta');
@@ -272,7 +272,7 @@ Route::post('catastro/get_adeudo_cuenta', 'catastro@get_adeudo_cuenta');
  * -----------------------------------------------------------
  * Solicitudes
  * -----------------------------------------------------------
- * 
+ *
  * Mostrar las solicitudes pendientes
  */
 Route::get('solicitudes/consulta_solicitudes/{id_solicitud}', 'solicitudes@consulta_solicitudes')->middleware('ciudadano');
@@ -291,9 +291,9 @@ Route::post('solicitud/detalles', 'solicitudes@detalles');
  * -----------------------------------------------------------
  * Prediales
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::post('predios/post', 'predios@post');
@@ -310,9 +310,9 @@ Route::post('predios/get_all', 'predios@get_all');
  * -----------------------------------------------------------
  * Notificaciones
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::post('notificaciones/visto', 'notificaciones@visto');
@@ -327,9 +327,9 @@ Route::post('notificaciones/eliminar', 'notificaciones@eliminar');
  * -----------------------------------------------------------
  * Graficas
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::post('graficas/solicitudes_estatus', 'graficas@solicitudes_estatus');
@@ -343,9 +343,9 @@ Route::post('graficas/solicitudes_revisor', 'graficas@solicitudes_revisor');
  * -----------------------------------------------------------
  * Prelicencias
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::get('prelicencias/solicitud', 'prelicencias@solicitud')->middleware('ciudadano');
@@ -366,9 +366,9 @@ Route::get('prelicencias/reenviar/{id_solicitud}', 'prelicencias@reenviar')->mid
  * -----------------------------------------------------------
  * Parkimetros
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::post('parkimetros/get_multas', 'parkimetros@get_multas');
@@ -382,9 +382,9 @@ Route::post('parkimetros/get_multas', 'parkimetros@get_multas');
  * -----------------------------------------------------------
  * licencias
  * -----------------------------------------------------------
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 Route::get('licencias/solicitud', 'licencias@solicitud')->middleware('ciudadano');
@@ -401,8 +401,8 @@ Route::post('licencias/ingresa_solicitud_uso_suelo', 'licencias@ingresa_solicitu
  * -----------------------------------------------------------
  * Consulta uso de suelo
  * -----------------------------------------------------------
- * 
- * 
+ *
+ *
  */
 
 Route::get('consulta_uso_suelo/pre_consulta', 'consulta_uso_suelo@pre_consulta')->middleware('ciudadano');
@@ -417,8 +417,8 @@ Route::get('consulta_uso_suelo/pre_consulta', 'consulta_uso_suelo@pre_consulta')
  * -----------------------------------------------------------
  * Horas extras Padrón y Licencias
  * -----------------------------------------------------------
- * 
- * 
+ *
+ *
  */
 
 Route::get('horas_extras/solicitud', 'horas_extras_pyl@solicitud')->middleware('ciudadano');
@@ -439,8 +439,8 @@ Route::get('horas_extras/orden', 'horas_extras_pyl@orden');
  * -----------------------------------------------------------
  * Expediente Unico Municipal
  * -----------------------------------------------------------
- * 
- * 
+ *
+ *
  */
 Route::get('expediente_unico_municipal/solicitud', 'expediente_unico_municipal@solicitud')->middleware('ciudadano');
 Route::post('expediente_unico_municipal/ingresa_tramite', 'expediente_unico_municipal@ingresa_tramite')->middleware('ciudadano');
@@ -499,7 +499,7 @@ Route::post('dictamen_img_urbana/ingresa_tramite', 'dictamen_img_urbana@ingresa_
  * -----------------------------------------------------------
  * Rutas de certificado de habilidad
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con el trámite de
  *  certificado de habilidad
  */
@@ -517,7 +517,7 @@ Route::get('certificado_habitabilidad/carta/{fecha}/{id_captura}', 'certificado_
  * -----------------------------------------------------------
  * Rutas de constancia de habilidad
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con el trámite de
  *  constancia de habilidad
  */
@@ -534,7 +534,7 @@ Route::get('constancia_habitabilidad/carta/{fecha}/{id_captura}', 'constancia_ha
  * -----------------------------------------------------------
  * Rutas de Revisión de Proyecto en Línea Ordenamiento del Territorio
  * -----------------------------------------------------------
- * 
+ *
  * Todas las rutas que tengan que ver con el trámite de revisión de proyecto
  * en línea de obra pública
  */
@@ -560,9 +560,11 @@ Route::get('dictamen_rea/carta/{fecha}/{id_captura}', 'dictamen_rea@carta');
 /*
 * Rutas para tramites para bomberos
 */
-Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');   
-Route::get('bombero_uno/solicitud', 'bombero_uno@solicitud')->middleware('ciudadano');
+Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');
+Route::get('bombero_uno/solicitud', 'Capacitaciones_Proteccion_Civil@solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/ingresa_solicitud', 'bombero_uno@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/actualiza_solicitud', 'bombero_uno@actualiza_solicitud')->middleware('ciudadano');
-Route::post('bombero_uno/ingresa_tramite', 'bombero_uno@ingresa_tramite')->middleware('ciudadano');
-                                                                               
+Route::get('bombero_uno/capacitacion', 'Capacitaciones_Proteccion_Civil@ingresa_tramite')->middleware('ciudadano');
+
+
+
