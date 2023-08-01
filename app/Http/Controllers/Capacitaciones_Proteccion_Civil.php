@@ -15,8 +15,6 @@ use PDF;
 
 class Capacitaciones_Proteccion_Civil extends Controller
 {
-
-
     public function solicitud()
     {
         if ($folio = Capacitaciones_Model::solicitud()) {
@@ -65,7 +63,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
                     echo json_encode("0");
                 } else {
 
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 68, 'pendiente', $obj->idcaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 171, 'pendiente', $obj->idcaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->idcaptura);
                 }
@@ -81,20 +79,20 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
     public function actualiza_solicitud(Request $request)
     {
-
+echo "sdf";exit;
         if ($response = Capacitaciones_Model::actualiza_solicitud($request)) {
 
             $obj = $response[0];
 
             if ($obj->idcaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 66);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 171);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
                     //Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 2, 'pendiente');
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 66, 'pendiente', $obj->idcaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 169, 'pendiente', $obj->idcaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->idcaptura);
                 }
@@ -106,6 +104,9 @@ class Capacitaciones_Proteccion_Civil extends Controller
             http_response_code(503);
         }
     }
+
+
+
 
 
 
@@ -150,3 +151,4 @@ public static function consulta_requisitos_op($id_solicitud)
         return $result;
     }
 }
+

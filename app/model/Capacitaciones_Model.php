@@ -17,14 +17,14 @@ class Capacitaciones_Model extends Model
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
-            $result = Solicitudes_model::consulta_ultimo_folio(12);
+            $result = Solicitudes_model::consulta_ultimo_folio(27);
             $folio = $result[0]->folio;
         } else {
-            $id_revisor = Solicitudes_model::balanza(65);
+            $id_revisor = Solicitudes_model::balanza(169);
             $folio = DB::table('solicitudes')->insertGetId([
-                'id_tramite' => 12,
+                'id_tramite' => 27,
                 'id_usuario' => session('id_usuario'),
-                'id_etapa'   =>  65,
+                'id_etapa'   =>  169,
                 'estatus'    =>  'pendiente',
                 'id_revisor' =>  $id_revisor
             ], 'id_solicitud');
@@ -33,8 +33,8 @@ class Capacitaciones_Model extends Model
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
                 'id_revisor'    => $id_revisor,
-                'id_tramite'    => 12,
-                'id_etapa'      => 65,
+                'id_tramite'    => 27,
+                'id_etapa'      => 170,
                 'estatus'       => 'pendiente',
 
             ];
@@ -51,7 +51,7 @@ class Capacitaciones_Model extends Model
 
     public static function ingresa_solicitud($request)
     {
-        $sql = "EXECUTE dfa_inserta_dictfinca ?,?,?,?,?,
+        $sql = "EXECUTE proteccion_capacitaciones_inserta ?,?,?,?,?,
         ?,?,?,?,?,
         ?,?,?,?,?,
         ?,?,?,?,?
@@ -91,8 +91,4 @@ class Capacitaciones_Model extends Model
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
     }
-
-
-
-
 }

@@ -562,9 +562,6 @@ Route::get('dictamen_rea/carta/{fecha}/{id_captura}', 'dictamen_rea@carta');
 */
 Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middleware('ciudadano');
 Route::get('bombero_uno/solicitud', 'Capacitaciones_Proteccion_Civil@solicitud')->middleware('ciudadano');
-Route::post('bombero_uno/ingresa_solicitud', 'bombero_uno@ingresa_solicitud')->middleware('ciudadano');
-Route::post('bombero_uno/actualiza_solicitud', 'bombero_uno@actualiza_solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/actualiza_solicitud', 'Capacitaciones_Proteccion_Civil@actualiza_solicitud')->middleware('ciudadano');
 Route::get('bombero_uno/capacitacion', 'Capacitaciones_Proteccion_Civil@ingresa_tramite')->middleware('ciudadano');
-
-
-

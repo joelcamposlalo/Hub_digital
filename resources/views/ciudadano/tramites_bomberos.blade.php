@@ -31,7 +31,7 @@
 
 <div id="section">
     <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Nuevos Bomberos" data-img="proteccion_civil.png" data-url="bombero_uno/solicitud">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitacion" data-img="proteccion_civil.png" data-url="bombero_uno/solicitud">
             <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal" data-target="#modal-carta">
                 <div style="height: 260px;" class="card card-hover-effect">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">

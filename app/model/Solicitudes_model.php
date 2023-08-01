@@ -17,15 +17,15 @@ class Solicitudes_model extends Model
 
     public static function consulta_solicitud($id_solicitud)
     {
-        
-      
+
+
         return DB::table('solicitudes as s')
             ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
             ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
             ->where('s.id_usuario', '=', session('id_usuario'))
             ->where('s.id_solicitud', '=', $id_solicitud)
             ->where('s.id_tramite', '=', DB::raw('e.id_tramite'))
-            ->get();        
+            ->get();
     }
 
     public static function consulta_datos_solicitud($id_solicitud, $id_tramite, $etapa)
@@ -48,11 +48,11 @@ class Solicitudes_model extends Model
 
 
     /**
-     * 
-     * Obtener solicitudes para el listado depediendo 
+     *
+     * Obtener solicitudes para el listado depediendo
      * el rol
-     * 
-     * @param rol 
+     *
+     * @param rol
      * @return object
      *
      */
@@ -61,8 +61,8 @@ class Solicitudes_model extends Model
     public static function get_all($rol, $search = '', $filtro = '', $filtro_2 = '')
     {
 
-        
-        
+
+
         switch ($rol) {
             case 'ciudadano':
                 //var_dump(DB::connection());
@@ -73,8 +73,8 @@ class Solicitudes_model extends Model
                         return DB::table('solicitudes as s')
                             ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                             ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
-                            ->select(DB::raw('s.*,t.*,e.*, case 
-                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6 
+                            ->select(DB::raw('s.*,t.*,e.*, case
+                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6
                         or s.id_tramite = 13 or s.id_tramite = 14  or s.id_tramite = 15
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
@@ -83,15 +83,15 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=8 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=7 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=5 then coalesce((select ds.dato from datos_solicitudes ds
@@ -118,12 +118,12 @@ class Solicitudes_model extends Model
                         when s.id_tramite=9 then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
-                        when s.id_tramite=3 then 
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
                         limit 1
-                        ),                        
+                        ),
                         coalesce(
                             (select ds.dato from datos_solicitudes ds
                             where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_acreditacion\'
@@ -162,8 +162,8 @@ class Solicitudes_model extends Model
                         return DB::table('solicitudes as s')
                             ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                             ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
-                            ->select(DB::raw('s.*,t.*,e.*, case 
-                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6  
+                            ->select(DB::raw('s.*,t.*,e.*, case
+                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6
                         or s.id_tramite = 13 or s.id_tramite = 14  or s.id_tramite = 15
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
@@ -181,43 +181,43 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=8 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=7 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=9 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=5 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=10 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=13 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=14 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
-                        when s.id_tramite=3 then 
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
                         limit 1
-                        ),                        
+                        ),
                         coalesce(
                             (select ds.dato from datos_solicitudes ds
                             where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_acreditacion\'
@@ -241,14 +241,14 @@ class Solicitudes_model extends Model
                             ->get();
                     }
                 } else {
-                    
+
 
                     return DB::table('solicitudes as s')
                         ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                         ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
-                        ->select(DB::raw('s.*,t.*,e.*, case 
-                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6 
-                        or s.id_tramite=6  
+                        ->select(DB::raw('s.*,t.*,e.*, case
+                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6
+                        or s.id_tramite=6
                         or s.id_tramite = 13 or s.id_tramite = 14   or s.id_tramite = 15
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
@@ -263,43 +263,43 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=8 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_permiso\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=7 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=5 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=10 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=9 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=13 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=14 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
-                        when s.id_tramite=3 then 
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
                         limit 1
-                        ),                        
+                        ),
                         coalesce(
                             (select ds.dato from datos_solicitudes ds
                             where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_acreditacion\'
@@ -324,31 +324,31 @@ class Solicitudes_model extends Model
                 }
                 break;
             case 'revisor':
-                
+
                 //if ($filtro == 'en revision') {
 
                     return DB::table('solicitudes as s')
                         ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                         ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
                         ->join('roles_etapas as re', 're.id_tramite', '=', 't.id_tramite')
-                        //->join('roles_etapas as ree', 'ree.id_etapa', '=', 'e.id_etapa')                        
+                        //->join('roles_etapas as ree', 'ree.id_etapa', '=', 'e.id_etapa')
                         //->join('roles_usuarios as ru', 're.id_rol_etapa', '=', 'ru.id_rol_etapa')
-                        ->select(DB::raw('s.*,t.*,e.*,                        
-                        case 
+                        ->select(DB::raw('s.*,t.*,e.*,
+                        case
                         when s.id_tramite in(1,2,5,6,9,11,12,13,14,15)
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
-                                                
+
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=7 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\'
                         order by created_at desc
-                        limit 1),null)                        
-                        when s.id_tramite=3 then 
+                        limit 1),null)
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
@@ -361,7 +361,7 @@ class Solicitudes_model extends Model
                             limit 1
                         ),null)
                         ) else null end as id_captura'))
-                        
+
                         ->whereColumn('re.id_etapa', '=', 'e.id_etapa')
                         ->where([
                             ['t.tramite', 'ILIKE', '%' . $search . '%'],
@@ -376,7 +376,7 @@ class Solicitudes_model extends Model
                             ['s.id_solicitud', '=', intval($search)],
                             ['s.estatus', '=', $filtro],
                             ['t.id_tramite', '!=', 4],
-                            ['s.id_revisor', '=', session('id_usuario')]                            
+                            ['s.id_revisor', '=', session('id_usuario')]
                         ])
                         ->orWhere([
                             ['s.eliminado', '=', false],
@@ -384,7 +384,7 @@ class Solicitudes_model extends Model
                             ['s.estatus', '=', $filtro],
                             ['t.id_tramite', '=', 4],
                             ['re.id_tramite', '=', 4]
-                            
+
 
                         ])
                         ->orWhere([
@@ -393,7 +393,7 @@ class Solicitudes_model extends Model
                             ['s.eliminado', '=', false],
                             ['t.id_tramite', '=', 4],
                             ['re.id_tramite', '=', 4]
-                            
+
 
                         ])
                         ->limit(50)
@@ -405,8 +405,8 @@ class Solicitudes_model extends Model
                         ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
                         ->join('roles_etapas as re', 're.id_tramite', '=', 't.id_tramite')
                         //->join('roles_usuarios as ru', 'ru.id_rol_etapa', '=', 're.id_rol_etapa')
-                        ->select(DB::raw('s.*,t.*,e.*, case 
-                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6 
+                        ->select(DB::raw('s.*,t.*,e.*, case
+                        when s.id_tramite=1 or s.id_tramite=5 or s.id_tramite=6
                         or s.id_tramite = 13 or s.id_tramite = 14
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
@@ -418,7 +418,7 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=11 then coalesce((select ds.dato from datos_solicitudes ds
@@ -427,7 +427,7 @@ class Solicitudes_model extends Model
                         when s.id_tramite=9 then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
-                        when s.id_tramite=3 then 
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
@@ -480,31 +480,31 @@ class Solicitudes_model extends Model
                 return DB::table('solicitudes as s')
                     ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                     ->join('cat_etapas as e', 'e.paso', '=', 's.id_etapa')
-                    ->select(DB::raw('s.*,t.*,e.*, case 
-                        when s.id_tramite=1  or s.id_tramite=5 
-                        or s.id_tramite=6  
+                    ->select(DB::raw('s.*,t.*,e.*, case
+                        when s.id_tramite=1  or s.id_tramite=5
+                        or s.id_tramite=6
                         or s.id_tramite = 13 or s.id_tramite = 14
                         then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=4 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=7 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_folio\'
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=5 then coalesce((select ds.dato from datos_solicitudes ds
-                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\' 
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
-                        when s.id_tramite=3 then 
+                        when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
                         limit 1
-                        ),                        
+                        ),
                         coalesce(
                             (select ds.dato from datos_solicitudes ds
                             where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_acreditacion\'
@@ -603,7 +603,7 @@ class Solicitudes_model extends Model
                 }
             }
 
-            $data = ['descripcion' => "<font color='#000000'>" . $descripcion . "</font><font color='#000000'><br>Lamentamos informarte que tu solicitud con <strong>folio: " . $request['id_solicitud'] . "</strong> fue rechazada por los motivos expuestos anteriormente. 
+            $data = ['descripcion' => "<font color='#000000'>" . $descripcion . "</font><font color='#000000'><br>Lamentamos informarte que tu solicitud con <strong>folio: " . $request['id_solicitud'] . "</strong> fue rechazada por los motivos expuestos anteriormente.
             Si consideras que la evaluación no ha sido la correcta por favor comunícate a los teléfonos: <br><br></font><font color='#000000'>
             3338182200 ext. 3509, 3529, 3570 y 4590 (Unidad Basílica) <br>
             3338182200 ext. 2961 (CISZ) <br>
@@ -626,7 +626,7 @@ class Solicitudes_model extends Model
             Mail::to($request['correo'])->bcc(env('MAIL_BCC'))->send(new Notificacion($request['correo'], 'Solicitud rechazada', $data['descripcion'], $request['logo']));
 
 
-            //Cambiamos el estatus de la solicitud 
+            //Cambiamos el estatus de la solicitud
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['estatus' => 'no autorizado', 'id_etapa' => $request['id_etapa'], 'update_at' => date('Y-m-d H:i:s')]);
@@ -692,7 +692,7 @@ class Solicitudes_model extends Model
                 }
             }
 
-            $data = ['descripcion' => "<font color='#000000'>" . $descripcion . "</font><font color='#000000'><br>Favor de ingresar al portal para continuar con el procedimiento respecto a tu solicitud con <strong>folio: " . $request['id_solicitud'] . "</strong>. 
+            $data = ['descripcion' => "<font color='#000000'>" . $descripcion . "</font><font color='#000000'><br>Favor de ingresar al portal para continuar con el procedimiento respecto a tu solicitud con <strong>folio: " . $request['id_solicitud'] . "</strong>.
                 Si tienes alguna duda por favor comunícate al: <br><br></font><font color='#000000'>
                 3338182200 ext. 3509, 3529, 3570 y 4590 (Unidad Basílica) <br>
                 3338182200 ext. 2961 (CISZ) <br>
@@ -714,7 +714,7 @@ class Solicitudes_model extends Model
             Mail::to($request['correo'])->bcc(env('MAIL_BCC'))->send(new Notificacion($request['correo'], 'Solicitud regresada', $data['descripcion'], $request['logo']));
 
 
-            //Cambiamos el estatus de la solicitud 
+            //Cambiamos el estatus de la solicitud
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['id_etapa' => $request['id_etapa'], 'estatus' => 'pendiente', 'update_at' => date('Y-m-d H:i:s')]);
@@ -788,7 +788,7 @@ class Solicitudes_model extends Model
             Mail::to($request['correo'])->bcc(env('MAIL_BCC'))->send(new Notificacion($request['correo'], $data['titulo'], $data['descripcion'], $request['logo']));
 
 
-            //Cambiamos el estatus de la solicitud 
+            //Cambiamos el estatus de la solicitud
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['id_etapa' => $request['id_etapa'], 'estatus' => $request['estatus'], 'update_at' => date('Y-m-d H:i:s')]);
@@ -811,7 +811,7 @@ class Solicitudes_model extends Model
 
         foreach ($request->all() as $key => $value) {
             $num_rows += DB::insert(
-                'insert into datos_solicitudes 
+                'insert into datos_solicitudes
             (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
             dato,created_at)
              values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
@@ -835,7 +835,7 @@ class Solicitudes_model extends Model
 
         foreach ($request->all() as $key => $value) {
             $num_rows += DB::insert(
-                'insert into datos_solicitudes 
+                'insert into datos_solicitudes
                 (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
                 dato,created_at)
                 values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
@@ -852,7 +852,7 @@ class Solicitudes_model extends Model
         $sql = "UPDATE solicitudes  SET id_etapa=?, estatus=?, update_at=? where  id_solicitud=? ;";
         $sql = "select * from actualiza_etapa_solicitud(?,?,?,?,?);";
 
-        $num_rows = DB::update($sql, array($etapa, $id_solicitud, $estatus, $id_captura, $edo_externo));        
+        $num_rows = DB::update($sql, array($etapa, $id_solicitud, $estatus, $id_captura, $edo_externo));
         return $num_rows;
     }
 
@@ -861,7 +861,7 @@ class Solicitudes_model extends Model
         $num_rows = 0;
 
         $num_rows += DB::insert(
-            'insert into datos_solicitudes 
+            'insert into datos_solicitudes
             (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
             dato,created_at)
              values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
@@ -882,9 +882,9 @@ class Solicitudes_model extends Model
             ->groupBy('ru.id_usuario')
             ->orderBy('total', 'asc')
             ->first();
-       
 
-        return $result->id_usuario;
+
+        // return $result->id_usuario;
     }
 
     public static function inserta_notificacion($data)
