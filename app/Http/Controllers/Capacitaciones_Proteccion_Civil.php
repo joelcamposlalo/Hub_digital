@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\DB;
 use App\model\Solicitudes_model;
 use App\model\Capacitaciones_Model;
 use App\model\Dictamen_finca_antigua_model;
-
-
+use App\Mail\contactoCapacitacion;
 use PDF;
+use App\model\Mail;
 
 class Capacitaciones_Proteccion_Civil extends Controller
 {
     public function solicitud()
     {
+
         if ($folio = Capacitaciones_Model::solicitud()) {
 
             $vars = [
@@ -27,15 +28,19 @@ class Capacitaciones_Proteccion_Civil extends Controller
             $result = Solicitudes_model::consulta_solicitud(intval($folio));
 
             if ($result) {
+
                 $solicitud  = $result[0];
                 $id_etapa   = $solicitud->id_etapa;
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 1, $id_etapa);
+
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
+
+
                 $vars += ["id_etapa" => $id_etapa];
             } else {
-                $vars += ["id_etapa" => 66];
+                $vars += ["id_etapa" => 169];
             }
 
             return view('bombero_uno/solicitud', $vars);
@@ -74,18 +79,16 @@ class Capacitaciones_Proteccion_Civil extends Controller
         } else {
             http_response_code(503);
         }
-
     }
 
     public function actualiza_solicitud(Request $request)
     {
-echo "sdf";exit;
         if ($response = Capacitaciones_Model::actualiza_solicitud($request)) {
 
             $obj = $response[0];
 
             if ($obj->idcaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 171);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 170);
 
                 if ($rows == 0) {
                     http_response_code(503);
@@ -104,10 +107,6 @@ echo "sdf";exit;
             http_response_code(503);
         }
     }
-
-
-
-
 
 
     public function ingresa_tramite(Request $request)
@@ -138,9 +137,34 @@ echo "sdf";exit;
                 }
             }
         }
-}
+    }
 
-public static function consulta_requisitos_op($id_solicitud)
+    public function guardar(Request $request)
+    {
+
+
+        for ($i = 1; $i <= $request->input('contador'); $i++) {
+            $parti[] = $request->input('participantes' . $i);
+        }
+
+        if (Capacitaciones_Model::guardarParticipantes($request, $parti)) {
+
+            Capacitaciones_Model::avanzarEtapa($request);
+            Capacitaciones_Model::sendMail($request);
+            $request->request->add([
+                'id_captura' => $request->id_captura
+            ]);
+
+             return view('/ciudadano/descanso');
+
+        } else {
+            echo "no funciono, favor de intentar de nuevo";
+        }
+        exit;
+        return redirect()->route('bombero_uno.solicitud');
+    }
+
+    public static function consulta_requisitos_op($id_solicitud)
     {
         $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
         c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
@@ -150,5 +174,9 @@ public static function consulta_requisitos_op($id_solicitud)
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
     }
-}
 
+
+
+
+
+}

@@ -9,7 +9,7 @@ use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
 use App\model\Acreditaciones_model;
 use App\model\Dictamen_trazos_usos_model;
-;
+
 
 class Solicitudes_model extends Model
 {

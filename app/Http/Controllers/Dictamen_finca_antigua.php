@@ -238,7 +238,6 @@ class Dictamen_finca_antigua extends Controller
             Dictamen_finca_antigua_model::actualiza_edo_act($request->id_captura, $ing);
             Dictamen_finca_antigua_model::notifica($request, $titulo, $mensaje, $correo);
 
-
             return view('ciudadano/descanso');
         }
     }

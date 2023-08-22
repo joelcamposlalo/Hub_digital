@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Dictamen_finca_antigua;
 use Illuminate\Support\Facades\Route;
+use app\Mail\contactoCapacitacion;
+use Illuminate\Support\Facades\Mail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +78,7 @@ Route::get('ciudadano/padron_licencias', 'ciudadano@padron_licencias')->middlewa
 Route::get('ciudadano/obras_publicas', 'ciudadano@obras_publicas')->middleware('ciudadano');
 Route::get('ciudadano/catastro', 'ciudadano@catastro')->middleware('ciudadano');
 Route::get('ciudadano/ordenamiento_territorio', 'ciudadano@ordenamiento_territorio')->middleware('ciudadano');
-route::get('ciudadano/expediente_unico_municipal','ciudadano@expediente_unico_municipal')->middleware('ciudadano');
+route::get('ciudadano/expediente_unico_municipal', 'ciudadano@expediente_unico_municipal')->middleware('ciudadano');
 Route::get('ciudadano/medio_ambiente', 'ciudadano@medio_ambiente')->middleware('ciudadano');
 
 
@@ -445,9 +448,9 @@ Route::get('horas_extras/orden', 'horas_extras_pyl@orden');
 Route::get('expediente_unico_municipal/solicitud', 'expediente_unico_municipal@solicitud')->middleware('ciudadano');
 Route::post('expediente_unico_municipal/ingresa_tramite', 'expediente_unico_municipal@ingresa_tramite')->middleware('ciudadano');
 Route::post('expediente_unico_municipal/actualiza_solicitud', 'expediente_unico_municipal@actualiza_solicitud')->middleware('ciudadano');
-Route::post('expediente_unico_municipal/ingresa_tramite','expediente_unico_municipal@ingresa_tramite')->middleware('ciudadano');
+Route::post('expediente_unico_municipal/ingresa_tramite', 'expediente_unico_municipal@ingresa_tramite')->middleware('ciudadano');
 Route::get('expediente_unico_municipal/carta/{fecha}/{id_captura}', 'expediente_unico_municipal@carta');
- /**
+/**
  * --------------- Fin rutas Horas extras -------------------------
  */
 
@@ -480,7 +483,7 @@ Route::get('conectarse', [Dictamen_finca_antigua::class, 'conectarse']);
 Route::get('dictamen_trazos_usos/solicitud', 'dictamen_trazos_usos@solicitud')->middleware('ciudadano');
 Route::post('dictamen_trazos_usos/ingresa_solicitud', 'dictamen_trazos_usos@ingresa_solicitud')->middleware('ciudadano');
 Route::post('dictamen_trazos_usos/actualiza_solicitud', 'dictamen_trazos_usos@actualiza_solicitud')->middleware('ciudadano');
-Route::post('dictamen_trazos_usos/ingresa_tramite','dictamen_trazos_usos@ingresa_tramite')->middleware('ciudadano');
+Route::post('dictamen_trazos_usos/ingresa_tramite', 'dictamen_trazos_usos@ingresa_tramite')->middleware('ciudadano');
 Route::get('dictamen_trazos_usos/carta/{fecha}/{id_captura}', 'dictamen_trazos_usos@carta');
 
 
@@ -564,4 +567,5 @@ Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middle
 Route::get('bombero_uno/solicitud', 'Capacitaciones_Proteccion_Civil@solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/actualiza_solicitud', 'Capacitaciones_Proteccion_Civil@actualiza_solicitud')->middleware('ciudadano');
-Route::get('bombero_uno/capacitacion', 'Capacitaciones_Proteccion_Civil@ingresa_tramite')->middleware('ciudadano');
+Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
+Route::post('bombero_uno/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->middleware('ciudadano');

@@ -135,7 +135,7 @@ return [
 
         'tramites_op' => [
             'driver'            => 'sqlsrv',
-            'host'              => env('DB_HOST_OP_TRAM', '172.16.4.75'),
+            'host'              => env('DB_HOST_OP_TRAM', '172.16.4.15'),
             'port'              => env('DB_PORT_OP_TRAM', '1433'),
             'database'          => env('DB_DATABASE_OP_TRAM', 'Tramites'),
             'username'          => env('DB_USERNAME_OP_TRAM', 'usr_tramitesOP'),
@@ -193,7 +193,7 @@ return [
             'prefix_indexes'    => true,
          ],
 
-        ],  
+        ],
 
     /*
     |--------------------------------------------------------------------------

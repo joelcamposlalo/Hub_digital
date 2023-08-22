@@ -160,7 +160,7 @@
                         <div class="col-md-3 mt-2">
                             <label for="numero"><small>Número exterior</small></label>
                             <input name="numero" id="numero" value="{{((isset($numero))?$numero:'')}}" class="ab-form background-color rounded border numero" type="text" data-parsley-type="number" required>
-                        </div>
+                         </div>
                         <div class="col-md-3 mt-2">
                             <label for="interior"><small>Número interior</small></label>
                             <input name="interior" id="interior" value="{{((isset($interior))?$interior:'')}}" class="ab-form background-color rounded border capitalize interior" type="text">
