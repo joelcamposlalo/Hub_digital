@@ -9,6 +9,7 @@ use App\model\Solicitudes_model;
 use App\Mail\contactoCapacitacion;
 use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\notificacion;
 
 class Capacitaciones_Model extends Model
 {
@@ -59,56 +60,40 @@ class Capacitaciones_Model extends Model
                 'Participantes' => $parti[$i]
             ]);
         }
-
         return true;
     }
 
-    public static function avanzarEtapa($request){
+    public static function avanzarEtapa($request)
+    {
 
         DB::connection('captura_op')->table('Precaptura')
-        ->where('idCaptura', $request->id_captura)
-        ->update(['EdoAct' => 2]);
+            ->where('idCaptura', $request->id_captura)
+            ->update(['EdoAct' => 2]);
 
         DB::connection('pgsql')->table('solicitudes')
-        ->where('id_solicitud', $request->id_solicitud)
-        ->update(['estatus' => "en revision"]);
+            ->where('id_solicitud', $request->id_solicitud)
+            ->update(['estatus' => "en revision"]);
     }
 
-    public static function sendMail($request){
 
-    $data_p = DB::connection('captura_op')->table('Precaptura')
-        ->where("IdCaptura", $request->id_captura)->first();
-
-    $data_participantes = DB::connection('captura_op')->table('Capacitaciones')
-    ->where("IdCaptura", $request->id_captura)->get();
-
-    $correoData = [
-        'data_p' => $data_p,
-        'data_participantes' => $data_participantes
-    ];
-
-    Mail::to($correoData['data_p']->emailPropietario)
-    ->send(new contactoCapacitacion($correoData));
-    }
 
     public static function ingresa_solicitud($request)
     {
-
         $sql = "EXECUTE proteccion_capacitaciones_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?";
+        ?,?,?,?";
 
         $params = array(
             $request->nombre, $request->apellido_p, $request->apellido_m, $request->correo, $request->telefono,
             $request->colonia, $request->municipio, $request->domicilio, $request->giro_comercio, $request->materia_de,
-            session('id_usuario'),  $request->id_solicitud
+            $request->razonSocial, $request->personaJ, session('id_usuario'),  $request->id_solicitud
+
         );
 
         $result = DB::connection('captura_op')->select($sql, $params);
 
         return $result;
-
     }
 
     public static function ingresa_participantes($request)
@@ -122,8 +107,8 @@ class Capacitaciones_Model extends Model
         DB::table('Capacitaciones')->insert($data);
 
         $data = [
-             'Estado' => 4
-         ];
+            'Estado' => 4
+        ];
         DB::table('EstadoPreCaptura')->insert($data);
 
         return true;
@@ -143,29 +128,60 @@ class Capacitaciones_Model extends Model
         return $result;
     }
 
-    public static function notifica($request, $titulo, $mensaje, $correo)
+    public static function notifica($request, $titulo, $mensaje)
     {
 
-        $data = [
-            'id_emisor'       => session('id_usuario'),
-            'id_receptor'     => $request['id_usuario'],
-            'id_coordinacion' => 4,
-            'titulo'          => $titulo,
-            'descripcion'     => $mensaje
-        ];
+
+
+        $data_p = DB::connection('captura_op')->table('Precaptura')
+        ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
+
+
+
+    $data = [
+        'id_emisor'       => session('id_usuario'),
+        'id_receptor'     => $request['id_usuario'],
+        'id_coordinacion' => 7,
+        'titulo'          => $titulo,
+        'descripcion'     => $mensaje,
+
+    ];
+
+
 
         if (DB::table('notificaciones')->insert($data)) {
 
             //Enviamos el correo->cc(env('MAIL_CC'))
-            //Mail::to($correo)->bcc(env('MAIL_BCC'))->send(new Notificacion($correo, $titulo, $mensaje, 'https://portal.zapopan.gob.mx/logos_vdigital/logo_ord.png'));
+            Mail::to($data_p)->bcc(env('MAIL_BCC'))->send(new notificacion($data_p, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
 
-            //Cambiamos el estatus de la solicitud
 
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
-                ->update(['id_etapa' => 68, 'estatus' => 'en revision']);
+                ->update(['id_etapa' => 171, 'estatus' => 'en revision']);
         } else {
             return false;
         }
     }
+
+    public static function sendMail($request)
+    {
+
+        $data_p = DB::connection('captura_op')->table('Precaptura')
+            ->where("IdCaptura", $request->id_captura)->first();
+
+        $data_participantes = DB::connection('captura_op')->table('Capacitaciones')
+            ->where("IdCaptura", $request->id_captura)->get();
+
+        $correoData = [
+            'data_p' => $data_p,
+            'data_participantes' => $data_participantes,
+        ];
+
+
+
+
+        Mail::to('joel.campos@zapopan.gob.mx')
+            ->send(new contactoCapacitacion($correoData));
+    }
+
 }

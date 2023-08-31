@@ -1,639 +1,440 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
 
 <head>
-    <title>Hola soy joel </title>
-    <!--
-
-    SALTED | A RESPONSIVE EMAIL TEMPLATE
-    =====================================
-
-    Based on code used and tested by Litmus (@litmusapp)
-    Originally developed by Kevin Mandeville (@KEVINgotbounce)
-    Cleaned up by Jason Rodriguez (@rodriguezcommaj)
-    Presented by A List Apart (@alistapart)
-
-    Email is surprisingly hard. While this has been thoroughly tested, your mileage may vary.
-    It's highly recommended that you test using a service like Litmus and your own devices.
-
-    Enjoy!
-
- -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <!-- Compiled with Bootstrap Email version: 1.3.1 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <style type="text/css">
-        /* CLIENT-SPECIFIC STYLES */
-        #outlook a {
-            padding: 0;
-        }
-
-        /* Force Outlook to provide a "view in browser" message */
-        .ReadMsgBody {
-            width: 100%;
+        body,
+        table,
+        td {
+            font-family: Helvetica, Arial, sans-serif !important
         }
 
         .ExternalClass {
-            width: 100%;
+            width: 100%
         }
 
-        /* Force Hotmail to display emails at full width */
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
         .ExternalClass font,
         .ExternalClass td,
         .ExternalClass div {
-            line-height: 100%;
+            line-height: 150%
         }
 
-        /* Force Hotmail to display normal line spacing */
-        body,
-        table,
-        td,
         a {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
+            text-decoration: none
         }
 
-        /* Prevent WebKit and Windows mobile changing default text sizes */
-        table,
-        td {
+        * {
+            color: inherit;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a[x-apple-data-detectors],
+        u+#body a,
+        #MessageViewBody a {
+            color: inherit;
+            text-decoration: none;
+            font-size: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            line-height: inherit
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic
+        }
+
+        table:not([class^=s-]) {
+            font-family: Helvetica, Arial, sans-serif;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
+            border-spacing: 0px;
+            border-collapse: collapse
         }
 
-        /* Remove spacing between tables in Outlook 2007 and up */
-        img {
-            -ms-interpolation-mode: bicubic;
+        table:not([class^=s-]) td {
+            border-spacing: 0px;
+            border-collapse: collapse
         }
 
-        /* Allow smoother rendering of resized image in Internet Explorer */
+        @media screen and (max-width: 600px) {
 
-        /* RESET STYLES */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        img {
-            border: 0;
-            height: auto;
-            line-height: 100%;
-            outline: none;
-            text-decoration: none;
-        }
-
-        table {
-            border-collapse: collapse !important;
-        }
-
-        body {
-            height: 100% !important;
-            margin: 0;
-            padding: 0;
-            width: 100% !important;
-        }
-
-        /* iOS BLUE LINKS */
-        .appleBody a {
-            color: #68440a;
-            text-decoration: none;
-        }
-
-        .appleFooter a {
-            color: #999999;
-            text-decoration: none;
-        }
-
-        /* MOBILE STYLES */
-        @media screen and (max-width: 525px) {
-
-            /* ALLOWS FOR FLUID TABLES */
-            table[class="wrapper"] {
-                width: 100% !important;
+            .max-w-48,
+            .max-w-48>tbody>tr>td {
+                max-width: 192px !important;
+                width: 100% !important
             }
 
-            /* ADJUSTS LAYOUT OF LOGO IMAGE */
-            td[class="logo"] {
-                text-align: left;
-                padding: 20px 0 20px 0 !important;
+            .max-w-56,
+            .max-w-56>tbody>tr>td {
+                max-width: 224px !important;
+                width: 100% !important
             }
 
-            td[class="logo"] img {
-                margin: 0 auto !important;
+            .max-w-96,
+            .max-w-96>tbody>tr>td {
+                max-width: 384px !important;
+                width: 100% !important
             }
 
-            /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE */
-            td[class="mobile-hide"] {
-                display: none;
+            .w-lg-80,
+            .w-lg-80>tbody>tr>td {
+                width: auto !important
             }
 
-            img[class="mobile-hide"] {
-                display: none !important;
+            .w-full,
+            .w-full>tbody>tr>td {
+                width: 100% !important
             }
 
-            img[class="img-max"] {
-                max-width: 100% !important;
-                height: auto !important;
+            .w-32,
+            .w-32>tbody>tr>td {
+                width: 128px !important
             }
 
-            /* FULL-WIDTH TABLES */
-            table[class="responsive-table"] {
-                width: 100% !important;
+            .pt-4:not(table),
+            .pt-4:not(.btn)>tbody>tr>td,
+            .pt-4.btn td a,
+            .py-4:not(table),
+            .py-4:not(.btn)>tbody>tr>td,
+            .py-4.btn td a {
+                padding-top: 16px !important
             }
 
-            /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
-            td[class="padding"] {
-                padding: 10px 5% 15px 5% !important;
+            .pb-4:not(table),
+            .pb-4:not(.btn)>tbody>tr>td,
+            .pb-4.btn td a,
+            .py-4:not(table),
+            .py-4:not(.btn)>tbody>tr>td,
+            .py-4.btn td a {
+                padding-bottom: 16px !important
             }
 
-            td[class="padding-copy"] {
-                padding: 10px 5% 10px 5% !important;
-                text-align: center;
+            *[class*=s-lg-]>tbody>tr>td {
+                font-size: 0 !important;
+                line-height: 0 !important;
+                height: 0 !important
             }
 
-            td[class="padding-meta"] {
-                padding: 30px 5% 0px 5% !important;
-                text-align: center;
+            .s-6>tbody>tr>td {
+                font-size: 24px !important;
+                line-height: 24px !important;
+                height: 24px !important
             }
 
-            td[class="no-pad"] {
-                padding: 0 0 20px 0 !important;
+            .s-10>tbody>tr>td {
+                font-size: 40px !important;
+                line-height: 40px !important;
+                height: 40px !important
             }
-
-            td[class="no-padding"] {
-                padding: 0 !important;
-            }
-
-            td[class="section-padding"] {
-                padding: 50px 15px 50px 15px !important;
-            }
-
-            td[class="section-padding-bottom-image"] {
-                padding: 50px 15px 0 15px !important;
-            }
-
-            /* ADJUST BUTTONS ON MOBILE */
-            td[class="mobile-wrapper"] {
-                padding: 10px 5% 15px 5% !important;
-            }
-
-            table[class="mobile-button-container"] {
-                margin: 0 auto;
-                width: 100% !important;
-            }
-
-            a[class="mobile-button"] {
-                width: 80% !important;
-                padding: 15px !important;
-                border: 0 !important;
-                font-size: 16px !important;
-            }
-
         }
     </style>
 </head>
 
-<body style="margin: 0; padding: 0;">
+<body
+    style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;"
+    bgcolor="#ffffff">
+    <table class="body" valign="top" role="presentation" border="0" cellpadding="0" cellspacing="0"
+        style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;"
+        bgcolor="#ffffff">
+        <tbody>
+            <tr>
+                <td valign="top" style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
+                    <table class=" w-full" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                        style="width: 100%;" bgcolor="" width="100%">
+                        <tbody>
+                            <tr>
+                                <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left"
+                                    bgcolor="#" width="100%">
+                                    <table class="container" role="presentation" border="0" cellpadding="0"
+                                        cellspacing="0" style="width: 100%;">
+                                        <tbody>
+                                            <tr>
+                                                <td align="center"
+                                                    style="background-color:#ffffff; ; line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
 
-    <!-- HEADER -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#ffffff">
-                <div align="center" style="padding: 0px 15px 0px 15px;">
-                    <table border="0" cellpadding="0" cellspacing="0" width="500" class="wrapper">
-                        <!-- LOGO/PREHEADER TEXT -->
-                        <tr>
-                            <td style="padding: 20px 0px 30px 0px;" class="logo">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td bgcolor="#ffffff" width="100" align="left">
-                                            <a href="https://www.3labeitak.com/" target="_blank"><img alt="Logo" src="http://www.3labeitak.com/wp-content/uploads/2016/12/Favicon.png" width="100" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px;" border="0"></a>
-                                        </td>
-                                        <td bgcolor="#ffffff" width="400" align="right" class="mobile-hide">
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="right" style="padding: 0 0 5px 0; font-size: 14px; font-family: Arial, sans-serif; color: #666666; text-decoration: none;"><span style="color: #666666; text-decoration: none;">Thank you!</span></td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
-
-    <!-- ONE COLUMN SECTION -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#ffffff" align="center" style="padding: 70px 15px 70px 15px;" class="section-padding">
-                <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
-                    <tr>
-                        <td>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td>
-                                        <!-- HERO IMAGE -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="padding-copy">
-                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <table class="first_container" align="center" role="presentation"
+                                                        border="0" cellpadding="0" cellspacing="0"
+                                                        style="width: 100%; max-width: 600px; margin: 0 auto;">
+                                                        <tbody>
                                                             <tr>
-                                                                <td>
-                                                                    <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/responsive-email.jpg" width="500" height="200" border="0" alt="Can an email really be responsive?" style="display: block; padding: 0; color: #666666; text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px; width: 500px; height: 200px;" class="img-max"></a>
+                                                                <td class="first_part"
+                                                                    style="line-height: 24px; font-size: 16px; margin: 0; background-color: #040D12;border-radius: 20px 20px 0px 0px;"
+                                                                    align="left">
+                                                                    <table class="s-10 w-full" role="presentation"
+                                                                        border="0" cellpadding="0" cellspacing="0"
+                                                                        style="width: 100%;" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
+                                                                                    align="left" width="100%"
+                                                                                    height="40">
+                                                                                    &#160;
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="ax-center" role="presentation"
+                                                                        align="center" border="0" cellpadding="0"
+                                                                        cellspacing="0" style="margin: 0 auto;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
+                                                                                    align="left">
+                                                                                    <img class="w-32"
+                                                                                        src="https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png"
+                                                                                        style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 300px; border-style: none; border-width: 0;"
+                                                                                        width="128">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="s-10 w-full" role="presentation"
+                                                                        border="0" cellpadding="0" cellspacing="0"
+                                                                        style="width: 100%;" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
+                                                                                    align="left" width="100%"
+                                                                                    height="40">
+                                                                                    &#160;
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="ax-center" role="presentation"
+                                                                        align="center" border="0" cellpadding="0"
+                                                                        cellspacing="0" style="margin: 0 auto;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
+                                                                                    align="left">
+                                                                                    <h1 class="text-white text-center"
+                                                                                        style="color: #ffffff; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
+                                                                                        align="center">Nueva petición a
+                                                                                        <br>
+                                                                                        Capacitación
+                                                                                    </h1>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="s-10 w-full" role="presentation"
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" style="width: 100%;"
+                                                                        width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
+                                                                                    align="left" width="100%"
+                                                                                    height="40">
+                                                                                    &#160;
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="ax-center" role="presentation"
+                                                                        align="center" border="0" cellpadding="0"
+                                                                        cellspacing="0" style="margin: 0 auto;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
+                                                                                    align="left">
+                                                                                    <img class="max-w-56  rounded-lg"
+                                                                                        src="https://cdn-icons-png.flaticon.com/128/1654/1654346.png"
+                                                                                        style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; border-radius: 8px; max-width: 224px; width: 100%; border-style: none; border-width: 0;"
+                                                                                        width="224">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="s-10 w-full" role="presentation"
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" style="width: 100%;"
+                                                                        width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
+                                                                                    align="left" width="100%"
+                                                                                    height="40">
+                                                                                    &#160;
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="ax-center" role="presentation"
+                                                                        align="center" border="0" cellpadding="0"
+                                                                        cellspacing="0" style="margin: 0 auto;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
+                                                                                    align="left">
+                                                                                    <p class="max-w-96 lh-lg text-white text-center text-2xl"
+                                                                                        style="line-height: 2; font-size: 24px; color: #ffffff; max-width: 384px; -premailer-width: 384; width: 100%; margin: 0;"
+                                                                                        align="center">
+                                                                                        Esta es la información que
+                                                                                        necesitas para la capacitación.
+                                                                                    </p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <table class="s-10 w-full" role="presentation"
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" style="width: 100%;"
+                                                                        width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
+                                                                                    align="left" width="100%"
+                                                                                    height="40">
+                                                                                    &#160;
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </td>
                                                             </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!-- COPY -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy">Yes. Email can be responsive, too.</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Using fluid structures, fluid images, and media queries, we can make email (nearly) as responsive as modern websites.</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!-- BULLETPROOF BUTTON -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                            <tr>
-                                                <td align="center" style="padding: 25px 0 0 0;" class="padding-copy">
-                                                    <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
-                                                        <tr>
-                                                            <td align="center"><a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #5D9CEC; border-top: 15px solid #5D9CEC; border-bottom: 15px solid #5D9CEC; border-left: 25px solid #5D9CEC; border-right: 25px solid #5D9CEC; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button">Learn How &rarr;</a></td>
-                                                        </tr>
+                                                        </tbody>
                                                     </table>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                            <![endif]-->
                                                 </td>
                                             </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0"
+                        style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <td align="center"
+                                    style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
+                                    <!--[if (gte mso 9)|(IE)]>
+                      <table align="center" role="presentation">
+                        <tbody>
+                          <tr>
+                            <td width="600">
+                    <![endif]-->
+                                    <table align="center" role="presentation" border="0" cellpadding="0"
+                                        cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
+                                                    align="left">
+                                                    <div class="row" style="margin-right: -24px;">
+                                                    </div>
+                                                    <div style="padding: 2rem; background-color: #fbfbfb; border-radius: 0px 0px 20px 20px;" >
+                                                        <br>
 
-    <!-- ONE COLUMN W/ BOTTOM IMAGE SECTION -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#f8f8f8" align="center" style="padding: 70px 15px 0 15px;" class="section-padding-bottom-image">
-                <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
-                    <tr>
-                        <td>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td>
-                                        <!-- COPY -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Mobile opens are at 48%</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">With an increasingly mobile audience, can you really afford to keep sending emails designed for desktop?</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!-- BULLETPROOF BUTTON -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                            <tr>
-                                                <td align="center" style="padding: 25px 0 0 0;" class="padding-copy">
-                                                    <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
-                                                        <tr>
-                                                            <td align="center"><a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #48CFAD; border-top: 15px solid #48CFAD; border-bottom: 15px solid #48CFAD; border-left: 25px solid #48CFAD; border-right: 25px solid #48CFAD; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button">Hell No &rarr;</a></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!--  BOTTOM IMAGE -->
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td style="padding: 50px 0 0 0;" align="center">
-                                                    <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/line-graph.jpg" width="500" height="180" border="0" alt="Mobile opens are on the rise" class="img-max" style="display: block; padding: 0; font-family: Helvetica, Arial, sans-serif; color: #666666; width: 500px; height: 180px;"></a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+                                                        <h2 style="text-align: center">Datos del solicitante</h2>
+                                                        <br>
+                                                        <p><b>Se han registrado el día: </b>{{ $correoData->fecha }}</p>
+                                                        <p><b>Tipo de Capacitación:</b> {{ $correoData->materiade }}</p>
+                                                        <p><b>Nombres: </b>
+                                                            {{ $correoData->nomPropietario }}</p>
+                                                        <p><b>Con el teléfono: </b>{{ $correoData->telPropietario }}</p>
+                                                        <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
+                                                        <p><b>En el Domicilio:</b> {{ $correoData->domPropietario }}</p>
+                                                        <p><b>En la Colonia:</b> {{ $correoData->colonia }}</p>
+                                                        <p><b>En el municipio de: </b> {{ $correoData->municipio }}</p>
+                                                        <p><b>Con el regímen fiscal como: </b>
+                                                            {{ $correoData->personaJ }}</p>
+                                                        @if (!empty($correoData->razonSocial))
+                                                            <p><b>Con la razón social: </b>
+                                                                {{ $correoData->razonSocial }}</p>
+                                                        @endif
 
-    <!-- TWO COLUMN SECTION -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#ffffff" align="center" style="padding: 70px 15px 70px 15px;" class="section-padding">
-                <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
-                    <tr>
-                        <td>
-                            <!-- TITLE SECTION AND COPY -->
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">How does it work?</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" style="padding: 20px 0 20px 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Responsive email works on the same principles as RWD:</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- TWO COLUMNS -->
-                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td valign="top" style="padding: 0;" class="mobile-wrapper">
-                                        <!-- LEFT COLUMN -->
-                                        <table cellpadding="0" cellspacing="0" border="0" width="47%" align="left" class="responsive-table">
-                                            <tr>
-                                                <td style="padding: 20px 0 40px 0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td align="center" bgcolor="#ffffff" valign="middle">
-                                                                <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/fluid-images.jpg" width="240" height="130" style="display: block; color: #666666; font-family: Helvetica, arial, sans-serif; font-size: 13px; width: 240px; height: 130px;" alt="Fluid images" border="0" class="img-max"></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 15px 0 0 0; font-family: Arial, sans-serif; color: #333333; font-size: 20px;" bgcolor="#ffffff">Fluid Images</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;" bgcolor="#ffffff"><span class="appleBody"><span style="font-family:Lucida Console, monospace;">max-width:100%</span> is your friend, just like on the web.</span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <!-- RIGHT COLUMN -->
-                                        <table cellpadding="0" cellspacing="0" border="0" width="47%" align="right" class="responsive-table">
-                                            <tr>
-                                                <td style="padding: 20px 0 40px 0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td align="center" bgcolor="#ffffff" valign="middle">
-                                                                <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/fluid-structure.jpg" width="240" height="130" style="display: block; color: #666666; font-family: Helvetica, arial, sans-serif; font-size: 13px; width: 240px; height: 130px;" alt="Fluid structures" border="0" class="img-max"></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 15px 0 0 0; font-family: Arial, sans-serif; color: #333333; font-size: 20px;" bgcolor="#ffffff">Fluid Structure</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;" bgcolor="#ffffff"><span class="appleBody">You can use percentage-based tables, too. Don&rsquo;t touch <em>ems</em>, though.</span></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- TWO COLUMNS -->
-                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td valign="top" style="padding: 0;" class="mobile-wrapper">
-                                        <!-- LEFT COLUMN -->
-                                        <table cellpadding="0" cellspacing="0" border="0" width="47%" align="left" class="responsive-table">
-                                            <tr>
-                                                <td style="padding: 20px 0 40px 0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td align="center" bgcolor="#ffffff" valign="middle">
-                                                                <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/media-queries.jpg" width="240" height="130" style="display: block; color: #666666; font-family: Helvetica, arial, sans-serif; font-size: 13px; width: 240px; height: 130px;" alt="Media queries" border="0" class="img-max"></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 15px 0 0 0; font-family: Arial, sans-serif; color: #333333; font-size: 20px;" bgcolor="#ffffff">Media Queries</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;" bgcolor="#ffffff"><span class="appleBody">They don&rsquo;t work everywhere, but when they do&hellip;</span></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <!-- RIGHT COLUMN -->
-                                        <table cellpadding="0" cellspacing="0" border="0" width="47%" align="right" class="responsive-table">
-                                            <tr>
-                                                <td style="padding: 20px 0 40px 0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td align="center" bgcolor="#ffffff" valign="middle">
-                                                                <a href="http://alistapart.com/article/can-email-be-responsive/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/bulletproof-buttons.jpg" width="240" height="130" style="display: block; color: #666666; font-family: Helvetica, arial, sans-serif; font-size: 13px; width: 240px; height: 130px;" alt="Bulletproof buttons" border="0" class="img-max"></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 15px 0 0 0; font-family: Arial, sans-serif; color: #333333; font-size: 20px;" bgcolor="#ffffff">Bulletproof Buttons</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;" bgcolor="#ffffff"><span class="appleBody">Don&rsquo;t use images for buttons. There&rsquo;s a better way.</span></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+                                                        @if (!empty($correoData->giroContruccion))
+                                                            <p><b>Con el giro comercial de: </b>
+                                                                {{ $correoData->giroContruccion }}</p>
+                                                        @endif
 
 
-    <!-- COMPACT ARTICLE SECTION -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#f8f8f8" align="center" style="padding: 70px 15px 70px 15px;" class="section-padding">
-                <table border="0" cellpadding="0" cellspacing="0" width="500" style="padding:0 0 20px 0;" class="responsive-table">
-                    <!-- TITLE -->
-                    <tr>
-                        <td align="left" style="padding: 0 0 10px 130px; font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333333;" class="padding-copy" colspan="2">Resources for learning more</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" style="padding: 40px 0 0 0;" class="mobile-hide">
-                            <a href="https://litmus.com/community" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/litmus-logo.jpg" alt="Litmus" width="105" height="105" border="0" style="display: block; font-family: Arial; color: #666666; font-size: 14px; width: 105px; height: 105px;"></a>
-                        </td>
-                        <td style="padding: 40px 0 0 0;" class="no-padding">
-                            <!-- ARTICLE -->
-                            <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #aaaaaa;" class="padding-meta">Litmus Community</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333333;" class="padding-copy">A growing community for email professionals</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 10px 0 15px 25px; font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Share knowledge, ask code questions, and learn from a growing library of articles on all things email.</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:0 0 45px 25px;" align="left" class="padding">
-                                        <table border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                            <tr>
-                                                <td align="center">
-                                                    <!-- BULLETPROOF BUTTON -->
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                                        <tr>
-                                                            <td align="center" style="padding: 0;" class="padding-copy">
-                                                                <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
-                                                                    <tr>
-                                                                        <td align="center"><a href="https://litmus.com/community" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #F6BB42; border-top: 10px solid #F6BB42; border-bottom: 10px solid #F6BB42; border-left: 20px solid #F6BB42; border-right: 20px solid #F6BB42; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button">Learn More &rarr;</a></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top" style="padding: 40px 0 0 0;" class="mobile-hide">
-                            <a href="http://templates.mailchimp.com" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/logo.jpg" alt="Freddie!" width="105" height="105" border="0" style="display: block; font-family: Arial; color: #666666; font-size: 14px; width: 105px; height: 105px;"></a>
-                        </td>
-                        <td style="padding: 40px 0 0 0;" class="no-padding">
-                            <!-- ARTICLE -->
-                            <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #aaaaaa;" class="padding-meta">MailChimp Template Reference</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333333;" class="padding-copy">A stunning introduction to email design and coding</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 10px 0 15px 25px; font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">MailChimp&rsquo;s Fabio Carneiro unleashes an amazing resource for learning more about all aspects of email design.</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:0 0 45px 25px;" align="left" class="padding">
-                                        <table border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                            <tr>
-                                                <td align="center">
-                                                    <!-- BULLETPROOF BUTTON -->
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                                        <tr>
-                                                            <td align="center" style="padding: 0;" class="padding-copy">
-                                                                <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
-                                                                    <tr>
-                                                                        <td align="center"><a href="http://templates.mailchimp.com" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #5D9CEC; border-top: 10px solid #5D9CEC; border-bottom: 10px solid #5D9CEC; border-left: 20px solid #5D9CEC; border-right: 20px solid #5D9CEC; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button">Learn More &rarr;</a></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top" style="padding: 40px 0 0 0;" class="mobile-hide">
-                            <a href="http://www.campaignmonitor.com/resources/" target="_blank"><img src="https://cdn.rawgit.com/rodriguezcommaj/salted/master/img/campaign-monitor-logo.jpg" alt="Campaign Monitor" width="105" height="105" border="0" style="display: block; font-family: Arial; color: #666666; font-size: 14px; width: 105px; height: 105px;"></a>
-                        </td>
-                        <td style="padding: 40px 0 0 0;" class="no-padding">
-                            <!-- ARTICLE -->
-                            <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #aaaaaa;" class="padding-meta">Campaign Monitor Guides</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 0 0 5px 25px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333333;" class="padding-copy">A fantastic library of information</td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding: 10px 0 15px 25px; font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Campaign Monitor puts out some amazing resources. These guides, as well as their Ultimate Guide to CSS, are constant companions.</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:0 0 45px 25px;" align="left" class="padding">
-                                        <table border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                            <tr>
-                                                <td align="center">
-                                                    <!-- BULLETPROOF BUTTON -->
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-                                                        <tr>
-                                                            <td align="center" style="padding: 0;" class="padding-copy">
-                                                                <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
-                                                                    <tr>
-                                                                        <td align="center"><a href="http://www.campaignmonitor.com/resources/" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #4FC1E9; border-top: 10px solid #4FC1E9; border-bottom: 10px solid #4FC1E9; border-left: 20px solid #4FC1E9; border-right: 20px solid #4FC1E9; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button">Learn More &rarr;</a></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+                                                        <br><br>
+                                                        <h2 style="text-align: center mb-2">Nombres de los participantes
+                                                        </h2>
 
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td bgcolor="#ffffff" align="center">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-                    <tr>
-                        <td style="padding: 20px 0px 20px 0px;">
-                            <table width="500" border="0" cellspacing="0" cellpadding="0" align="center" class="responsive-table">
-                                <tr>
-                                    <td align="center" valign="middle" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;">
-                                        <span class="appleFooter" style="color:#666666;">1234 Main Street, Anywhere, MA 01234, USA</span>
-                                        <br><a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a><span class="original-only" style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-                                        <a style="color: #666666; text-decoration: none;">View this email in your browser</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                                                        @foreach ($participantes as $participante)
+                                                            <p><b>Nombre Completo de Participante:</b>
+                                                                {{ $participante->Participantes }}
+                                                        @endforeach
+                                                    </div>
+                                                    <table class="s-6 w-full" role="presentation" border="0"
+                                                        cellpadding="0" cellspacing="0" style="width: 100%;"
+                                                        width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                                                                    align="left" width="100%" height="24">
+                                                                    &#160;
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <table class="s-6 w-full" role="presentation" border="0"
+                                                        cellpadding="0" cellspacing="0" style="width: 100%;"
+                                                        width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;"
+                                                                    align="left" width="100%" height="24">
+                                                                    &#160;
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                    <![endif]-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
     </table>
+    <style>
+        .first_part {
+            background-color: #fff;
+            border-radius: 20px 20px 20px 20px;
+            margin-top: 2rem;
+        }
+
+        .first_container {
+            background-color: #fff;
+            margin-top: 2rem !important;
+            margin-bottom: 3rem !important;
+        }
+    </style>
 
 </body>
+
+
 
 </html>

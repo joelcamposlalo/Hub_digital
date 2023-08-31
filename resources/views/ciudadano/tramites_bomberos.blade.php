@@ -19,9 +19,11 @@
                     <i class="fas fa-arrow-left"></i>
                 </button>
             </a>
-            <h1 class="text-muted font m-0 bold c-primary-color">Dirección de Proteccion civil y bomberos</h1>
+            <h1 class=" font m-0 bold c-primary-color">Coordinación municipal de <br>Protección Civil y Bomberos Zapopan</h1>
         </div>
-        <small class="font text-muted mb-5 f-15">Trámites disponibles.</small>
+        <br>
+
+
         @if (!empty($leyendaVac[0]) && $leyendaVac[0]->fecha_inicio < $hoy && $leyendaVac[0]->fecha_fin > $hoy)
 
             <div class="alert alert-warning alert-dismissible fade show notas mt-2" role="alert">
@@ -32,8 +34,9 @@
                 </small>
             </div>
         @endif
-    </div>
 
+    </div>
+    <div class="text-center"><small class="font  mb-5 f-15"><b>Trámites disponibles.</b></small></div>
     <div id="section">
         <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitacion"
@@ -45,7 +48,7 @@
                             <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}"width="90px"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">Capacitaciones</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">CAPACITACIONES</span>
                             </div>
                             <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                                 <small class="text-center mt-2"> SOLICITUD DE CAPACITACION MEDIANTE VENTANILLA VIRTUAL</small>
@@ -67,7 +70,7 @@
                             <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}"width="90px"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">FENÓMENOS PERTURBADORES</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">EVALUACIÓN DE RIESGOS</span>
                             </div>
                             <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                                 <small class="text-center mt-2">SOLICITUD DE EVALUACIÓN POR

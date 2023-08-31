@@ -567,5 +567,4 @@ Route::get('ciudadano/tramites_bomberos', 'ciudadano@tramites_bomberos')->middle
 Route::get('bombero_uno/solicitud', 'Capacitaciones_Proteccion_Civil@solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/actualiza_solicitud', 'Capacitaciones_Proteccion_Civil@actualiza_solicitud')->middleware('ciudadano');
-Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->middleware('ciudadano');

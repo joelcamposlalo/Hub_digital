@@ -72,18 +72,18 @@ class Dictamen_finca_antigua_model extends Model
             //->orderBy('c.id_cat_archivo', 'asc')
             ->get();
 
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-            c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+            c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
             WHERE c.id_cat_archivo = a.id_cat_archivo
-            and a.id_solicitud =' . $id_solicitud . '         
+            and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
             ) and c.id_documento>0 and c.id_tramite = 12');
 
         //$resv = Dictamen_finca_antigua_model::consulta_requisitos_validados($id_solicitud);
-        $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM         
-        cat_archivo c join archivos a on c.id_cat_archivo =a.id_cat_archivo 
-        join archivosodt ao  on ao.id_archivo =a.id_archivo 
+        $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM
+        cat_archivo c join archivos a on c.id_cat_archivo =a.id_cat_archivo
+        join archivosodt ao  on ao.id_archivo =a.id_archivo
         where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_usuario') . ' and ao.estatus=\'validado\'');
 
         $validados = array();
@@ -104,10 +104,10 @@ class Dictamen_finca_antigua_model extends Model
 
     public static function consulta_requisitos_op($id_solicitud)
     {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a 
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo 
-        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . " 
+        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
+        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
+        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . "
         and ao.estatus='validado'";
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
@@ -115,10 +115,10 @@ class Dictamen_finca_antigua_model extends Model
 
     public static function consulta_requisitos_validados($id_solicitud)
     {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a 
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo 
-        where a.id_solicitud =" . $id_solicitud . " and a.id_usuario =" . session('id_usuario') . " 
+        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
+        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
+        where a.id_solicitud =" . $id_solicitud . " and a.id_usuario =" . session('id_usuario') . "
         and ao.estatus='validado'";
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
@@ -201,14 +201,14 @@ class Dictamen_finca_antigua_model extends Model
     public static function inserta_requisito_op($id_documento, $filename, $extension, $id_solicitud)
     {
 
-        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE 
+        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE
         c.id_documento = ' . $id_documento . ' and id_tramite=12');
         if ($res1) {
             $id_cat_archivo = $res1[0]->id_cat_archivo;
 
-            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
             WHERE c.id_cat_archivo = a.id_cat_archivo
-            and a.id_solicitud =' . $id_solicitud . ' 
+            and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
             ) and c.id_tramite=12 and c.id_documento=' . $id_documento);
 
@@ -249,10 +249,10 @@ class Dictamen_finca_antigua_model extends Model
 
     public static function consulta_archivos_faltantes($id_solicitud)
     {
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
         WHERE c.id_cat_archivo = a.id_cat_archivo
-        and a.id_solicitud =' . $id_solicitud . '         
+        and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
         ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 12');
         return $pendientes;
@@ -285,10 +285,10 @@ class Dictamen_finca_antigua_model extends Model
         if (DB::table('notificaciones')->insert($data)) {
 
             //Enviamos el correo->cc(env('MAIL_CC'))
-            //Mail::to($correo)->bcc(env('MAIL_BCC'))->send(new Notificacion($correo, $titulo, $mensaje, 'https://portal.zapopan.gob.mx/logos_vdigital/logo_ord.png'));
+            Mail::to($correo)->bcc(env('MAIL_BCC'))->send(new Notificacion($correo, $titulo, $mensaje, 'https://portal.zapopan.gob.mx/logos_vdigital/logo_ord.png'));
 
-            //Cambiamos el estatus de la solicitud 
-            
+            //Cambiamos el estatus de la solicitud
+
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['id_etapa' => 68, 'estatus' => 'en revision']);

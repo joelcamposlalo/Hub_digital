@@ -88,17 +88,17 @@
                     <form id=form_2 method="post">
                         <div class="row">
                             <div class="col-md-12 mt-2">
-                                <label for="calle"><small></small></label>
+                                <label for="materia_de"><small>Tipo de Capacitación</small></label>
                                 <select name="materia_de" id="materia_de"
                                     class="ab-form background-color rounded border materia_de" required>
-                                    <option value="incendios">Incendio y Primeros Auxilios</option>
-                                    <option value="primeros">Formación de Brigadas</option>
+                                    <option value="Control y Combate de Incendios y Primeros Auxilios">Control y Combate de Incendios y Primeros Auxilios</option>
+                                    <option value="Formación de Brigadas">Formación de Brigadas</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 mt-2">
-                                <label for="nombre"><small>Nombre o Razon Social</small></label>
+                                <label for="nombre"><small>Nombres completos</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
                                     class="ab-form background-color rounded border nombre" type="text" required>
                             </div>
@@ -123,14 +123,13 @@
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario"
-                                    type="text">
+                                    class="ab-form background-color rounded border correo_propietario" type="text"
+                                    required>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-4 mt-2">
-                                <label for="domicilio"><small>Domicilio</small></label>
+                                <label for="domicilio"><small>Domicilio y número</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text"
                                     required>
@@ -148,11 +147,26 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 mt-2">
-                                <label for="giro_comercio"><small>Giro Comercial</small></label>
+                                <label for="personaJ"><small>Regímen Fiscal</small></label>
+                                <select name="personaJ" id="personaJ"
+                                    class="ab-form background-color rounded border personaJ" required>
+                                    <option value="Persona Fisica">Persona Física</option>
+                                    <option value="Persona Moral">Persona Moral</option>
+                                </select>
+                            </div>
+                            <div class="col mt-2">
+                                <label for="giro_comercio" id="giro_comercio"><small>Giro Comercial</small></label>
                                 <input name="giro_comercio" id="giro_comercio"
                                     value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
                                     class="ab-form background-color rounded border capitalize giro_comercio"
-                                    type="text" required>
+                                    type="text" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="razonSocial" id="razonSocial"><small>Razón Social</small></label>
+                                <input name="razonSocial" id="razonSocial" value="{{ isset($razonSocial) ? $razonSocial : '' }}"
+                                    class="ab-form background-color rounded border capitalize razonSocial" type="text">
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -176,7 +190,8 @@
         <div class="col mt-4" id="top-4">
             <div class="card  shadow-sm card_4 rounded border-none">
                 <div class="card-header">
-                    <small>Participantes</small>
+                    <small>Participantes (Maximo 10 participantes) </p></small>
+                    <p>
                 </div>
                 <div class="card-body">
 
@@ -194,14 +209,15 @@
                                     <div class='col'>
                                         <div class='form-group'>
                                             <label>Nombre Completo de Participante</label>
-                                            <input type='text' class='form-control participante'
-                                                name='participantes1' required>
+                                            <input type='text' class='form-control participante' name='participantes1'
+                                                required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class='row'>
                                     <div class='col button-add-participantes'>
-                                        <button type="button" class="btn btn-primary" id="more">Agregar más participantes</button>
+                                        <button type="button" class="btn btn-primary" id="more">Agregar más
+                                            participantes</button>
                                     </div>
                                     <input id="contador" type="hidden" name="contador" value="1">
                                 </div>
@@ -223,8 +239,9 @@
         .button-add-participantes {
             margin-left: 1rem;
         }
-
     </style>
+
+
 
 @endsection
 
@@ -252,8 +269,6 @@
         var map;
         var n = 0;
 
-        //Valida si esta en la versión mobile
-        //Valida si esta en la versión mobile
         if (is_mobile()) {
             $('.mapa1').remove();
         } else {
@@ -326,19 +341,11 @@
                 $('form').prop('disabled', true);
             @endif
 
-            /**
-                lightbox
-             */
-
             lightbox.option({
                 'resizeDuration': 200,
                 'wrapAround': true
             })
 
-            /**
-             * Menu de optiones
-             *
-             */
 
             $('#nav .menu').click(function() {
                 $('.menu-mobile').addClass('open');
@@ -348,11 +355,6 @@
                 $('.menu-mobile').removeClass('open');
             });
 
-            /**
-             *
-             * Paginado de prediales
-             *
-             */
 
             $('.anterior').click(function() {
                 n = n - 5;
@@ -382,26 +384,10 @@
                 }
 
                 get_predios(n);
-
             });
-
-            /**
-             *
-             * Inicializamos la validación de
-             * los formularios
-             *
-             */
 
             $('#form_2').parsley();
             $('#form_4').parsley();
-
-
-            /**
-             *
-             * Completando la primera parte
-             *
-             */
-
 
             $('.agregar').click(function(e) {
 
@@ -423,12 +409,6 @@
 
             });
 
-            /**
-             *
-             * Completando la segunda parte
-             *
-             */
-
             $('#form_2').submit(async function(e) {
                 e.preventDefault();
 
@@ -442,11 +422,25 @@
                 }, 500);
             });
 
-            /**
-             *
-             * Completando la tercera parte
-             *
-             */
+
+            $(document).ready(function() {
+    // Initially hide the fields and labels
+    $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
+
+    // Listen for changes in the select input
+    $("#personaJ").change(function() {
+        var selectedOption = $(this).val();
+
+        // Check the selected value and show/hide fields and labels accordingly
+        if (selectedOption === "Persona Fisica") {
+            $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
+        } else if (selectedOption === "Persona Moral") {
+            $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").show();
+        }
+    });
+});
+
+
 
             $('#form_2').submit(async function(e) {
 
@@ -464,14 +458,17 @@
                 var domicilio = $('.domicilio').val();
                 var colonia = $('.colonia').val();
                 var municipio = $('.municipio').val();
+                var personaJ = $('.personaJ').val();
                 var giro_comercio = $('.giro_comercio').val();
+                var razonSocial = $('.razonSocial').val();
                 var id_etapa = $('#id_etapa').val();
+
+
 
                 $('.btn_inserta').html('Guardar');
 
                 if (id_solicitud > 0) {
-                    //console.log(tipo_tramite);
-                    //formdata.append('id_solicitud', id_solicitud);
+
                     var formdata = new FormData();
 
                     formdata.append('materia_de', materia_de);
@@ -483,9 +480,13 @@
                     formdata.append('domicilio', domicilio);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
+                    formdata.append('personaJ', personaJ);
                     formdata.append('giro_comercio', giro_comercio);
-                    //formdata.append('id_etapa', id_etapa);
+                    formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
+
+
+
 
                     if (id_etapa == 0) {
                         formdata.append('etapa', 1);
@@ -527,8 +528,6 @@
                         });
 
                     } else {
-                        //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
-
                         formdata.append('id_captura', $('#id_captura').val());
 
                         var res = await axios.post(
@@ -562,7 +561,6 @@
                                 });
                             }
                         });
-
                     }
 
                 } else {
@@ -577,23 +575,6 @@
                     //    $('.btn-form4').html('Guardar');
                     return false;
                 }
-            });
-
-
-            $('.aqui').click(function() {
-
-                var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-                var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
-                    "Sábado");
-                var f = new Date();
-                var fecha = diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] +
-                    " de " + f.getFullYear()
-                var id_captura = $('#id_captura').val();
-                var url = '{{ url('dictamen_finca_antigua/carta') }}'
-                var ruta = url + '/' + fecha + '/' + id_captura;
-
-                window.open(ruta, '_blank');
             });
 
             $('#form_5').submit(function(e) {
@@ -612,7 +593,6 @@
                     $('.btn-form4').text('Guardar');
                     return false;
                 }
-
             });
 
             $('.btn-regresar').click(function() {
@@ -626,213 +606,8 @@
                 $('html, body').animate({
                     scrollTop: $(atras).siblings('.card-header').offset().top
                 }, 500);
-
             });
         });
-
-        /**
-         *
-         * Paginado de prediales
-         *
-         */
-
-        function agregar_poligono(geopolygon) {
-            if (geopolygon != null) {
-
-                map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 18
-                });
-
-                var arr = GeoPolygonToJson(geopolygon);
-
-                const poligono = new google.maps.Polygon({
-                    path: arr,
-                    strokeColor: "#a8dda8",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                    fillColor: "#a8dda8",
-                    fillOpacity: 0.3,
-                });
-
-                map.setCenter(arr[1]);
-                poligono.setMap(map);
-
-            } else {
-                map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 18
-                });
-
-                var arr = [];
-
-                const poligono = new google.maps.Polygon({
-                    path: arr,
-                    strokeColor: "#a8dda8",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                    fillColor: "#a8dda8",
-                    fillOpacity: 0.3,
-                });
-                map.setCenter(arr[1]);
-                poligono.setMap(map);
-
-            }
-        }
-
-
-        /**
-         * Subir archivos
-         */
-
-
-        $('.file').change(function() {
-
-            var file = event.target.files[0];
-            var name = $(this).attr('data-archivo');
-            var id_solicitud = "{{ $folio }}";
-            var me = $(this);
-            var total = 0;
-            if (id_solicitud <= 0) {
-                alert('Intenta crear la solicitud nuevamente');
-                return;
-            }
-
-            if (get_extension(file.name) == 'jpg' || get_extension(file.name) == 'jpeg' || get_extension(file
-                    .name) == 'png' || get_extension(file.name) == 'pdf' || get_extension(file.name) == 'PDF' ||
-                get_extension(file.name) == 'PNG' || get_extension(file.name) == 'JPG' || get_extension(file
-                    .name) == 'JPEG' || get_extension(file.name) == 'dwg' || get_extension(file.name) == 'DWG') {
-
-                me.attr('data-upload', '1');
-                me.siblings('.progreso').text("Actualizar");
-                me.parents('.acciones').siblings('td').find('.icono').attr('src',
-                    `{{ asset('media/flaticon/archivos/${get_extension(file.name)}.svg') }}`);
-                me.parents('.acciones').siblings('td').find('.icono').parents('.enlace_box').attr('href', '#!')
-                me.parents('.acciones').siblings('td').find('.icono').attr('width', `50px`);
-                me.parents('.acciones').siblings('.filesize').text(`Tamaño: ${file.size} bytes`);
-                me.parents('.acciones').siblings('.archivo').find('br').remove();
-                me.parents('.acciones').siblings('.archivo').find('.error').remove();
-                me.parents('.acciones').siblings('td').find('.icono').css('transform', `translateX(0)`);
-
-                iziToast.show({
-                    message: 'Se subió el archivo correctamente',
-                    backgroundColor: '#2fd099',
-                    closeOnEscape: true
-                });
-
-            } else {
-                iziToast.show({
-                    title: 'Ups ☹️',
-                    message: 'El formato no es válido, recuerda que solo es posible subir en formato jpg, png, jpeg, pdf',
-                    backgroundColor: '#ff9b93',
-                    closeOnEscape: true
-                });
-            }
-
-        });
-
-
-        function limpia_predio() {
-            $('.calle').val('');
-            $('.numero').val('');
-            $('.interior').val('');
-            $('.fraccionamiento').val('');
-            $('.manzana').val('');
-            $('.cuenta').val('');
-            $('.lote').val('');
-            $('.condominio').val('');
-
-            $('.calle_1').val('');
-            $('.calle_2').val('');
-
-            $('.dictamen').val('');
-            $('.alineamiento').val('');
-            $('.alineamiento').val('');
-            $('.id_captura').val('');
-            $('.nombre').val('');
-            $('.apellido_1').val('');
-            $('.apellido_2').val('');
-            $('.domicilio').val("{{ session('domicilio') }}");
-            $('.telefono').val("{{ session('telefono') }}");
-            $('.correo').val('');
-
-            $('.suelo').val('');
-            //agregar_poligono(null);
-        }
-
-
-        function limpia_form() {
-            $('.calle').val('');
-            $('.numero').val('');
-            $('.interior').val('');
-            $('.fraccionamiento').val('');
-            $('.manzana').val('');
-            $('.lote').val('');
-            $('.condominio').val('');
-            $('.calle_1').val('');
-            $('.calle_2').val('');
-
-            $('.dictamen').val('');
-            $('.alineamiento').val('');
-            $('.id_captura').val('');
-            $('.nombre').val('');
-            $('.apellido_1').val('');
-            $('.apellido_2').val('');
-            $('.domicilio').val("{{ session('domicilio') }}");
-            $('.telefono').val("{{ session('telefono') }}");
-            $('.correo').val('');
-
-            $('.suelo').val('');
-            //agregar_poligono(null);
-        }
-
-
-        /**
-         *
-         * Total de archivos requeridos
-         * faltantes
-         *
-         */
-
-        function fileIsRequired() {
-
-            var countFileRequired = 0;
-
-            $('.file').each(function(i, item) {
-
-                if ($(this).attr('data-upload') == 0 && $(this).attr('data-required') == 1) {
-                    countFileRequired += 1;
-                }
-
-            });
-
-            return countFileRequired;
-
-        }
-
-
-        function initMap() {
-
-
-            var markers = [];
-
-            map = new google.maps.Map(document.getElementById("map"), { //Carga el mapa
-                center: {
-                    lat: 20.6785454,
-                    lng: -103.4275859
-                },
-                zoom: 14,
-                zoomControl: true,
-                mapTypeControl: false,
-                scaleControl: false,
-                streetViewControl: true,
-                rotateControl: false,
-                fullscreenControl: false
-            });
-
-        }
-
-        function descarga_solicitud(element) {
-            $('#ref_sol').attr('href', '{{ env('SOLICITUD_MORD') }}' + '=' + $('#id_captura').val());
-        }
 
         function is_mobile() {
 
@@ -841,9 +616,7 @@
             } else {
                 return false;
             }
-
         }
-
 
         $(document).ready(function() {
             var max_fields = 10;
@@ -880,4 +653,7 @@
             });
         });
     </script>
+
+
+
 @endsection

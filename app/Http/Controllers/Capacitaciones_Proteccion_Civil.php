@@ -12,6 +12,8 @@ use App\model\Dictamen_finca_antigua_model;
 use App\Mail\contactoCapacitacion;
 use PDF;
 use App\model\Mail;
+use App\model\Notificacion;
+
 
 class Capacitaciones_Proteccion_Civil extends Controller
 {
@@ -37,7 +39,6 @@ class Capacitaciones_Proteccion_Civil extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
 
-
                 $vars += ["id_etapa" => $id_etapa];
             } else {
                 $vars += ["id_etapa" => 169];
@@ -51,7 +52,9 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
+
         if ($response = Capacitaciones_Model::ingresa_solicitud($request)) {
+
             $obj = $response[0];
 
             if ($obj->idcaptura > 0) {
@@ -148,15 +151,23 @@ class Capacitaciones_Proteccion_Civil extends Controller
         }
 
         if (Capacitaciones_Model::guardarParticipantes($request, $parti)) {
-
             Capacitaciones_Model::avanzarEtapa($request);
+
             Capacitaciones_Model::sendMail($request);
+
             $request->request->add([
                 'id_captura' => $request->id_captura
             ]);
 
-             return view('/ciudadano/descanso');
 
+
+            $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Capacitacion</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu capacitación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+            $titulo = "Notificación de Registro de Trámite en Línea";
+
+            Capacitaciones_Model::notifica($request, $titulo, $mensaje);
+
+
+            return view('/ciudadano/descanso');
         } else {
             echo "no funciono, favor de intentar de nuevo";
         }
@@ -174,9 +185,4 @@ class Capacitaciones_Proteccion_Civil extends Controller
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
     }
-
-
-
-
-
 }
