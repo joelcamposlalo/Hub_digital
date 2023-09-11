@@ -17,13 +17,27 @@ class Capacitaciones_Model extends Model
 
     public static function solicitud()
     {
+
+        //Esta linea hace que se refresque la pagina y no se guarde en cache
+
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
+        //Si la pagina se refresca se borra la variable de sesion lastpage
+
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
+
+            // este modelo se usa para cuando se refresca la pagina y carga el ultimo folio
+
             $result = Solicitudes_model::consulta_ultimo_folio(27);
             $folio = $result[0]->folio;
         } else {
+
+            //es para id revisor no aplica
+
             $id_revisor = Solicitudes_model::balanza(169);
+
+            //declaras los valores para la table solicitudes
+
             $folio = DB::table('solicitudes')->insertGetId([
                 'id_tramite' => 27,
                 'id_usuario' => session('id_usuario'),
@@ -39,6 +53,7 @@ class Capacitaciones_Model extends Model
                 'id_etapa'      => 170,
                 'estatus'       => 'pendiente',
             ];
+            //insertas los valores en la tabla solicitudes_hist
 
             DB::table('solicitudes_hist')
                 ->insert($data1);
@@ -47,7 +62,7 @@ class Capacitaciones_Model extends Model
         session(['lastpage' => __FILE__]);
         return $folio;
     }
-
+    // esta funcion ahce un bucle para guardar los participantes
     public static function guardarParticipantes($request, $parti)
     {
 
@@ -70,24 +85,29 @@ class Capacitaciones_Model extends Model
             ->where('idCaptura', $request->id_captura)
             ->update(['EdoAct' => 2]);
 
+        DB::connection('captura_op')->table('Precaptura')
+            ->where('idCaptura', $request->id_captura)
+            ->update(['id_solicitud' => $request->id_solicitud]);
+
+
         DB::connection('pgsql')->table('solicitudes')
             ->where('id_solicitud', $request->id_solicitud)
-            ->update(['estatus' => "en revision"]);
+            ->update(['id_solicitud' => $request->id_solicitud]);
     }
-
-
 
     public static function ingresa_solicitud($request)
     {
+
+
         $sql = "EXECUTE proteccion_capacitaciones_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?,?,?,?";
 
         $params = array(
             $request->nombre, $request->apellido_p, $request->apellido_m, $request->correo, $request->telefono,
-            $request->colonia, $request->municipio, $request->domicilio, $request->giro_comercio, $request->materia_de,
-            $request->razonSocial, $request->personaJ, session('id_usuario'),  $request->id_solicitud
+            $request->colonia, $request->municipio, $request->domicilio, $request->numero, $request->giro_comercio,
+            $request->materia_de, $request->razonSocial, $request->personaJ, session('id_usuario'),  $request->id_solicitud
 
         );
 
@@ -96,6 +116,37 @@ class Capacitaciones_Model extends Model
         return $result;
     }
 
+    public static function actualiza_solicitud($request)
+    {
+
+
+        $sql = "EXECUTE proteccion_capacitaciones_actualiza
+        ?,?,?,?,?,
+        ?,?,?,?,?,
+        ?,?,?,?,?,?";
+
+        if ($request->giro_comercio != null) {
+            $giro = $request->giro_comercio;
+        } else {
+            $giro = '';
+        }
+        if ($request->razonSocial != null) {
+            $razon = $request->giro_comercio;
+        } else {
+            $razon = '';
+        }
+
+        $params = array(
+            $request->nombre, $request->apellido_p, $request->apellido_m, $request->correo, $request->telefono,
+            $request->colonia, $request->municipio, $request->domicilio, $request->numero, $giro, $request->materia_de,
+            $razon, $request->personaJ, session('id_usuario'),  $request->id_solicitud, $request->id_captura
+        );
+
+        return DB::connection('captura_op')->select($sql, $params);
+    }
+
+
+
     public static function ingresa_participantes($request)
     {
 
@@ -103,12 +154,13 @@ class Capacitaciones_Model extends Model
             'tipoTramite' => 27,
             'parti' => $request->participantes
         ];
-        // Insert the data into the 'capacitaciones' table
+
         DB::table('Capacitaciones')->insert($data);
 
         $data = [
             'Estado' => 4
         ];
+
         DB::table('EstadoPreCaptura')->insert($data);
 
         return true;
@@ -131,37 +183,34 @@ class Capacitaciones_Model extends Model
     public static function notifica($request, $titulo, $mensaje)
     {
 
-
-
         $data_p = DB::connection('captura_op')->table('Precaptura')
-        ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
+            ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
 
+        $data = [
+            'id_emisor'       => session('id_usuario'),
+            'id_receptor'     => session('id_usuario'),
+            'id_coordinacion' => 7,
+            'titulo'          => $titulo,
+            'descripcion'     => $mensaje,
 
-
-    $data = [
-        'id_emisor'       => session('id_usuario'),
-        'id_receptor'     => $request['id_usuario'],
-        'id_coordinacion' => 7,
-        'titulo'          => $titulo,
-        'descripcion'     => $mensaje,
-
-    ];
-
-
+        ];
 
         if (DB::table('notificaciones')->insert($data)) {
 
-            //Enviamos el correo->cc(env('MAIL_CC'))
             Mail::to($data_p)->bcc(env('MAIL_BCC'))->send(new notificacion($data_p, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
 
-
-            return DB::table('solicitudes')
+            DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
-                ->update(['id_etapa' => 171, 'estatus' => 'en revision']);
+                ->update(['id_etapa' => 171, 'estatus' => 'terminado']);
+
+            return DB::table('solicitudes_hist')
+                ->where('id_solicitud', $request['id_solicitud'])
+                ->update(['id_etapa' => 171, 'estatus' => 'terminado']);
         } else {
             return false;
         }
     }
+
 
     public static function sendMail($request)
     {
@@ -177,11 +226,7 @@ class Capacitaciones_Model extends Model
             'data_participantes' => $data_participantes,
         ];
 
-
-
-
         Mail::to('joel.campos@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
-
 }

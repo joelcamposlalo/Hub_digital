@@ -326,12 +326,6 @@
                             <tr>
                                 <td align="center"
                                     style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
-                                    <!--[if (gte mso 9)|(IE)]>
-                      <table align="center" role="presentation">
-                        <tbody>
-                          <tr>
-                            <td width="600">
-                    <![endif]-->
                                     <table align="center" role="presentation" border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto;">
                                         <tbody>
@@ -352,20 +346,21 @@
                                                         <p><b>Con el teléfono: </b>{{ $correoData->telPropietario }}</p>
                                                         <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
                                                         <p><b>En el Domicilio:</b> {{ $correoData->domPropietario }}</p>
+                                                        <p><b>Con el número: </b> {{ $correoData->numExt }}</p>
                                                         <p><b>En la Colonia:</b> {{ $correoData->colonia }}</p>
                                                         <p><b>En el municipio de: </b> {{ $correoData->municipio }}</p>
                                                         <p><b>Con el regímen fiscal como: </b>
                                                             {{ $correoData->personaJ }}</p>
+
                                                         @if (!empty($correoData->razonSocial))
                                                             <p><b>Con la razón social: </b>
                                                                 {{ $correoData->razonSocial }}</p>
                                                         @endif
-
+                                                        
                                                         @if (!empty($correoData->giroContruccion))
                                                             <p><b>Con el giro comercial de: </b>
                                                                 {{ $correoData->giroContruccion }}</p>
                                                         @endif
-
 
                                                         <br><br>
                                                         <h2 style="text-align: center mb-2">Nombres de los participantes

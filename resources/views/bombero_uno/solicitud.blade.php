@@ -74,7 +74,6 @@
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Terminado</small>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -86,12 +85,15 @@
                 </div>
                 <div class="card-body">
                     <form id=form_2 method="post">
+                        <input name="id_captura" id="id_captura" type="hidden"
+                            value="{{ isset($id_captura) ? $id_captura : '' }}">
                         <div class="row">
                             <div class="col-md-12 mt-2">
                                 <label for="materia_de"><small>Tipo de Capacitación</small></label>
                                 <select name="materia_de" id="materia_de"
                                     class="ab-form background-color rounded border materia_de" required>
-                                    <option value="Control y Combate de Incendios y Primeros Auxilios">Control y Combate de Incendios y Primeros Auxilios</option>
+                                    <option value="Control y Combate de Incendios y Primeros Auxilios">Control y Combate de
+                                        Incendios y Primeros Auxilios</option>
                                     <option value="Formación de Brigadas">Formación de Brigadas</option>
                                 </select>
                             </div>
@@ -121,25 +123,33 @@
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
-                                <input name="correo_propietario" id="correo_propietario"
+                                <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
                                     class="ab-form background-color rounded border correo_propietario" type="text"
                                     required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 mt-2">
-                                <label for="domicilio"><small>Domicilio y número</small></label>
+                            <div class="col-10 mt-2">
+                                <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text"
                                     required>
                             </div>
-                            <div class="col-md-4 mt-2">
+                            <div class="col-2 mt-2">
+                                <label for="numero"><small>Número</small></label>
+                                <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
+                                    class="ab-form background-color rounded border capitalize numero" type="number"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
                                 <label for="colonia"><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
                                     class="ab-form background-color rounded border capitalize colonia" type="text">
                             </div>
-                            <div class="col-md-4 mt-2">
+                            <div class="col mt-2">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
                                     class="ab-form background-color rounded border capitalize municipio" type="text">
@@ -159,23 +169,26 @@
                                 <input name="giro_comercio" id="giro_comercio"
                                     value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
                                     class="ab-form background-color rounded border capitalize giro_comercio"
-                                    type="text" >
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="razonSocial" id="razonSocial"><small>Razón Social</small></label>
-                                <input name="razonSocial" id="razonSocial" value="{{ isset($razonSocial) ? $razonSocial : '' }}"
+                                <input name="razonSocial" id="razonSocial"
+                                    value="{{ isset($razonSocial) ? $razonSocial : '' }}"
                                     class="ab-form background-color rounded border capitalize razonSocial" type="text">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12 mt-2 text-right">
-                                <button data-back=".card_1 .card-body" type="button"
+                                <button data-back=".card_1 .card-body" type="button" style="display: none;"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                 <input name="poligono" id="poligono" class="poligono" type="hidden"
                                     value="{{ isset($poligono) ? $poligono : '' }}">
                                 <input name="origen" type="hidden" value='solicitud'>
+                                <input name="id_captura" id="id_captura_frm4" type="hidden"
+                            value="{{ isset($id_captura) ? $id_captura : '' }}" required>
                                 <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
                                     type="submit">Continuar</button>
                             </div>
@@ -194,12 +207,10 @@
                     <p>
                 </div>
                 <div class="card-body">
-
                     <form id="form_4" method="POST" action="/bombero_uno/guardar">
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
-                            <input name="id_captura" id="id_captura_frm4" type="hidden"
-                                value="{{ isset($id_captura) ? $id_captura : '' }}" required>
+
                             <input name="id_solicitud" id="id_solicitud_frm4" type="hidden"
                                 value="{{ $folio }}">
                             <input name="id_etapa" id="id_etapa" type="hidden"
@@ -216,14 +227,15 @@
                                 </div>
                                 <div class='row'>
                                     <div class='col button-add-participantes'>
-                                        <button type="button" class="btn btn-primary" id="more">Agregar más
-                                            participantes</button>
+                                        <button type="button" class="btn btn-primary" id="more">Agregar más participantes</button>
                                     </div>
                                     <input id="contador" type="hidden" name="contador" value="1">
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12 mt-2 text-right">
+                                    <input name="id_captura" id="id_captura_frm4" type="hidden"
+                                value="{{ isset($id_captura) ? $id_captura : '' }}" >
                                     <button data-back=".card_1 .card-body" type="button"
                                         class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                     <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
@@ -235,13 +247,12 @@
             </div>
         </div>
     </div>
+
     <style>
         .button-add-participantes {
             margin-left: 1rem;
         }
     </style>
-
-
 
 @endsection
 
@@ -424,21 +435,23 @@
 
 
             $(document).ready(function() {
-    // Initially hide the fields and labels
-    $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
+                // Initially hide the fields and labels
+                $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
 
-    // Listen for changes in the select input
-    $("#personaJ").change(function() {
-        var selectedOption = $(this).val();
+                // Listen for changes in the select input
+                $("#personaJ").change(function() {
+                    var selectedOption = $(this).val();
 
-        // Check the selected value and show/hide fields and labels accordingly
-        if (selectedOption === "Persona Fisica") {
-            $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
-        } else if (selectedOption === "Persona Moral") {
-            $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").show();
-        }
-    });
-});
+                    // Check the selected value and show/hide fields and labels accordingly
+                    if (selectedOption === "Persona Fisica") {
+                        $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial")
+                            .hide();
+                    } else if (selectedOption === "Persona Moral") {
+                        $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial")
+                            .show();
+                    }
+                });
+            });
 
 
 
@@ -456,6 +469,7 @@
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
                 var domicilio = $('.domicilio').val();
+                var numero = $('.numero').val();
                 var colonia = $('.colonia').val();
                 var municipio = $('.municipio').val();
                 var personaJ = $('.personaJ').val();
@@ -478,6 +492,7 @@
                     formdata.append('telefono', telefono);
                     formdata.append('correo', correo_propietario);
                     formdata.append('domicilio', domicilio);
+                    formdata.append('numero', numero);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
                     formdata.append('personaJ', personaJ);
@@ -485,17 +500,13 @@
                     formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
 
-
-
-
                     if (id_etapa == 0) {
                         formdata.append('etapa', 1);
                     } else {
                         formdata.append('etapa', id_etapa);
                     }
 
-                    if ($('#id_captura').val() != "") {
-                        console.log(materia_de);
+                    if ($('#id_captura').val() == '') {
                         var res = await axios.post(
                             '{{ url('bombero_uno/ingresa_solicitud') }}',
                             formdata, {
@@ -529,9 +540,9 @@
 
                     } else {
                         formdata.append('id_captura', $('#id_captura').val());
-
+                        console.log("en el else")
                         var res = await axios.post(
-                            '{{ url('Capacitaciones_Proteccion_Civil/actualiza_solicitud') }}',
+                            '{{ url('bombero_uno/actualiza_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -539,13 +550,13 @@
                             }).then(function(response) {
 
                             if (parseInt(response.data) > 0) {
-
+                                console.log(response.data);
                                 $('#id_captura_frm4').val(response.data);
                                 $('.btn-form4').prop('disabled', false);
                                 $('.card_2 .card-body').slideUp('slow');
                                 $('.card_4 .card-body').slideDown('slow');
                                 iziToast.show({
-                                    message: 'Se actualizo la información correctamente, si lo requieres puedes ingresar tus archivos',
+                                    message: 'Se actualizo la información correctamente, puedes agregar a tus participantes',
                                     backgroundColor: '#2fd099',
                                     closeOnEscape: true
                                 });
@@ -572,28 +583,10 @@
                     });
                     $('.card_4 .card-body').slideUp('slow');
                     $('.card_3 .card-body').slideDown('slow');
-                    //    $('.btn-form4').html('Guardar');
                     return false;
                 }
             });
 
-            $('#form_5').submit(function(e) {
-
-                if (fileIsRequired() == 0) {
-                    $('.btn-form4').html(spiner());
-                    $('.btn-form4').prop('disabled', true);
-                    return true;
-                } else {
-                    iziToast.show({
-                        title: 'Ups ☹️',
-                        message: `${fileIsRequired() > 1 ? `${fileIsRequired()} Archivos requeridos faltantes` : `${fileIsRequired()} Archivo requerido faltante`}. Debes cargar todos los archivos`,
-                        backgroundColor: '#ff9b93',
-                        closeOnEscape: true
-                    });
-                    $('.btn-form4').text('Guardar');
-                    return false;
-                }
-            });
 
             $('.btn-regresar').click(function() {
 
@@ -623,6 +616,7 @@
             var wrapper1 = $("#participantes-container");
             var x = 1;
 
+
             document.getElementById("contador").value = x;
 
             $('#more').on('click', function(e) {
@@ -630,7 +624,7 @@
 
                 if (x < max_fields) {
                     x++;
-                    console.log(x)
+
                     document.getElementById("contador").value = x;
 
                     var newRow = $(
