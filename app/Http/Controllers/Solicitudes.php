@@ -25,7 +25,7 @@ class Solicitudes extends Controller
     {
 
         $result = Solicitudes_model::consulta_solicitud(intval($id_solicitud));
-      
+
         if ($result) {
 
             $solicitud  = $result[0];
@@ -33,11 +33,11 @@ class Solicitudes extends Controller
             $id_tramite = $solicitud->id_tramite;
             $id_etapa   = $solicitud->id_etapa;
             $estatus    = $solicitud->estatus;
-            
+
             if ($id_tramite == 1) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
-               
+
                 $vars = [
                     'predios'      => Predios_model::get_all(0),
                     'ultimo'       => Predios_model::get_count(),
@@ -64,32 +64,32 @@ class Solicitudes extends Controller
              } else if ($id_tramite == 11) {
 
                     $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
-                 
+
                     $vars = [
                         'files'        => Dictamen_trazos_usos_model::get_files($folio),
                         'folio'        => $folio,
                         'notificacion' => Notificaciones_model::get_observacion($folio),
                         'id_etapa'     => $id_etapa,
                         'estatus'      => $estatus
-    
+
                     ];
-    
-                    
+
+
                     if ($solicitud->id_etapa == 71) {
                         $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
                     }
-                    
+
                     foreach ($result2 as $obj) {
                         $vars += [$obj->campo => $obj->dato];
                     }
-                    
+
                     return view('dictamen_trazos_usos/solicitud', $vars);
 
 
             } else if ($id_tramite == 9) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
-             
+
                 $vars = [
                     'files'        => Dictamen_trazos_usos_model::get_files($folio),
                     'folio'        => $folio,
@@ -99,15 +99,15 @@ class Solicitudes extends Controller
 
                 ];
 
-                
+
                 if ($solicitud->id_etapa == 91) {
                     $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
                 }
-                
+
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
-                
+
                 return view('expediente_unico_municipal/solicitud', $vars);
 
 
@@ -215,7 +215,7 @@ class Solicitudes extends Controller
 
                 return view('alineamiento_num_oficial/solicitud', $vars);
             } else  if ($id_tramite == 6) {
-                
+
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 6, $id_etapa);
                 //var_dump($result2);
                 $vars = [
@@ -279,9 +279,9 @@ class Solicitudes extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
                 return view('horas_extras/solicitud', $vars);
-               
+
             } else if ($id_tramite == 10) { //Dictamen de imagen urbana
- 
+
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 10, $id_etapa);
 
                 $vars = [
@@ -359,7 +359,7 @@ class Solicitudes extends Controller
             else if ($id_tramite == 12) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
-                
+
                 $vars = [
                     'ultimo'       => Predios_model::get_count(),
                     'files'        => Dictamen_finca_antigua_model::get_files($folio),
@@ -379,9 +379,9 @@ class Solicitudes extends Controller
 
 
                 return view('dictamen_finca_antigua/solicitud', $vars);
-               
+
             } else  if ($id_tramite == 15) {
-                
+
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 15, $id_etapa);
                 //var_dump($result2);
                 $vars = [
@@ -414,7 +414,7 @@ class Solicitudes extends Controller
             else if ($id_tramite == 17) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
-                
+
                 $vars = [
                     'ultimo'       => Predios_model::get_count(),
                     'files'        => Dictamen_rea_Model::get_files($folio),
@@ -434,21 +434,46 @@ class Solicitudes extends Controller
 
 
                 return view('dictamen_rea/solicitud', $vars);
-               
+
             }
-        } 
+
+            ///Proteccion Civil
+            //Bomberos
+            else if ($id_tramite == 27) {
+
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
+
+                $vars = [
+                    'ultimo'       => Predios_model::get_count(),
+                    'folio'        => $folio,
+                    'notificacion' => Notificaciones_model::get_observacion($folio),
+                    'id_etapa'     => $id_etapa,
+                    'estatus'      => $estatus
+                ];
+
+                if ($solicitud->id_etapa == 171) {
+                    $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
+                }
+
+                foreach ($result2 as $obj) {
+                    $vars += [$obj->campo => $obj->dato];
+                }
+                return view('bombero_uno/solicitud', $vars);
+
+            }
+        }
     }
 
 
     /**
      * Obtener todas las solicitudes del
      * ciudadano
-     * 
+     *
      * @return json
      */
 
     public function get_all(Request $request)
-    {        
+    {
         if ($response = Solicitudes_model::get_all(session('tipo'), $request->search, $request->filtro, $request->filtro_2)) {
             http_response_code(200);
             echo json_encode($response);
@@ -458,11 +483,11 @@ class Solicitudes extends Controller
     }
 
     /**
-     * 
+     *
      * Eliminar solicitud
-     * 
+     *
      * @method post
-     * 
+     *
      */
 
 
@@ -490,11 +515,11 @@ class Solicitudes extends Controller
 
 
     /**
-     * 
+     *
      * Detalles de solicitud
-     * 
+     *
      * @method post
-     * 
+     *
      */
 
 
@@ -514,9 +539,9 @@ class Solicitudes extends Controller
     }
 
     /**
-     * 
-     * Rechazar la solicitud 
-     * 
+     *
+     * Rechazar la solicitud
+     *
      */
 
     public function rechazar(Request $request)
@@ -540,9 +565,9 @@ class Solicitudes extends Controller
     }
 
     /**
-     * 
-     * Regresar la solicitud 
-     * 
+     *
+     * Regresar la solicitud
+     *
      */
 
     public function regresar(Request $request)
@@ -565,9 +590,9 @@ class Solicitudes extends Controller
     }
 
     /**
-     * 
-     * Continuar con el siguiente paso 
-     * 
+     *
+     * Continuar con el siguiente paso
+     *
      */
 
     public function continuar(Request $request)

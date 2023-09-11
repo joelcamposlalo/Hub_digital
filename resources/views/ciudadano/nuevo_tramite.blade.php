@@ -292,7 +292,7 @@
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <div style="height: 110px" class="d-flex flex-column justify-content-center align-items-center">
                             <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" width="120px" alt="Dirección Proteccion Civil y bomberos" aria-hidden="true">
-                            <span class="badge badge-warning mt-4 f-13">Coordinación municipal de <br>Protección Civil y Bomberos Zapopan</span>
+                            <span class="badge badge-warning mt-4 f-13">Coordinación Municipal de <br>Protección Civil y Bomberos Zapopan</span>
                         </div>
                         <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                             <br>

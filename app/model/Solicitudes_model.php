@@ -30,7 +30,8 @@ class Solicitudes_model extends Model
 
     public static function consulta_datos_solicitud($id_solicitud, $id_tramite, $etapa)
     {
-        return DB::table('datos_solicitudes as ds')
+        return
+        DB::table('datos_solicitudes as ds')
             ->where('id_solicitud', '=', $id_solicitud)
             ->where('id_usuario', '=', session('id_usuario'))
             //->where('id_tramite', '=', $id_tramite)

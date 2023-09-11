@@ -102,24 +102,24 @@
                             <div class="col-md-4 mt-2">
                                 <label for="nombre"><small>Nombres completos</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border nombre" type="text" required>
+                                    class="ab-form background-color rounded border capitalize nombre" type="text" required>
                             </div>
                             <div class="col-md-4 mt-2">
                                 <label for="apellido_1"><small>Primer Apellido</small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text">
+                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" required>
                             </div>
                             <div class="col-md-4 mt-2">
                                 <label for="apellido_2"><small>Segundo Apellido</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text">
+                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-2">
                                 <label for="telefono"><small>Teléfono</small></label>
                                 <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
-                                    class="ab-form background-color rounded border capitalize telefono" type="tel">
+                                    class="ab-form background-color rounded border capitalize telefono" type="tel" data-parsley-length="[10, 10]" required >
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
@@ -139,7 +139,7 @@
                             <div class="col-2 mt-2">
                                 <label for="numero"><small>Número</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="number"
+                                    class="ab-form background-color rounded border capitalize numero" type="text"
                                     required>
                             </div>
                         </div>
@@ -147,12 +147,12 @@
                             <div class="col mt-2">
                                 <label for="colonia"><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text">
+                                    class="ab-form background-color rounded border capitalize colonia" type="text" required>
                             </div>
                             <div class="col mt-2">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
-                                    class="ab-form background-color rounded border capitalize municipio" type="text">
+                                    class="ab-form background-color rounded border capitalize municipio" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -211,7 +211,7 @@
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
 
-                            <input name="id_solicitud" id="id_solicitud_frm4" type="hidden"
+                            <input name="id_solicitud" id="id_solicitud" type="hidden"
                                 value="{{ $folio }}">
                             <input name="id_etapa" id="id_etapa" type="hidden"
                                 value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
@@ -220,7 +220,7 @@
                                     <div class='col'>
                                         <div class='form-group'>
                                             <label>Nombre Completo de Participante</label>
-                                            <input type='text' class='form-control participante' name='participantes1'
+                                            <input type='text' class='form-control participante capitalize' name='participantes1'
                                                 required>
                                         </div>
                                     </div>
@@ -234,8 +234,8 @@
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12 mt-2 text-right">
-                                    <input name="id_captura" id="id_captura_frm4" type="hidden"
-                                value="{{ isset($id_captura) ? $id_captura : '' }}" >
+                                    <input name="id_captura" id="id_captura_guardar" type="hidden"
+                            value="{{ isset($id_captura) ? $id_captura : '' }}">
                                     <button data-back=".card_1 .card-body" type="button"
                                         class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                     <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
@@ -519,6 +519,7 @@
                                 //console.log(response.data);
                                 $('#id_captura').val(response.data);
                                 $('#id_captura_frm4').val(response.data);
+                                $('#id_captura_guardar').val(response.data);
                                 $('.card_4 .card-body').slideDown('slow');
                                 $('.btn-form4').prop('disabled', false);
                                 iziToast.show({
@@ -628,7 +629,7 @@
                     document.getElementById("contador").value = x;
 
                     var newRow = $(
-                        "<div class='new-participante row container-fluid d-flex align-items-center'><div class='col'><div class='form-group'><label>Nombre Completo de Participante</label><input type='text' class='form-control participante' name='participantes" +
+                        "<div class='new-participante row container-fluid d-flex align-items-center'><div class='col'><div class='form-group'><label>Nombre Completo de Participante</label><input type='text' class='form-control participante capitalize' name='participantes" +
                         x +
                         "'required></div></div><div class='col-md-1'><button class='btn btn-danger remove-participante'>Eliminar</button></div></div>"
                     );

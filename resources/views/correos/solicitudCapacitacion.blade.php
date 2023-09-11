@@ -339,26 +339,26 @@
 
                                                         <h2 style="text-align: center">Datos del solicitante</h2>
                                                         <br>
-                                                        <p><b>Se han registrado el día: </b>{{ $correoData->fecha }}</p>
-                                                        <p><b>Tipo de Capacitación:</b> {{ $correoData->materiade }}</p>
-                                                        <p><b>Nombres: </b>
+                                                        <p><b>Se Han Registrado El Día: </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
+                                                        <p><b>Tipo De Capacitación:</b> {{ $correoData->materiade }}</p>
+                                                        <p><b>Nombre Completo Del Interesado </b>
                                                             {{ $correoData->nomPropietario }}</p>
-                                                        <p><b>Con el teléfono: </b>{{ $correoData->telPropietario }}</p>
+                                                        <p><b>Con El Teléfono: </b>{{ $correoData->telPropietario }}</p>
                                                         <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
-                                                        <p><b>En el Domicilio:</b> {{ $correoData->domPropietario }}</p>
-                                                        <p><b>Con el número: </b> {{ $correoData->numExt }}</p>
-                                                        <p><b>En la Colonia:</b> {{ $correoData->colonia }}</p>
-                                                        <p><b>En el municipio de: </b> {{ $correoData->municipio }}</p>
-                                                        <p><b>Con el regímen fiscal como: </b>
+                                                        <p><b>En El Domicilio:</b> {{ $correoData->domPropietario }}</p>
+                                                        <p><b>Con El Número: </b> {{ $correoData->numExt }}</p>
+                                                        <p><b>En La Colonia:</b> {{ $correoData->colonia }}</p>
+                                                        <p><b>En el Municipio De: </b> {{ $correoData->municipio }}</p>
+                                                        <p><b>Con El Regímen Fiscal Como: </b>
                                                             {{ $correoData->personaJ }}</p>
 
                                                         @if (!empty($correoData->razonSocial))
-                                                            <p><b>Con la razón social: </b>
+                                                            <p><b>Con La Razón Social: </b>
                                                                 {{ $correoData->razonSocial }}</p>
                                                         @endif
-                                                        
+
                                                         @if (!empty($correoData->giroContruccion))
-                                                            <p><b>Con el giro comercial de: </b>
+                                                            <p><b>Con El Giro Comercial De: </b>
                                                                 {{ $correoData->giroContruccion }}</p>
                                                         @endif
 
@@ -400,12 +400,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!--[if (gte mso 9)|(IE)]>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-                    <![endif]-->
                                 </td>
                             </tr>
                         </tbody>
