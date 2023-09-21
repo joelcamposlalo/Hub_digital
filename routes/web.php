@@ -568,3 +568,13 @@ Route::get('bombero_uno/solicitud', 'Capacitaciones_Proteccion_Civil@solicitud')
 Route::post('bombero_uno/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/actualiza_solicitud', 'Capacitaciones_Proteccion_Civil@actualiza_solicitud')->middleware('ciudadano');
 Route::post('bombero_uno/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->middleware('ciudadano');
+
+
+/*
+* Rutas para tramites de verificacion tecnica de Riesgos
+*/
+
+
+Route::get('ciudadano/tramites_verificacion_tecnica_riesgos', 'ciudadano@tramites_verificacion_tecnica_riesgos')->middleware('ciudadano');
+Route::get('verificacion_tecnica_riesgos/solicitud', 'Verificacion_Riesgos@solicitud')->middleware('ciudadano');
+Route::post('verificacion_tecnica_riesgos/ingresa_solicitud', 'Verificacion_Riesgos@ingresa_solicitud')->middleware('ciudadano');

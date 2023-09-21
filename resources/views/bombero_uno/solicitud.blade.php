@@ -100,7 +100,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4 mt-2">
-                                <label for="nombre"><small>Nombres completos</small></label>
+                                <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre" type="text" required>
                             </div>
@@ -433,7 +433,7 @@
                 }, 500);
             });
 
-
+//Esta funcion sirve para ocultar
             $(document).ready(function() {
                 // Initially hide the fields and labels
                 $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
@@ -441,6 +441,7 @@
                 // Listen for changes in the select input
                 $("#personaJ").change(function() {
                     var selectedOption = $(this).val();
+                    
 
                     // Check the selected value and show/hide fields and labels accordingly
                     if (selectedOption === "Persona Fisica") {

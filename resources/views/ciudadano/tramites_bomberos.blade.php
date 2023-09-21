@@ -86,7 +86,7 @@
                 </a>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos"
-                data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+                data-img="proteccion_civil.png" data-url="verificacion_tecnica_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
                     <div style="height: 260px;" class="card card-hover-effect">
