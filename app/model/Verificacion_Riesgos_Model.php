@@ -119,6 +119,8 @@ class Verificacion_Riesgos_Model extends Model
     public static function ingresa_solicitud($request)
     {
 
+
+
         $sql = "EXECUTE proteccion_verificacion_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
@@ -142,7 +144,7 @@ class Verificacion_Riesgos_Model extends Model
             $request->id_solicitud
 
         );
-dd($params);exit;
+
         $result = DB::connection('captura_op')->select($sql, $params);
 
         return $result;
@@ -172,6 +174,7 @@ dd($params);exit;
         $result = DB::connection('captura_op')->select($sql, $params);
 
         return $result;
+
     }
 
     public static function cancela_solicitud_dtu($id_captura)

@@ -60,10 +60,10 @@ class Verificacion_Riesgos extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-
+        echo('ingresa_solicitud');
         if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
             $obj = $response[0];
-            
+
             if ($obj->idcaptura > 0) {
 
                 $request->request->add([

@@ -306,12 +306,6 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                            <![endif]-->
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -349,8 +343,7 @@
                                                         <p><b>Con El Número: </b> {{ $correoData->numExt }}</p>
                                                         <p><b>En La Colonia:</b> {{ $correoData->colonia }}</p>
                                                         <p><b>En el Municipio De: </b> {{ $correoData->municipio }}</p>
-                                                        <p><b>Con El Regímen Fiscal Como: </b>
-                                                            {{ $correoData->personaJ }}</p>
+                                                      
 
                                                         @if (!empty($correoData->razonSocial))
                                                             <p><b>Con La Razón Social: </b>
@@ -423,7 +416,4 @@
     </style>
 
 </body>
-
-
-
 </html>

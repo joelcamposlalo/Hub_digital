@@ -102,12 +102,12 @@ class Capacitaciones_Model extends Model
         $sql = "EXECUTE proteccion_capacitaciones_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?,?,?";
+        ?,?";
 
         $params = array(
-            $request->nombre, $request->apellido_p, $request->apellido_m, $request->correo, $request->telefono,
-            $request->colonia, $request->municipio, $request->domicilio, $request->numero, $request->giro_comercio,
-            $request->materia_de, $request->razonSocial, $request->personaJ, session('id_usuario'),  $request->id_solicitud
+            $request->materia_de, $request->razonSocial,  $request->giro_comercio, $request->nombre,$request->telefono,
+            $request->correo, $request->domicilio, $request->numero, $request->colonia,  $request->municipio,
+            session('id_usuario'),  $request->id_solicitud
 
         );
 
@@ -119,30 +119,20 @@ class Capacitaciones_Model extends Model
     public static function actualiza_solicitud($request)
     {
 
-
         $sql = "EXECUTE proteccion_capacitaciones_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?,?,?,?";
-
-        if ($request->giro_comercio != null) {
-            $giro = $request->giro_comercio;
-        } else {
-            $giro = '';
-        }
-        if ($request->razonSocial != null) {
-            $razon = $request->giro_comercio;
-        } else {
-            $razon = '';
-        }
+        ?,?";
 
         $params = array(
-            $request->nombre, $request->apellido_p, $request->apellido_m, $request->correo, $request->telefono,
-            $request->colonia, $request->municipio, $request->domicilio, $request->numero, $giro, $request->materia_de,
-            $razon, $request->personaJ, session('id_usuario'),  $request->id_solicitud, $request->id_captura
+            $request->materia_de, $request->razonSocial,  $request->giro_comercio, $request->nombre,$request->telefono,
+            $request->correo, $request->domicilio, $request->numero, $request->colonia,  $request->municipio,
+            session('id_usuario'),  $request->id_captura
+
         );
 
         return DB::connection('captura_op')->select($sql, $params);
+
     }
 
 
@@ -164,6 +154,7 @@ class Capacitaciones_Model extends Model
         DB::table('EstadoPreCaptura')->insert($data);
 
         return true;
+
     }
 
 

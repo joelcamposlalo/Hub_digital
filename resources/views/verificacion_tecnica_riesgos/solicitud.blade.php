@@ -53,7 +53,7 @@
                         <small
                             class="font f-15 bold @if ($id_etapa == 67 || $id_etapa == 86) text-white @else text-muted @endif ">2</small>
                     </div>
-                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos Para Verificación</small>
+                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos del Solicitante</small>
                 </div>
                 <div class="@if ($id_etapa == 69 || $id_etapa == 86) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
@@ -72,7 +72,7 @@
                         <small
                             class="font f-15 bold @if ($id_etapa == 69) text-white @else text-muted @endif">3</small>
                     </div>
-                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Fotografías Adjuntas</small>
+                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos Para Verificación</small>
                 </div>
                 <div class="@if ($id_etapa == 69) line @else line_off @endif"></div>
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
@@ -90,7 +90,7 @@
                         <small
                             class="font f-15 bold @if ($id_etapa == 69) text-white @else text-muted @endif">4</small>
                     </div>
-                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Terminado</small>
+                    <small class="mt-1 mb-1 font c-carbon f-10 text-center">Fotografías Adjuntas</small>
                 </div>
             </div>
         </div>
@@ -434,48 +434,39 @@
         $('.card_3 .card-body').slideUp('fast');
         $('.card_4 .card-body').slideUp('fast');
 
-        var map;
-        var n = 0;
 
-        //Valida si esta en la versión mobile
-        //Valida si esta en la versión mobile
-        if (is_mobile()) {
-            $('.mapa1').remove();
-        } else {
-            $('.mapa2').remove();
-        }
 
         $(document).ready(function() {
 
-            @if (isset($id_etapa) && $id_etapa == 178)
+            @if (isset($id_etapa) && $id_etapa == 177)
                 $('.card_1 .card-body').slideDown('slow');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 66)
+            @if (isset($id_etapa) && $id_etapa == 178)
                 $('.card_1 .card-body').slideUp('fast');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideDown('slow');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 67)
+            @if (isset($id_etapa) && $id_etapa == 179)
                 $('.card_1 .card-body').slideUp('fast');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideDown('slow');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 68)
+            @if (isset($id_etapa) && $id_etapa == 180)
                 $('.card_1 .card-body').slideDown('fast');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 69)
+            @if (isset($id_etapa) && $id_etapa == 181)
                 $('.card_predios').fadeOut();
                 $('.progreso').fadeOut();
                 $('.descarga').removeClass('ocultar');
@@ -485,43 +476,15 @@
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 72)
-                $('.card_1 .card-body').slideUp('fast');
-                $('.card_2 .card-body').slideUp('fast');
-                $('.card_3 .card-body').slideDown('slow');
-                $('.card_4 .card-body').slideUp('fast');
-            @endif
 
-            @if (isset($id_etapa) && $id_etapa == 86)
-                $('.continuar').fadeOut();
-                $('.btn-guardar').fadeOut();
-                $('.btn-form3').fadeOut();
-                $('.btn-buscar').fadeOut();
-                $('.ab-btn').fadeOut();
-                $('.descarga').fadeIn();
-                $('.carta').fadeIn();
-
-                $('.card_predios').fadeOut();
-                $('.progreso').fadeOut();
-
-                $('.card_1 .card-body').slideDown('slow');
-                $('.card_3 .card-body').slideDown('slow');
-                $('.card_2 .card-body').slideDown('slow');
-                $('.card_4 .card-body').slideDown('slow');
-                $('form').prop('disabled', true);
-            @endif
-
-            /**
-                lightbox
-             */
-
+            //animacion
             lightbox.option({
                 'resizeDuration': 200,
                 'wrapAround': true
             })
 
             /**
-             * Menu de optiones
+             * Menu de optiones en movil
              *
              */
 
@@ -533,81 +496,15 @@
                 $('.menu-mobile').removeClass('open');
             });
 
-            /**
-             *
-             * Paginado de prediales
-             *
-             */
+            //Parsley de validacionn en el form
 
-            $('.anterior').click(function() {
-                n = n - 5;
-                var ultimo = parseInt($('#ultimo').val());
-
-                if (n == 0) {
-                    $('.antLi').addClass('disabled');
-                }
-
-                if (n < ultimo) {
-                    $('.sigLi').removeClass('disabled');
-                }
-
-                get_predios(n);
-            });
-
-            $('.siguiente').click(function() {
-                n = n + 5;
-                var ultimo = parseInt($('#ultimo').val());
-
-                if (n == ultimo - 5) {
-                    $('.sigLi').addClass('disabled');
-                }
-
-                if (n > 0) {
-                    $('.antLi').removeClass('disabled');
-                }
-
-                get_predios(n);
-
-            });
-
-            /**
-             *
-             * Inicializamos la validación de
-             * los formularios
-             *
-             */
             $('#form_1').parsley();
             $('#form_2').parsley();
             $('#form_3').parsley();
 
-            /**
-             *
-             * Completando la primera parte
-             *
-             */
 
 
-            $('.agregar').click(function(e) {
-
-                if ($('#id_captura').val() == "") {
-                    limpia_predio();
-                }
-
-                //$('.continuar').fadeOut('fast');
-                $('.card_1 .card-body').slideUp('slow');
-                $('.card_2 .card-body').slideDown('slow');
-
-                setTimeout(() => {
-                    $('html, body').animate({
-                        scrollTop: $('#top-2').position().top
-                    }, 500);
-                }, 500);
-
-                e.preventDefault();
-
-            });
-
-
+            //funcion para agregar campos si es persona moral
             $(document).ready(function() {
                 // Initially hide the fields and labels
                 $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
@@ -627,13 +524,6 @@
                 });
             });
 
-
-            /**
-             *
-             * Completando la segunda parte
-             *
-             */
-
             $('#form_1').submit(async function(e) {
                 e.preventDefault();
 
@@ -647,12 +537,6 @@
                 }, 500);
             });
 
-            /**
-             *
-             * Completando la tercera parte
-             *
-             */
-
             $('#form_1').submit(async function(e) {
 
                 $('.btn_inserta').prop('disabled', true);
@@ -661,11 +545,9 @@
 
                 var id_solicitud = "{{ $folio }}";
                 var nombre = $('.nombre').val();
-                var apellido_p = $('.apellido_1').val();
-                var apellido_m = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
-                var personaJ = $('.personaJ').val();
+
                 var giro_comercio = $('.giro_comercio').val();
                 var razonSocial = $('.razonSocial').val();
                 var tipo_tramite = $('.tipo_tramite').val();
@@ -679,11 +561,8 @@
                     var formdata = new FormData();
                     //Comienza Formulario #1 Datos ciudadano
                     formdata.append('nombre', nombre);
-                    formdata.append('apellido_p', apellido_p);
-                    formdata.append('apellido_m', apellido_m);
                     formdata.append('telefono', telefono);
                     formdata.append('correo', correo_propietario);
-                    formdata.append('personaJ', personaJ);
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
                     //Termina Formulario #1 Datos ciudadano
@@ -698,7 +577,7 @@
                     }
 
                     if ($('#id_captura').val() == "") {
-                        //console.log(formdata);
+
                         var res = await axios.post('{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
@@ -736,6 +615,7 @@
                     } else {
                         //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
                         formdata.append('id_captura', $('#id_captura').val());
+
 
                         var res = await axios.post('{{ url('manejo_arbolada/actualiza_solicitud') }}',
                             formdata, {

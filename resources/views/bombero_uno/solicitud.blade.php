@@ -91,7 +91,7 @@
                             <div class="col-md-12 mt-2">
                                 <label for="materia_de"><small>Tipo de Capacitación</small></label>
                                 <select name="materia_de" id="materia_de"
-                                    class="ab-form background-color rounded border materia_de" required>
+                                    class="ab-form background-color rounded border materia_de">
                                     <option value="Control y Combate de Incendios y Primeros Auxilios">Control y Combate de
                                         Incendios y Primeros Auxilios</option>
                                     <option value="Formación de Brigadas">Formación de Brigadas</option>
@@ -99,20 +99,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 mt-2">
-                                <label for="nombre"><small>Nombre(s)</small></label>
+                            <div class="col mt-2">
+                                <label for="razonSocial" id="razonSocial"><small>Razón Social</small></label>
+                                <input name="razonSocial" id="razonSocial"
+                                    value="{{ isset($razonSocial) ? $razonSocial : '' }}"
+                                    class="ab-form background-color rounded border capitalize razonSocial" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="giro_comercio" id="giro_comercio"><small>Giro Comercial</small></label>
+                                <input name="giro_comercio" id="giro_comercio"
+                                    value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
+                                    class="ab-form background-color rounded border capitalize giro_comercio"
+                                    type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="nombre"><small>Nombre Completo</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre" type="text" required>
-                            </div>
-                            <div class="col-md-4 mt-2">
-                                <label for="apellido_1"><small>Primer Apellido</small></label>
-                                <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" required>
-                            </div>
-                            <div class="col-md-4 mt-2">
-                                <label for="apellido_2"><small>Segundo Apellido</small></label>
-                                <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -129,57 +136,34 @@
                                     required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-10 mt-2">
+                        <div class="row responsive_numero">
+                            <div class="col-10 mt-2 domicilio_div ">
                                 <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text"
                                     required>
                             </div>
-                            <div class="col-2 mt-2">
+                            <div class="numero_div col-2 mt-2 ">
                                 <label for="numero"><small>Número</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
                                     class="ab-form background-color rounded border capitalize numero" type="text"
                                     required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="colonia"><small>Colonia</small></label>
+                        <div class="row responsive_numero">
+                            <div class="col mt-2 ">
+                                <label for="colonia "><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
                                     class="ab-form background-color rounded border capitalize colonia" type="text" required>
                             </div>
-                            <div class="col mt-2">
+                            <div class="col mt-2 domicilio_div">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
                                     class="ab-form background-color rounded border capitalize municipio" type="text" required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-2">
-                                <label for="personaJ"><small>Regímen Fiscal</small></label>
-                                <select name="personaJ" id="personaJ"
-                                    class="ab-form background-color rounded border personaJ" required>
-                                    <option value="Persona Fisica">Persona Física</option>
-                                    <option value="Persona Moral">Persona Moral</option>
-                                </select>
-                            </div>
-                            <div class="col mt-2">
-                                <label for="giro_comercio" id="giro_comercio"><small>Giro Comercial</small></label>
-                                <input name="giro_comercio" id="giro_comercio"
-                                    value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
-                                    class="ab-form background-color rounded border capitalize giro_comercio"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="razonSocial" id="razonSocial"><small>Razón Social</small></label>
-                                <input name="razonSocial" id="razonSocial"
-                                    value="{{ isset($razonSocial) ? $razonSocial : '' }}"
-                                    class="ab-form background-color rounded border capitalize razonSocial" type="text">
-                            </div>
-                        </div>
+
+
                         <div class="row mt-4">
                             <div class="col-md-12 mt-2 text-right">
                                 <button data-back=".card_1 .card-body" type="button" style="display: none;"
@@ -252,6 +236,34 @@
         .button-add-participantes {
             margin-left: 1rem;
         }
+
+        .new-participante{
+            flex-direction: column;
+            margin-top: 1rem;
+        }
+
+        .button-add-participantes{
+            margin-top: 1rem;
+        }
+
+    @media (max-width: 768px) {
+        .responsive_numero {
+            flex-direction: column;
+        }
+        .domicilio_div{
+            width: 100%;
+            max-width: none;
+        }
+        .numero_div {
+            width: 100%;
+            max-width: none;
+        }
+
+        .remove-participante{
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+    }
     </style>
 
 @endsection
@@ -433,27 +445,6 @@
                 }, 500);
             });
 
-//Esta funcion sirve para ocultar
-            $(document).ready(function() {
-                // Initially hide the fields and labels
-                $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial").hide();
-
-                // Listen for changes in the select input
-                $("#personaJ").change(function() {
-                    var selectedOption = $(this).val();
-                    
-
-                    // Check the selected value and show/hide fields and labels accordingly
-                    if (selectedOption === "Persona Fisica") {
-                        $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial")
-                            .hide();
-                    } else if (selectedOption === "Persona Moral") {
-                        $("#giro_comercio, #razonSocial, #label_giro_comercio, #label_razonSocial")
-                            .show();
-                    }
-                });
-            });
-
 
 
             $('#form_2').submit(async function(e) {
@@ -465,15 +456,12 @@
                 var id_solicitud = "{{ $folio }}";
                 var materia_de = $('.materia_de').val();
                 var nombre = $('.nombre').val();
-                var apellido_p = $('.apellido_1').val();
-                var apellido_m = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
                 var domicilio = $('.domicilio').val();
                 var numero = $('.numero').val();
                 var colonia = $('.colonia').val();
                 var municipio = $('.municipio').val();
-                var personaJ = $('.personaJ').val();
                 var giro_comercio = $('.giro_comercio').val();
                 var razonSocial = $('.razonSocial').val();
                 var id_etapa = $('#id_etapa').val();
@@ -488,15 +476,13 @@
 
                     formdata.append('materia_de', materia_de);
                     formdata.append('nombre', nombre);
-                    formdata.append('apellido_p', apellido_p);
-                    formdata.append('apellido_m', apellido_m);
                     formdata.append('telefono', telefono);
                     formdata.append('correo', correo_propietario);
                     formdata.append('domicilio', domicilio);
                     formdata.append('numero', numero);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
-                    formdata.append('personaJ', personaJ);
+
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
@@ -632,7 +618,7 @@
                     var newRow = $(
                         "<div class='new-participante row container-fluid d-flex align-items-center'><div class='col'><div class='form-group'><label>Nombre Completo de Participante</label><input type='text' class='form-control participante capitalize' name='participantes" +
                         x +
-                        "'required></div></div><div class='col-md-1'><button class='btn btn-danger remove-participante'>Eliminar</button></div></div>"
+                        "'required></div></div><div class='col'><button class='btn btn-danger remove-participante'>Eliminar</button></div></div>"
                     );
 
                     $(wrapper1).append(newRow);
