@@ -102,12 +102,12 @@ class Capacitaciones_Model extends Model
         $sql = "EXECUTE proteccion_capacitaciones_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?";
+        ?,?,?,?";
 
         $params = array(
-            $request->materia_de, $request->razonSocial,  $request->giro_comercio, $request->nombre,$request->telefono,
-            $request->correo, $request->domicilio, $request->numero, $request->colonia,  $request->municipio,
-            session('id_usuario'),  $request->id_solicitud
+            $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
+            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->giro_comercio,
+            $request->materia_de, $request->razonSocial, session('id_usuario'),  $request->id_solicitud
 
         );
 
@@ -122,12 +122,12 @@ class Capacitaciones_Model extends Model
         $sql = "EXECUTE proteccion_capacitaciones_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?";
+        ?,?,?,?";
 
         $params = array(
-            $request->materia_de, $request->razonSocial,  $request->giro_comercio, $request->nombre,$request->telefono,
-            $request->correo, $request->domicilio, $request->numero, $request->colonia,  $request->municipio,
-            session('id_usuario'),  $request->id_captura
+            $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
+            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->giro_comercio,
+            $request->materia_de, $request->razonSocial,  session('id_usuario'),  $request->id_captura
 
         );
 

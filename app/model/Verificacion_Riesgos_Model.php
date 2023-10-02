@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\model\Solicitudes_model;
 use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
+use Psy\VersionUpdater\IntervalChecker;
 
 class Verificacion_Riesgos_Model extends Model
 {
@@ -16,7 +17,7 @@ class Verificacion_Riesgos_Model extends Model
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
-            $result = Solicitudes_model::consulta_ultimo_folio(12);
+            $result = Solicitudes_model::consulta_ultimo_folio(29);
             $folio = $result[0]->folio;
         } else {
             $id_revisor = Solicitudes_model::balanza(65);
@@ -25,14 +26,13 @@ class Verificacion_Riesgos_Model extends Model
                 'id_usuario' => session('id_usuario'),
                 'id_etapa'   =>  177,
                 'estatus'    =>  'pendiente',
-                'id_revisor' =>  $id_revisor
+                //'id_revisor' =>  $id_revisor
             ], 'id_solicitud');
-
 
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
-                'id_revisor'    => $id_revisor,
+             //   'id_revisor'    => $id_revisor,
                 'id_tramite'    => 29,
                 'id_etapa'      => 177,
                 'estatus'       => 'pendiente',
@@ -118,63 +118,71 @@ class Verificacion_Riesgos_Model extends Model
 
     public static function ingresa_solicitud($request)
     {
-
-
-
         $sql = "EXECUTE proteccion_verificacion_inserta
         ?,?,?,?,?,
-        ?,?,?,?,?,
-        ?,";
+        ?,?,?,?,?";
 
         if ($request->giro_comercio != null) {
             $giro = $request->giro_comercio;
         } else {
-            $giro = '';
+            $giro = '-';
         }
         if ($request->razonSocial != null) {
-            $razon = $request->giro_comercio;
+            $razon = $request->razonSocial;
         } else {
-            $razon = '';
+            $razon = '-';
         }
 
-
         $params = array(
-            $request->nombre, $request->apellido_p, $request->apellido_m,$request->telefono, $request->correo,
-            $request->personaJ, $request->giro_comercio,  $request->razonSocial, $request->materia_de, session('id_usuario'),
-            $request->id_solicitud
-
+            $request->nombre  ?? '-',
+            $request->apellido_1 ?? '-',
+            $request->apellido_2 ?? '-',
+            $request->telefono ?? '-',
+            $request->correo ?? '-',
+            $request->personaJ ?? '-',
+            $request->giro_comercio ?? '-',
+            $request->razonSocial ?? '-',
+            session('id_usuario') ?? '-',
+            intval($request->id_solicitud)  ?? 1,
         );
 
         $result = DB::connection('captura_op')->select($sql, $params);
-
-        return $result;
+        return $result[0]->idcaptura;
     }
 
     public static function actualiza_solicitud($request)
     {
 
-        $sql = "EXECUTE dfa_actualiza_dictfinca ?,?,?,?,?,
+        $sql = "EXECUTE proteccion_verificacion_actualiza
         ?,?,?,?,?,
-        ?,?,?,?,?,
-        ?,?,?,?,?, ?";
+        ?,?,?,?,?";
 
-        if ($request->interior) {
-            $numero = $request->numero . " " . $request->interior;
+        if ($request->giro_comercio != null) {
+            $giro = $request->giro_comercio;
         } else {
-            $numero = $request->numero;
+            $giro = '-';
+        }
+        if ($request->razonSocial != null) {
+            $razon = $request->razonSocial;
+        } else {
+            $razon = '-';
         }
 
         $params = array(
-            $request->calle, $numero, $request->fraccionamiento, $request->manzana, $request->lote,
-            $request->condominio, $request->calle_1, $request->calle_2, $request->cuenta, $request->nombre,
-            $request->apellido_p, $request->apellido_m, $request->domicilio, $request->telefono, $request->correo_propietario,
-            $request->nombre, $request->apellido_p, $request->apellido_m, $request->id_captura, $request->correo, $request->tipo_tramite
+            $request->nombre  ?? '-',
+            $request->apellido_1 ?? '-',
+            $request->apellido_2 ?? '-',
+            $request->telefono ?? '-',
+            $request->correo ?? '-',
+            $request->personaJ ?? '-',
+            $request->giro_comercio ?? '-',
+            $request->razonSocial ?? '-',
+            session('id_usuario') ?? '-',
+            intval($request->id_solicitud)  ?? 1,
         );
 
         $result = DB::connection('captura_op')->select($sql, $params);
-
-        return $result;
-
+        return $result[0]->idcaptura;
     }
 
     public static function cancela_solicitud_dtu($id_captura)

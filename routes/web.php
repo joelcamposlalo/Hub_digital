@@ -578,4 +578,4 @@ Route::post('bombero_uno/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->m
 Route::get('ciudadano/tramites_verificacion_tecnica_riesgos', 'ciudadano@tramites_verificacion_tecnica_riesgos')->middleware('ciudadano');
 Route::get('verificacion_tecnica_riesgos/solicitud', 'Verificacion_Riesgos@solicitud')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos/ingresa_solicitud', 'Verificacion_Riesgos@ingresa_solicitud')->middleware('ciudadano');
-Route::get('verificacion_tecnica_riesgos/actualiza_solicitud', 'Verificacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
+Route::post('verificacion_tecnica_riesgos/actualiza_solicitud', 'Verificacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');

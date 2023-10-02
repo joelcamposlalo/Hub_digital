@@ -18,6 +18,7 @@ class Verificacion_Riesgos extends Controller
 
     public function solicitud()
     {
+
         if ($folio = Verificacion_Riesgos_Model::solicitud()) {
 
             $vars = [
@@ -46,28 +47,20 @@ class Verificacion_Riesgos extends Controller
     }
 
 
-    public function carta($fecha, $id_captura)
-    {
-        $data = [
-            'fecha' => $fecha,
-            'id_captura' => $id_captura
-        ];
 
-        $pdf = PDF::loadView('dictamen_finca_antigua.carta', $data);
-        return $pdf->download('carta responsiva.pdf');
-    }
+//ANDRES ESTUVO AQUIIII siuuuu
 
-
+//SALUDOS AMIX
     public function ingresa_solicitud(Request $request)
     {
-        echo('ingresa_solicitud');
-        if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
-            $obj = $response[0];
 
-            if ($obj->idcaptura > 0) {
+        if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
+            $obj = $response;
+
+            if ($obj > 0) {
 
                 $request->request->add([
-                    'id_captura' => $obj->idcaptura
+                    'id_captura' => $obj
                 ]);
 
                 $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa);
@@ -78,13 +71,13 @@ class Verificacion_Riesgos extends Controller
                     echo json_encode("0");
                 } else {
 
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj->idcaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj, null);
                     http_response_code(200);
-                    echo json_encode($obj->idcaptura);
+                    echo json_encode($obj);
                 }
             } else {
                 http_response_code(503);
-                echo json_encode($obj->idcaptura);
+                echo json_encode($obj);
             }
         } else {
             http_response_code(503);
@@ -94,7 +87,7 @@ class Verificacion_Riesgos extends Controller
     public function actualiza_solicitud(Request $request)
     {
 
-        if ($response = Dictamen_finca_antigua_model::actualiza_solicitud($request)) {
+        if ($response = Verificacion_Riesgos_Model::actualiza_solicitud($request)) {
 
             $obj = $response[0];
 
@@ -126,7 +119,7 @@ class Verificacion_Riesgos extends Controller
         $files_s3 = 0;
         $rows_elimina = 0;
 
-        $requisitos = Dictamen_finca_antigua_model::consulta_requisitos_op(
+        $requisitos = Verificacion_Riesgos_Model::consulta_requisitos_op(
             $request->id_solicitud
         );
 
@@ -166,7 +159,7 @@ class Verificacion_Riesgos extends Controller
                 } else {
                     $files_s3--;
                 }
-                $rows += Dictamen_finca_antigua_model::inserta_requisito_op(
+                $rows += Verificacion_Riesgos_Model::inserta_requisito_op(
                     $id_documento,
                     $filename,
                     $ext,
@@ -175,7 +168,7 @@ class Verificacion_Riesgos extends Controller
             }
         }
 
-        $pendientes = Dictamen_finca_antigua_model::consulta_archivos_faltantes($request->id_solicitud);
+        $pendientes = Verificacion_Riesgos_Model::consulta_archivos_faltantes($request->id_solicitud);
 
         if ($pendientes || $rows <> $files_s3) {
 
@@ -230,14 +223,5 @@ class Verificacion_Riesgos extends Controller
 
             return view('ciudadano/descanso');
         }
-    }
-
-    public function descargarPlano()
-    {
-        $filePath = public_path("EjemploPlanoDFA.pdf");
-        $headers = ['Content-Type: application/pdf'];
-        $fileName = 'EjemploPlanoDFA.pdf';
-
-        return response()->download($filePath, $fileName, $headers);
     }
 }

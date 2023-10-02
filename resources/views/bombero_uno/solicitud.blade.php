@@ -117,9 +117,21 @@
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="nombre"><small>Nombre Completo</small></label>
+                                <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre" type="text" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="apellido_uno"><small>Primer Apellido</small></label>
+                                <input name="apellido_uno" id="apellido_uno" value="{{ isset($apellido_uno) ? $apellido_uno : '' }}"
+                                    class="ab-form background-color rounded border capitalize apellido_uno" type="text" required>
+                            </div>
+                            <div class="col mt-2">
+                                <label for="apellido_dos"><small>Segundo Apellido</small></label>
+                                <input name="apellido_dos" id="apellido_dos" value="{{ isset($apellido_dos) ? $apellido_dos : '' }}"
+                                    class="ab-form background-color rounded border capitalize apellido_dos" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -456,6 +468,8 @@
                 var id_solicitud = "{{ $folio }}";
                 var materia_de = $('.materia_de').val();
                 var nombre = $('.nombre').val();
+                var apellido_uno = $('.apellido_uno').val();
+                var apellido_dos = $('.apellido_dos').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
                 var domicilio = $('.domicilio').val();
@@ -476,6 +490,8 @@
 
                     formdata.append('materia_de', materia_de);
                     formdata.append('nombre', nombre);
+                    formdata.append('apellido_uno', apellido_uno);
+                    formdata.append('apellido_dos', apellido_dos);
                     formdata.append('telefono', telefono);
                     formdata.append('correo', correo_propietario);
                     formdata.append('domicilio', domicilio);

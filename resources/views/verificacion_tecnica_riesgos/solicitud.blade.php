@@ -185,8 +185,8 @@
     </div>
 
     <div class="row">
-        <div class="col mt-4" id="top-3">
-            <div class="card  shadow-sm card_3 rounded border-none">
+        <div class="col mt-4" id="top-2">
+            <div class="card  shadow-sm card_2 rounded border-none">
                 <div class="card-header">
                     <small>Datos para la Verificación</small>
                 </div>
@@ -250,7 +250,7 @@
                                 <input name="origen" type="hidden" value='solicitud'>
                                 <input name="id_captura" id="id_captura_frm4" type="hidden"
                                     value="{{ isset($id_captura) ? $id_captura : '' }}">
-                                <button data-back=".card_3 .card-body" type="button"
+                                <button data-back=".card_1 .card-body" type="button"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                 <button class="ab-btn b-primary-color  " id="" type="submit">Continuar</button>
                             </div>
@@ -438,43 +438,20 @@
 
         $(document).ready(function() {
 
-            @if (isset($id_etapa) && $id_etapa == 177)
+            @if (isset($id_etapa) && $id_etapa == 178)
                 $('.card_1 .card-body').slideDown('slow');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 178)
-                $('.card_1 .card-body').slideUp('fast');
-                $('.card_2 .card-body').slideUp('fast');
-                $('.card_3 .card-body').slideDown('slow');
-                $('.card_4 .card-body').slideUp('fast');
-            @endif
-
             @if (isset($id_etapa) && $id_etapa == 179)
                 $('.card_1 .card-body').slideUp('fast');
-                $('.card_2 .card-body').slideUp('fast');
-                $('.card_3 .card-body').slideUp('fast');
-                $('.card_4 .card-body').slideDown('slow');
-            @endif
-
-            @if (isset($id_etapa) && $id_etapa == 180)
-                $('.card_1 .card-body').slideDown('fast');
-                $('.card_2 .card-body').slideUp('fast');
+                $('.card_2 .card-body').slideDown('slow');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 181)
-                $('.card_predios').fadeOut();
-                $('.progreso').fadeOut();
-                $('.descarga').removeClass('ocultar');
-                $('.card_1 .card-body').slideUp('fast');
-                $('.card_2 .card-body').slideUp('fast');
-                $('.card_3 .card-body').slideUp('fast');
-                $('.card_4 .card-body').slideUp('fast');
-            @endif
 
 
             //animacion
@@ -545,6 +522,157 @@
 
                 var id_solicitud = "{{ $folio }}";
                 var nombre = $('.nombre').val();
+                var apellido_1 = $('.apellido_1').val();
+                var apellido_2 = $('.apellido_2').val();
+                var telefono = $('.telefono').val();
+                var correo_propietario = $('.correo_propietario').val();
+                var giro_comercio = $('.giro_comercio').val();
+                var razonSocial = $('.razonSocial').val();
+                var tipo_tramite = $('.tipo_tramite').val();
+
+
+
+                //$('.btn-form4').html('Guardar');
+                if (id_solicitud > 0) {
+
+
+                    var formdata = new FormData();
+                    //Comienza Formulario #1 Datos ciudadano
+                    formdata.append('nombre', nombre);
+                    formdata.append('telefono', telefono);
+                    formdata.append('apellido_1', apellido_1);
+                    formdata.append('apellido_2', apellido_2);
+                    formdata.append('correo', correo_propietario);
+                    formdata.append('giro_comercio', giro_comercio);
+                    formdata.append('razonSocial', razonSocial);
+                    //Termina Formulario #1 Datos ciudadano
+
+                    //formdata.append('id_etapa', id_etapa);
+                    formdata.append('id_solicitud', id_solicitud);
+
+                    // if (id_etapa == 0) {
+                    //     formdata.append('etapa', 1);
+                    // } else {
+                    //     formdata.append('etapa', id_etapa);
+                    // }
+
+                    if ($('#id_captura').val() == "") {
+
+                        var res = await axios.post('{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
+                            formdata, {
+                                data: {
+                                    "_token": "{{ csrf_token() }}"
+                                }
+                            }).then(function(response) {
+
+                            if (parseInt(response.data) > 0) {
+                                //console.log(response.data);
+                                $('#id_captura').val(response.data);
+                                $('#id_captura_frm4').val(response.data);
+                                $('.card_1 .card-body').slideUp('slow');
+                                $('.card_2 .card-body').slideDown('slow');
+                                $('.card_3 .card-body').slideUp('slow');
+                                $('.btn-form4').prop('disabled', false);
+                                iziToast.show({
+                                    message: 'Se registró la información correctamente, puedes ingresar tus archivos',
+                                    backgroundColor: '#2fd099',
+                                    closeOnEscape: true
+                                });
+                            } else {
+
+                                $('.card_4 .card-body').slideUp('slow');
+                                $('.card_3 .card-body').slideDown('slow');
+
+                                iziToast.show({
+                                    message: 'Ocurrió un error al tratar de registrar la información, por favor intenta más tarde',
+                                    backgroundColor: '#ff9b93',
+                                    closeOnEscape: true
+                                });
+                            }
+                        });
+
+                    } else {
+                        //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
+                        formdata.append('id_captura', $('#id_captura').val());
+
+
+                        var res = await axios.post('{{ url('verificacion_tecnica_riesgos/actualiza_solicitud') }}',
+                            formdata, {
+                                data: {
+                                    "_token": "{{ csrf_token() }}"
+                                }
+                            }).then(function(response) {
+
+                            if (parseInt(response.data) > 0) {
+
+                                $('#id_captura_frm4').val(response.data);
+                                $('.btn-form4').prop('disabled', false);
+                                $('.card_1 .card-body').slideUp('slow');
+                                $('.card_2 .card-body').slideUp('slow');
+                                $('.card_3 .card-body').slideUp('slow');
+                                $('.card_4 .card-body').slideDown('slow');
+                                iziToast.show({
+                                    message: 'Se actualizo la información correctamente, si lo requieres puedes ingresar tus archivos',
+                                    backgroundColor: '#2fd099',
+                                    closeOnEscape: true
+                                });
+
+                            } else {
+                                $('.card_1 .card-body').slideUp('slow');
+                                $('.card_2 .card-body').slideUp('slow');
+                                $('.card_3 .card-body').slideUp('slow');
+                                $('.card_4 .card-body').slideDown('slow');
+
+                                iziToast.show({
+                                    message: 'Ocurrió un error al tratar de actualizar la información, por favor intenta más tarde',
+                                    backgroundColor: '#ff9b93',
+                                    closeOnEscape: true
+                                });
+                            }
+                        });
+
+                    }
+
+                } else {
+                    iziToast.show({
+                        title: 'Ups ☹️',
+                        message: 'Se produjo un error al registra la solicitud',
+                        backgroundColor: '#ff9b93',
+                        closeOnEscape: true
+                    });
+                    $('.card_1 .card-body').slideUp('slow');
+                    $('.card_2 .card-body').slideUp('slow');
+                    $('.card_3 .card-body').slideDown('slow');
+                    $('.btn-form4').html('Guardar');
+                    return false;
+                }
+            });
+
+
+
+            $('#form_2').submit(async function(e) {
+                e.preventDefault();
+
+                $('.card_1 .card-body').slideUp('slow');
+                $('.card_3 .card-body').slideDown('slow');
+
+                setTimeout(() => {
+                    $('html, body').animate({
+                        scrollTop: $('#top-3').position().top
+                    }, 500);
+                }, 500);
+            });
+
+            $('#form_2').submit(async function(e) {
+
+                $('.btn_inserta').prop('disabled', true);
+
+                e.preventDefault();
+
+                var id_solicitud = "{{ $folio }}";
+                var nombre = $('.nombre').val();
+                var apellido_1 = $('.apellido_1').val();
+                var apellido_2 = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
 
@@ -561,6 +689,8 @@
                     var formdata = new FormData();
                     //Comienza Formulario #1 Datos ciudadano
                     formdata.append('nombre', nombre);
+                    formdata.append('apellido_1', apellido_1);
+                    formdata.append('apellido_2', apellido_2);
                     formdata.append('telefono', telefono);
                     formdata.append('correo', correo_propietario);
                     formdata.append('giro_comercio', giro_comercio);
@@ -570,11 +700,11 @@
                     //formdata.append('id_etapa', id_etapa);
                     formdata.append('id_solicitud', id_solicitud);
 
-                    if (id_etapa == 0) {
-                        formdata.append('etapa', 1);
-                    } else {
-                        formdata.append('etapa', id_etapa);
-                    }
+                    // if (id_etapa == 0) {
+                    //     formdata.append('etapa', 1);
+                    // } else {
+                    //     formdata.append('etapa', id_etapa);
+                    // }
 
                     if ($('#id_captura').val() == "") {
 
@@ -590,9 +720,8 @@
                                 $('#id_captura').val(response.data);
                                 $('#id_captura_frm4').val(response.data);
                                 $('.card_1 .card-body').slideUp('slow');
-                                $('.card_2 .card-body').slideUp('slow');
+                                $('.card_2 .card-body').slideDown('slow');
                                 $('.card_3 .card-body').slideUp('slow');
-                                $('.card_4 .card-body').slideDown('slow');
                                 $('.btn-form4').prop('disabled', false);
                                 iziToast.show({
                                     message: 'Se registró la información correctamente, puedes ingresar tus archivos',
