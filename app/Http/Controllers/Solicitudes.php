@@ -460,6 +460,7 @@ class Solicitudes extends Controller
                 }
                 return view('bombero_uno/solicitud', $vars);
 
+                
             }
         }
     }

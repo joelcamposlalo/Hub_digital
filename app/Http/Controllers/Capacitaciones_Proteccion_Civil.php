@@ -63,7 +63,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
                     'id_captura' => $obj->idcaptura
                 ]);
 
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $obj->idcaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
@@ -91,7 +91,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
             if ($response[0]) {
 
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 170);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 170, $response[0]->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);

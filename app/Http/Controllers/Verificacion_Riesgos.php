@@ -15,7 +15,7 @@ use PDF;
 class Verificacion_Riesgos extends Controller
 {
 
-
+//Aqui ingresas la solicitud a la tabla solicitudes
     public function solicitud()
     {
 
@@ -48,29 +48,29 @@ class Verificacion_Riesgos extends Controller
 
 
 
-//ANDRES ESTUVO AQUIIII siuuuu
+    //Aqui esta la funcion general para ingreso de solicitud y el primer procedimiento
 
-//SALUDOS AMIX
     public function ingresa_solicitud(Request $request)
     {
-
+                    //Primer procedimiento almacenado
         if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
             $obj = $response;
+
 
             if ($obj > 0) {
 
                 $request->request->add([
                     'id_captura' => $obj
                 ]);
-
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa);
+                    //Temas de la table solicitud cambia el estado y datos
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $request->id_captura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo ($rows);
                     echo json_encode("0");
                 } else {
-
+                        //Cambia el status de la etapa
                     Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj, null);
                     http_response_code(200);
                     echo json_encode($obj);
@@ -83,35 +83,61 @@ class Verificacion_Riesgos extends Controller
             http_response_code(503);
         }
     }
-
+                    //El procdimiento almacenado de actualizar el primer card
     public function actualiza_solicitud(Request $request)
-    {
-
+    {               //SP de el actualizar informacion
         if ($response = Verificacion_Riesgos_Model::actualiza_solicitud($request)) {
 
             $obj = $response[0];
 
-            if ($obj->idcaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 66);
+            if ($obj->IdCaptura > 0) {
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 178, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
                     //Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 2, 'pendiente');
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 66, 'pendiente', $obj->idcaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
-                    echo json_encode($obj->idcaptura);
+                    echo json_encode($obj->IdCaptura);
                 }
             } else {
                 http_response_code(503);
-                echo json_encode($obj->idcaptura);
+                echo json_encode($obj->IdCaptura);
             }
         } else {
             http_response_code(503);
         }
     }
 
+    public function actualiza_solicitud_2(Request $request)
+    {               //SP de el actualizar informacion
+        if ($response = Verificacion_Riesgos_Model::actualiza_solicitud_2($request)) {
+
+            $obj = $response[0];
+
+            if ($obj->IdCaptura > 0) {
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 179, $obj->IdCaptura);
+
+                if ($rows == 0) {
+                    http_response_code(503);
+                    echo json_encode("0");
+                } else {
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 179, 'pendiente', $obj->IdCaptura, null);
+                    http_response_code(200);
+                    echo json_encode($obj->IdCaptura);
+                }
+            } else {
+                http_response_code(503);
+                echo json_encode($obj->IdCaptura);
+            }
+        } else {
+            http_response_code(503);
+        }
+    }
+
+    
     public function ingresa_tramite(Request $request)
     {
         $id_captura = $request->id_captura;
@@ -125,7 +151,6 @@ class Verificacion_Riesgos extends Controller
 
         foreach ($requisitos as $r) {
             $nombre_archivo = $r->nombre;
-
 
             if ($r->estatus != 'validado') {
 
@@ -172,7 +197,6 @@ class Verificacion_Riesgos extends Controller
 
         if ($pendientes || $rows <> $files_s3) {
 
-            // Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 3, 'pendiente');
             Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 67, 'pendiente', $id_captura, null);
 
             $result = Solicitudes_model::consulta_solicitud($request->id_solicitud);
@@ -183,9 +207,6 @@ class Verificacion_Riesgos extends Controller
                 $folio      = $solicitud->id_solicitud;
                 $id_tramite = $solicitud->id_tramite;
 
-
-
-
                 $result2 = Solicitudes_model::consulta_datos_solicitud($request->id_solicitud, $id_tramite, 65);
 
                 $vars = [
@@ -194,8 +215,6 @@ class Verificacion_Riesgos extends Controller
                     'error'   => 'Debe de completar todos los archivos obligatorios',
                     'id_etapa' => $solicitud->id_etapa
                 ];
-
-
 
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];

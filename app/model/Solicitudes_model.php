@@ -824,7 +824,7 @@ class Solicitudes_model extends Model
     }
 
 
-    public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa)
+    public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
     {
         $num_rows = 0;
         //$sql = "DELETE FROM datos_solicitudes   where id_usuario=? and id_tramite =? and id_solicitud=? and id_etapa=?;";

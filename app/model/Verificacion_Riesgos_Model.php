@@ -118,6 +118,8 @@ class Verificacion_Riesgos_Model extends Model
 
     public static function ingresa_solicitud($request)
     {
+
+
         $sql = "EXECUTE proteccion_verificacion_inserta
         ?,?,?,?,?,
         ?,?,?,?,?";
@@ -150,6 +152,7 @@ class Verificacion_Riesgos_Model extends Model
         return $result[0]->idcaptura;
     }
 
+    //SP de el primer actualiza card
     public static function actualiza_solicitud($request)
     {
 
@@ -168,6 +171,7 @@ class Verificacion_Riesgos_Model extends Model
             $razon = '-';
         }
 
+
         $params = array(
             $request->nombre  ?? '-',
             $request->apellido_1 ?? '-',
@@ -178,77 +182,40 @@ class Verificacion_Riesgos_Model extends Model
             $request->giro_comercio ?? '-',
             $request->razonSocial ?? '-',
             session('id_usuario') ?? '-',
-            intval($request->id_solicitud)  ?? 1,
+            $request->id_captura ?? '-',
         );
 
-        $result = DB::connection('captura_op')->select($sql, $params);
-        return $result[0]->idcaptura;
+
+
+        return DB::connection('captura_op')->select($sql, $params);
+
     }
 
-    public static function cancela_solicitud_dtu($id_captura)
+
+    //Segundo actualiza sp para actualizar y ahcer insert a los datos de verificacion
+    public static function actualiza_solicitud_2($request)
     {
-        $sql = "EXECUTE dtu_cancela_dictamen ?";
-        $params = array($id_captura);
-        $result = DB::connection('captura_op')->select($sql, $params);
-        return $result;
+        
+
+        $sql = "EXECUTE proteccion_verificacion_actualiza_2
+        ?,?,?,?,?,
+        ?,?,?,?,?";
+
+        $params = array(
+            $request-> domicilio  ?? '-',
+            $request-> numero  ?? '-',
+            $request-> entreCalle_1 ?? '-',
+            $request-> entreCalle_2 ?? '-',
+            $request-> colonia ?? '-',
+            $request-> municipio ?? '-',
+            $request-> problematica ?? '-',
+            session('id_usuario') ?? '-',
+            $request->id_captura ?? '-',
+        );
+
+        return DB::connection('captura_op')->select($sql, $params);
     }
 
-    public static function elimina_requisito_op($id_archivo, $id_solicitud)
-    {
-        DB::table('archivos')
-            ->where('id_achivo', $id_archivo)
-            ->where('id_solicitud', $id_solicitud)
-            ->delete();
-    }
-
-    public static function inserta_requisito_op($id_documento, $filename, $extension, $id_solicitud)
-    {
-
-        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE
-        c.id_documento = ' . $id_documento . ' and id_tramite=12');
-        if ($res1) {
-            $id_cat_archivo = $res1[0]->id_cat_archivo;
-
-            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
-            WHERE c.id_cat_archivo = a.id_cat_archivo
-            and a.id_solicitud =' . $id_solicitud . '
-            and a.id_usuario =' . session('id_usuario') . '
-            ) and c.id_tramite=12 and c.id_documento=' . $id_documento);
-
-            if ($pend_file) {
-
-
-                $affected =  DB::table('archivos')->insert([
-                    'id_usuario'     => session('id_usuario'),
-                    'id_cat_archivo' => $id_cat_archivo,
-                    'nombre'         => $filename,
-                    'extension'      => $extension,
-                    'created_at'     => date('Y-m-d H:i:s'),
-                    'id_solicitud'   => $id_solicitud,
-                ]);
-            } else {
-
-
-                $affected =  DB::table('archivos')
-                    ->where('id_solicitud', $id_solicitud)
-                    ->where('id_cat_archivo', $id_cat_archivo)
-                    ->update([
-                        'id_usuario'     => session('id_usuario'),
-                        'nombre'         => $filename,
-                        'extension'      => $extension,
-                        'created_at'     => date('Y-m-d H:i:s'),
-                    ]);
-
-                $arc = DB::table('archivos')->where('nombre', $filename)->first();
-
-                DB::table('archivosodt')->where([
-                    'id_archivo'     => $arc->id_archivo,
-                ])->delete();
-            }
-            return $affected;
-        } else
-            return null;
-    }
 
     public static function consulta_archivos_faltantes($id_solicitud)
     {

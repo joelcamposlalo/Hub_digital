@@ -22,8 +22,8 @@
             <div class="etapas d-flex justify-content-center align-items-center">
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa border @if ($id_etapa == 65) process @else active @endif d-flex justify-content-center align-items-center">
-                        @if ($id_etapa != 65 && $id_etapa != 72)
+                        class="etapa border @if ($id_etapa == 177) process @else active @endif d-flex justify-content-center align-items-center">
+                        @if ($id_etapa != 177 && $id_etapa != 177)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,16 +32,16 @@
                                 </svg>
                             </div>
                         @endif
-                        <small class="font f-15 bold @if ($id_etapa != 65) @else text-muted @endif">1</small>
+                        <small class="font f-15 bold @if ($id_etapa != 177) @else text-muted @endif">1</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10">Solicitud</small>
                 </div>
-                <div class="@if ($id_etapa != 65) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa != 177) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 67 || $id_etapa == 86) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 67 || $id_etapa == 86)
+                        class="etapa  @if ($id_etapa == 178 || $id_etapa == 178) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 178 || $id_etapa == 178)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -51,16 +51,16 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 67 || $id_etapa == 86) text-white @else text-muted @endif ">2</small>
+                            class="font f-15 bold @if ($id_etapa == 178 || $id_etapa == 178) text-white @else text-muted @endif ">2</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos del Solicitante</small>
                 </div>
-                <div class="@if ($id_etapa == 69 || $id_etapa == 86) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 178 || $id_etapa == 178) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 69) active @elseif($id_etapa == 18) process @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 69)
+                        class="etapa  @if ($id_etapa == 178) active @elseif($id_etapa == 178) process @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 178)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,15 +70,15 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 69) text-white @else text-muted @endif">3</small>
+                            class="font f-15 bold @if ($id_etapa == 178) text-white @else text-muted @endif">3</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos Para Verificación</small>
                 </div>
-                <div class="@if ($id_etapa == 69) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 178) line @else line_off @endif"></div>
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 69) active @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 69)
+                        class="etapa  @if ($id_etapa == 179) active @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 179)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 69) text-white @else text-muted @endif">4</small>
+                            class="font f-15 bold @if ($id_etapa == 179) text-white @else text-muted @endif">4</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Fotografías Adjuntas</small>
                 </div>
@@ -185,7 +185,7 @@
     </div>
 
     <div class="row">
-        <div class="col mt-4" id="top-2">
+        <div class="col mt-4" id="top_2">
             <div class="card  shadow-sm card_2 rounded border-none">
                 <div class="card-header">
                     <small>Datos para la Verificación</small>
@@ -210,14 +210,16 @@
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="colonia"><small>Entre Calle 1</small></label>
-                                <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text">
+                                <label for="entreCalle_1"><small>Entre Calle 1</small></label>
+                                <input name="entreCalle_1" id="entreCalle_1"
+                                    value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
+                                    class="ab-form background-color rounded border capitalize entreCalle_1" type="text">
                             </div>
                             <div class="col mt-2">
-                                <label for="municipio"><small>Entre Calle 2</small></label>
-                                <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
-                                    class="ab-form background-color rounded border capitalize municipio" type="text">
+                                <label for="entreCalle_2"><small>Entre Calle 2</small></label>
+                                <input name="entreCalle_2" id="entreCalle_2"
+                                    value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
+                                    class="ab-form background-color rounded border capitalize entreCalle_2" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -237,8 +239,8 @@
                                 <label for="problematica"><small>Descripción</small></label>
                                 <input name="problematica" id="problematica"
                                     value="{{ isset($problematica) ? $problematica : '' }}"
-                                    class="ab-form background-color rounded border capitalize problematica"
-                                    type="text-area" placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:">
+                                    class="ab-form background-color rounded border problematica" type="text-area"
+                                    placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:">
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -252,7 +254,8 @@
                                     value="{{ isset($id_captura) ? $id_captura : '' }}">
                                 <button data-back=".card_1 .card-body" type="button"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <button class="ab-btn b-primary-color  " id="" type="submit">Continuar</button>
+                                <button class="ab-btn b-primary-color  " id="btn_inserta_2"
+                                    type="submit">Continuar</button>
                             </div>
                         </div>
                     </form>
@@ -263,24 +266,19 @@
 
 
     <div class="row">
-        <div class="col mt-4" id="top-4">
-            <div class="card  shadow-sm card_4 rounded border-none">
+        <div class="col mt-4" id="top_3">
+            <div class="card  shadow-sm card_3 rounded border-none">
                 <div class="card-header">
                     <small>Archivos requeridos</small>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-warning alert-dismissible fade show mt-4 notas" role="alert">
                         <h6 class="font">
-                            Nota: Debes de adjuntar todos los archivos obligatorios, descarga la solicitud
-                            <a href="javascript:;" id="ref_sol" onclick="descarga_solicitud(this);"
-                                target="_blank">aquí</a>
+                            Nota: Debes de adjuntar todos los archivos obligatorios.
                         </h6>
-                        <h6 class="font">
-                            Descarga ejemplo del plano
-                            <a href="{{ url('dictamen_finca_antigua/descargarPlano') }}" target="_blank">aquí</a>
-                        </h6>
+
                     </div>
-                    <form id="form_4" action="{{ url('dictamen_finca_antigua/ingresa_tramite') }}" method="POST"
+                    <form id="form_4" action="{{ url('verificacion_riesgos/ingresa_tramite') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
@@ -396,7 +394,7 @@
                             value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
                         <div class="row mt-4">
                             <div class="col-md-12 mt-2 text-right">
-                                <button data-back=".card_3 .card-body" type="button"
+                                <button data-back=".card_2 .card-body" type="button"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                 <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
                             </div>
@@ -505,18 +503,18 @@
                 e.preventDefault();
 
                 $('.card_1 .card-body').slideUp('slow');
-                $('.card_3 .card-body').slideDown('slow');
+                $('.card_2 .card-body').slideDown('slow');
 
                 setTimeout(() => {
                     $('html, body').animate({
-                        scrollTop: $('#top-3').position().top
+                        scrollTop: $('#top_2').position().top
                     }, 500);
                 }, 500);
             });
 
             $('#form_1').submit(async function(e) {
 
-                $('.btn_inserta').prop('disabled', true);
+                $('.btn_inserta').prop('enable', true);
 
                 e.preventDefault();
 
@@ -530,14 +528,10 @@
                 var razonSocial = $('.razonSocial').val();
                 var tipo_tramite = $('.tipo_tramite').val();
 
-
-
-                //$('.btn-form4').html('Guardar');
                 if (id_solicitud > 0) {
 
-
                     var formdata = new FormData();
-                    //Comienza Formulario #1 Datos ciudadano
+
                     formdata.append('nombre', nombre);
                     formdata.append('telefono', telefono);
                     formdata.append('apellido_1', apellido_1);
@@ -545,20 +539,12 @@
                     formdata.append('correo', correo_propietario);
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
-                    //Termina Formulario #1 Datos ciudadano
-
-                    //formdata.append('id_etapa', id_etapa);
                     formdata.append('id_solicitud', id_solicitud);
-
-                    // if (id_etapa == 0) {
-                    //     formdata.append('etapa', 1);
-                    // } else {
-                    //     formdata.append('etapa', id_etapa);
-                    // }
 
                     if ($('#id_captura').val() == "") {
 
-                        var res = await axios.post('{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
+                        var res = await axios.post(
+                            '{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -574,7 +560,7 @@
                                 $('.card_3 .card-body').slideUp('slow');
                                 $('.btn-form4').prop('disabled', false);
                                 iziToast.show({
-                                    message: 'Se registró la información correctamente, puedes ingresar tus archivos',
+                                    message: 'Se registró la información correctamente, puedes continuar llenando la otra información',
                                     backgroundColor: '#2fd099',
                                     closeOnEscape: true
                                 });
@@ -594,9 +580,9 @@
                     } else {
                         //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
                         formdata.append('id_captura', $('#id_captura').val());
+                        var res = await axios.post(
+                            '{{ url('verificacion_tecnica_riesgos/actualiza_solicitud') }}',
 
-
-                        var res = await axios.post('{{ url('verificacion_tecnica_riesgos/actualiza_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -608,11 +594,10 @@
                                 $('#id_captura_frm4').val(response.data);
                                 $('.btn-form4').prop('disabled', false);
                                 $('.card_1 .card-body').slideUp('slow');
-                                $('.card_2 .card-body').slideUp('slow');
+                                $('.card_2 .card-body').slideDown('fast');
                                 $('.card_3 .card-body').slideUp('slow');
-                                $('.card_4 .card-body').slideDown('slow');
                                 iziToast.show({
-                                    message: 'Se actualizo la información correctamente, si lo requieres puedes ingresar tus archivos',
+                                    message: 'Se actualizo la información correctamente, si lo requieres puedes ingresar tus datos restantes',
                                     backgroundColor: '#2fd099',
                                     closeOnEscape: true
                                 });
@@ -621,7 +606,6 @@
                                 $('.card_1 .card-body').slideUp('slow');
                                 $('.card_2 .card-body').slideUp('slow');
                                 $('.card_3 .card-body').slideUp('slow');
-                                $('.card_4 .card-body').slideDown('slow');
 
                                 iziToast.show({
                                     message: 'Ocurrió un error al tratar de actualizar la información, por favor intenta más tarde',
@@ -647,7 +631,6 @@
                     return false;
                 }
             });
-
 
 
             $('#form_2').submit(async function(e) {
@@ -658,135 +641,70 @@
 
                 setTimeout(() => {
                     $('html, body').animate({
-                        scrollTop: $('#top-3').position().top
+                        scrollTop: $('#top_3').position().top
                     }, 500);
                 }, 500);
             });
 
             $('#form_2').submit(async function(e) {
-
-                $('.btn_inserta').prop('disabled', true);
-
+                $('#btn_inserta_2').prop('enable', true);
                 e.preventDefault();
 
                 var id_solicitud = "{{ $folio }}";
-                var nombre = $('.nombre').val();
-                var apellido_1 = $('.apellido_1').val();
-                var apellido_2 = $('.apellido_2').val();
-                var telefono = $('.telefono').val();
-                var correo_propietario = $('.correo_propietario').val();
+                var domicilio = $('.domicilio').val();
+                var numero = $('.numero').val();
+                var entreCalle_1 = $('.entreCalle_1').val();
+                var entreCalle_2 = $('.entreCalle_2').val();
+                var colonia = $('.colonia').val();
+                var municipio = $('.municipio').val();
+                var problematica = $('.problematica').val();
 
-                var giro_comercio = $('.giro_comercio').val();
-                var razonSocial = $('.razonSocial').val();
-                var tipo_tramite = $('.tipo_tramite').val();
-
-
-
-                //$('.btn-form4').html('Guardar');
-                if (id_solicitud > 0) {
-
-
+                if ($('#id_captura').val() !== "") { // Solo se ejecutará si id_captura no está vacío
                     var formdata = new FormData();
-                    //Comienza Formulario #1 Datos ciudadano
-                    formdata.append('nombre', nombre);
-                    formdata.append('apellido_1', apellido_1);
-                    formdata.append('apellido_2', apellido_2);
-                    formdata.append('telefono', telefono);
-                    formdata.append('correo', correo_propietario);
-                    formdata.append('giro_comercio', giro_comercio);
-                    formdata.append('razonSocial', razonSocial);
-                    //Termina Formulario #1 Datos ciudadano
 
-                    //formdata.append('id_etapa', id_etapa);
+                    formdata.append('domicilio', domicilio);
+                    formdata.append('numero', numero);
+                    formdata.append('entreCalle_1', entreCalle_1);
+                    formdata.append('entreCalle_2', entreCalle_2);
+                    formdata.append('colonia', colonia);
+                    formdata.append('municipio', municipio);
+                    formdata.append('problematica', problematica);
                     formdata.append('id_solicitud', id_solicitud);
+                    formdata.append('id_captura', $('#id_captura').val());
 
-                    // if (id_etapa == 0) {
-                    //     formdata.append('etapa', 1);
-                    // } else {
-                    //     formdata.append('etapa', id_etapa);
-                    // }
-
-                    if ($('#id_captura').val() == "") {
-
-                        var res = await axios.post('{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
-                            formdata, {
-                                data: {
-                                    "_token": "{{ csrf_token() }}"
-                                }
-                            }).then(function(response) {
-
-                            if (parseInt(response.data) > 0) {
-                                //console.log(response.data);
-                                $('#id_captura').val(response.data);
-                                $('#id_captura_frm4').val(response.data);
-                                $('.card_1 .card-body').slideUp('slow');
-                                $('.card_2 .card-body').slideDown('slow');
-                                $('.card_3 .card-body').slideUp('slow');
-                                $('.btn-form4').prop('disabled', false);
-                                iziToast.show({
-                                    message: 'Se registró la información correctamente, puedes ingresar tus archivos',
-                                    backgroundColor: '#2fd099',
-                                    closeOnEscape: true
-                                });
-                            } else {
-
-                                $('.card_4 .card-body').slideUp('slow');
-                                $('.card_3 .card-body').slideDown('slow');
-
-                                iziToast.show({
-                                    message: 'Ocurrió un error al tratar de registrar la información, por favor intenta más tarde',
-                                    backgroundColor: '#ff9b93',
-                                    closeOnEscape: true
-                                });
+                    var res = await axios.post(
+                        '{{ url('verificacion_tecnica_riesgos_2/actualiza_solicitud_2') }}',
+                        formdata, {
+                            data: {
+                                "_token": "{{ csrf_token() }}"
                             }
-                        });
-
-                    } else {
-                        //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
-                        formdata.append('id_captura', $('#id_captura').val());
-
-
-                        var res = await axios.post('{{ url('manejo_arbolada/actualiza_solicitud') }}',
-                            formdata, {
-                                data: {
-                                    "_token": "{{ csrf_token() }}"
-                                }
-                            }).then(function(response) {
-
-                            if (parseInt(response.data) > 0) {
-
-                                $('#id_captura_frm4').val(response.data);
-                                $('.btn-form4').prop('disabled', false);
-                                $('.card_1 .card-body').slideUp('slow');
-                                $('.card_2 .card-body').slideUp('slow');
-                                $('.card_3 .card-body').slideUp('slow');
-                                $('.card_4 .card-body').slideDown('slow');
-                                iziToast.show({
-                                    message: 'Se actualizo la información correctamente, si lo requieres puedes ingresar tus archivos',
-                                    backgroundColor: '#2fd099',
-                                    closeOnEscape: true
-                                });
-
-                            } else {
-                                $('.card_1 .card-body').slideUp('slow');
-                                $('.card_2 .card-body').slideUp('slow');
-                                $('.card_3 .card-body').slideUp('slow');
-                                $('.card_4 .card-body').slideDown('slow');
-
-                                iziToast.show({
-                                    message: 'Ocurrió un error al tratar de actualizar la información, por favor intenta más tarde',
-                                    backgroundColor: '#ff9b93',
-                                    closeOnEscape: true
-                                });
-                            }
-                        });
-
-                    }
-
+                        }).then(function(response) {
+                        if (parseInt(response.data) > 0) {
+                            $('#id_captura_frm4').val(response.data);
+                            $('.btn-form4').prop('disabled', false);
+                            $('.card_1 .card-body').slideUp('slow');
+                            $('.card_2 .card-body').slideUp('slow');
+                            $('.card_3 .card-body').slideDown('fast');
+                            iziToast.show({
+                                message: 'Se actualizó la información correctamente, si lo requieres puedes ingresar tus archivos',
+                                backgroundColor: '#2fd099',
+                                closeOnEscape: true
+                            });
+                        } else {
+                            $('.card_1 .card-body').slideUp('slow');
+                            $('.card_2 .card-body').slideUp('slow');
+                            $('.card_3 .card-body').slideDown('fast');
+                            iziToast.show({
+                                message: 'Ocurrió un error al tratar de actualizar la información, por favor intenta más tarde',
+                                backgroundColor: '#ff9b93',
+                                closeOnEscape: true
+                            });
+                        }
+                    });
                 } else {
                     iziToast.show({
                         title: 'Ups ☹️',
-                        message: 'Se produjo un error al registra la solicitud',
+                        message: 'Se produjo un error al registrar la solicitud',
                         backgroundColor: '#ff9b93',
                         closeOnEscape: true
                     });
@@ -798,47 +716,6 @@
                 }
             });
 
-
-
-
-
-            $('.aqui').click(function() {
-
-                var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo",
-                    "Junio", "Julio",
-                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-                var diasSemana = new Array("Domingo", "Lunes", "Martes",
-                    "Miércoles", "Jueves", "Viernes",
-                    "Sábado");
-                var f = new Date();
-                var fecha = diasSemana[f.getDay()] + ", " + f.getDate() + " de " +
-                    meses[f.getMonth()] +
-                    " de " + f.getFullYear()
-                var id_captura = $('#id_captura').val();
-                var url = '{{ url('dictamen_finca_antigua/carta') }}'
-                var ruta = url + '/' + fecha + '/' + id_captura;
-
-                window.open(ruta, '_blank');
-            });
-
-            $('#form_4').submit(function(e) {
-
-                if (fileIsRequired() == 0) {
-                    $('.btn-form4').html(spiner());
-                    $('.btn-form4').prop('disabled', true);
-                    return true;
-                } else {
-                    iziToast.show({
-                        title: 'Ups ☹️',
-                        message: `${fileIsRequired() > 1 ? `${fileIsRequired()} Archivos requeridos faltantes` : `${fileIsRequired()} Archivo requerido faltante`}. Debes cargar todos los archivos`,
-                        backgroundColor: '#ff9b93',
-                        closeOnEscape: true
-                    });
-                    $('.btn-form4').text('Guardar');
-                    return false;
-                }
-
-            });
 
             $('.btn-regresar').click(function() {
 
@@ -855,59 +732,6 @@
 
             });
         });
-
-        /**
-         *
-         * Paginado de prediales
-         *
-         */
-
-        function agregar_poligono(geopolygon) {
-            if (geopolygon != null) {
-
-                map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 18
-                });
-
-                var arr = GeoPolygonToJson(geopolygon);
-
-                const poligono = new google.maps.Polygon({
-                    path: arr,
-                    strokeColor: "#a8dda8",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                    fillColor: "#a8dda8",
-                    fillOpacity: 0.3,
-                });
-
-                map.setCenter(arr[1]);
-                poligono.setMap(map);
-
-            } else {
-                map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 18
-                });
-
-                var arr = [];
-
-                const poligono = new google.maps.Polygon({
-                    path: arr,
-                    strokeColor: "#a8dda8",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                    fillColor: "#a8dda8",
-                    fillOpacity: 0.3,
-                });
-                map.setCenter(arr[1]);
-                poligono.setMap(map);
-
-            }
-        }
-
-
-        /**
-         * Subir archivos
-         */
 
 
         $('.file').change(function() {
@@ -966,67 +790,6 @@
         });
 
 
-        function limpia_predio() {
-            $('.calle').val('');
-            $('.numero').val('');
-            $('.interior').val('');
-            $('.fraccionamiento').val('');
-            $('.manzana').val('');
-            $('.cuenta').val('');
-            $('.lote').val('');
-            $('.condominio').val('');
-
-            $('.calle_1').val('');
-            $('.calle_2').val('');
-
-            $('.dictamen').val('');
-            $('.alineamiento').val('');
-            $('.alineamiento').val('');
-            $('.id_captura').val('');
-            $('.nombre').val('');
-            $('.apellido_1').val('');
-            $('.apellido_2').val('');
-            $('.domicilio').val("{{ session('domicilio') }}");
-            $('.telefono').val("{{ session('telefono') }}");
-            $('.correo').val('');
-
-            $('.suelo').val('');
-            //agregar_poligono(null);
-        }
-
-
-        function limpia_form() {
-            $('.calle').val('');
-            $('.numero').val('');
-            $('.interior').val('');
-            $('.fraccionamiento').val('');
-            $('.manzana').val('');
-            $('.lote').val('');
-            $('.condominio').val('');
-            $('.calle_1').val('');
-            $('.calle_2').val('');
-
-            $('.dictamen').val('');
-            $('.alineamiento').val('');
-            $('.id_captura').val('');
-            $('.nombre').val('');
-            $('.apellido_1').val('');
-            $('.apellido_2').val('');
-            $('.domicilio').val("{{ session('domicilio') }}");
-            $('.telefono').val("{{ session('telefono') }}");
-            $('.correo').val('');
-
-            $('.suelo').val('');
-            //agregar_poligono(null);
-        }
-
-
-        /**
-         *
-         * Total de archivos requeridos
-         * faltantes
-         *
-         */
 
         function fileIsRequired() {
 
@@ -1042,28 +805,6 @@
             });
 
             return countFileRequired;
-
-        }
-
-
-        function initMap() {
-
-
-            var markers = [];
-
-            map = new google.maps.Map(document.getElementById("map"), { //Carga el mapa
-                center: {
-                    lat: 20.6785454,
-                    lng: -103.4275859
-                },
-                zoom: 14,
-                zoomControl: true,
-                mapTypeControl: false,
-                scaleControl: false,
-                streetViewControl: true,
-                rotateControl: false,
-                fullscreenControl: false
-            });
 
         }
 

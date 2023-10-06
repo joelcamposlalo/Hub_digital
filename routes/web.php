@@ -579,3 +579,5 @@ Route::get('ciudadano/tramites_verificacion_tecnica_riesgos', 'ciudadano@tramite
 Route::get('verificacion_tecnica_riesgos/solicitud', 'Verificacion_Riesgos@solicitud')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos/ingresa_solicitud', 'Verificacion_Riesgos@ingresa_solicitud')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos/actualiza_solicitud', 'Verificacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
+Route::post('verificacion_tecnica_riesgos_2/actualiza_solicitud_2', 'Verificacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
+
