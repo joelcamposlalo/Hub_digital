@@ -134,10 +134,10 @@ class Verificacion_Riesgos extends Controller
             }
         } else {
             http_response_code(503);
-        }
+        }+
     }
 
-    
+
     public function ingresa_tramite(Request $request)
     {
         $id_captura = $request->id_captura;

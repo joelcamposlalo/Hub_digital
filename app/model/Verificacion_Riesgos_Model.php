@@ -195,7 +195,7 @@ class Verificacion_Riesgos_Model extends Model
     //Segundo actualiza sp para actualizar y ahcer insert a los datos de verificacion
     public static function actualiza_solicitud_2($request)
     {
-        
+        dd($request);
 
         $sql = "EXECUTE proteccion_verificacion_actualiza_2
         ?,?,?,?,?,
