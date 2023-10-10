@@ -195,11 +195,11 @@ class Verificacion_Riesgos_Model extends Model
     //Segundo actualiza sp para actualizar y ahcer insert a los datos de verificacion
     public static function actualiza_solicitud_2($request)
     {
-        dd($request);
+
 
         $sql = "EXECUTE proteccion_verificacion_actualiza_2
         ?,?,?,?,?,
-        ?,?,?,?,?";
+        ?,?,?,?";
 
         $params = array(
             $request-> domicilio  ?? '-',
@@ -266,4 +266,23 @@ class Verificacion_Riesgos_Model extends Model
             return false;
         }
     }
+
+    // public static function sendMail($request)
+    // {
+
+    //     $data_p = DB::connection('captura_op')->table('Precaptura')
+    //         ->where("IdCaptura", $request->id_captura)->first();
+
+    //     $data_participantes = DB::connection('captura_op')->table('Capacitaciones')
+    //         ->where("IdCaptura", $request->id_captura)->get();
+
+    //     $correoData = [
+    //         'data_p' => $data_p,
+    //         'data_participantes' => $data_participantes,
+    //     ];
+
+    //     Mail::to('joel.campos@zapopan.gob.mx')
+    //         ->send(new contactoCapacitacion($correoData));
+    // }
+
 }

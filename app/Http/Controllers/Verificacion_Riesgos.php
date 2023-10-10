@@ -134,7 +134,7 @@ class Verificacion_Riesgos extends Controller
             }
         } else {
             http_response_code(503);
-        }+
+        }
     }
 
 
