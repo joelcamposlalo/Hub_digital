@@ -56,7 +56,7 @@ class Verificacion_Riesgos_Model extends Model
             ->select('a.nombre as archivo', '*')
             ->where([
                 ['a.id_usuario', '=', session('id_usuario')],
-                ['c.id_tramite', '=', 12],
+                ['c.id_tramite', '=', 29],
                 ['a.id_solicitud', '=', $id_solicitud],
                 ['c.universal', '=', false],
                 ['c.id_documento', '>', 0]
@@ -69,7 +69,7 @@ class Verificacion_Riesgos_Model extends Model
             WHERE c.id_cat_archivo = a.id_cat_archivo
             and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
-            ) and c.id_documento>0 and c.id_tramite = 12');
+            ) and c.id_documento>0 and c.id_tramite = 29');
 
         //$resv = Dictamen_finca_antigua_model::consulta_requisitos_validados($id_solicitud);
         $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
@@ -224,7 +224,7 @@ class Verificacion_Riesgos_Model extends Model
         WHERE c.id_cat_archivo = a.id_cat_archivo
         and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
-        ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 12');
+        ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 29');
         return $pendientes;
     }
 
