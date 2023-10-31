@@ -249,7 +249,7 @@
                                                                                 <td style="line-height: 24px; font-size: 16px; margin: 0;"
                                                                                     align="left">
                                                                                     <img class="max-w-56  rounded-lg"
-                                                                                        src="https://cdn-icons-png.flaticon.com/512/3750/3750222.png"
+                                                                                        src="https://cdn-icons-png.flaticon.com/512/2849/2849146.png"
                                                                                         style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; border-radius: 8px; max-width: 224px; width: 100%; border-style: none; border-width: 0;"
                                                                                         width="224">
                                                                                 </td>
@@ -328,19 +328,23 @@
                                                     align="left">
                                                     <div class="row" style="margin-right: -24px;">
                                                     </div>
-                                                    <div style="padding: 2rem; background-color: #fbfbfb; border-radius: 0px 0px 20px 20px;" >
+                                                    <div
+                                                        style="padding: 2rem; background-color: #fbfbfb; border-radius: 0px 0px 20px 20px;">
                                                         <br>
 
                                                         <h2 style="text-align: center">Datos del solicitante</h2>
                                                         <br>
-                                                        <p><b>Se Han Registrado El Día: </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
-                                                        <p><b>Tipo De Capacitación:</b> {{ $correoData->materiade }}</p>
+                                                        <p><b>Se Han Registrado El Día:
+                                                            </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
+                                                        {{-- <p><b>Tipo De Capacitación:</b> {{ $correoData->materiade }}</p> --}}
                                                         <p><b>Nombre Completo Del Interesado </b>
                                                             {{ $correoData->nomPropietario }}</p>
                                                         <p><b>Con El Teléfono: </b>{{ $correoData->telPropietario }}</p>
                                                         <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
                                                         <p><b>En El Domicilio:</b> {{ $correoData->domPropietario }}</p>
-                                                        <p><b>Con El Número: </b> {{ $correoData->numExt }}</p>
+                                                        <p><b>Entre la Calle</b> {{ $correoData->entreCalle1 }}</p>
+                                                        <p><b>Y entre la Calle</b> {{ $correoData->entreCalle2 }}</p>
+                                                        <p><b>Con El Número: </b> {{ $correoData->numInt }}</p>
                                                         <p><b>En La Colonia:</b> {{ $correoData->colonia }}</p>
                                                         <p><b>En el Municipio De: </b> {{ $correoData->municipio }}</p>
 
@@ -356,13 +360,25 @@
                                                         @endif
 
                                                         <br><br>
-                                                        <h2 style="text-align: center mb-2">Nombres de los participantes
+                                                        <h2 style="text-align: center mb-2">Descripción de la
+                                                            Problemática
                                                         </h2>
 
-                                                        @foreach ($participantes as $participante)
-                                                            <p><b>Nombre Completo de Participante:</b>
-                                                                {{ $participante->Participantes }}
-                                                        @endforeach
+                                                        <p>{{ $correoData->problematica }}</p>
+
+
+                                                        <br><br><br>
+                                                        <h2 style="text-align: center mb-2">Documentos
+                                                        </h2>
+
+                                                        @foreach ($document_urls as $filename => $url)
+                                                        <p>Enlace a la Evidencia de Verificación de Riesgos
+                                                            <a href="{{ $url }}">{{ $url }}</a>
+                                                        </p>
+                                                    @endforeach
+
+
+
                                                     </div>
                                                     <table class="s-6 w-full" role="presentation" border="0"
                                                         cellpadding="0" cellspacing="0" style="width: 100%;"
@@ -416,4 +432,5 @@
     </style>
 
 </body>
+
 </html>

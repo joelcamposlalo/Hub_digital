@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Verificacion_Riesgos_Model;
 use App\model\Dictamen_trazos_usos_model;
+use App\Mail\contactoVerificacion;
 use PDF;
 
 class Verificacion_Riesgos extends Controller
 {
 
-//Aqui ingresas la solicitud a la tabla solicitudes
+    //Aqui ingresas la solicitud a la tabla solicitudes
     public function solicitud()
     {
 
@@ -52,7 +53,7 @@ class Verificacion_Riesgos extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-                    //Primer procedimiento almacenado
+        //Primer procedimiento almacenado
         if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
             $obj = $response;
 
@@ -62,7 +63,7 @@ class Verificacion_Riesgos extends Controller
                 $request->request->add([
                     'id_captura' => $obj
                 ]);
-                    //Temas de la table solicitud cambia el estado y datos
+                //Temas de la table solicitud cambia el estado y datos
                 $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $request->id_captura);
 
                 if ($rows == 0) {
@@ -70,7 +71,7 @@ class Verificacion_Riesgos extends Controller
                     echo ($rows);
                     echo json_encode("0");
                 } else {
-                        //Cambia el status de la etapa
+                    //Cambia el status de la etapa
                     Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj, null);
                     http_response_code(200);
                     echo json_encode($obj);
@@ -83,7 +84,7 @@ class Verificacion_Riesgos extends Controller
             http_response_code(503);
         }
     }
-                    //El procdimiento almacenado de actualizar el primer card
+    //El procdimiento almacenado de actualizar el primer card
     public function actualiza_solicitud(Request $request)
     {               //SP de el actualizar informacion
         if ($response = Verificacion_Riesgos_Model::actualiza_solicitud($request)) {
@@ -140,6 +141,7 @@ class Verificacion_Riesgos extends Controller
 
     public function ingresa_tramite(Request $request)
     {
+
         $id_captura = $request->id_captura;
         $rows = 0;
         $files_s3 = 0;
@@ -154,9 +156,9 @@ class Verificacion_Riesgos extends Controller
 
             if ($r->estatus != 'validado') {
 
-                if (Storage::disk('s3')->exists('public/' . session('id_usuario') . '/' . $nombre_archivo)) {
+                if (Storage::disk('s3')->exists(env('AWS_FOLDER') . '/' . session('id_usuario') . '/' . $nombre_archivo)) {
 
-                    Storage::disk('s3')->delete('public/' . session('id_usuario') . '/' . $nombre_archivo);
+                    Storage::disk('s3')->exists(env('AWS_FOLDER') . '/' . session('id_usuario') . '/' . $nombre_archivo);
 
                     DB::table('archivos')
                         ->where('nombre', $nombre_archivo)
@@ -165,7 +167,7 @@ class Verificacion_Riesgos extends Controller
                 }
             }
         }
-
+        $document_urls = [];
         foreach ($_FILES as $key => $file) {
 
             if ($file["size"] > 0 && $file["name"] != "") {
@@ -175,15 +177,18 @@ class Verificacion_Riesgos extends Controller
                 $uploadedFile = $request->file($key);
 
                 $id_documento = str_replace("file_", "", $key);
+
                 $filename = $request->id_captura . "_" . $id_documento . "." . $ext;
+                $url = 'https://servicios.zapopan.gob.mx:8000/' . env('AWS_BUCKET') . '/' . env('AWS_FOLDER') . '/' . session('id_usuario') . '/' . $filename;
+                $document_urls[$filename] = $url;
 
-
-                $path = $request->file($key)->storeAs('public/' . session('id_usuario'), $filename, 's3');
+                $path = $request->file($key)->storeAs(env('AWS_FOLDER') . "/" . session('id_usuario'), $filename, 's3');
                 if (Storage::disk('s3')->setVisibility($path, 'public')) {
                     $files_s3++;
                 } else {
                     $files_s3--;
                 }
+
                 $rows += Verificacion_Riesgos_Model::inserta_requisito_op(
                     $id_documento,
                     $filename,
@@ -192,55 +197,26 @@ class Verificacion_Riesgos extends Controller
                 );
             }
         }
+        Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 181,  'terminado', $id_captura, null);
 
-        $pendientes = Verificacion_Riesgos_Model::consulta_archivos_faltantes($request->id_solicitud);
+        DB::connection('pgsql')->table('solicitudes_hist')->insert([
+            'id_solicitud' => $request->id_solicitud,
+            'id_usuario' => $request->id_usuario,
+            'id_tramite' => 29,
+            'id_etapa' => 181,
+            'estatus' => "terminado",
+            'id_usuario' => session('id_usuario'),
+            'folio_externo' => $request->id_captura,
+        ]);
 
-        if ($pendientes || $rows <> $files_s3) {
 
-            Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 67, 'pendiente', $id_captura, null);
 
-            $result = Solicitudes_model::consulta_solicitud($request->id_solicitud);
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Verificación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $titulo = "Notificación de Registro de Trámite en Línea";
+        $correo = session('correo');
+        Verificacion_Riesgos_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
+        Verificacion_Riesgos_Model::sendMail($request, $document_urls);
 
-            if ($result) {
-
-                $solicitud  = $result[0];
-                $folio      = $solicitud->id_solicitud;
-                $id_tramite = $solicitud->id_tramite;
-
-                $result2 = Solicitudes_model::consulta_datos_solicitud($request->id_solicitud, $id_tramite, 65);
-
-                $vars = [
-                    'files'    => Dictamen_finca_antigua_model::get_files($id_tramite, $folio),
-                    'folio'    => $folio,
-                    'error'   => 'Debe de completar todos los archivos obligatorios',
-                    'id_etapa' => $solicitud->id_etapa
-                ];
-
-                foreach ($result2 as $obj) {
-                    $vars += [$obj->campo => $obj->dato];
-                }
-
-                return view('dictamen_finca_antigua/solicitud', $vars);
-            }
-        } else {
-
-            Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 68, 'en revision', $id_captura, 1);
-
-            if ($request->id_etapa == 72) {
-                $descripcion_estatus = "reingresado";
-                $ing = 2;
-            } else {
-                $descripcion_estatus = "ingresado";
-                $ing = 1;
-            }
-
-            $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">' . $descripcion_estatus . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Dictamen de Finca Antigua Web</strong>.</font><br><br><font color="#000000"> Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
-            $titulo = "Notificación de Registro de Trámite en Línea";
-            $correo = session('correo');
-            Dictamen_finca_antigua_model::actualiza_edo_act($request->id_captura, $ing);
-            Dictamen_finca_antigua_model::notifica($request, $titulo, $mensaje, $correo);
-
-            return view('ciudadano/descanso');
-        }
+        return view('ciudadano/descanso');
     }
 }

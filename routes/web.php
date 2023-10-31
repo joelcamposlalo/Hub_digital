@@ -580,4 +580,9 @@ Route::get('verificacion_tecnica_riesgos/solicitud', 'Verificacion_Riesgos@solic
 Route::post('verificacion_tecnica_riesgos/ingresa_solicitud', 'Verificacion_Riesgos@ingresa_solicitud')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos/actualiza_solicitud', 'Verificacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos_2/actualiza_solicitud_2', 'Verificacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
+Route::post('verificacion_tecnica_riesgos/ingresa_tramite', 'Verificacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
+
+
+
+
 

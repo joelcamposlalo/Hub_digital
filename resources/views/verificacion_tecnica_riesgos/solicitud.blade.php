@@ -153,8 +153,7 @@
                                 <label for="giro_comercio" id="giro_comercio"><small>Giro Comercial</small></label>
                                 <input name="giro_comercio" id="giro_comercio"
                                     value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
-                                    class="ab-form background-color rounded border capitalize giro_comercio"
-                                    type="text">
+                                    class="ab-form background-color rounded border  giro_comercio" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -192,7 +191,7 @@
                 </div>
                 <div class="card-body">
                     <form id=form_2>
-                        <input name="id_captura" id="id_captura" type="hidden"
+                        <input name="id_captura" id="id_captura_2" type="hidden"
                             value="{{ isset($id_captura) ? $id_captura : '' }}">
                         <div class="row">
                         </div>
@@ -213,13 +212,15 @@
                                 <label for="entreCalle_1"><small>Entre Calle 1</small></label>
                                 <input name="entreCalle_1" id="entreCalle_1"
                                     value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_1" type="text">
+                                    class="ab-form background-color rounded border capitalize entreCalle_1"
+                                    type="text">
                             </div>
                             <div class="col mt-2">
                                 <label for="entreCalle_2"><small>Entre Calle 2</small></label>
                                 <input name="entreCalle_2" id="entreCalle_2"
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_2" type="text">
+                                    class="ab-form background-color rounded border capitalize entreCalle_2"
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -237,10 +238,8 @@
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="problematica"><small>Descripción</small></label>
-                                <input name="problematica" id="problematica"
-                                    value="{{ isset($problematica) ? $problematica : '' }}"
-                                    class="ab-form background-color rounded border problematica" type="text-area"
-                                    placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:">
+                                <textarea name="problematica" id="problematica" class="ab-form background-color rounded border problematica"
+                                    placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:" rows="5" cols="5">{{ isset($problematica) ? $problematica : '' }}</textarea>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -278,81 +277,13 @@
                         </h6>
 
                     </div>
-                    <form id="form_4" action="{{ url('verificacion_riesgos/ingresa_tramite') }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form id="form_4" action="{{ url('verificacion_tecnica_riesgos/ingresa_tramite') }}"
+                        method="POST" enctype="multipart/form-data" data-parsley-validate>
+                        <input name="id_captura" id="id_captura_3" type="hidden"
+                            value="{{ isset($id_captura) ? $id_captura : '' }}">
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
                             <table class="w-100">
-                                @foreach ($files['terminados'] as $file)
-                                    <tr class="w-100 predio">
-                                        <td class="f-14">
-                                            @if ($file->extension == 'pdf')
-                                                <a href="{{ Storage::disk('s3')->url('public/' . session('id_usuario')) }}/{{ $file->archivo }}"
-                                                    target="_blank">
-                                                    <img class="icono"
-                                                        src="{{ asset('media/flaticon/archivos/pdf.svg') }}"
-                                                        width="50px" alt="{{ $file->nombre }}">
-                                                </a>
-                                            @elseif ($file->extension == 'jpg' or $file->extension == 'jpeg')
-                                                <a href="{{ Storage::disk('s3')->url('public/' . session('id_usuario')) }}/{{ $file->archivo }}"
-                                                    data-lightbox="roadtrip">
-                                                    <img class="icono"
-                                                        src="{{ asset('media/flaticon/archivos/jpg.svg') }}"
-                                                        width="50px" alt="{{ $file->nombre }}">
-                                                </a>
-                                            @else
-                                                <a href="{{ Storage::disk('s3')->url('public/' . session('id_usuario')) }}/{{ $file->archivo }}"
-                                                    data-lightbox="roadtrip">
-                                                    <img class="icono"
-                                                        src="{{ asset('media/flaticon/archivos/png.svg') }}"
-                                                        width="50px" alt="{{ $file->nombre }}">
-                                                </a>
-                                            @endif
-                                        </td>
-
-                                        <td class="f-12 font archivo">{{ $file->descripcion_larga }} <br>
-                                            @if (!in_array($file->id_documento, $files['validados']))
-                                                @if ($file->obligatorio == 1)
-                                                    <small class="f-10 font text-danger error">Este archivo es
-                                                        obligatorio</small>
-                                                @else
-                                                    <small class="f-10 font text-success success">Este archivo es
-                                                        opcional</small>
-                                                @endif
-                                            @endif
-                                        </td>
-                                        <td class="f-12 font filesize">Extensión: {{ $file->extension }}</td>
-                                        <td class="f-12 p-0"></td>
-                                        <td class="f-14 acciones">
-
-                                            <?php
-
-                                    if (!in_array($file->id_documento, $files['validados'])) {
-                                    ?>
-                                            <label for="{{ $file->nombre }}" class="ab-btn-effect bold font btn-file">
-                                                <small class="font bold f-10 progreso">Actualizar</small>
-                                                <input class="file" id="{{ $file->nombre }}" type="file"
-                                                    name="file_{{ $file->id_documento }}"
-                                                    data-archivo="{{ $file->nombre }}" value="{{ $file->nombre }}"
-                                                    data-cat-archivo="{{ $file->id_cat_archivo }}"
-                                                    data-update="{{ $file->id_archivo }}" data-upload="0"
-                                                    data-required="{{ $file->obligatorio }}">
-                                            </label>
-                                            <?php
-                                    } else {
-                                    ?>
-                                            <label for="{{ $file->nombre }}" class="ab-btn-effect bold font btn-file"
-                                                style="background-color:#75cfb8 !important">
-                                                <small class="font bold f-10 text-white success">VALIDADO</small>
-                                            </label>
-                                            <?php
-
-                                    }
-                                    ?>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
                                 @foreach ($files['pendientes'] as $key => $file)
                                     <tr class="w-100 predio">
                                         <td class="f-14">
@@ -378,18 +309,17 @@
                                                 class="ab-btn-effect bold font btn-file">
                                                 <small class="font bold f-10 progreso">Subir Archivo</small>
                                                 <input class="file" id="file_{{ $key }}" type="file"
-                                                    name="file_{{ $file->id_documento }}" data-upload="0"
-                                                    data-required="{{ $file->obligatorio }}">
+                                                    name="file_{{ $file->id_documento }}" data-upload="0" required
+                                                    data-parsley-required-message="Este archivo es obligatorio">
                                             </label>
                                         </td>
                                     </tr>
                                 @endforeach
                             </table>
                         </div>
+                        <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
 
-                        <input name="id_captura" id="id_captura_frm4" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}" required>
-                        <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
+                        <input name="id_solicitud" id="id_solicitud_frm4" type="text" value="{{ $folio }}">
                         <input name="id_etapa" id="id_etapa" type="hidden"
                             value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
                         <div class="row mt-4">
@@ -399,6 +329,8 @@
                                 <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>
@@ -427,6 +359,19 @@
     <script src="{{ asset('vendors/parsley/es.js') }}"></script>
     <script src="{{ asset('js/frontend.js') }}"></script>
     <script src="{{ asset('vendors/lightbox/dist/js/lightbox.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#form_4').parsley().on('form:error', function() {
+                iziToast.error({
+                    title: 'Error de validación',
+                    message: 'Por favor, suba todos los documentos antes de enviar el formulario.',
+                });
+            });
+        });
+    </script>
+
+
     <script>
         $('.card_2 .card-body').slideUp('fast');
         $('.card_3 .card-body').slideUp('fast');
@@ -476,6 +421,7 @@
             $('#form_1').parsley();
             $('#form_2').parsley();
             $('#form_3').parsley();
+            $('#form_4').parsley();
 
 
 
@@ -552,8 +498,10 @@
                             }).then(function(response) {
 
                             if (parseInt(response.data) > 0) {
-                                //console.log(response.data);
+                                console.log(response.data);
                                 $('#id_captura').val(response.data);
+                                $('#id_captura_2').val(response.data);
+                                $('#id_captura_3').val(response.data);
                                 $('#id_captura_frm4').val(response.data);
                                 $('.card_1 .card-body').slideUp('slow');
                                 $('.card_2 .card-body').slideDown('slow');
@@ -733,6 +681,22 @@
             });
         });
 
+        $('#form_4').submit(function(e) {
+            if (archivosRequeridosSubidos() === 0) {
+                // Todos los documentos requeridos han sido subidos, permite avanzar
+                return true;
+            } else {
+                // Faltan documentos requeridos, muestra una alerta
+                alert(
+                    `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir. Debes cargar todos los archivos`
+                    );
+                return false; // Evita que el formulario se envíe
+            }
+        });
+
+
+
+
 
         $('.file').change(function() {
 
@@ -797,15 +761,13 @@
 
             $('.file').each(function(i, item) {
 
-                if ($(this).attr('data-upload') == 0 && $(this).attr('data-required') ==
+                if ($(this).attr('data-5') == 0 && $(this).attr('data-required') ==
                     1) {
                     countFileRequired += 1;
                 }
-
             });
 
             return countFileRequired;
-
         }
 
         function descarga_solicitud(element) {
@@ -821,6 +783,50 @@
                 return false;
             }
 
+        }
+
+
+        function archivosRequeridosSubidos() {
+            let archivosFaltantes = 0;
+
+            // Itera a través de los elementos de entrada de tipo "file" que representan los documentos requeridos
+            $('.file').each(function() {
+                if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
+                    archivosFaltantes++;
+                }
+            });
+
+            return archivosFaltantes;
+        }
+
+        $('#form_1').submit(function(e) {
+            if (archivosRequeridosSubidos() === 0) {
+                // Todos los documentos requeridos han sido subidos, permite avanzar
+                return true;
+            } else {
+                // Faltan documentos requeridos, muestra un mensaje de error
+                iziToast.show({
+                    title: 'Ups ☹️',
+                    message: `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir.`,
+                    backgroundColor: '#ff9b93',
+                    closeOnEscape: true
+                });
+                return false; // Evita que el formulario se envíe
+            }
+        });
+
+
+        function archivosRequeridosSubidos() {
+            let archivosFaltantes = 0;
+
+            // Itera a través de los elementos de entrada de tipo "file" que representan los documentos requeridos
+            $('.file').each(function() {
+                if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
+                    archivosFaltantes++;
+                }
+            });
+
+            return archivosFaltantes;
         }
     </script>
 

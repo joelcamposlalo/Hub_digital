@@ -99,7 +99,7 @@
                             </div>
                             <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
                                 <small class="text-center mt-2">SOLICITUD DE VERIFICACION TECNICA
-                                    DE RIESGO MEDIANTE VENTANILLA
+                                    DE RIESGOS MEDIANTE VENTANILLA
 
                                     VIRTUAL</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"

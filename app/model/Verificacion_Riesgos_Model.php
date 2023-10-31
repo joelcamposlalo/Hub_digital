@@ -9,6 +9,7 @@ use App\model\Solicitudes_model;
 use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
 use Psy\VersionUpdater\IntervalChecker;
+use App\Mail\contactoVerificacion;
 
 class Verificacion_Riesgos_Model extends Model
 {
@@ -32,7 +33,7 @@ class Verificacion_Riesgos_Model extends Model
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
-             //   'id_revisor'    => $id_revisor,
+                //   'id_revisor'    => $id_revisor,
                 'id_tramite'    => 29,
                 'id_etapa'      => 177,
                 'estatus'       => 'pendiente',
@@ -90,8 +91,6 @@ class Verificacion_Riesgos_Model extends Model
             'pendientes'  => $pendientes,
             'validados'  => $validados
         ];
-        //$sql ="execute tw_consulta_requisitos ?,?"
-
     }
 
     public static function consulta_requisitos_op($id_solicitud)
@@ -188,7 +187,6 @@ class Verificacion_Riesgos_Model extends Model
 
 
         return DB::connection('captura_op')->select($sql, $params);
-
     }
 
 
@@ -202,13 +200,13 @@ class Verificacion_Riesgos_Model extends Model
         ?,?,?,?";
 
         $params = array(
-            $request-> domicilio  ?? '-',
-            $request-> numero  ?? '-',
-            $request-> entreCalle_1 ?? '-',
-            $request-> entreCalle_2 ?? '-',
-            $request-> colonia ?? '-',
-            $request-> municipio ?? '-',
-            $request-> problematica ?? '-',
+            $request->domicilio  ?? '-',
+            $request->numero  ?? '-',
+            $request->entreCalle_1 ?? '-',
+            $request->entreCalle_2 ?? '-',
+            $request->colonia ?? '-',
+            $request->municipio ?? '-',
+            $request->problematica ?? '-',
             session('id_usuario') ?? '-',
             $request->id_captura ?? '-',
         );
@@ -231,6 +229,7 @@ class Verificacion_Riesgos_Model extends Model
     public static function  actualiza_edo_act($id_captura, $ing)
     {
 
+
         //$sql = "UPDATE capturaweb.dbo.PRECAPTURA SET edoact=1,ing=? where IdCaptura=?";
         $sql = "EXECUTE tw_ingresa_precaptura ?";
 
@@ -241,48 +240,91 @@ class Verificacion_Riesgos_Model extends Model
         return $result;
     }
 
-    public static function notifica($request, $titulo, $mensaje, $correo)
+
+    public static function inserta_requisito_op($id_documento, $filename, $extension, $id_solicitud)
     {
 
-        $data = [
-            'id_emisor'       => session('id_usuario'),
-            'id_receptor'     => $request['id_usuario'],
-            'id_coordinacion' => 4,
-            'titulo'          => $titulo,
-            'descripcion'     => $mensaje
-        ];
+        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE
+        c.id_documento = ' . $id_documento . ' and id_tramite=29');
+        if ($res1) {
+            $id_cat_archivo = $res1[0]->id_cat_archivo;
 
-        if (DB::table('notificaciones')->insert($data)) {
+            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
+            WHERE c.id_cat_archivo = a.id_cat_archivo
+            and a.id_solicitud =' . $id_solicitud . '
+            and a.id_usuario =' . session('id_usuario') . '
+            ) and c.id_tramite=29 and c.id_documento=' . $id_documento);
 
-            //Enviamos el correo->cc(env('MAIL_CC'))
-            Mail::to($correo)->bcc(env('MAIL_BCC'))->send(new Notificacion($correo, $titulo, $mensaje, 'https://portal.zapopan.gob.mx/logos_vdigital/logo_ord.png'));
+            if ($pend_file) {
 
-            //Cambiamos el estatus de la solicitud
 
-            return DB::table('solicitudes')
-                ->where('id_solicitud', $request['id_solicitud'])
-                ->update(['id_etapa' => 68, 'estatus' => 'en revision']);
-        } else {
-            return false;
-        }
+                $affected =  DB::table('archivos')->insert([
+                    'id_usuario'     => session('id_usuario'),
+                    'id_cat_archivo' => $id_cat_archivo,
+                    'nombre'         => $filename,
+                    'extension'      => $extension,
+                    'created_at'     => date('Y-m-d H:i:s'),
+                    'id_solicitud'   => $id_solicitud,
+                ]);
+            } else {
+
+
+                $affected =  DB::table('archivos')
+                    ->where('id_solicitud', $id_solicitud)
+                    ->where('id_cat_archivo', $id_cat_archivo)
+                    ->update([
+                        'id_usuario'     => session('id_usuario'),
+                        'nombre'         => $filename,
+                        'extension'      => $extension,
+                        'created_at'     => date('Y-m-d H:i:s'),
+                    ]);
+
+                $arc = DB::table('archivos')->where('nombre', $filename)->first();
+
+                DB::table('archivosodt')->where([
+                    'id_archivo'     => $arc->id_archivo,
+                ])->delete();
+            }
+            return $affected;
+        } else
+            return null;
     }
 
-    // public static function sendMail($request)
-    // {
+    public static function notificarPorCorreo($request, $titulo, $mensaje)
+    {
+        $data = [
+            'id_emisor' => session('id_usuario'),
+            'id_receptor' => session('id_usuario'),
+            'id_coordinacion' => 7,
+            'titulo' => $titulo,
+            'descripcion' => $mensaje,
+        ];
 
-    //     $data_p = DB::connection('captura_op')->table('Precaptura')
-    //         ->where("IdCaptura", $request->id_captura)->first();
+        $emailPropietario = DB::connection('captura_op')->table('Precaptura')
+            ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
 
-    //     $data_participantes = DB::connection('captura_op')->table('Capacitaciones')
-    //         ->where("IdCaptura", $request->id_captura)->get();
 
-    //     $correoData = [
-    //         'data_p' => $data_p,
-    //         'data_participantes' => $data_participantes,
-    //     ];
 
-    //     Mail::to('joel.campos@zapopan.gob.mx')
-    //         ->send(new contactoCapacitacion($correoData));
-    // }
 
+        if ($emailPropietario) {
+            if (DB::table('notificaciones')->insert($data)) {
+                Mail::to($emailPropietario)->bcc(env('MAIL_BCC'))->send(new notificacion($emailPropietario, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static function sendMail($request, $document_urls)
+    {
+        $correoData = DB::connection('captura_op')->table('Precaptura')
+            ->where("IdCaptura", $request->id_captura)->first();
+
+
+        Mail::to('joel.campos@zapopan.gob.mx')
+            ->send(new contactoVerificacion($correoData, $document_urls));
+
+        }
 }
