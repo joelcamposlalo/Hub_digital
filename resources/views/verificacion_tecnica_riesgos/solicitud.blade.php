@@ -319,7 +319,7 @@
                         </div>
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
 
-                        <input name="id_solicitud" id="id_solicitud_frm4" type="text" value="{{ $folio }}">
+                        <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
                         <input name="id_etapa" id="id_etapa" type="hidden"
                             value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
                         <div class="row mt-4">

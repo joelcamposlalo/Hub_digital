@@ -98,16 +98,16 @@ class Capacitaciones_Model extends Model
     public static function ingresa_solicitud($request)
     {
 
-
+        dd($request);
         $sql = "EXECUTE proteccion_capacitaciones_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?,?,?,?";
 
         $params = array(
             $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
             $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->giro_comercio,
-            $request->materia_de, $request->razonSocial, session('id_usuario'),  $request->id_solicitud
+            $request->materia_de, $request->razonSocial, session('id_usuario'), $request->selector_pc, $request->id_solicitud,
 
         );
 
@@ -122,17 +122,16 @@ class Capacitaciones_Model extends Model
         $sql = "EXECUTE proteccion_capacitaciones_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?,?,?,?";
 
         $params = array(
             $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
             $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->giro_comercio,
-            $request->materia_de, $request->razonSocial,  session('id_usuario'),  $request->id_captura
+            $request->materia_de, $request->razonSocial,  session('id_usuario'), $request->selector_pc, $request->id_captura,
 
         );
 
         return DB::connection('captura_op')->select($sql, $params);
-
     }
 
 
@@ -154,7 +153,6 @@ class Capacitaciones_Model extends Model
         DB::table('EstadoPreCaptura')->insert($data);
 
         return true;
-
     }
 
 
@@ -218,7 +216,7 @@ class Capacitaciones_Model extends Model
         ];
 
         Mail::to('joel.campos@zapopan.gob.mx')
-        ->bcc('vimoz@zapopan.gob.mx')
+            // ->bcc('vimoz@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
 }

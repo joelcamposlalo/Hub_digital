@@ -95,7 +95,20 @@
                                     <option value="Control y Combate de Incendios y Primeros Auxilios">Control y Combate de
                                         Incendios y Primeros Auxilios</option>
                                     <option value="Formación de Brigadas">Formación de Brigadas</option>
+                                    <option value="PC Contigo">PC Contigo</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div id="pc_contigo" style="display: none;">
+                            <div class="row">
+                                <div class="col mt-2">
+                                    <label for="selector_pc"><small>Tipo de Capacitación de Pc contigo</small></label>
+                                    <select name="selector1" id="selector1" class="ab-form background-color rounded border">
+                                        <option value="Puertas abiertas">Puertas abiertas</option>
+                                        <option value="CER (Comunidades Escolares Resilientes)">CER (Comunidades Escolares Resilientes)</option>
+                                        <option value="Comités Vecinales de Protección Civil">Comités Vecinales de Protección Civil</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -310,6 +323,8 @@
             $('.mapa2').remove();
         }
 
+
+
         $(document).ready(function() {
 
             @if (isset($id_etapa) && $id_etapa == 65)
@@ -467,6 +482,7 @@
 
                 var id_solicitud = "{{ $folio }}";
                 var materia_de = $('.materia_de').val();
+                var selector_pc = $('.selector_pc').val();
                 var nombre = $('.nombre').val();
                 var apellido_uno = $('.apellido_uno').val();
                 var apellido_dos = $('.apellido_dos').val();
@@ -489,6 +505,7 @@
                     var formdata = new FormData();
 
                     formdata.append('materia_de', materia_de);
+                    formdata.append('selector_pc', selector_pc);
                     formdata.append('nombre', nombre);
                     formdata.append('apellido_uno', apellido_uno);
                     formdata.append('apellido_dos', apellido_dos);
@@ -498,7 +515,6 @@
                     formdata.append('numero', numero);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
-
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
@@ -651,7 +667,20 @@
             });
         });
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tipoCapacitacionSelector = document.getElementById('materia_de');
+        var pc_contigo = document.getElementById('pc_contigo');
 
+        tipoCapacitacionSelector.addEventListener('change', function () {
+            if (tipoCapacitacionSelector.value === 'PC Contigo') {
+                pc_contigo.style.display = 'block';
+            } else {
+                pc_contigo.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 
 @endsection
