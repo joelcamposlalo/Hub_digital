@@ -52,6 +52,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
+        
     //aqui declaras que ejecute la funcion de ingresa solicitud donde esta el procedimiento almacenado
         if ($response = Capacitaciones_Model::ingresa_solicitud($request)) {
 

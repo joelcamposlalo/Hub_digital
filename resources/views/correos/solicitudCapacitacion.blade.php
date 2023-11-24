@@ -328,22 +328,31 @@
                                                     align="left">
                                                     <div class="row" style="margin-right: -24px;">
                                                     </div>
-                                                    <div style="padding: 2rem; background-color: #fbfbfb; border-radius: 0px 0px 20px 20px;" >
+                                                    <div
+                                                        style="padding: 2rem; background-color: #fbfbfb; border-radius: 0px 0px 20px 20px;">
                                                         <br>
-
                                                         <h2 style="text-align: center">Datos del solicitante</h2>
                                                         <br>
-                                                        <p><b>Se Han Registrado El Día: </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
+                                                        <p><b>Se Han Registrado El Día:
+                                                            </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
                                                         <p><b>Tipo De Capacitación:</b> {{ $correoData->materiade }}</p>
+                                                        @if (!empty($correoData->PcContigo))
+                                                            <p><b>Con la capacitación de Pc contigo de:</b>
+                                                                {{ $correoData->PcContigo}}</p>
+                                                        @endif
+                                                        {{-- <p><b>Con la Capacitación de Pc Contigo de: </b>{{ $correoData->selector_pc}}</p> --}}
                                                         <p><b>Nombre Completo Del Interesado </b>
                                                             {{ $correoData->nomPropietario }}</p>
                                                         <p><b>Con El Teléfono: </b>{{ $correoData->telPropietario }}</p>
                                                         <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
                                                         <p><b>En El Domicilio:</b> {{ $correoData->domPropietario }}</p>
-                                                        <p><b>Con El Número: </b> {{ $correoData->numExt }}</p>
+                                                        <p><b>Con El Número Exterior: </b> {{ $correoData->numExt }}</p>
+                                                        @if (!empty($correoData->numInt))
+                                                            <p><b>Con El Número Interior </b>
+                                                                {{ $correoData->numInt }}</p>
+                                                        @endif
                                                         <p><b>En La Colonia:</b> {{ $correoData->colonia }}</p>
                                                         <p><b>En el Municipio De: </b> {{ $correoData->municipio }}</p>
-                                                      
 
                                                         @if (!empty($correoData->razonSocial))
                                                             <p><b>Con La Razón Social: </b>
@@ -356,7 +365,8 @@
                                                         @endif
 
                                                         <br><br>
-                                                        <h2 style="text-align: center mb-2">Nombres de los participantes
+                                                        <h2 style="text-align: center mb-2">Nombres de los
+                                                            participantes
                                                         </h2>
 
                                                         @foreach ($participantes as $participante)
@@ -416,4 +426,5 @@
     </style>
 
 </body>
+
 </html>

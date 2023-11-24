@@ -103,10 +103,13 @@
                             <div class="row">
                                 <div class="col mt-2">
                                     <label for="selector_pc"><small>Tipo de Capacitación de Pc contigo</small></label>
-                                    <select name="selector1" id="selector1" class="ab-form background-color rounded border">
+                                    <select name="selector_pc" id="selector_pc"
+                                        class="ab-form background-color rounded border selector_pc">
                                         <option value="Puertas abiertas">Puertas abiertas</option>
-                                        <option value="CER (Comunidades Escolares Resilientes)">CER (Comunidades Escolares Resilientes)</option>
-                                        <option value="Comités Vecinales de Protección Civil">Comités Vecinales de Protección Civil</option>
+                                        <option value="CER (Comunidades Escolares Resilientes)">CER (Comunidades Escolares
+                                            Resilientes)</option>
+                                        <option value="Comités Vecinales de Protección Civil">Comités Vecinales de
+                                            Protección Civil</option>
                                     </select>
                                 </div>
                             </div>
@@ -124,34 +127,39 @@
                                 <label for="giro_comercio" id="giro_comercio"><small>Giro Comercial</small></label>
                                 <input name="giro_comercio" id="giro_comercio"
                                     value="{{ isset($giro_comercio) ? $giro_comercio : '' }}"
-                                    class="ab-form background-color rounded border capitalize giro_comercio"
-                                    type="text">
+                                    class="ab-form background-color rounded border capitalize giro_comercio" type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text" required>
+                                    class="ab-form background-color rounded border capitalize nombre" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="apellido_uno"><small>Primer Apellido</small></label>
-                                <input name="apellido_uno" id="apellido_uno" value="{{ isset($apellido_uno) ? $apellido_uno : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_uno" type="text" required>
+                                <input name="apellido_uno" id="apellido_uno"
+                                    value="{{ isset($apellido_uno) ? $apellido_uno : '' }}"
+                                    class="ab-form background-color rounded border capitalize apellido_uno" type="text"
+                                    required>
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_dos"><small>Segundo Apellido</small></label>
-                                <input name="apellido_dos" id="apellido_dos" value="{{ isset($apellido_dos) ? $apellido_dos : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_dos" type="text" required>
+                                <input name="apellido_dos" id="apellido_dos"
+                                    value="{{ isset($apellido_dos) ? $apellido_dos : '' }}"
+                                    class="ab-form background-color rounded border capitalize apellido_dos" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-2">
                                 <label for="telefono"><small>Teléfono</small></label>
                                 <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
-                                    class="ab-form background-color rounded border capitalize telefono" type="tel" data-parsley-length="[10, 10]" required >
+                                    class="ab-form background-color rounded border capitalize telefono" type="tel"
+                                    data-parsley-length="[10, 10]" required>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
@@ -161,30 +169,40 @@
                                     required>
                             </div>
                         </div>
-                        <div class="row responsive_numero">
-                            <div class="col-10 mt-2 domicilio_div ">
+                        <div class="row">
+                            <div class="col mt-2 domicilio_div ">
                                 <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text"
                                     required>
                             </div>
-                            <div class="numero_div col-2 mt-2 ">
-                                <label for="numero"><small>Número</small></label>
+                        </div>
+                        <div class="row">
+                            <div class=" col mt-2 ">
+                                <label for="numero"><small>Número Exterior</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
                                     class="ab-form background-color rounded border capitalize numero" type="text"
                                     required>
+                            </div>
+                            <div class=" col mt-2 ">
+                                <label for="numeroint"><small>Número Interior</small></label>
+                                <input name="numeroint" id="numeroint" value="{{ isset($numeroint) ? $numeroint : '' }}"
+                                    class="ab-form background-color rounded border capitalize numeroint" type="text"
+                                    >
                             </div>
                         </div>
                         <div class="row responsive_numero">
                             <div class="col mt-2 ">
                                 <label for="colonia "><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text" required>
+                                    class="ab-form background-color rounded border capitalize colonia" type="text"
+                                    required>
                             </div>
                             <div class="col mt-2 domicilio_div">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
-                                    class="ab-form background-color rounded border capitalize municipio" type="text" required>
+                                    class="ab-form background-color rounded border capitalize municipio" type="text"
+                                    required>
                             </div>
                         </div>
 
@@ -197,7 +215,7 @@
                                     value="{{ isset($poligono) ? $poligono : '' }}">
                                 <input name="origen" type="hidden" value='solicitud'>
                                 <input name="id_captura" id="id_captura_frm4" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}" required>
+                                    value="{{ isset($id_captura) ? $id_captura : '' }}" required>
                                 <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
                                     type="submit">Continuar</button>
                             </div>
@@ -220,8 +238,7 @@
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
 
-                            <input name="id_solicitud" id="id_solicitud" type="hidden"
-                                value="{{ $folio }}">
+                            <input name="id_solicitud" id="id_solicitud" type="hidden" value="{{ $folio }}">
                             <input name="id_etapa" id="id_etapa" type="hidden"
                                 value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
                             <div class="container">
@@ -229,14 +246,15 @@
                                     <div class='col'>
                                         <div class='form-group'>
                                             <label>Nombre Completo de Participante</label>
-                                            <input type='text' class='form-control participante capitalize' name='participantes1'
-                                                required>
+                                            <input type='text' class='form-control participante capitalize'
+                                                name='participantes1' required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class='row'>
                                     <div class='col button-add-participantes'>
-                                        <button type="button" class="btn btn-primary" id="more">Agregar más participantes</button>
+                                        <button type="button" class="btn btn-primary" id="more">Agregar más
+                                            participantes</button>
                                     </div>
                                     <input id="contador" type="hidden" name="contador" value="1">
                                 </div>
@@ -244,7 +262,7 @@
                             <div class="row mt-4">
                                 <div class="col-md-12 mt-2 text-right">
                                     <input name="id_captura" id="id_captura_guardar" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                                     <button data-back=".card_1 .card-body" type="button"
                                         class="ab-btn btn-cancel btn-regresar">Regresar</button>
                                     <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
@@ -262,33 +280,35 @@
             margin-left: 1rem;
         }
 
-        .new-participante{
+        .new-participante {
             flex-direction: column;
             margin-top: 1rem;
         }
 
-        .button-add-participantes{
+        .button-add-participantes {
             margin-top: 1rem;
         }
 
-    @media (max-width: 768px) {
-        .responsive_numero {
-            flex-direction: column;
-        }
-        .domicilio_div{
-            width: 100%;
-            max-width: none;
-        }
-        .numero_div {
-            width: 100%;
-            max-width: none;
-        }
+        @media (max-width: 768px) {
+            .responsive_numero {
+                flex-direction: column;
+            }
 
-        .remove-participante{
-            margin-bottom: 1rem;
-            width: 100%;
+            .domicilio_div {
+                width: 100%;
+                max-width: none;
+            }
+
+            .numero_div {
+                width: 100%;
+                max-width: none;
+            }
+
+            .remove-participante {
+                margin-bottom: 1rem;
+                width: 100%;
+            }
         }
-    }
     </style>
 
 @endsection
@@ -490,11 +510,20 @@
                 var correo_propietario = $('.correo_propietario').val();
                 var domicilio = $('.domicilio').val();
                 var numero = $('.numero').val();
+                var numeroint = $('.numeroint').val();
                 var colonia = $('.colonia').val();
                 var municipio = $('.municipio').val();
                 var giro_comercio = $('.giro_comercio').val();
                 var razonSocial = $('.razonSocial').val();
                 var id_etapa = $('#id_etapa').val();
+
+                if ($('#pc_contigo').is(':visible')) {
+                    // Si está visible, usar su valor actual
+                    selector_pc = $('.selector_pc').val();
+                } else {
+                    // Si está oculto, establecerlo como cadena vacía o cualquier valor predeterminado
+                    selector_pc = '';
+                }
 
 
 
@@ -513,6 +542,7 @@
                     formdata.append('correo', correo_propietario);
                     formdata.append('domicilio', domicilio);
                     formdata.append('numero', numero);
+                    formdata.append('numeroint', numeroint);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
                     formdata.append('giro_comercio', giro_comercio);
@@ -667,20 +697,24 @@
             });
         });
     </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var tipoCapacitacionSelector = document.getElementById('materia_de');
-        var pc_contigo = document.getElementById('pc_contigo');
 
-        tipoCapacitacionSelector.addEventListener('change', function () {
-            if (tipoCapacitacionSelector.value === 'PC Contigo') {
-                pc_contigo.style.display = 'block';
-            } else {
-                pc_contigo.style.display = 'none';
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tipoCapacitacionSelector = document.getElementById('materia_de');
+            var pcContigo = document.getElementById('pc_contigo');
+
+            tipoCapacitacionSelector.addEventListener('change', function() {
+                console.log('Tipo de capacitación diferente');
+
+                var opcion = $("#materia_de option:selected").val();
+
+                if (opcion == "PC Contigo") {
+                    pcContigo.style.display = 'block';
+                } else {
+                    pcContigo.style.display = 'none';
+                }
+            });
         });
-    });
-</script>
-
+    </script>
 
 @endsection
