@@ -586,3 +586,9 @@ Route::post('verificacion_tecnica_riesgos/ingresa_tramite', 'Verificacion_Riesgo
 
 
 
+/*
+* Rutas para tramites de rectificación de nombre
+*/
+
+Route::get('rectificacion/solicitud', 'rectificacion@solicitud')->middleware('ciudadano');
+
