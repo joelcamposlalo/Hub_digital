@@ -333,34 +333,34 @@
                                                         <br>
                                                         <h2 style="text-align: center">Datos del solicitante</h2>
                                                         <br>
-                                                        <p><b>Se Han Registrado El Día:
+                                                        <p><b>Se han registrado el día:
                                                             </b>{{ date('d/m/Y', strtotime($correoData->fecha)) }}</p>
-                                                        <p><b>Tipo De Capacitación:</b> {{ $correoData->materiade }}</p>
+                                                        <p><b>Tipo de capacitación:</b> {{ $correoData->materiade }}</p>
                                                         @if (!empty($correoData->PcContigo))
                                                             <p><b>Con la capacitación de Pc contigo de:</b>
                                                                 {{ $correoData->PcContigo}}</p>
                                                         @endif
                                                         {{-- <p><b>Con la Capacitación de Pc Contigo de: </b>{{ $correoData->selector_pc}}</p> --}}
-                                                        <p><b>Nombre Completo Del Interesado </b>
+                                                        <p><b>Nombre completo del interesado </b>
                                                             {{ $correoData->nomPropietario }}</p>
-                                                        <p><b>Con El Teléfono: </b>{{ $correoData->telPropietario }}</p>
+                                                        <p><b>Con el teléfono: </b>{{ $correoData->telPropietario }}</p>
                                                         <p><b>Correo: </b>{{ $correoData->emailPropietario }}</p>
-                                                        <p><b>En El Domicilio:</b> {{ $correoData->domPropietario }}</p>
-                                                        <p><b>Con El Número Exterior: </b> {{ $correoData->numExt }}</p>
+                                                        <p><b>En el domicilio:</b> {{ $correoData->domPropietario }}</p>
+                                                        <p><b>Con e número exterior: </b> {{ $correoData->numExt }}</p>
                                                         @if (!empty($correoData->numInt))
-                                                            <p><b>Con El Número Interior </b>
+                                                            <p><b>Con el número interior </b>
                                                                 {{ $correoData->numInt }}</p>
                                                         @endif
-                                                        <p><b>En La Colonia:</b> {{ $correoData->colonia }}</p>
-                                                        <p><b>En el Municipio De: </b> {{ $correoData->municipio }}</p>
+                                                        <p><b>En la colonia:</b> {{ $correoData->colonia }}</p>
+                                                        <p><b>En el municipio de: </b> {{ $correoData->municipio }}</p>
 
                                                         @if (!empty($correoData->razonSocial))
-                                                            <p><b>Con La Razón Social: </b>
+                                                            <p><b>Con la razón social: </b>
                                                                 {{ $correoData->razonSocial }}</p>
                                                         @endif
 
                                                         @if (!empty($correoData->giroContruccion))
-                                                            <p><b>Con El Giro Comercial De: </b>
+                                                            <p><b>Con el giro comercial de: </b>
                                                                 {{ $correoData->giroContruccion }}</p>
                                                         @endif
 
@@ -370,7 +370,7 @@
                                                         </h2>
 
                                                         @foreach ($participantes as $participante)
-                                                            <p><b>Nombre Completo de Participante:</b>
+                                                            <p><b>Nombre completo de participante:</b>
                                                                 {{ $participante->Participantes }}
                                                         @endforeach
                                                     </div>

@@ -159,7 +159,7 @@
                                 <label for="telefono"><small>Teléfono</small></label>
                                 <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
                                     class="ab-form background-color rounded border capitalize telefono" type="tel"
-                                    data-parsley-length="[10, 10]" required>
+                                    data-parsley-length="[10, 10]" data-parsley-type="number" required>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
@@ -171,7 +171,7 @@
                         </div>
                         <div class="row">
                             <div class="col mt-2 domicilio_div ">
-                                <label for="domicilio"><small>Domicilio</small></label>
+                                <label for="domicilio"><small>Calle</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text"
                                     required>
@@ -181,7 +181,7 @@
                             <div class=" col mt-2 ">
                                 <label for="numero"><small>Número Exterior</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="text"
+                                    class="ab-form background-color rounded border capitalize numero" type="number"
                                     required>
                             </div>
                             <div class=" col mt-2 ">
@@ -230,11 +230,11 @@
         <div class="col mt-4" id="top-4">
             <div class="card  shadow-sm card_4 rounded border-none">
                 <div class="card-header">
-                    <small>Participantes (Maximo 10 participantes) </p></small>
+                    <small>Participantes (Máximo 10 participantes) </p></small>
                     <p>
                 </div>
                 <div class="card-body">
-                    <form id="form_4" method="POST" action="/bombero_uno/guardar">
+                    <form id="form_4" method="POST" action="{{ url('/bombero_capacitacion/guardar') }}">
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
 
@@ -245,7 +245,7 @@
                                 <div class='row container-fluid ' id="participantes-container">
                                     <div class='col'>
                                         <div class='form-group'>
-                                            <label>Nombre Completo de Participante</label>
+                                            <label>Nombre Completo Del Participante</label>
                                             <input type='text' class='form-control participante capitalize'
                                                 name='participantes1' required>
                                         </div>
@@ -557,7 +557,7 @@
 
                     if ($('#id_captura').val() == '') {
                         var res = await axios.post(
-                            '{{ url('bombero_uno/ingresa_solicitud') }}',
+                            '{{ url('bombero_capacitacion/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -590,9 +590,9 @@
 
                     } else {
                         formdata.append('id_captura', $('#id_captura').val());
-                        console.log("en el else")
+
                         var res = await axios.post(
-                            '{{ url('bombero_uno/actualiza_solicitud') }}',
+                            '{{ url('bombero_capacitacion/actualiza_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -600,13 +600,13 @@
                             }).then(function(response) {
 
                             if (parseInt(response.data) > 0) {
-                                console.log(response.data);
+
                                 $('#id_captura_frm4').val(response.data);
                                 $('.btn-form4').prop('disabled', false);
                                 $('.card_2 .card-body').slideUp('slow');
                                 $('.card_4 .card-body').slideDown('slow');
                                 iziToast.show({
-                                    message: 'Se actualizo la información correctamente, puedes agregar a tus participantes',
+                                    message: 'Se actualizó la información correctamente, puedes agregar a tus participantes',
                                     backgroundColor: '#2fd099',
                                     closeOnEscape: true
                                 });
@@ -716,5 +716,17 @@
             });
         });
     </script>
+
+<script>
+
+
+    @if(session('error'))
+        iziToast.error({
+            title: 'Error',
+            message: '{{ session('error') }}',
+            position: 'topRight'
+        });
+    @endif
+</script>
 
 @endsection

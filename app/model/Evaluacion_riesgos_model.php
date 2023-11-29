@@ -4,12 +4,14 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\model\Solicitudes_model;
 use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
+use Psy\VersionUpdater\IntervalChecker;
 use App\Mail\contactoVerificacion;
 
-class Verificacion_Riesgos_Model extends Model
+class Evaluacion_riesgos_model extends Model
 {
     public static function solicitud()
     {

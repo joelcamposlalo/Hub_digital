@@ -4,16 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use App\model\Solicitudes_model;
 use App\model\Capacitaciones_Model;
-use App\model\Dictamen_finca_antigua_model;
-use App\Mail\contactoCapacitacion;
-use PDF;
-use App\model\Mail;
-use App\model\Notificacion;
-
 
 class Capacitaciones_Proteccion_Civil extends Controller
 {
@@ -23,7 +15,6 @@ class Capacitaciones_Proteccion_Civil extends Controller
         if ($folio = Capacitaciones_Model::solicitud()) {
 
             $vars = [
-                'files'    => Dictamen_finca_antigua_model::get_files($folio),
                 'folio'    => $folio
             ];
 
@@ -44,7 +35,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
                 $vars += ["id_etapa" => 169];
             }
 
-            return view('bombero_uno/solicitud', $vars);
+            return view('bombero_capacitacion/solicitud', $vars);
         }
 
         session(['lastpage' => __FILE__]);
@@ -52,7 +43,7 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-        
+
     //aqui declaras que ejecute la funcion de ingresa solicitud donde esta el procedimiento almacenado
         if ($response = Capacitaciones_Model::ingresa_solicitud($request)) {
 
@@ -112,37 +103,6 @@ class Capacitaciones_Proteccion_Civil extends Controller
         }
     }
 
-
-    public function ingresa_tramite(Request $request)
-    {
-        $id_captura = $request->id_captura;
-        $rows = 0;
-        $files_s3 = 0;
-        $rows_elimina = 0;
-
-        $requisitos = Capacitaciones_Model::consulta_requisitos_op(
-            $request->id_solicitud
-        );
-
-        foreach ($requisitos as $r) {
-            $nombre_archivo = $r->nombre;
-
-
-            if ($r->estatus != 'validado') {
-
-                if (Storage::disk('s3')->exists('public/' . session('id_usuario') . '/' . $nombre_archivo)) {
-
-                    Storage::disk('s3')->delete('public/' . session('id_usuario') . '/' . $nombre_archivo);
-
-                    DB::table('archivos')
-                        ->where('nombre', $nombre_archivo)
-                        ->where('id_solicitud', $request->id_solicitud)
-                        ->delete();
-                }
-            }
-        }
-    }
-
     public function guardar(Request $request)
     {
 
@@ -166,20 +126,9 @@ class Capacitaciones_Proteccion_Civil extends Controller
 
             return view('/ciudadano/descanso');
         } else {
-            echo "no funciono, favor de intentar de nuevo";
+            return redirect()->route('bombero_capacitacion.solicitud')->with('error', 'Hubo un problema al guardar los participantes.');
         }
         exit;
-        return redirect()->route('bombero_uno.solicitud');
-    }
-
-    public static function consulta_requisitos_op($id_solicitud)
-    {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
-        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . "
-        and ao.estatus='validado'";
-        $result = DB::select($sql, [$id_solicitud]);
-        return $result;
+        return redirect()->route('bombero_capacitacion.solicitud');
     }
 }

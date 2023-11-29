@@ -162,8 +162,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset('media/ilustrator/catastro.svg') }}"width="90px"
+                                    alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                    </div>
 
-                    <div class="text-center mb-4 img-tramite">
+                    <div class="text-center mb-4">
 
                     </div>
 

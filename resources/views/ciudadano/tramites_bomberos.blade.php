@@ -19,7 +19,8 @@
                     <i class="fas fa-arrow-left"></i>
                 </button>
             </a>
-            <h1 class=" font m-0 bold c-primary-color">Coordinación municipal de <br>Protección Civil y Bomberos Zapopan</h1>
+            <h1 class=" font m-0 bold c-primary-color">Coordinación municipal de <br>Protección Civil y Bomberos Zapopan
+            </h1>
         </div>
         <br>
 
@@ -39,19 +40,20 @@
     <div class="text-center"><small class="font  mb-5 f-15"><b>Trámites disponibles.</b></small></div>
     <div id="section">
         <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitacion"
-                data-img="proteccion_civil.png" data-url="bombero_uno/solicitud">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitación"
+                data-img="proteccion_civil.png" data-url="bombero_capacitacion/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
-                    <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card card-hover-effect">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}"width="90px"
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
+                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
                                 <span class="badge badge-warning mt-4" aria-hidden="true">CAPACITACIONES</span>
                             </div>
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2"> SOLICITUD DE CAPACITACION MEDIANTE VENTANILLA VIRTUAL</small>
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
+                                <small class="text-center mt-2"> SOLICITUD DE CAPACITACIÓN MEDIANTE VENTANILLA
+                                    VIRTUAL</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -61,18 +63,18 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos"
-                data-img="proteccion_civil.png" data-url="regularizacion_predios/solicitud">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="EVALUACIÓN TÉCNICA DE RIESGOS"
+                data-img="proteccion_civil.png" data-url="evaluacion_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
-                    <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card card-hover-effect">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}"width="90px"
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
+                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
                                 <span class="badge badge-warning mt-4" aria-hidden="true">EVALUACIÓN DE RIESGOS</span>
                             </div>
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
                                 <small class="text-center mt-2">SOLICITUD DE EVALUACIÓN POR
                                     FENÓMENOS PERTURBADORES
                                     MEDIANTE VENTANILLA VIRTUAL</small>
@@ -85,20 +87,20 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Nuevos Bomberos"
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Verificación de Riesgos"
                 data-img="proteccion_civil.png" data-url="verificacion_tecnica_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
-                    <div style="height: 260px;" class="card card-hover-effect">
+                    <div class="card card-hover-effect">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}"width="90px"
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
+                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">VERIFICACION TECNICA
-                                    DE RIESGO</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">VERIFICACIÓN TÉCNICA
+                                    DE RIESGOS</span>
                             </div>
-                            <div style="height: 150px" class="d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">SOLICITUD DE VERIFICACION TECNICA
+                            <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
+                                <small class="text-center mt-2">SOLICITUD DE VERIFICACIÓN TECNICA
                                     DE RIESGOS MEDIANTE VENTANILLA
 
                                     VIRTUAL</small>
@@ -302,6 +304,29 @@
     <!-- Library css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet" type="text/css" />
+
+
+    <style>
+        @media only screen and (max-width: 1500px) {
+            .card-bombero {
+                height: 10rem;
+            }
+
+            .bombero_logo_card{
+                width: 100px !important;
+            }
+        }
+
+        @media only screen and (min-width: 1501px) {
+            .card-bombero {
+                height: 9rem;
+            }
+
+            .bombero_logo_card{
+                width: 110px !important;
+            }
+        }
+    </style>
 
 @endsection
 
