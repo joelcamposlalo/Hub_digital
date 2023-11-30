@@ -17,6 +17,7 @@ class Capacitaciones_Model extends Model
     public static function solicitud()
     {
 
+
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
@@ -184,8 +185,8 @@ class Capacitaciones_Model extends Model
             'data_participantes' => $data_participantes,
         ];
 
-        Mail::to('joel.campos@zapopan.gob.mx')
-            // ->bcc('vimoz@zapopan.gob.mx')
+        Mail::to('oficialiapcyb@zapopan.gob.mx')
+             ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
 }

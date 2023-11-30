@@ -36,7 +36,7 @@ class Rectificacion extends Controller
                 }
                 $vars += ["id_etapa" => $id_etapa];
             } else {
-                $vars += ["id_etapa" => 178];
+                $vars += ["id_etapa" => 182];
             }
 
             return view('rectificacion/solicitud', $vars);

@@ -18,24 +18,21 @@ class Rectificacion_model extends Model
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
-            $result = Solicitudes_model::consulta_ultimo_folio(29);
+            $result = Solicitudes_model::consulta_ultimo_folio(30);
             $folio = $result[0]->folio;
         } else {
-            $id_revisor = Solicitudes_model::balanza(65);
             $folio = DB::table('solicitudes')->insertGetId([
-                'id_tramite' => 29,
+                'id_tramite' => 30,
                 'id_usuario' => session('id_usuario'),
-                'id_etapa'   =>  177,
+                'id_etapa'   =>  182,
                 'estatus'    =>  'pendiente',
-                //'id_revisor' =>  $id_revisor
             ], 'id_solicitud');
 
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
-                //   'id_revisor'    => $id_revisor,
-                'id_tramite'    => 29,
-                'id_etapa'      => 177,
+                'id_tramite'    => 30,
+                'id_etapa'      => 182,
                 'estatus'       => 'pendiente',
 
             ];
@@ -118,7 +115,7 @@ class Rectificacion_model extends Model
     public static function ingresa_solicitud($request)
     {
 
-
+        dd($request);
         $sql = "EXECUTE proteccion_verificacion_inserta
         ?,?,?,?,?,
         ?,?,?,?,?";
