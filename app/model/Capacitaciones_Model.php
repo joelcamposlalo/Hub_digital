@@ -189,4 +189,5 @@ class Capacitaciones_Model extends Model
              ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
+    
 }
