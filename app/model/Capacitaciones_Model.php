@@ -185,8 +185,8 @@ class Capacitaciones_Model extends Model
             'data_participantes' => $data_participantes,
         ];
 
-        Mail::to('oficialiapcyb@zapopan.gob.mx')
-             ->bcc('joel.campos@zapopan.gob.mx')
+        Mail::to('joel.campos@zapopan.gob.mx')
+            //  ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
 }

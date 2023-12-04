@@ -100,7 +100,7 @@
                                     DE RIESGOS</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">SOLICITUD DE VERIFICACIÓN TECNICA
+                                <small class="text-center mt-2">SOLICITUD DE VERIFICACIÓN TÉCNICA
                                     DE RIESGOS MEDIANTE VENTANILLA
 
                                     VIRTUAL</small>

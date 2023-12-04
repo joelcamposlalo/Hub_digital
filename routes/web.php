@@ -597,4 +597,7 @@ Route::get('evaluacion_riesgos/solicitud', 'evaluacion_riesgos@solicitud')->midd
 */
 
 Route::get('rectificacion/solicitud', 'rectificacion@solicitud')->middleware('ciudadano');
-
+Route::post('rectificacion/ingresa_solicitud', 'Rectificacion@ingresa_solicitud')->middleware('ciudadano');
+Route::post('rectificacion/actualiza_solicitud', 'Rectificacion@actualiza_solicitud')->middleware('ciudadano');
+Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion@actualiza_solicitud_2')->middleware('ciudadano');
+Route::post('rectificacion/ingresa_tramite', 'Rectificacion@ingresa_tramite')->middleware('ciudadano');

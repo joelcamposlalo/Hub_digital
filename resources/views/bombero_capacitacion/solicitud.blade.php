@@ -150,8 +150,8 @@
                                 <label for="apellido_dos"><small>Segundo Apellido</small></label>
                                 <input name="apellido_dos" id="apellido_dos"
                                     value="{{ isset($apellido_dos) ? $apellido_dos : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_dos" type="text"
-                                    required>
+                                    class="ab-form background-color rounded border capitalize apellido_dos"
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -187,8 +187,7 @@
                             <div class=" col mt-2 ">
                                 <label for="numeroint"><small>Número Interior</small></label>
                                 <input name="numeroint" id="numeroint" value="{{ isset($numeroint) ? $numeroint : '' }}"
-                                    class="ab-form background-color rounded border capitalize numeroint" type="text"
-                                    >
+                                    class="ab-form background-color rounded border capitalize numeroint" type="text">
                             </div>
                         </div>
                         <div class="row responsive_numero">
@@ -678,7 +677,7 @@
                     document.getElementById("contador").value = x;
 
                     var newRow = $(
-                        "<div class='new-participante row container-fluid d-flex align-items-center'><div class='col'><div class='form-group'><label>Nombre Completo de Participante</label><input type='text' class='form-control participante capitalize' name='participantes" +
+                        "<div class='new-participante row container-fluid d-flex align-items-center'><div class='col'><div class='form-group'><label>Nombre Completo Del Participante</label><input type='text' class='form-control participante capitalize' name='participantes" +
                         x +
                         "'required></div></div><div class='col'><button class='btn btn-danger remove-participante'>Eliminar</button></div></div>"
                     );
@@ -717,16 +716,14 @@
         });
     </script>
 
-<script>
-
-
-    @if(session('error'))
-        iziToast.error({
-            title: 'Error',
-            message: '{{ session('error') }}',
-            position: 'topRight'
-        });
-    @endif
-</script>
+    <script>
+        @if (session('error'))
+            iziToast.error({
+                title: 'Error',
+                message: '{{ session('error') }}',
+                position: 'topRight'
+            });
+        @endif
+    </script>
 
 @endsection

@@ -128,7 +128,5 @@ class Capacitaciones_Proteccion_Civil extends Controller
         } else {
             return redirect()->route('bombero_capacitacion.solicitud')->with('error', 'Hubo un problema al guardar los participantes.');
         }
-        exit;
-        return redirect()->route('bombero_capacitacion.solicitud');
     }
 }

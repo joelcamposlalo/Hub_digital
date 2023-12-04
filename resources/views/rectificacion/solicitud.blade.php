@@ -312,6 +312,7 @@
                         @csrf
                         <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
                             <table class="w-100">
+
                                 @foreach ($files['pendientes'] as $key => $file)
                                     <tr class="w-100 predio">
                                         <td class="f-14">
@@ -388,25 +389,10 @@
     <script src="{{ asset('js/frontend.js') }}"></script>
     <script src="{{ asset('vendors/lightbox/dist/js/lightbox.min.js') }}"></script>
 
-    // Validacion al finalizar form
-    <script>
-        $(document).ready(function() {
-            $('#form_4').parsley().on('form:error', function() {
-                iziToast.error({
-                    title: 'Error de validación',
-                    message: 'Por favor, suba todos los documentos antes de enviar el formulario.',
-                });
-            });
-        });
-    </script>
-
-    // Movimiento de Cards
     <script>
         $('.card_2 .card-body').slideUp('fast');
         $('.card_3 .card-body').slideUp('fast');
         $('.card_4 .card-body').slideUp('fast');
-
-        //Movimiento de cards
 
         $(document).ready(function() {
 
@@ -424,18 +410,10 @@
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-
-
-            //animacion
             lightbox.option({
                 'resizeDuration': 200,
                 'wrapAround': true
             })
-
-            /**
-             * Menu de optiones en movil
-             *
-             */
 
             $('#nav .menu').click(function() {
                 $('.menu-mobile').addClass('open');
@@ -445,14 +423,10 @@
                 $('.menu-mobile').removeClass('open');
             });
 
-            //Parsley de validacionn en el form
-
             $('#form_1').parsley();
             $('#form_2').parsley();
             $('#form_3').parsley();
             $('#form_4').parsley();
-
-
 
             //funcion para mostrar campo depdendiendo de su rectificacion
             $(document).ready(function() {
@@ -488,7 +462,7 @@
 
             $('#form_1').submit(async function(e) {
 
-                $('.btn_inserta').prop('enable', true);
+                $('.btn_inserta').prop('disabled', true);
 
                 e.preventDefault();
 
@@ -518,7 +492,7 @@
                     if ($('#id_captura').val() == "") {
 
                         var res = await axios.post(
-                            '{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
+                            '{{ url('rectificacion/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -554,10 +528,9 @@
                         });
 
                     } else {
-                        //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
                         formdata.append('id_captura', $('#id_captura').val());
                         var res = await axios.post(
-                            '{{ url('verificacion_tecnica_riesgos/actualiza_solicitud') }}',
+                            '{{ url('rectificacion/actualiza_solicitud') }}',
 
                             formdata, {
                                 data: {
@@ -635,7 +608,7 @@
                 var municipio = $('.municipio').val();
                 var problematica = $('.problematica').val();
 
-                if ($('#id_captura').val() !== "") { // Solo se ejecutará si id_captura no está vacío
+                if ($('#id_captura').val() !== "") {
                     var formdata = new FormData();
 
                     formdata.append('domicilio', domicilio);
@@ -649,7 +622,7 @@
                     formdata.append('id_captura', $('#id_captura').val());
 
                     var res = await axios.post(
-                        '{{ url('verificacion_tecnica_riesgos_2/actualiza_solicitud_2') }}',
+                        '{{ url('rectificacion_2/actualiza_solicitud_2') }}',
                         formdata, {
                             data: {
                                 "_token": "{{ csrf_token() }}"
@@ -721,10 +694,6 @@
                 return false; // Evita que el formulario se envíe
             }
         });
-
-
-
-
 
         $('.file').change(function() {
 

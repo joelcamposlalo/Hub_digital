@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\model\Solicitudes_model;
+use App\model\Predios_model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Rectificacion_model;
+use App\model\Dictamen_trazos_usos_model;
 use App\Mail\contactoVerificacion;
 use PDF;
 
@@ -36,12 +38,11 @@ class Rectificacion extends Controller
                 }
                 $vars += ["id_etapa" => $id_etapa];
             } else {
-                $vars += ["id_etapa" => 182];
+                $vars += ["id_etapa" => 178];
             }
 
             return view('rectificacion/solicitud', $vars);
         }
-
         session(['lastpage' => __FILE__]);
     }
 
