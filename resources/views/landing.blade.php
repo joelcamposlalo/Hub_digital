@@ -51,10 +51,10 @@
         <nav class="border" id="nav">
             <div class="container d-flex justify-content-between align-items-center">
                 <a href="https://www.zapopan.gob.mx/v3/" aria-label="Portal de Zapopan">
-                    <div class="logo d-flex align-items-center">                        
+                    <div class="logo d-flex align-items-center">
                         <!--<div class="circle background-color d-flex justify-content-center align-items-center">
                             <img src="{{asset('media/ilustrator/logo.png')}}" width="50rem" alt="logo">
-                        </div> -->                       
+                        </div> -->
                         <img src="{{asset('media/ilustrator/logo.png')}}" width="270rem" alt="logo" aria-hidden="true">
                         <!--<img class="ml-3 logo-title" src="{{asset('media/ilustrator/ZapopanCiudadNinos.png')}}" width="180rem" alt="logo del gobierno de zapopan" aria-hidden="true"> -->
                     </div>
@@ -367,7 +367,25 @@
                                 </div>
                             </div>
                         </a>
-                    </div>                    
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4 c-negro c-card">
+                        <div style="height: 17.5rem; padding-top: .5rem;" class="card card-hover-effect c-negro">
+                            <div class="card-body">
+                                <a href="{{url('cuenta')}}" style="text-decoration: none !important;" target="_blank" aria-label="Proteccion Municipal de Protección Civil y Bomberos">
+                                    <div style="height: 7.5rem" class="d-flex flex-column justify-content-center align-items-center">
+                                        <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" width="100px" alt="Proteccion Municipal de Protección Civil y Bomberos" aria-hidden="true">
+                                        <h3 class="font mt-3 text-center bold f-16 c-negro" aria-hidden="true">Protección Civil <br>y Bomberos</h3>
+                                        <br>
+                                    </div>
+                                    <div style="height: 9.375rem" class="c-negro" aria-hidden="true">
+                                        <ul class="ml-2 mt-2">
+                                            <li class="font f-14">Capacitaciones</li>
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         </section>
         <section id="registro">
@@ -1086,7 +1104,7 @@
                             <div class="col text-center">
                                 <small>Nos encantaria conocer cual fue tu experiencia, escribenos a <a href="#!">webmaster@zapopan.gob.mx</a></small>
                             </div>
-                            
+
                         </div>
                     </div>
         </footer>

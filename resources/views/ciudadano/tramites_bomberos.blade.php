@@ -47,7 +47,7 @@
                     <div class="card card-hover-effect">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ asset('media/ilustrator/proteccion_civil.png') }}" class="bombero_logo_card"
+                                <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
                                 <span class="badge badge-warning mt-4" aria-hidden="true">CAPACITACIONES</span>
                             </div>
