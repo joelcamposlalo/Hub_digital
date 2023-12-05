@@ -144,8 +144,6 @@ class Rectificacion_model extends Model
     //SP de el primer actualiza card
     public static function actualiza_solicitud($request)
     {
-
-
         $sql = "EXECUTE catastro_sp_vdigital_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?";

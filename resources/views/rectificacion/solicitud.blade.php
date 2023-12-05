@@ -488,7 +488,7 @@
                             }).then(function(response) {
 
                             if (parseInt(response.data) > 0) {
-                                console.log(response.data);
+
                                 $('#id_captura').val(response.data);
                                 $('#id_captura_2').val(response.data);
                                 $('#id_captura_3').val(response.data);
@@ -516,6 +516,7 @@
                         });
 
                     } else {
+                        console.log("En Actualiza");
                         formdata.append('id_captura', $('#id_captura').val());
                         var res = await axios.post(
                             '{{ url('rectificacion/actualiza_solicitud') }}',

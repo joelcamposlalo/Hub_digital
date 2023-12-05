@@ -349,6 +349,24 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4 c-negro c-card">
+                        <div style="height: 17.5rem; padding-top: .5rem;" class="card card-hover-effect c-negro">
+                            <div class="card-body">
+                                <a href="{{url('cuenta')}}" style="text-decoration: none !important;" target="_blank" aria-label="Proteccion Municipal de Protección Civil y Bomberos">
+                                    <div style="height: 7.5rem" class="d-flex flex-column justify-content-center align-items-center">
+                                        <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" width="100px" alt="Proteccion Municipal de Protección Civil y Bomberos" aria-hidden="true">
+                                        <h3 class="font mt-3 text-center bold f-16 c-negro" aria-hidden="true">Protección Civil <br>y Bomberos</h3>
+                                        <br>
+                                    </div>
+                                    <div style="height: 9.375rem" class="c-negro" aria-hidden="true">
+                                        <ul class="ml-2 mt-2">
+                                            <li class="font f-14">Capacitaciones</li>
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4 c-card">
                         <a href="https://www.zapopan.gob.mx/verificadores/" style="text-decoration: none;" target="_blank" aria-label="Registro Municipal">
                             <div style="height: 17.5rem;" class="card card-hover-effect c-negro">
@@ -368,24 +386,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4 c-negro c-card">
-                        <div style="height: 17.5rem; padding-top: .5rem;" class="card card-hover-effect c-negro">
-                            <div class="card-body">
-                                <a href="{{url('cuenta')}}" style="text-decoration: none !important;" target="_blank" aria-label="Proteccion Municipal de Protección Civil y Bomberos">
-                                    <div style="height: 7.5rem" class="d-flex flex-column justify-content-center align-items-center">
-                                        <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" width="100px" alt="Proteccion Municipal de Protección Civil y Bomberos" aria-hidden="true">
-                                        <h3 class="font mt-3 text-center bold f-16 c-negro" aria-hidden="true">Protección Civil <br>y Bomberos</h3>
-                                        <br>
-                                    </div>
-                                    <div style="height: 9.375rem" class="c-negro" aria-hidden="true">
-                                        <ul class="ml-2 mt-2">
-                                            <li class="font f-14">Capacitaciones</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
         </section>
         <section id="registro">
