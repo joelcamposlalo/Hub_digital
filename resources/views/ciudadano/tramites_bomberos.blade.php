@@ -19,7 +19,7 @@
                     <i class="fas fa-arrow-left"></i>
                 </button>
             </a>
-            <h1 class=" font m-0 bold c-primary-color">Coordinación municipal de <br>Protección Civil y Bomberos Zapopan
+            <h1 class=" font m-0 bold c-primary-color">Coordinación Municipal de <br>Protección Civil y Bomberos Zapopan
             </h1>
         </div>
         <br>

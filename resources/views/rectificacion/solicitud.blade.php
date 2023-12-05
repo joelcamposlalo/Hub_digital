@@ -428,25 +428,6 @@
             $('#form_3').parsley();
             $('#form_4').parsley();
 
-            //funcion para mostrar campo depdendiendo de su rectificacion
-            $(document).ready(function() {
-                // Oculta todos los campos al principio
-                $('.campo-especifico').hide();
-
-                // Maneja el cambio en el select
-                $('#tipo_rectificación').change(function() {
-                    // Oculta todos los campos al principio
-                    $('.campo-especifico').hide();
-
-                    // Muestra el campo correspondiente a la opción seleccionada
-                    var seleccion = $(this).val();
-                    $('#' + seleccion).show();
-                });
-
-                // Dispara el evento change manualmente para mostrar el campo correspondiente al valor inicial
-                $('#tipo_rectificación').trigger('change');
-            });
-
             $('#form_1').submit(async function(e) {
                 e.preventDefault();
 
@@ -472,22 +453,29 @@
                 var apellido_2 = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
-                var giro_comercio = $('.giro_comercio').val();
-                var razonSocial = $('.razonSocial').val();
-                var tipo_tramite = $('.tipo_tramite').val();
+                var domicilio_p = $('.domicilio_p').val();
+                var domicilio_n = $('.domicilio_n').val();
+                var entreCalle_1 = $('.entreCalle_1').val();
+                var entreCalle_2 = $('.entreCalle_2').val();
+                var numInt = $('.numInt').val();
+                var numExt = $('.numExt').val();
 
                 if (id_solicitud > 0) {
 
                     var formdata = new FormData();
 
+                    formdata.append('id_solicitud', id_solicitud);
                     formdata.append('nombre', nombre);
-                    formdata.append('telefono', telefono);
                     formdata.append('apellido_1', apellido_1);
                     formdata.append('apellido_2', apellido_2);
-                    formdata.append('correo', correo_propietario);
-                    formdata.append('giro_comercio', giro_comercio);
-                    formdata.append('razonSocial', razonSocial);
-                    formdata.append('id_solicitud', id_solicitud);
+                    formdata.append('telefono', telefono);
+                    formdata.append('correo_propietario', correo_propietario);
+                    formdata.append('domicilio_p', domicilio_p);
+                    formdata.append('domicilio_n', domicilio_n);
+                    formdata.append('entreCalle_1', entreCalle_1);
+                    formdata.append('entreCalle_2', entreCalle_2);
+                    formdata.append('numInt', numInt);
+                    formdata.append('numExt', numExt);
 
                     if ($('#id_captura').val() == "") {
 

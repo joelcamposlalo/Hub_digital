@@ -16,22 +16,19 @@ class Rectificacion_model extends Model
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
-            $result = Solicitudes_model::consulta_ultimo_folio(29);
+            $result = Solicitudes_model::consulta_ultimo_folio(30);
             $folio = $result[0]->folio;
         } else {
-            $id_revisor = Solicitudes_model::balanza(65);
             $folio = DB::table('solicitudes')->insertGetId([
                 'id_tramite' => 30,
                 'id_usuario' => session('id_usuario'),
                 'id_etapa'   =>  182,
                 'estatus'    =>  'pendiente',
-                //'id_revisor' =>  $id_revisor
             ], 'id_solicitud');
 
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
-                //   'id_revisor'    => $id_revisor,
                 'id_tramite'    => 30,
                 'id_etapa'      => 182,
                 'estatus'       => 'pendiente',
@@ -41,9 +38,8 @@ class Rectificacion_model extends Model
             DB::table('solicitudes_hist')
                 ->insert($data1);
         }
-
+        //dd($folio);
         session(['lastpage' => __FILE__]);
-
 
         return $folio;
     }
@@ -116,31 +112,27 @@ class Rectificacion_model extends Model
     public static function ingresa_solicitud($request)
     {
 
-        dd($request);
-        $sql = "EXECUTE proteccion_verificacion_inserta
-        ?,?,?,?,?,
-        ?,?,?,?,?";
 
-        if ($request->giro_comercio != null) {
-            $giro = $request->giro_comercio;
-        } else {
-            $giro = '-';
-        }
-        if ($request->razonSocial != null) {
-            $razon = $request->razonSocial;
-        } else {
-            $razon = '-';
-        }
+        $sql = "EXECUTE catastro_sp_vdigital_inserta
+        ?,?,?,?,?,
+        ?,?,?,?,?,
+        ?,?,?";
 
         $params = array(
+
             $request->nombre  ?? '-',
             $request->apellido_1 ?? '-',
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
-            $request->correo ?? '-',
-            $request->personaJ ?? '-',
-            $request->giro_comercio ?? '-',
-            $request->razonSocial ?? '-',
+            $request->correo_propietario ?? '-',
+
+            $request->domicilio_p ?? '-',
+            $request->domicilio_n ?? '-',
+            $request->entreCalle_1 ?? '-',
+            $request->entreCalle_2 ?? '-',
+            $request->numInt ?? '-',
+
+            $request->numExt ?? '-',
             session('id_usuario') ?? '-',
             intval($request->id_solicitud)  ?? 1,
         );
@@ -153,20 +145,11 @@ class Rectificacion_model extends Model
     public static function actualiza_solicitud($request)
     {
 
-        $sql = "EXECUTE proteccion_verificacion_actualiza
+
+        $sql = "EXECUTE catastro_sp_vdigital_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?";
 
-        if ($request->giro_comercio != null) {
-            $giro = $request->giro_comercio;
-        } else {
-            $giro = '-';
-        }
-        if ($request->razonSocial != null) {
-            $razon = $request->razonSocial;
-        } else {
-            $razon = '-';
-        }
 
 
         $params = array(
@@ -181,8 +164,6 @@ class Rectificacion_model extends Model
             session('id_usuario') ?? '-',
             $request->id_captura ?? '-',
         );
-
-
 
         return DB::connection('captura_op')->select($sql, $params);
     }
@@ -227,11 +208,7 @@ class Rectificacion_model extends Model
     public static function  actualiza_edo_act($id_captura, $ing)
     {
 
-
-        //$sql = "UPDATE capturaweb.dbo.PRECAPTURA SET edoact=1,ing=? where IdCaptura=?";
         $sql = "EXECUTE tw_ingresa_precaptura ?";
-
-
         $params = array($id_captura);
         $result = DB::connection('tramites_op')->select($sql, $params);
 

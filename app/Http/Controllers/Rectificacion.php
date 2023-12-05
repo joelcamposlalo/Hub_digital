@@ -29,7 +29,7 @@ class Rectificacion extends Controller
 
             $result = Solicitudes_model::consulta_solicitud(intval($folio));
 
-            if ($result) {
+            if ($result && count($result) > 0) {
                 $solicitud  = $result[0];
                 $id_etapa   = $solicitud->id_etapa;
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 1, $id_etapa);
@@ -38,14 +38,13 @@ class Rectificacion extends Controller
                 }
                 $vars += ["id_etapa" => $id_etapa];
             } else {
-                $vars += ["id_etapa" => 178];
+                $vars += ["id_etapa" => 182];
             }
 
             return view('rectificacion/solicitud', $vars);
         }
         session(['lastpage' => __FILE__]);
     }
-
 
 
     //Aqui esta la funcion general para ingreso de solicitud y el primer procedimiento
@@ -91,14 +90,14 @@ class Rectificacion extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 178, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 182, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
                     //Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 2, 'pendiente');
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 182, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
