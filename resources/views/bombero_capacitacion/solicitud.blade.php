@@ -665,7 +665,6 @@
             var wrapper1 = $("#participantes-container");
             var x = 1;
 
-
             document.getElementById("contador").value = x;
 
             $('#more').on('click', function(e) {
@@ -693,7 +692,17 @@
                 $(this).closest('.row').remove();
                 x--;
                 document.getElementById("contador").value = x;
+
+                // Renumerar los campos después de eliminar un participante
+                renumerarCampos();
             });
+
+            function renumerarCampos() {
+                var participantes = wrapper1.find('.participante');
+                participantes.each(function(index) {
+                    $(this).attr('name', 'participantes' + (index + 1));
+                });
+            }
         });
     </script>
 

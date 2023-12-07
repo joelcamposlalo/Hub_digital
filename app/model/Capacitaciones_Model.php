@@ -49,18 +49,22 @@ class Capacitaciones_Model extends Model
 
     public static function guardarParticipantes($request, $parti)
     {
+        
+        $parti = collect($parti)->filter()->toArray();
 
-        for ($i = 0; $i < count($parti); $i++) {
+        foreach ($parti as $participante) {
             DB::connection('captura_op')->table('Capacitaciones')->insert([
                 'tipoTramite' => 27,
                 'idCaptura'  => $request->id_captura,
                 'fecha'       => date('Y-d-m H:i:s'),
                 'id_solicitud' => $request->id_solicitud,
-                'Participantes' => $parti[$i]
+                'Participantes' => $participante
             ]);
         }
         return true;
     }
+
+
 
     public static function avanzarEtapa($request)
     {
@@ -90,7 +94,7 @@ class Capacitaciones_Model extends Model
 
         $params = array(
             $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
-            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero,$request->numeroint, $request->giro_comercio,
+            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->numeroint, $request->giro_comercio,
             $request->materia_de, $request->razonSocial, session('id_usuario'), $request->selector_pc, $request->id_solicitud,
 
         );
@@ -110,7 +114,7 @@ class Capacitaciones_Model extends Model
 
         $params = array(
             $request->domicilio,  $request->correo, $request->telefono, $request->colonia, $request->municipio,
-            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero,$request->numeroint, $request->giro_comercio,
+            $request->nombre, $request->apellido_uno, $request->apellido_dos, $request->numero, $request->numeroint, $request->giro_comercio,
             $request->materia_de, $request->razonSocial,  session('id_usuario'), $request->selector_pc, $request->id_captura,
 
         );
@@ -185,9 +189,8 @@ class Capacitaciones_Model extends Model
             'data_participantes' => $data_participantes,
         ];
 
-        Mail::to('oficialiapcyb@zapopan.gob.mx')
-             ->bcc('joel.campos@zapopan.gob.mx')
+        Mail::to('joel.campos@zapopan.gob.mx')
+            //  ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoCapacitacion($correoData));
     }
-    
 }

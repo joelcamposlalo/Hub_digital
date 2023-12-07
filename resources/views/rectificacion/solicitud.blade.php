@@ -785,7 +785,7 @@
             return archivosFaltantes;
         }
 
-        $('#form_1').submit(function(e) {
+        $('#form_2').submit(function(e) {
             if (archivosRequeridosSubidos() === 0) {
                 // Todos los documentos requeridos han sido subidos, permite avanzar
                 return true;
