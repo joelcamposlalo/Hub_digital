@@ -35,18 +35,15 @@ class Evaluacion_riesgos extends Controller
                 }
                 $vars += ["id_etapa" => $id_etapa];
             } else {
-                $vars += ["id_etapa" => 178];
+                $vars += ["id_etapa" => 172];
             }
 
-            return view('verificacion_tecnica_riesgos/solicitud', $vars);
+            return view('evaluacion_riesgos/solicitud', $vars);
         }
 
         session(['lastpage' => __FILE__]);
     }
 
-
-
-    //Aqui esta la funcion general para ingreso de solicitud y el primer procedimiento
 
     public function ingresa_solicitud(Request $request)
     {
@@ -69,7 +66,7 @@ class Evaluacion_riesgos extends Controller
                     echo json_encode("0");
                 } else {
                     //Cambia el status de la etapa
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj, null);
                     http_response_code(200);
                     echo json_encode($obj);
                 }
@@ -81,6 +78,9 @@ class Evaluacion_riesgos extends Controller
             http_response_code(503);
         }
     }
+
+
+
     //El procdimiento almacenado de actualizar el primer card
     public function actualiza_solicitud(Request $request)
     {               //SP de el actualizar informacion
@@ -89,14 +89,14 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 178, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
                     //Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 2, 'pendiente');
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
@@ -116,13 +116,13 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 179, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 179, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
@@ -165,6 +165,7 @@ class Evaluacion_riesgos extends Controller
             }
         }
         $document_urls = [];
+
         foreach ($_FILES as $key => $file) {
 
             if ($file["size"] > 0 && $file["name"] != "") {
@@ -194,13 +195,13 @@ class Evaluacion_riesgos extends Controller
                 );
             }
         }
-        Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 181,  'terminado', $id_captura, null);
+        Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 176,  'terminado', $id_captura, null);
 
         DB::connection('pgsql')->table('solicitudes_hist')->insert([
             'id_solicitud' => $request->id_solicitud,
             'id_usuario' => $request->id_usuario,
-            'id_tramite' => 29,
-            'id_etapa' => 181,
+            'id_tramite' => 28,
+            'id_etapa' => 176,
             'estatus' => "terminado",
             'id_usuario' => session('id_usuario'),
             'folio_externo' => $request->id_captura,
@@ -208,7 +209,7 @@ class Evaluacion_riesgos extends Controller
 
 
 
-        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Verificación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Evaluación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
         $titulo = "Notificación de Registro de Trámite en Línea";
         $correo = session('correo');
         Evaluacion_riesgos_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);

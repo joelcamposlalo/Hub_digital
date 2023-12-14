@@ -9,7 +9,7 @@ use App\model\Solicitudes_model;
 use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
 use Psy\VersionUpdater\IntervalChecker;
-use App\Mail\contactoVerificacion;
+use App\Mail\contactoEvaluacion;
 
 class Evaluacion_riesgos_model extends Model
 {
@@ -18,14 +18,13 @@ class Evaluacion_riesgos_model extends Model
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
-            $result = Solicitudes_model::consulta_ultimo_folio(29);
+            $result = Solicitudes_model::consulta_ultimo_folio(28);
             $folio = $result[0]->folio;
         } else {
-            $id_revisor = Solicitudes_model::balanza(65);
             $folio = DB::table('solicitudes')->insertGetId([
-                'id_tramite' => 29,
+                'id_tramite' => 28,
                 'id_usuario' => session('id_usuario'),
-                'id_etapa'   =>  177,
+                'id_etapa'   =>  172,
                 'estatus'    =>  'pendiente',
                 //'id_revisor' =>  $id_revisor
             ], 'id_solicitud');
@@ -34,8 +33,8 @@ class Evaluacion_riesgos_model extends Model
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
                 //   'id_revisor'    => $id_revisor,
-                'id_tramite'    => 29,
-                'id_etapa'      => 177,
+                'id_tramite'    => 28,
+                'id_etapa'      => 172,
                 'estatus'       => 'pendiente',
 
             ];
@@ -57,7 +56,7 @@ class Evaluacion_riesgos_model extends Model
             ->select('a.nombre as archivo', '*')
             ->where([
                 ['a.id_usuario', '=', session('id_usuario')],
-                ['c.id_tramite', '=', 29],
+                ['c.id_tramite', '=', 28],
                 ['a.id_solicitud', '=', $id_solicitud],
                 ['c.universal', '=', false],
                 ['c.id_documento', '>', 0]
@@ -70,7 +69,7 @@ class Evaluacion_riesgos_model extends Model
             WHERE c.id_cat_archivo = a.id_cat_archivo
             and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
-            ) and c.id_documento>0 and c.id_tramite = 29');
+            ) and c.id_documento>0 and c.id_tramite = 28');
 
         //$resv = Dictamen_finca_antigua_model::consulta_requisitos_validados($id_solicitud);
         $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
@@ -93,16 +92,6 @@ class Evaluacion_riesgos_model extends Model
         ];
     }
 
-    public static function consulta_requisitos_op($id_solicitud)
-    {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
-        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . "
-        and ao.estatus='validado'";
-        $result = DB::select($sql, [$id_solicitud]);
-        return $result;
-    }
 
     public static function consulta_requisitos_validados($id_solicitud)
     {
@@ -115,11 +104,22 @@ class Evaluacion_riesgos_model extends Model
         return $result;
     }
 
+    public static function consulta_requisitos_op($id_solicitud)
+    {
+        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
+        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
+        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . "
+        and ao.estatus='validado'";
+        $result = DB::select($sql, [$id_solicitud]);
+        return $result;
+    }
+
     public static function ingresa_solicitud($request)
     {
 
 
-        $sql = "EXECUTE proteccion_verificacion_inserta
+        $sql = "EXECUTE proteccion_evaluacion_inserta
         ?,?,?,?,?,
         ?,?,?,?,?";
 
@@ -139,7 +139,7 @@ class Evaluacion_riesgos_model extends Model
             $request->apellido_1 ?? '-',
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
-            $request->correo ?? '-',
+            $request->correo_propietario ?? '-',
             $request->personaJ ?? '-',
             $request->giro_comercio ?? '-',
             $request->razonSocial ?? '-',
@@ -155,7 +155,7 @@ class Evaluacion_riesgos_model extends Model
     public static function actualiza_solicitud($request)
     {
 
-        $sql = "EXECUTE proteccion_verificacion_actualiza
+        $sql = "EXECUTE proteccion_evaluacion_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?";
 
@@ -176,7 +176,7 @@ class Evaluacion_riesgos_model extends Model
             $request->apellido_1 ?? '-',
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
-            $request->correo ?? '-',
+            $request->correo_propietario ?? '-',
             $request->personaJ ?? '-',
             $request->giro_comercio ?? '-',
             $request->razonSocial ?? '-',
@@ -195,15 +195,16 @@ class Evaluacion_riesgos_model extends Model
     {
 
 
-        $sql = "EXECUTE proteccion_verificacion_actualiza_2
+        $sql = "EXECUTE proteccion_evaluacion_actualiza_2
         ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?,?,?,?";
 
         $params = array(
             $request->domicilio  ?? '-',
-            $request->numero  ?? '-',
             $request->entreCalle_1 ?? '-',
             $request->entreCalle_2 ?? '-',
+            $request->numExt  ?? '-',
+            $request->numInt  ?? '-',
             $request->colonia ?? '-',
             $request->municipio ?? '-',
             $request->problematica ?? '-',
@@ -222,30 +223,15 @@ class Evaluacion_riesgos_model extends Model
         WHERE c.id_cat_archivo = a.id_cat_archivo
         and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
-        ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 29');
+        ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 28');
         return $pendientes;
     }
-
-    public static function  actualiza_edo_act($id_captura, $ing)
-    {
-
-
-        //$sql = "UPDATE capturaweb.dbo.PRECAPTURA SET edoact=1,ing=? where IdCaptura=?";
-        $sql = "EXECUTE tw_ingresa_precaptura ?";
-
-
-        $params = array($id_captura);
-        $result = DB::connection('tramites_op')->select($sql, $params);
-
-        return $result;
-    }
-
 
     public static function inserta_requisito_op($id_documento, $filename, $extension, $id_solicitud)
     {
 
         $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE
-        c.id_documento = ' . $id_documento . ' and id_tramite=29');
+        c.id_documento = ' . $id_documento . ' and id_tramite=28');
         if ($res1) {
             $id_cat_archivo = $res1[0]->id_cat_archivo;
 
@@ -253,7 +239,7 @@ class Evaluacion_riesgos_model extends Model
             WHERE c.id_cat_archivo = a.id_cat_archivo
             and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
-            ) and c.id_tramite=29 and c.id_documento=' . $id_documento);
+            ) and c.id_tramite=28 and c.id_documento=' . $id_documento);
 
             if ($pend_file) {
 
@@ -278,12 +264,6 @@ class Evaluacion_riesgos_model extends Model
                         'extension'      => $extension,
                         'created_at'     => date('Y-m-d H:i:s'),
                     ]);
-
-                $arc = DB::table('archivos')->where('nombre', $filename)->first();
-
-                DB::table('archivosodt')->where([
-                    'id_archivo'     => $arc->id_archivo,
-                ])->delete();
             }
             return $affected;
         } else
@@ -303,9 +283,6 @@ class Evaluacion_riesgos_model extends Model
         $emailPropietario = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
 
-
-
-
         if ($emailPropietario) {
             if (DB::table('notificaciones')->insert($data)) {
                 Mail::to($emailPropietario)->bcc(env('MAIL_BCC'))->send(new notificacion($emailPropietario, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
@@ -322,9 +299,9 @@ class Evaluacion_riesgos_model extends Model
         $correoData = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first();
 
-
+        
         Mail::to('joel.campos@zapopan.gob.mx')
-            ->send(new contactoVerificacion($correoData, $document_urls));
+            ->send(new contactoEvaluacion($correoData, $document_urls));
 
         }
 }

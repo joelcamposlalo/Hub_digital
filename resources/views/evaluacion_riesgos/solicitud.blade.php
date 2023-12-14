@@ -12,7 +12,7 @@
 
 @section('container')
     <h1 class="text-muted text-center font m-0 bold c-primary-color">
-        Solicitud De Verificación Tecnica De Riesgos @isset($id_captura)
+        Solicitud De Evaluación Tecnica De Riesgos @isset($id_captura)
         @endisset
     </h1>
     <div class="font text-center ">Folio de trámite: {{ $folio }}</div>
@@ -22,8 +22,8 @@
             <div class="etapas d-flex justify-content-center align-items-center">
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa border @if ($id_etapa == 177) process @else active @endif d-flex justify-content-center align-items-center">
-                        @if ($id_etapa != 177 && $id_etapa != 177)
+                        class="etapa border @if ($id_etapa == 172) process @else active @endif d-flex justify-content-center align-items-center">
+                        @if ($id_etapa != 172 && $id_etapa != 172)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,16 +32,16 @@
                                 </svg>
                             </div>
                         @endif
-                        <small class="font f-15 bold @if ($id_etapa != 177) @else text-muted @endif">1</small>
+                        <small class="font f-15 bold @if ($id_etapa != 172) @else text-muted @endif">1</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10">Solicitud</small>
                 </div>
-                <div class="@if ($id_etapa != 177) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa != 172) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 178 || $id_etapa == 178) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 178 || $id_etapa == 178)
+                        class="etapa  @if ($id_etapa == 173 || $id_etapa == 173) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 173 || $id_etapa == 173)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -51,16 +51,16 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 178 || $id_etapa == 178) text-white @else text-muted @endif ">2</small>
+                            class="font f-15 bold @if ($id_etapa == 173 || $id_etapa == 178) text-white @else text-muted @endif ">2</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos del Solicitante</small>
                 </div>
-                <div class="@if ($id_etapa == 178 || $id_etapa == 178) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 173 || $id_etapa == 173) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 178) active @elseif($id_etapa == 178) process @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 178)
+                        class="etapa  @if ($id_etapa == 173) active @elseif($id_etapa == 178) process @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 173)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,15 +70,15 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 178) text-white @else text-muted @endif">3</small>
+                            class="font f-15 bold @if ($id_etapa == 174) text-white @else text-muted @endif">3</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos Para Verificación</small>
                 </div>
-                <div class="@if ($id_etapa == 178) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 174) line @else line_off @endif"></div>
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 179) active @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 179)
+                        class="etapa  @if ($id_etapa == 175) active @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 175)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 179) text-white @else text-muted @endif">4</small>
+                            class="font f-15 bold @if ($id_etapa == 175) text-white @else text-muted @endif">4</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Fotografías Adjuntas</small>
                 </div>
@@ -116,12 +116,12 @@
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="apellido_1"><small>Apellido Paterno</small></label>
+                                <label for="apellido_1"><small>Primer Apellido</small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
                                     class="ab-form background-color rounded border capitalize apellido_1" type="text">
                             </div>
                             <div class="col mt-2">
-                                <label for="apellido_2"><small>Apellido Materno</small></label>
+                                <label for="apellido_2"><small>Segundo Apellido</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize apellido_2" type="text">
                             </div>
@@ -135,8 +135,8 @@
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
-                                <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
-                                    value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
+                                <input name="correo_propietario" id="correo_propietario"
+                                    value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
                                     class="ab-form background-color rounded border correo_propietario" type="text">
                             </div>
                         </div>
@@ -196,15 +196,10 @@
                         <div class="row">
                         </div>
                         <div class="row">
-                            <div class="col-10 mt-2">
+                            <div class="col mt-2">
                                 <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
                                     class="ab-form background-color rounded border capitalize domicilio" type="text">
-                            </div>
-                            <div class="col-2 mt-2">
-                                <label for="numero"><small>Número</small></label>
-                                <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -221,6 +216,18 @@
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_2"
                                     type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="numExt"><small>Número Exterior</small></label>
+                                <input name="numExt" id="numExt" value="{{ isset($numExt) ? $numExt : '' }}"
+                                    class="ab-form background-color rounded border capitalize numExt" type="text">
+                            </div>
+                            <div class="col mt-2">
+                                <label for="numInt"><small>Número Interior</small></label>
+                                <input name="numInt" id="numInt" value="{{ isset($numInt) ? $numInt : '' }}"
+                                    class="ab-form background-color rounded border capitalize numInt" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -277,8 +284,8 @@
                         </h6>
 
                     </div>
-                    <form id="form_4" action="{{ url('verificacion_tecnica_riesgos/ingresa_tramite') }}"
-                        method="POST" enctype="multipart/form-data" data-parsley-validate>
+                    <form id="form_4" action="{{ url('evaluacion_riesgos/ingresa_tramite') }}" method="POST"
+                        enctype="multipart/form-data" data-parsley-validate>
                         <input name="id_captura" id="id_captura_3" type="hidden"
                             value="{{ isset($id_captura) ? $id_captura : '' }}">
                         @csrf
@@ -381,14 +388,14 @@
 
         $(document).ready(function() {
 
-            @if (isset($id_etapa) && $id_etapa == 178)
+            @if (isset($id_etapa) && $id_etapa == 174)
                 $('.card_1 .card-body').slideDown('slow');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 179)
+            @if (isset($id_etapa) && $id_etapa == 175)
                 $('.card_1 .card-body').slideUp('fast');
                 $('.card_2 .card-body').slideDown('slow');
                 $('.card_3 .card-body').slideUp('fast');
@@ -407,6 +414,7 @@
              * Menu de optiones en movil
              *
              */
+            console.log()
 
             $('#nav .menu').click(function() {
                 $('.menu-mobile').addClass('open');
@@ -469,20 +477,21 @@
                 var apellido_1 = $('.apellido_1').val();
                 var apellido_2 = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
-                var correo_propietario = $('.correo_propietario').val();
-                var giro_comercio = $('.giro_comercio').val();
+                var correo_propietario = $('#correo_propietario').val();
+                var personaJ = $('#personaJ').val();
                 var razonSocial = $('.razonSocial').val();
-                var tipo_tramite = $('.tipo_tramite').val();
+                var giro_comercio = $('.giro_comercio').val();
 
                 if (id_solicitud > 0) {
 
                     var formdata = new FormData();
 
                     formdata.append('nombre', nombre);
-                    formdata.append('telefono', telefono);
                     formdata.append('apellido_1', apellido_1);
                     formdata.append('apellido_2', apellido_2);
-                    formdata.append('correo', correo_propietario);
+                    formdata.append('telefono', telefono);
+                    formdata.append('correo_propietario', correo_propietario);
+                    formdata.append('personaJ', personaJ);
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
@@ -490,7 +499,7 @@
                     if ($('#id_captura').val() == "") {
 
                         var res = await axios.post(
-                            '{{ url('verificacion_tecnica_riesgos/ingresa_solicitud') }}',
+                            '{{ url('evaluacion_riesgos/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -529,7 +538,7 @@
                         //alert("MODIFICANDO SOLICITUD CON id captura  " + $('#id_captura').val());
                         formdata.append('id_captura', $('#id_captura').val());
                         var res = await axios.post(
-                            '{{ url('verificacion_tecnica_riesgos/actualiza_solicitud') }}',
+                            '{{ url('evaluacion_riesgos/actualiza_solicitud') }}',
 
                             formdata, {
                                 data: {
@@ -600,20 +609,22 @@
 
                 var id_solicitud = "{{ $folio }}";
                 var domicilio = $('.domicilio').val();
-                var numero = $('.numero').val();
                 var entreCalle_1 = $('.entreCalle_1').val();
                 var entreCalle_2 = $('.entreCalle_2').val();
+                var numExt = $('.numExt').val();
+                var numInt = $('.numInt').val();
                 var colonia = $('.colonia').val();
                 var municipio = $('.municipio').val();
                 var problematica = $('.problematica').val();
 
-                if ($('#id_captura').val() !== "") { // Solo se ejecutará si id_captura no está vacío
+                if ($('#id_captura').val() !== "") {
                     var formdata = new FormData();
 
                     formdata.append('domicilio', domicilio);
-                    formdata.append('numero', numero);
                     formdata.append('entreCalle_1', entreCalle_1);
                     formdata.append('entreCalle_2', entreCalle_2);
+                    formdata.append('numExt', numExt);
+                    formdata.append('numInt', numInt);
                     formdata.append('colonia', colonia);
                     formdata.append('municipio', municipio);
                     formdata.append('problematica', problematica);
@@ -621,7 +632,7 @@
                     formdata.append('id_captura', $('#id_captura').val());
 
                     var res = await axios.post(
-                        '{{ url('verificacion_tecnica_riesgos_2/actualiza_solicitud_2') }}',
+                        '{{ url('evaluacion_riesgos_2/actualiza_solicitud_2') }}',
                         formdata, {
                             data: {
                                 "_token": "{{ csrf_token() }}"
@@ -681,23 +692,6 @@
             });
         });
 
-        $('#form_4').submit(function(e) {
-            if (archivosRequeridosSubidos() === 0) {
-                // Todos los documentos requeridos han sido subidos, permite avanzar
-                return true;
-            } else {
-                // Faltan documentos requeridos, muestra una alerta
-                alert(
-                    `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir. Debes cargar todos los archivos`
-                    );
-                return false; // Evita que el formulario se envíe
-            }
-        });
-
-
-
-
-
         $('.file').change(function() {
 
             var file = event.target.files[0];
@@ -754,7 +748,6 @@
         });
 
 
-
         function fileIsRequired() {
 
             var countFileRequired = 0;
@@ -770,10 +763,6 @@
             return countFileRequired;
         }
 
-        function descarga_solicitud(element) {
-            $('#ref_sol').attr('href', '{{ env('SOLICITUD_MORD') }}' + '=' + $('#id_captura')
-                .val());
-        }
 
         function is_mobile() {
 
@@ -784,6 +773,7 @@
             }
 
         }
+
 
 
         function archivosRequeridosSubidos() {
@@ -798,6 +788,7 @@
 
             return archivosFaltantes;
         }
+
 
         $('#form_1').submit(function(e) {
             if (archivosRequeridosSubidos() === 0) {
@@ -828,6 +819,7 @@
 
             return archivosFaltantes;
         }
+
     </script>
 
 @endsection

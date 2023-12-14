@@ -320,8 +320,9 @@ class Verificacion_Riesgos_Model extends Model
         $correoData = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first();
 
-
-        Mail::to('joel.campos@zapopan.gob.mx')
+            Mail::to('joel.campos@zapopan.gob.mx')
+            // Mail::to('oficialiapcyb@zapopan.gob.mx')
+            // ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoVerificacion($correoData, $document_urls));
 
         }

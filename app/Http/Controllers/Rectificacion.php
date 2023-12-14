@@ -1,22 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\model\Solicitudes_model;
-use App\model\Predios_model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Rectificacion_model;
-use App\model\Dictamen_trazos_usos_model;
-use App\Mail\contactoVerificacion;
-use PDF;
 
 class Rectificacion extends Controller
 {
 
-    //Aqui ingresas la solicitud a la tabla solicitudes
     public function solicitud()
     {
 
@@ -43,25 +36,21 @@ class Rectificacion extends Controller
 
             return view('rectificacion/solicitud', $vars);
         }
+
         session(['lastpage' => __FILE__]);
     }
 
-
-    //Aqui esta la funcion general para ingreso de solicitud y el primer procedimiento
-
     public function ingresa_solicitud(Request $request)
     {
-        //Primer procedimiento almacenado
         if ($response = Rectificacion_model::ingresa_solicitud($request)) {
-            $obj = $response;
+            $obj = $response[0];
 
-
-            if ($obj > 0) {
+            if ($obj->idcaptura > 0) {
 
                 $request->request->add([
-                    'id_captura' => $obj
+                    'id_captura' => $obj->idcaptura
                 ]);
-                //Temas de la table solicitud cambia el estado y datos
+
                 $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $request->id_captura);
 
                 if ($rows == 0) {
@@ -69,35 +58,34 @@ class Rectificacion extends Controller
                     echo ($rows);
                     echo json_encode("0");
                 } else {
-                    //Cambia el status de la etapa
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 178, 'pendiente', $obj, null);
+
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 183, 'pendiente', $obj->idcaptura, null);
                     http_response_code(200);
-                    echo json_encode($obj);
+                    echo json_encode($obj->idcaptura);
                 }
             } else {
                 http_response_code(503);
-                echo json_encode($obj);
+                echo json_encode($obj->idcaptura);
             }
         } else {
             http_response_code(503);
         }
     }
-    //El procdimiento almacenado de actualizar el primer card
+
     public function actualiza_solicitud(Request $request)
-    {               //SP de el actualizar informacion
+    {
         if ($response = Rectificacion_model::actualiza_solicitud($request)) {
 
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 182, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 183, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
-                    //Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 2, 'pendiente');
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 182, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 183, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
@@ -111,19 +99,19 @@ class Rectificacion extends Controller
     }
 
     public function actualiza_solicitud_2(Request $request)
-    {               //SP de el actualizar informacion
+    {
         if ($response = Rectificacion_model::actualiza_solicitud_2($request)) {
 
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 179, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 183, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 179, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 183, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
@@ -195,13 +183,13 @@ class Rectificacion extends Controller
                 );
             }
         }
-        Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 181,  'terminado', $id_captura, null);
+        Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 184,  'terminado', $id_captura, null);
 
         DB::connection('pgsql')->table('solicitudes_hist')->insert([
             'id_solicitud' => $request->id_solicitud,
             'id_usuario' => $request->id_usuario,
-            'id_tramite' => 29,
-            'id_etapa' => 181,
+            'id_tramite' => 30,
+            'id_etapa' => 184,
             'estatus' => "terminado",
             'id_usuario' => session('id_usuario'),
             'folio_externo' => $request->id_captura,
@@ -209,7 +197,7 @@ class Rectificacion extends Controller
 
 
 
-        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Verificación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Trámite web de rectificación de nombre, domicilio y ubicación</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu rectificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
         $titulo = "Notificación de Registro de Trámite en Línea";
         $correo = session('correo');
         Rectificacion_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
@@ -217,4 +205,5 @@ class Rectificacion extends Controller
 
         return view('ciudadano/descanso');
     }
+
 }

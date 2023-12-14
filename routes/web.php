@@ -589,7 +589,10 @@ Route::post('verificacion_tecnica_riesgos/ingresa_tramite', 'Verificacion_Riesgo
 * Rutas para tramites de evaluación técnica de riesgos
 */
 Route::get('evaluacion_riesgos/solicitud', 'evaluacion_riesgos@solicitud')->middleware('ciudadano');
-
+Route::post('evaluacion_riesgos/ingresa_solicitud', 'Evaluacion_Riesgos@ingresa_solicitud')->middleware('ciudadano');
+Route::post('evaluacion_riesgos/actualiza_solicitud', 'Evaluacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
+Route::post('evaluacion_riesgos_2/actualiza_solicitud_2', 'Evaluacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
+Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
 
 
 /*

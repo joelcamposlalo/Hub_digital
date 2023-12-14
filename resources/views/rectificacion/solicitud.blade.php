@@ -23,8 +23,8 @@
             <div class="etapas d-flex justify-content-center align-items-center">
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa border @if ($id_etapa == 177) process @else active @endif d-flex justify-content-center align-items-center">
-                        @if ($id_etapa != 177 && $id_etapa != 177)
+                        class="etapa border @if ($id_etapa == 182) process @else active @endif d-flex justify-content-center align-items-center">
+                        @if ($id_etapa != 182 && $id_etapa != 182)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -33,16 +33,16 @@
                                 </svg>
                             </div>
                         @endif
-                        <small class="font f-15 bold @if ($id_etapa != 177) @else text-muted @endif">1</small>
+                        <small class="font f-15 bold @if ($id_etapa != 182) @else text-muted @endif">1</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10">Solicitud</small>
                 </div>
-                <div class="@if ($id_etapa != 177) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa != 182) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 178 || $id_etapa == 178) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 178 || $id_etapa == 178)
+                        class="etapa  @if ($id_etapa == 183 || $id_etapa == 183) active text-white @elseif($id_etapa == 66 || $id_etapa == 67 || $id_etapa == 72) process @endif  border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 183 || $id_etapa == 183)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -52,16 +52,16 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 178 || $id_etapa == 178) text-white @else text-muted @endif ">2</small>
+                            class="font f-15 bold @if ($id_etapa == 183 || $id_etapa == 183) text-white @else text-muted @endif ">2</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos del Solicitante</small>
                 </div>
-                <div class="@if ($id_etapa == 178 || $id_etapa == 178) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 183 || $id_etapa == 183) line @else line_off @endif"></div>
                 <div style="width: 60px; transform: translateY(7px);"
                     class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 178) active @elseif($id_etapa == 178) process @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 178)
+                        class="etapa  @if ($id_etapa == 183) active @elseif($id_etapa == 183) process @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 183)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -71,15 +71,15 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 178) text-white @else text-muted @endif">3</small>
+                            class="font f-15 bold @if ($id_etapa == 183) text-white @else text-muted @endif">3</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Datos Para Verificación</small>
                 </div>
-                <div class="@if ($id_etapa == 178) line @else line_off @endif"></div>
+                <div class="@if ($id_etapa == 183) line @else line_off @endif"></div>
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa  @if ($id_etapa == 179) active @endif border d-flex justify-content-center align-items-center">
-                        @if ($id_etapa == 179)
+                        class="etapa  @if ($id_etapa == 184) active @endif border d-flex justify-content-center align-items-center">
+                        @if ($id_etapa == 184)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +89,7 @@
                             </div>
                         @endif
                         <small
-                            class="font f-15 bold @if ($id_etapa == 179) text-white @else text-muted @endif">4</small>
+                            class="font f-15 bold @if ($id_etapa == 184) text-white @else text-muted @endif">4</small>
                     </div>
                     <small class="mt-1 mb-1 font c-carbon f-10 text-center">Fotografías Adjuntas</small>
                 </div>
@@ -112,17 +112,17 @@
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text">
+                                    class="ab-form background-color rounded border capitalize nombre" type="text" data-parsley-validate="required">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="apellido_1"><small>Apellido Paterno</small></label>
+                                <label for="apellido_1"><small>Primer Apellido </small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
                                     class="ab-form background-color rounded border capitalize apellido_1" type="text">
                             </div>
                             <div class="col mt-2">
-                                <label for="apellido_2"><small>Apellido Materno</small></label>
+                                <label for="apellido_2"><small>Segundo Apellido</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize apellido_2" type="text">
                             </div>
@@ -196,6 +196,7 @@
                                     value="{{ isset($id_captura) ? $id_captura : '' }}">
                                 <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
                                     type="submit">Continuar</button>
+
                             </div>
                         </div>
                     </form>
@@ -220,28 +221,28 @@
                             <div class="col mt-2">
                                 <label for="numero_cuenta"><small>Número de cuenta Predial</small></label>
                                 <input name="numero_cuenta" id="numero_cuenta"
-                                    value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
+                                    value="{{ isset($nmero_cuenta) ? $numero_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize numero_cuenta"
                                     type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="numero_cuenta"><small>Nombre en cuenta Predial</small></label>
-                                <input name="numero_cuenta" id="numero_cuenta"
-                                    value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero_cuenta"
+                                <label for="nombre_cuenta"><small>Nombre completo en cuenta Predial</small></label>
+                                <input name="nombre_cuenta" id="nombre_cuenta"
+                                    value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
+                                    class="ab-form background-color rounded border capitalize nombre_cuenta"
                                     type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
-                                <label for="tipo_rectificación"><small>Tipo de rectificación</small></label>
-                                <select name="tipo_rectificación" id="tipo_rectificación"
-                                    class="ab-form background-color rounded border tipo_rectificación">
-                                    <option value="r_nombre">Rectificación de nombre</option>
-                                    <option value="r_notificacion">Rectificación de notificación</option>
-                                    <option value="r_ubicacion">Rectificación de ubicación</option>
+                                <label for="tipo_rectificacion"><small>Tipo de rectificación</small></label>
+                                <select name="tipo_rectificacion" id="tipo_rectificacion"
+                                    class="ab-form background-color rounded border tipo_rectificacion">
+                                    <option value="Rectificación de nombre">Rectificación de nombre</option>
+                                    <option value="Rectificación de notificación">Rectificación de notificación</option>
+                                    <option value="Rectificación de ubicación">Rectificación de ubicación</option>
                                 </select>
                             </div>
                         </div>
@@ -305,8 +306,8 @@
                         </h6>
 
                     </div>
-                    <form id="form_4" action="{{ url('verificacion_tecnica_riesgos/ingresa_tramite') }}"
-                        method="POST" enctype="multipart/form-data" data-parsley-validate>
+                    <form id="form_4" action="{{ url('rectificacion/ingresa_tramite') }}" method="POST"
+                        enctype="multipart/form-data" data-parsley-validate>
                         <input name="id_captura" id="id_captura_3" type="hidden"
                             value="{{ isset($id_captura) ? $id_captura : '' }}">
                         @csrf
@@ -396,14 +397,14 @@
 
         $(document).ready(function() {
 
-            @if (isset($id_etapa) && $id_etapa == 178)
+            @if (isset($id_etapa) && $id_etapa == 182)
                 $('.card_1 .card-body').slideDown('slow');
                 $('.card_2 .card-body').slideUp('fast');
                 $('.card_3 .card-body').slideUp('fast');
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-            @if (isset($id_etapa) && $id_etapa == 179)
+            @if (isset($id_etapa) && $id_etapa == 183)
                 $('.card_1 .card-body').slideUp('fast');
                 $('.card_2 .card-body').slideDown('slow');
                 $('.card_3 .card-body').slideUp('fast');
@@ -443,7 +444,7 @@
 
             $('#form_1').submit(async function(e) {
 
-                $('.btn_inserta').prop('disabled', true);
+                $('.btn_inserta').prop('enabled', true);
 
                 e.preventDefault();
 
@@ -516,7 +517,7 @@
                         });
 
                     } else {
-                        console.log("En Actualiza");
+
                         formdata.append('id_captura', $('#id_captura').val());
                         var res = await axios.post(
                             '{{ url('rectificacion/actualiza_solicitud') }}',
@@ -589,24 +590,24 @@
                 e.preventDefault();
 
                 var id_solicitud = "{{ $folio }}";
-                var domicilio = $('.domicilio').val();
-                var numero = $('.numero').val();
-                var entreCalle_1 = $('.entreCalle_1').val();
-                var entreCalle_2 = $('.entreCalle_2').val();
-                var colonia = $('.colonia').val();
-                var municipio = $('.municipio').val();
-                var problematica = $('.problematica').val();
+                var numero_cuenta = $('.numero_cuenta').val();
+                var nombre_cuenta = $('.nombre_cuenta').val();
+                var tipo_rectificacion = $('.tipo_rectificacion').val();
+                var rc_nombre = $('.rc_nombre').val();
+                var rc_notificacion = $('.rc_notificacion').val();
+                var rc_ubicacion = $('.rc_ubicacion').val();
+
+
 
                 if ($('#id_captura').val() !== "") {
                     var formdata = new FormData();
 
-                    formdata.append('domicilio', domicilio);
-                    formdata.append('numero', numero);
-                    formdata.append('entreCalle_1', entreCalle_1);
-                    formdata.append('entreCalle_2', entreCalle_2);
-                    formdata.append('colonia', colonia);
-                    formdata.append('municipio', municipio);
-                    formdata.append('problematica', problematica);
+                    formdata.append('numero_cuenta', numero_cuenta);
+                    formdata.append('nombre_cuenta', nombre_cuenta);
+                    formdata.append('tipo_rectificacion', tipo_rectificacion);
+                    formdata.append('rc_nombre', rc_nombre);
+                    formdata.append('rc_notificacion', rc_notificacion);
+                    formdata.append('rc_ubicacion', rc_ubicacion);
                     formdata.append('id_solicitud', id_solicitud);
                     formdata.append('id_captura', $('#id_captura').val());
 
@@ -785,7 +786,7 @@
             return archivosFaltantes;
         }
 
-        $('#form_2').submit(function(e) {
+        $('#form_3').submit(function(e) {
             if (archivosRequeridosSubidos() === 0) {
                 // Todos los documentos requeridos han sido subidos, permite avanzar
                 return true;
@@ -814,6 +815,31 @@
 
             return archivosFaltantes;
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Función para mostrar u ocultar campos según la opción seleccionada
+            function toggleCamposEspecificos() {
+                var tipoRectificacion = $('#tipo_rectificacion').val();
+
+                // Ocultar todos los campos específicos
+                $('.campo-especifico').hide();
+
+                // Mostrar solo el campo de "Nombre correcto" si es la opción seleccionada
+                if (tipoRectificacion === 'Rectificación de nombre') {
+                    $('#r_nombre').show();
+                }
+            }
+
+            // Manejar el cambio en el campo "Tipo de rectificación"
+            $('#tipo_rectificacion').on('change', function() {
+                toggleCamposEspecificos();
+            });
+
+            // Llamar a la función al cargar la página para asegurarse de que los campos estén configurados correctamente
+            toggleCamposEspecificos();
+        });
     </script>
 
 @endsection
