@@ -202,7 +202,7 @@ class Rectificacion extends Controller
         $correo = session('correo');
         Rectificacion_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
         Rectificacion_model::sendMail($request, $document_urls);
-
+        dd($request);
         return view('ciudadano/descanso');
     }
 

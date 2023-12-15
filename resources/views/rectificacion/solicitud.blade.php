@@ -112,7 +112,8 @@
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text" data-parsley-validate="required">
+                                    class="ab-form background-color rounded border capitalize nombre" type="text"
+                                    data-parsley-validate="required">
                             </div>
                         </div>
                         <div class="row">
@@ -818,28 +819,21 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-            // Función para mostrar u ocultar campos según la opción seleccionada
-            function toggleCamposEspecificos() {
-                var tipoRectificacion = $('#tipo_rectificacion').val();
+        function toggleCamposEspecificos() {
+            var tipoRectificacion = $('#tipo_rectificacion').val();
 
-                // Ocultar todos los campos específicos
-                $('.campo-especifico').hide();
+            // Deshabilitar todos los campos específicos
+            $('.campo-especifico input').prop('disabled', true);
 
-                // Mostrar solo el campo de "Nombre correcto" si es la opción seleccionada
-                if (tipoRectificacion === 'Rectificación de nombre') {
-                    $('#r_nombre').show();
-                }
+            // Habilitar solo el campo correspondiente a la opción seleccionada
+            if (tipoRectificacion === 'Rectificación de nombre') {
+                $('#r_nombre input').prop('disabled', false);
+            } else if (tipoRectificacion === 'Rectificación de notificación') {
+                $('#r_notificacion input').prop('disabled', false);
+            } else if (tipoRectificacion === 'Rectificación de ubicación') {
+                $('#r_ubicacion input').prop('disabled', false);
             }
-
-            // Manejar el cambio en el campo "Tipo de rectificación"
-            $('#tipo_rectificacion').on('change', function() {
-                toggleCamposEspecificos();
-            });
-
-            // Llamar a la función al cargar la página para asegurarse de que los campos estén configurados correctamente
-            toggleCamposEspecificos();
-        });
+        }
     </script>
 
 @endsection

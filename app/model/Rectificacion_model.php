@@ -149,15 +149,16 @@ class Rectificacion_model extends Model
         ?,?,?";
 
         $params = array(
-            $request->numero_cuenta  ?? '-',
-            $request->nombre_cuenta ?? '-',
-            $request->tipo_rectificacion ?? '-',
-            $request->rc_nombre ?? '-',
-            $request->rc_notificacion ?? '-',
-            $request->rc_ubicacion ?? '-',
-            session('id_usuario') ?? '-',
-            $request->id_captura ?? '-',
+            $request->numero_cuenta  ?? null,
+            $request->nombre_cuenta ?? null,
+            $request->tipo_rectificacion ?? null,
+            $request->rc_nombre ?? null,
+            $request->rc_notificacion ?? null,
+            $request->rc_ubicacion ?? null,
+            session('id_usuario') ?? null,
+            $request->id_captura ?? null,
         );
+
 
         return DB::connection('captura_op')->select($sql, $params);
     }
