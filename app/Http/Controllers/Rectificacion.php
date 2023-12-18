@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\model\Solicitudes_model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Rectificacion_model;
+use Illuminate\Support\Carbon;
 
 class Rectificacion extends Controller
 {
@@ -202,8 +204,8 @@ class Rectificacion extends Controller
         $correo = session('correo');
         Rectificacion_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
         Rectificacion_model::sendMail($request, $document_urls);
-        
+        Rectificacion_model::insert_Seg($request);
+
         return view('ciudadano/descanso');
     }
-
 }

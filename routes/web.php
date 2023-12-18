@@ -595,6 +595,7 @@ Route::post('evaluacion_riesgos_2/actualiza_solicitud_2', 'Evaluacion_Riesgos@ac
 Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
 
 
+
 /*
 * Rutas para tramites de rectificación de nombre
 */

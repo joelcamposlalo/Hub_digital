@@ -253,8 +253,21 @@ class Rectificacion_model extends Model
             ->where("IdCaptura", $request->id_captura)->first();
 
 
-            Mail::to('joel.campos@zapopan.gob.mx')
+        Mail::to('joel.campos@zapopan.gob.mx')
             ->send(new contactoRectificacion($correoData, $document_urls));
-        }
+    }
 
+    public static function insert_Seg($request)
+    {
+        $sql = "EXECUTE sp_InsertarPreCapturaSeg ?, ?, ?";
+
+        $idPrecaptura = $request->id_captura ?? 0;
+        $observaciones = 'Ingreso de trámite de Rectificaciones en Vdigital con el folio ' .$idPrecaptura;
+        $usuario = session('id_usuario');
+
+        DB::connection('captura_op')->statement($sql, [$idPrecaptura, $observaciones, $usuario]);
+
+
+        return "Procedimiento almacenado ejecutado con éxito";
+    }
 }

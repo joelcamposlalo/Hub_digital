@@ -147,7 +147,7 @@
                                 <label for="domicilio_p"><small>Domicilio en recibo Predial</small></label>
                                 <input name="domicilio_p" id="domicilio_p"
                                     value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio_p" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border domicilio_p" type="text" data-parsley-validate="true" data-parsley-required="true">
                             </div>
                         </div>
                         <div class="row">
