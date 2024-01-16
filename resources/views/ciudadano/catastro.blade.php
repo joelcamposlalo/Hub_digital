@@ -131,7 +131,7 @@
                             </div>
                             <div style="height: 150px"
                                 class="d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">Trámite web de rectificación de nombre, domicilio y
+                                <small class="text-center mt-2">Trámite web de rectificación de domicilio o
                                     ubicación</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
@@ -431,3 +431,6 @@
         });
     </script>
 @endsection
+
+
+

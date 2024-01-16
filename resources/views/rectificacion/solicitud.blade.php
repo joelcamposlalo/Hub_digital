@@ -12,7 +12,7 @@
 
 @section('container')
     <h1 class="text-muted text-center font m-0 bold c-primary-color">
-        Trámite web de rectificación de nombre, domicilio y ubicación
+        Trámite web de rectificación de domicilio o ubicación
         @isset($id_captura)
         @endisset
     </h1>
@@ -241,7 +241,6 @@
                                 <label for="tipo_rectificacion"><small>Tipo de rectificación</small></label>
                                 <select name="tipo_rectificacion" id="tipo_rectificacion"
                                     class="ab-form background-color rounded border tipo_rectificacion">
-                                    <option value="Rectificación de nombre">Rectificación de nombre</option>
                                     <option value="Rectificación de notificación">Rectificación de notificación</option>
                                     <option value="Rectificación de ubicación">Rectificación de ubicación</option>
                                 </select>
