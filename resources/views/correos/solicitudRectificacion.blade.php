@@ -223,7 +223,7 @@
                                                                                         <br>
                                                                                         Trámite web de rectificación
                                                                                         <br>
-                                                                                        de nombre, domicilio y ubicación
+                                                                                        de domicilio o ubicación
                                                                                     </h1>
                                                                                 </td>
                                                                             </tr>

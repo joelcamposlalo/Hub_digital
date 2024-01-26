@@ -113,33 +113,33 @@
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre" type="text"
-                                    data-parsley-validate="true" data-parsley-required="true">
+                                    >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="apellido_1"><small>Primer Apellido </small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" >
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_2"><small>Segundo Apellido</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" data-parsley-validate="true" data-parsley-required="false">
+                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-2">
                                 <label for="telefono"><small>Teléfono</small></label>
                                 <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
-                                    class="ab-form background-color rounded border capitalize telefono" type="tel" data-parsley-validate="true" data-parsley-required="true"
+                                    class="ab-form background-color rounded border capitalize telefono" type="tel"
                                     data-parsley-length="[10, 10]">
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border correo_propietario" type="text" >
                             </div>
                         </div>
                         <div class="row">
@@ -147,7 +147,7 @@
                                 <label for="domicilio_p"><small>Domicilio en recibo Predial</small></label>
                                 <input name="domicilio_p" id="domicilio_p"
                                     value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
-                                    class="ab-form background-color rounded border domicilio_p" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border domicilio_p" type="text" >
                             </div>
                         </div>
                         <div class="row">
@@ -155,7 +155,15 @@
                                 <label for="domicilio_n"><small>Domicilio de notificaciones</small></label>
                                 <input name="domicilio_n" id="domicilio_n"
                                     value="{{ isset($domicilio_n) ? $domicilio_n : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio_n" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border capitalize domicilio_n" type="text" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-2">
+                                <label for="colonia"><small>Colonia</small></label>
+                                <input name="colonia" id="colonia"
+                                    value="{{ isset($colonia) ? $colonia : '' }}"
+                                    class="ab-form background-color rounded border capitalize colonia" type="text" >
                             </div>
                         </div>
                         <div class="row">
@@ -164,26 +172,26 @@
                                 <input name="entreCalle_1" id="entreCalle_1"
                                     value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_1"
-                                    type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    type="text" >
                             </div>
                             <div class="col mt-2">
                                 <label for="entreCalle_2"><small>Entre Calle 2</small></label>
                                 <input name="entreCalle_2" id="entreCalle_2"
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_2"
-                                    type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    type="text" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="numInt"><small>Número Exterior</small></label>
                                 <input name="numInt" id="numInt" value="{{ isset($numInt) ? $numInt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numInt" type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    class="ab-form background-color rounded border capitalize numInt" type="text" >
                             </div>
                             <div class="col mt-2">
                                 <label for="numExt"><small>Número Interior</small></label>
                                 <input name="numExt" id="numExt" value="{{ isset($numExt) ? $numExt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numExt" type="text" data-parsley-validate="true" data-parsley-required="false">
+                                    class="ab-form background-color rounded border capitalize numExt" type="text" data-parsley-validate="" data-parsley-required="false">
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -224,7 +232,7 @@
                                 <input name="numero_cuenta" id="numero_cuenta"
                                     value="{{ isset($nmero_cuenta) ? $numero_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize numero_cuenta"
-                                    type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    type="text" >
                             </div>
                         </div>
                         <div class="row">
@@ -233,7 +241,7 @@
                                 <input name="nombre_cuenta" id="nombre_cuenta"
                                     value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre_cuenta"
-                                    type="text" data-parsley-validate="true" data-parsley-required="true">
+                                    type="text" >
                             </div>
                         </div>
                         <div class="row">
@@ -456,6 +464,7 @@
                 var correo_propietario = $('.correo_propietario').val();
                 var domicilio_p = $('.domicilio_p').val();
                 var domicilio_n = $('.domicilio_n').val();
+                var colonia = $('.colonia').val();
                 var entreCalle_1 = $('.entreCalle_1').val();
                 var entreCalle_2 = $('.entreCalle_2').val();
                 var numInt = $('.numInt').val();
@@ -473,10 +482,12 @@
                     formdata.append('correo_propietario', correo_propietario);
                     formdata.append('domicilio_p', domicilio_p);
                     formdata.append('domicilio_n', domicilio_n);
+                    formdata.append('colonia', colonia);
                     formdata.append('entreCalle_1', entreCalle_1);
                     formdata.append('entreCalle_2', entreCalle_2);
                     formdata.append('numInt', numInt);
                     formdata.append('numExt', numExt);
+
 
                     if ($('#id_captura').val() == "") {
 

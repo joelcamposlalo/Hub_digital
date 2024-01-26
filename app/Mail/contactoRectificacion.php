@@ -34,7 +34,7 @@ class contactoRectificacion extends Mailable
     public function build()
     {
         return $this->view('correos.solicitudRectificacion')
-            ->subject('Solicitud para Rectificación de Trámite web de rectificación de nombre, domicilio y ubicación')
+            ->subject('Solicitud para Trámite web de rectificación de domicilio y ubicación')
             ->with([
                 'correoData' => $this->correoData,
                 'document_urls' => $this->document_urls,

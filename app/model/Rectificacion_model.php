@@ -100,12 +100,15 @@ class Rectificacion_model extends Model
             $request->correo_propietario ?? '-',
             $request->domicilio_p ?? '-',
             $request->domicilio_n ?? '-',
+            $request->colonia ?? '-',
             $request->entreCalle_1 ?? '-',
             $request->entreCalle_2 ?? '-',
             $request->numInt ?? '-',
             $request->numExt ?? '-',
             session('id_usuario') ?? '-',
             intval($request->id_solicitud)  ?? 1,
+
+        
         );
 
         $result = DB::connection('captura_op')->select($sql, $params);
@@ -117,10 +120,11 @@ class Rectificacion_model extends Model
     public static function actualiza_solicitud($request)
     {
 
+
         $sql = "EXECUTE catastro_sp_vdigital_actualiza
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?";
+        ?,?,?,?";
 
         $params = array(
             $request->nombre  ?? '-',
@@ -137,6 +141,8 @@ class Rectificacion_model extends Model
             session('id_usuario') ?? '-',
             $request->id_captura ?? '-',
         );
+
+        exit;
 
         return DB::connection('captura_op')->select($sql, $params);
     }
@@ -264,10 +270,7 @@ class Rectificacion_model extends Model
         $idPrecaptura = $request->id_captura ?? 0;
         $observaciones = 'Ingreso de trámite de Rectificaciones en Vdigital con el folio ' .$idPrecaptura;
         $usuario = session('id_usuario');
-
         DB::connection('captura_op')->statement($sql, [$idPrecaptura, $observaciones, $usuario]);
-
-
         return "Procedimiento almacenado ejecutado con éxito";
     }
 }
