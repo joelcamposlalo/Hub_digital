@@ -90,7 +90,7 @@ class Rectificacion_model extends Model
         $sql = "EXECUTE catastro_sp_vdigital_inserta
         ?,?,?,?,?,
         ?,?,?,?,?,
-        ?,?,?";
+        ?,?,?,?";
 
         $params = array(
             $request->nombre  ?? '-',
@@ -108,7 +108,7 @@ class Rectificacion_model extends Model
             session('id_usuario') ?? '-',
             intval($request->id_solicitud)  ?? 1,
 
-        
+
         );
 
         $result = DB::connection('captura_op')->select($sql, $params);
@@ -134,6 +134,7 @@ class Rectificacion_model extends Model
             $request->correo_propietario ?? '-',
             $request->domicilio_p ?? '-',
             $request->domicilio_n ?? '-',
+            $request->colonia ?? '-',
             $request->entreCalle_1 ?? '-',
             $request->entreCalle_2 ?? '-',
             $request->numInt ?? '-',
@@ -142,7 +143,7 @@ class Rectificacion_model extends Model
             $request->id_captura ?? '-',
         );
 
-        exit;
+
 
         return DB::connection('captura_op')->select($sql, $params);
     }
@@ -152,13 +153,12 @@ class Rectificacion_model extends Model
 
         $sql = "EXECUTE catastro_sp_vdigital_actualiza_2
         ?,?,?,?,?,
-        ?,?,?";
+        ?,?";
 
         $params = array(
             $request->numero_cuenta  ?? null,
             $request->nombre_cuenta ?? null,
             $request->tipo_rectificacion ?? null,
-            $request->rc_nombre ?? null,
             $request->rc_notificacion ?? null,
             $request->rc_ubicacion ?? null,
             session('id_usuario') ?? null,

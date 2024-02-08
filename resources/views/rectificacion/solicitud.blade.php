@@ -97,7 +97,6 @@
         </div>
     </div>
 
-
     <div class="row position-relative">
         <div class="col mt-4" id="top_1">
             <div class="card  shadow-sm card_1 rounded border-none">
@@ -112,20 +111,19 @@
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text"
-                                    >
+                                    class="ab-form background-color rounded border capitalize nombre" type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="apellido_1"><small>Primer Apellido </small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" >
+                                    class="ab-form background-color rounded border capitalize apellido_1" type="text">
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_2"><small>Segundo Apellido</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" >
+                                    class="ab-form background-color rounded border capitalize apellido_2" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -139,7 +137,7 @@
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario" type="text" >
+                                    class="ab-form background-color rounded border correo_propietario" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -147,7 +145,7 @@
                                 <label for="domicilio_p"><small>Domicilio en recibo Predial</small></label>
                                 <input name="domicilio_p" id="domicilio_p"
                                     value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
-                                    class="ab-form background-color rounded border domicilio_p" type="text" >
+                                    class="ab-form background-color rounded border domicilio_p" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -155,15 +153,14 @@
                                 <label for="domicilio_n"><small>Domicilio de notificaciones</small></label>
                                 <input name="domicilio_n" id="domicilio_n"
                                     value="{{ isset($domicilio_n) ? $domicilio_n : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio_n" type="text" >
+                                    class="ab-form background-color rounded border capitalize domicilio_n" type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="colonia"><small>Colonia</small></label>
-                                <input name="colonia" id="colonia"
-                                    value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text" >
+                                <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
+                                    class="ab-form background-color rounded border capitalize colonia" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -172,26 +169,27 @@
                                 <input name="entreCalle_1" id="entreCalle_1"
                                     value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_1"
-                                    type="text" >
+                                    type="text">
                             </div>
                             <div class="col mt-2">
                                 <label for="entreCalle_2"><small>Entre Calle 2</small></label>
                                 <input name="entreCalle_2" id="entreCalle_2"
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_2"
-                                    type="text" >
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="numInt"><small>Número Exterior</small></label>
                                 <input name="numInt" id="numInt" value="{{ isset($numInt) ? $numInt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numInt" type="text" >
+                                    class="ab-form background-color rounded border capitalize numInt" type="text">
                             </div>
                             <div class="col mt-2">
                                 <label for="numExt"><small>Número Interior</small></label>
                                 <input name="numExt" id="numExt" value="{{ isset($numExt) ? $numExt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numExt" type="text" data-parsley-validate="" data-parsley-required="false">
+                                    class="ab-form background-color rounded border capitalize numExt" type="text"
+                                    data-parsley-validate="" data-parsley-required="false">
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -232,7 +230,7 @@
                                 <input name="numero_cuenta" id="numero_cuenta"
                                     value="{{ isset($nmero_cuenta) ? $numero_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize numero_cuenta"
-                                    type="text" >
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -241,7 +239,7 @@
                                 <input name="nombre_cuenta" id="nombre_cuenta"
                                     value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize nombre_cuenta"
-                                    type="text" >
+                                    type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -347,12 +345,14 @@
                                                 class="ab-btn-effect bold font btn-file">
                                                 <small class="font bold f-10 progreso">Subir Archivo</small>
                                                 <input class="file" id="file_{{ $key }}" type="file"
-                                                    name="file_{{ $file->id_documento }}" data-upload="0" required
+                                                    name="file_{{ $file->id_documento }}" data-upload="0"
+                                                    @if ($file->obligatorio == 1) required @endif
                                                     data-parsley-required-message="Este archivo es obligatorio">
                                             </label>
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </table>
                         </div>
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
@@ -604,7 +604,6 @@
                 var numero_cuenta = $('.numero_cuenta').val();
                 var nombre_cuenta = $('.nombre_cuenta').val();
                 var tipo_rectificacion = $('.tipo_rectificacion').val();
-                var rc_nombre = $('.rc_nombre').val();
                 var rc_notificacion = $('.rc_notificacion').val();
                 var rc_ubicacion = $('.rc_ubicacion').val();
 
@@ -616,7 +615,6 @@
                     formdata.append('numero_cuenta', numero_cuenta);
                     formdata.append('nombre_cuenta', nombre_cuenta);
                     formdata.append('tipo_rectificacion', tipo_rectificacion);
-                    formdata.append('rc_nombre', rc_nombre);
                     formdata.append('rc_notificacion', rc_notificacion);
                     formdata.append('rc_ubicacion', rc_ubicacion);
                     formdata.append('id_solicitud', id_solicitud);
@@ -684,17 +682,24 @@
         });
 
         $('#form_4').submit(function(e) {
-            if (archivosRequeridosSubidos() === 0) {
-                // Todos los documentos requeridos han sido subidos, permite avanzar
+            let archivosFaltantes = archivosRequeridosSubidos();
+
+            // Si todos los archivos requeridos (obligatorios) han sido subidos, permite avanzar
+            if (archivosFaltantes === 0) {
                 return true;
             } else {
-                // Faltan documentos requeridos, muestra una alerta
-                alert(
-                    `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir. Debes cargar todos los archivos`
-                );
-                return false; // Evita que el formulario se envíe
+                // Faltan documentos requeridos, pero si son opcionales, permite avanzar
+                $('.file').each(function() {
+                    if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
+                        // Si un archivo requerido no ha sido subido y no es opcional, muestra una alerta y detiene el envío del formulario
+                        alert(`Falta subir el archivo obligatorio: ${$(this).attr('name')}`);
+                        e.preventDefault(); // Evita que el formulario se envíe
+                        return false; // Detiene el bucle each
+                    }
+                });
             }
         });
+
 
         $('.file').change(function() {
 

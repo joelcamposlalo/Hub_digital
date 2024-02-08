@@ -44,7 +44,7 @@ class Rectificacion extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-        
+
         if ($response = Rectificacion_model::ingresa_solicitud($request)) {
             $obj = $response[0];
 
@@ -210,3 +210,6 @@ class Rectificacion extends Controller
         return view('ciudadano/descanso');
     }
 }
+
+
+

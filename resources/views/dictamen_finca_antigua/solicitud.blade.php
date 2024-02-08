@@ -295,7 +295,7 @@
                         <a href="{{url('dictamen_finca_antigua/descargarPlano')}}" target="_blank">aquí</a>
                     </h6>
                 </div>
-                <form id="form_4" action="{{url('dictamen_finca_antigua/ingresa_tramite')}}" method="POST" enctype="multipart/form-data">
+                <form id="form_4" action="{{url('dictamen_finca_antigua/ingresa_tramite')}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                     @csrf
                     <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
                         <table class="w-100">
@@ -450,8 +450,8 @@
     var map;
     var n = 0;
 
-    //Valida si esta en la versión mobile 
-    //Valida si esta en la versión mobile 
+    //Valida si esta en la versión mobile
+    //Valida si esta en la versión mobile
     if (is_mobile()) {
         $('.mapa1').remove();
     } else {
@@ -533,9 +533,9 @@
             'wrapAround': true
         })
 
-        /** 
+        /**
          * Menu de optiones
-         * 
+         *
          */
 
         $('#nav .menu').click(function() {
@@ -547,9 +547,9 @@
         });
 
         /**
-         * 
+         *
          * Paginado de prediales
-         * 
+         *
          */
 
         $('.anterior').click(function() {
@@ -584,19 +584,19 @@
         });
 
         /**
-         * 
-         * Inicializamos la validación de 
+         *
+         * Inicializamos la validación de
          * los formularios
-         * 
+         *
          */
 
         $('#form_2').parsley();
         $('#form_3').parsley();
 
         /**
-         * 
+         *
          * Completando la primera parte
-         * 
+         *
          */
 
 
@@ -621,9 +621,9 @@
         });
 
         /**
-         * 
+         *
          * Completando la segunda parte
-         * 
+         *
          */
 
         $('#form_2').submit(async function(e) {
@@ -640,9 +640,9 @@
         });
 
         /**
-         * 
+         *
          * Completando la tercera parte
-         * 
+         *
          */
 
         $('#form_3').submit(async function(e) {
@@ -675,7 +675,7 @@
             $('.btn-form4').html('Guardar');
             if (id_solicitud > 0) {
                 //console.log(tipo_tramite);
-                //formdata.append('id_solicitud', id_solicitud);                
+                //formdata.append('id_solicitud', id_solicitud);
                 var formdata = new FormData();
                 formdata.append('cuenta', cuenta);
                 formdata.append('calle', calle);
@@ -702,7 +702,7 @@
                 } else {
                     formdata.append('etapa', id_etapa);
                 }
-               
+
                 if ($('#id_captura').val() == "") {
                     //console.log(formdata);
                     var res = await axios.post('{{url("dictamen_finca_antigua/ingresa_solicitud")}}',
@@ -788,6 +788,7 @@
                 return false;
             }
         });
+        
 
         /*
         $('.btn-form4').click(function() {
@@ -857,9 +858,9 @@
     });
 
     /**
-     * 
+     *
      * Paginado de prediales
-     * 
+     *
      */
 
     function agregar_poligono(geopolygon) {
@@ -982,7 +983,7 @@
         $('.correo').val('');
 
         $('.suelo').val('');
-        //agregar_poligono(null);        
+        //agregar_poligono(null);
     }
 
 
@@ -1008,15 +1009,15 @@
         $('.correo').val('');
 
         $('.suelo').val('');
-        //agregar_poligono(null);        
+        //agregar_poligono(null);
     }
 
 
     /**
-     * 
-     * Total de archivos requeridos 
+     *
+     * Total de archivos requeridos
      * faltantes
-     * 
+     *
      */
 
     function fileIsRequired() {
