@@ -40,7 +40,7 @@
     <div class="text-center"><small class="font  mb-5 f-15"><b>Trámites disponibles.</b></small></div>
     <div id="section">
         <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitación"
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite card-capacitacion" data-tramite="Capacitaciones"
                 data-img="proteccion_civil.png" data-url="bombero_capacitacion/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
@@ -49,11 +49,10 @@
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
                                 <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">CAPACITACIONES</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">Capacitaciones</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2"> SOLICITUD DE CAPACITACIÓN MEDIANTE VENTANILLA
-                                    VIRTUAL</small>
+                                <small class="text-center mt-2">Solicitud de capacitación mediante ventanilla virtual</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -72,12 +71,12 @@
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
                                 <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">EVALUACIÓN DE RIESGOS</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">Evaluación técnica de riesgos</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">SOLICITUD DE EVALUACIÓN POR
-                                    FENÓMENOS PERTURBADORES
-                                    MEDIANTE VENTANILLA VIRTUAL</small>
+                                <small class="text-center mt-2">Solicitud de evaluación por
+                                    fenómenos perturbadores
+                                    mediante ventanilla virtual</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -87,7 +86,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Verificación de Riesgos"
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Verificación técnica de tiesgos"
                 data-img="proteccion_civil.png" data-url="verificacion_tecnica_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
@@ -96,14 +95,10 @@
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
                                 <img src="{{asset('media/ilustrator/logo_proteccion_civil.png')}}" class="bombero_logo_card"
                                     alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
-                                <span class="badge badge-warning mt-4" aria-hidden="true">VERIFICACIÓN TÉCNICA
-                                    DE RIESGOS</span>
+                                <span class="badge badge-warning mt-4" aria-hidden="true">Verificación técnica de riesgos</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">SOLICITUD DE VERIFICACIÓN TÉCNICA
-                                    DE RIESGOS MEDIANTE VENTANILLA
-
-                                    VIRTUAL</small>
+                                <small class="text-center mt-2">Solicitud de verificación técnica de riesgos mediante ventanilla digital </small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>

@@ -11,11 +11,11 @@
 @endsection
 
 @section('container')
-    <h1 class="text-muted text-center font m-0 bold c-primary-color">
+    <h1 class="text-muted text-left font m-0 bold c-primary-color">
         Solicitud de Capacitación @isset($id_captura)
         @endisset
     </h1>
-    <p class="font text-muted text-center mb-5">Folio de trámite: {{ $folio }}</p>
+    <p class="font text-muted text-left mb-5">Folio de trámite: {{ $folio }}</p>
     <div class="row mt-5 etapas_info">
         <div class="col">
             <div class="etapas d-flex justify-content-center align-items-center">

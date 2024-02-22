@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\model\Solicitudes_model;
 use App\Mail\contactoCapacitacion;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\notificacion;
+use App\Mail\notificacion_capacitacion;
 
 class Capacitaciones_Model extends Model
 {
@@ -49,7 +49,7 @@ class Capacitaciones_Model extends Model
 
     public static function guardarParticipantes($request, $parti)
     {
-        
+
         $parti = collect($parti)->filter()->toArray();
 
         foreach ($parti as $participante) {
@@ -160,7 +160,7 @@ class Capacitaciones_Model extends Model
 
         if (DB::table('notificaciones')->insert($data)) {
 
-            Mail::to($data_p)->bcc(env('MAIL_BCC'))->send(new notificacion($data_p, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
+            Mail::to($data_p)->bcc(env('MAIL_BCC'))->send(new notificacion_capacitacion($data_p, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
 
             DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])

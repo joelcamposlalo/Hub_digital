@@ -104,26 +104,26 @@
                     <small>Datos del solicitante</small>
                 </div>
                 <div class="card-body">
-                    <form id=form_1 method="post">
+                    <form id=form_1 method="post" data-parsley-validate="">
                         <input name="id_captura" id="id_captura" type="hidden"
                             value="{{ isset($id_captura) ? $id_captura : '' }}">
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text">
+                                    class="ab-form background-color rounded border capitalize nombre" type="text" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="apellido_1"><small>Apellido Paterno</small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text">
+                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" required>
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_2"><small>Apellido Materno</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text">
+                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -131,13 +131,13 @@
                                 <label for="telefono"><small>Teléfono</small></label>
                                 <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
                                     class="ab-form background-color rounded border capitalize telefono" type="tel"
-                                    data-parsley-length="[10, 10]">
+                                    data-parsley-length="[10, 10]" required>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario" type="text">
+                                    class="ab-form background-color rounded border correo_propietario" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -190,7 +190,7 @@
                     <small>Datos para la Verificación</small>
                 </div>
                 <div class="card-body">
-                    <form id=form_2>
+                    <form id=form_2 data-parsley-validate="">
                         <input name="id_captura" id="id_captura_2" type="hidden"
                             value="{{ isset($id_captura) ? $id_captura : '' }}">
                         <div class="row">
@@ -199,12 +199,12 @@
                             <div class="col-10 mt-2">
                                 <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio" type="text">
+                                    class="ab-form background-color rounded border capitalize domicilio" type="text" required>
                             </div>
                             <div class="col-2 mt-2">
                                 <label for="numero"><small>Número</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="text">
+                                    class="ab-form background-color rounded border capitalize numero" type="text" required>
                             </div>
                         </div>
                         <div class="row">
@@ -213,33 +213,33 @@
                                 <input name="entreCalle_1" id="entreCalle_1"
                                     value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_1"
-                                    type="text">
+                                    type="text" required>
                             </div>
                             <div class="col mt-2">
                                 <label for="entreCalle_2"><small>Entre Calle 2</small></label>
                                 <input name="entreCalle_2" id="entreCalle_2"
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize entreCalle_2"
-                                    type="text">
+                                    type="text" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="colonia"><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text">
+                                    class="ab-form background-color rounded border capitalize colonia" type="text" required>
                             </div>
                             <div class="col mt-2">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
-                                    class="ab-form background-color rounded border capitalize municipio" type="text">
+                                    class="ab-form background-color rounded border capitalize municipio" type="text" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="problematica"><small>Descripción</small></label>
                                 <textarea name="problematica" id="problematica" class="ab-form background-color rounded border problematica"
-                                    placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:" rows="5" cols="5">{{ isset($problematica) ? $problematica : '' }}</textarea>
+                                    placeholder="DESCRIPCIÓN BREVE DE SU SITUACIÓN:" required rows="5" cols="5">{{ isset($problematica) ? $problematica : '' }}</textarea>
                             </div>
                         </div>
                         <div class="row mt-4">
