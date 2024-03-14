@@ -20,7 +20,7 @@ class Trabajos_menores_model extends Model
 
 
     /**
-     * Obtiene toda la información que necesita el 
+     * Obtiene toda la información que necesita el
      * revisor
      */
 
@@ -70,7 +70,7 @@ class Trabajos_menores_model extends Model
      * logeado
      */
 
-    public static function get_files($id_solicitud)
+    public static function get_files($id_solicitud,$id_etapa)
     {
         $terminados = DB::table('archivos as a')
             ->join('cat_archivo as c', 'a.id_cat_archivo', '=', 'c.id_cat_archivo')
@@ -91,10 +91,10 @@ class Trabajos_menores_model extends Model
             ->get();
 
 
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-            c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+            c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
             WHERE c.id_cat_archivo = a.id_cat_archivo
-            and a.id_solicitud =' . $id_solicitud . '         
+            and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
             ) and c.id_documento>0 and c.id_tramite = 1 or c.id_documento>0 and c.id_tramite = 0');
 
@@ -164,9 +164,9 @@ class Trabajos_menores_model extends Model
     }
 
     /**
-     * 
+     *
      * Agregar solicitud
-     * 
+     *
      */
 
     public static function solicitud()
@@ -200,7 +200,7 @@ class Trabajos_menores_model extends Model
             DB::table('solicitudes_hist')
                 ->insert($data1);
         }
-        /*insert into solicitudes_hist(id_solicitud, id_usuario, id_revisor, id_tramite, id_etapa, created_at, estatus, folio_externo, estatus_externo) 
+        /*insert into solicitudes_hist(id_solicitud, id_usuario, id_revisor, id_tramite, id_etapa, created_at, estatus, folio_externo, estatus_externo)
 			SELECT s.id_solicitud, s.id_usuario,s.id_revisor,s.id_tramite,s.id_etapa, current_timestamp ,s.estatus,cast(vprecaptura as varchar(100)),vedoact*/
 
 
@@ -344,9 +344,9 @@ class Trabajos_menores_model extends Model
             if ($res1) {
                 $id_cat_archivo = $res1[0]->id_cat_archivo;
 
-                $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+                $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
                 WHERE c.id_cat_archivo = a.id_cat_archivo
-                and a.id_solicitud =' . $id_solicitud . ' 
+                and a.id_solicitud =' . $id_solicitud . '
                 and a.id_usuario =' . session('id_usuario') . '
                 ) and c.id_documento=' . $id_documento);
 
@@ -372,9 +372,9 @@ class Trabajos_menores_model extends Model
             if ($res1) {
                 $id_cat_archivo = $res1[0]->id_cat_archivo;
 
-                $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+                $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
                 WHERE c.id_cat_archivo = a.id_cat_archivo
-                and a.id_solicitud =' . $id_solicitud . ' 
+                and a.id_solicitud =' . $id_solicitud . '
                 and a.id_usuario =' . session('id_usuario') . '
                 ) and c.id_documento=' . $id_documento);
 
@@ -396,10 +396,10 @@ class Trabajos_menores_model extends Model
 
     public static function consulta_archivos_faltantes($id_solicitud)
     {
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
         WHERE c.id_cat_archivo = a.id_cat_archivo
-        and a.id_solicitud =' . $id_solicitud . '         
+        and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
         ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 1');
 
@@ -434,7 +434,7 @@ class Trabajos_menores_model extends Model
             //Enviamos el correo
             //Mail::to($correo)->bcc(env('MAIL_BCC'))->send(new Notificacion($correo, $titulo, $mensaje, 'https://portal.zapopan.gob.mx/logos_vdigital/logo_plc.png'));
 
-            //Cambiamos el estatus de la solicitud 
+            //Cambiamos el estatus de la solicitud
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['id_etapa' => 4, 'estatus' => 'en revision']);

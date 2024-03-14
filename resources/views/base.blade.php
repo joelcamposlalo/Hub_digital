@@ -188,6 +188,8 @@
 <script src="{{asset('js/frontend.js')}}"></script>
 <script src="{{asset('vendors/parsley/parsley.min.js')}}"></script>
 <script src="{{asset('vendors/parsley/es.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @show
 
 

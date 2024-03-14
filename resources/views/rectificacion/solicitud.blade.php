@@ -136,7 +136,7 @@
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
-                                    value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
+                                    value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
                                     class="ab-form background-color rounded border correo_propietario" type="text">
                             </div>
                         </div>
@@ -201,6 +201,8 @@
                                 <input name="origen" type="hidden" value='solicitud'>
                                 <input name="id_captura" id="id_captura_frm4" type="hidden"
                                     value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                <input name="id_etapa" id="id_etapa" type="hidden"
+                                    value="{{ isset($id_etapa) ? $id_etapa : '' }}">
                                 <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
                                     type="submit">Continuar</button>
 
@@ -228,7 +230,7 @@
                             <div class="col mt-2">
                                 <label for="numero_cuenta"><small>Número de cuenta Predial</small></label>
                                 <input name="numero_cuenta" id="numero_cuenta"
-                                    value="{{ isset($nmero_cuenta) ? $numero_cuenta : '' }}"
+                                    value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
                                     class="ab-form background-color rounded border capitalize numero_cuenta"
                                     type="text">
                             </div>
@@ -343,18 +345,17 @@
                                         <td class="f-14 acciones">
                                             <label for="file_{{ $key }}"
                                                 class="ab-btn-effect bold font btn-file">
-                                                <small class="font bold f-10 progreso">Subir Archivo</small>
+                                                <small class="font bold f-10 progreso">Actualizar</small>
                                                 <input class="file" id="file_{{ $key }}" type="file"
                                                     name="file_{{ $file->id_documento }}" data-upload="0"
-                                                    @if ($file->obligatorio == 1) required @endif
-                                                    data-parsley-required-message="Este archivo es obligatorio">
+                                                    data-required="{{ $file->obligatorio }}">
                                             </label>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </table>
                         </div>
+
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
 
                         <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
@@ -367,8 +368,6 @@
                                 <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -377,6 +376,7 @@
 
     <div class="btnFloat" data-toggle="modal" data-target="#modal-map"><i class="fas fa-map-marker-alt text-white"></i>
     </div>
+
 
     <p id="parrafo"></p>
 @endsection
@@ -389,6 +389,18 @@
     @parent
     <link rel="stylesheet" href="{{ asset('css/trabajos_menores/solicitud.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/lightbox/dist/css/lightbox.min.css') }}">
+    <style>
+        div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+            background-color: #1E636D !important;
+            /* Cambia el color del botón de cerrar */
+        }
+
+        div:where(.swal2-icon).swal2-warning {
+            border-color: #1e636d !important;
+            color: #1e636d !important;
+        }
+    </style>
+
 @endsection
 
 @section('js')
@@ -469,6 +481,7 @@
                 var entreCalle_2 = $('.entreCalle_2').val();
                 var numInt = $('.numInt').val();
                 var numExt = $('.numExt').val();
+                var id_etapa = $('id_etapa').val();
 
                 if (id_solicitud > 0) {
 
@@ -487,6 +500,7 @@
                     formdata.append('entreCalle_2', entreCalle_2);
                     formdata.append('numInt', numInt);
                     formdata.append('numExt', numExt);
+                    formdata.append('id_etapa', id_etapa);
 
 
                     if ($('#id_captura').val() == "") {
@@ -607,8 +621,6 @@
                 var rc_notificacion = $('.rc_notificacion').val();
                 var rc_ubicacion = $('.rc_ubicacion').val();
 
-
-
                 if ($('#id_captura').val() !== "") {
                     var formdata = new FormData();
 
@@ -691,14 +703,22 @@
                 // Faltan documentos requeridos, pero si son opcionales, permite avanzar
                 $('.file').each(function() {
                     if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
-                        // Si un archivo requerido no ha sido subido y no es opcional, muestra una alerta y detiene el envío del formulario
-                        alert(`Falta subir el archivo obligatorio: ${$(this).attr('name')}`);
-                        e.preventDefault(); // Evita que el formulario se envíe
-                        return false; // Detiene el bucle each
+                        // Si un archivo requerido no ha sido subido y no es opcional, muestra un SweetAlert y detiene el envío del formulario
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: `Falta subir los archivos obligatorios`,
+                            customClass: {
+                                closeConfirm: 'btn-close-custom-color'
+                            }
+                        });
+                        e.preventDefault();
+                        return false;
                     }
                 });
             }
         });
+
 
 
         $('.file').change(function() {
@@ -769,7 +789,6 @@
                     countFileRequired += 1;
                 }
             });
-
             return countFileRequired;
         }
 
@@ -792,7 +811,7 @@
         function archivosRequeridosSubidos() {
             let archivosFaltantes = 0;
 
-            // Itera a través de los elementos de entrada de tipo "file" que representan los documentos requeridos
+
             $('.file').each(function() {
                 if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
                     archivosFaltantes++;
@@ -804,25 +823,23 @@
 
         $('#form_3').submit(function(e) {
             if (archivosRequeridosSubidos() === 0) {
-                // Todos los documentos requeridos han sido subidos, permite avanzar
+
                 return true;
             } else {
-                // Faltan documentos requeridos, muestra un mensaje de error
+
                 iziToast.show({
                     title: 'Ups ☹️',
                     message: `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir.`,
                     backgroundColor: '#ff9b93',
                     closeOnEscape: true
                 });
-                return false; // Evita que el formulario se envíe
+                return false;
             }
         });
 
 
         function archivosRequeridosSubidos() {
             let archivosFaltantes = 0;
-
-            // Itera a través de los elementos de entrada de tipo "file" que representan los documentos requeridos
             $('.file').each(function() {
                 if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
                     archivosFaltantes++;

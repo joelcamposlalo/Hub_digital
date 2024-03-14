@@ -62,7 +62,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="EVALUACIÓN TÉCNICA DE RIESGOS"
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Evaluación técnica de riesgos"
                 data-img="proteccion_civil.png" data-url="evaluacion_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
@@ -86,7 +86,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Verificación técnica de tiesgos"
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Verificación técnica de riesgos"
                 data-img="proteccion_civil.png" data-url="verificacion_tecnica_riesgos/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">

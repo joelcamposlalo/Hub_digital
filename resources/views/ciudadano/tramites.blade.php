@@ -120,7 +120,6 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
                     <table class="detalles">
                         <small id="folio" class="font text-muted f-14 ml-1"></small>
@@ -431,7 +430,7 @@
         /*
          *
          * Detalles de la solicitud
-         *  
+         *
          */
 
         const detalles = () => {
@@ -509,7 +508,7 @@
                     $('.responsive').show();
                     $('.no-tramites').hide();
 
-                    // console.log(response.data);                    
+                    // console.log(response.data);
 
                     response.data.forEach(element => {
                         $('.table-body').append(plantilla(element.id_solicitud, element.tramite, element.estatus, element.porcentaje, element.paso, element.id_captura, element.id_tramite));
@@ -541,7 +540,7 @@
         const plantilla = (id_solicitud, tramite, estatus, porcentaje, paso, id_captura, id_tramite) => {
 
             return `
-                    <tr class="${estatus.replace(' ', '')} tramites">                    
+                    <tr class="${estatus.replace(' ', '')} tramites">
                     <td class="f-15">${id_solicitud}                                                                                                                         </td>
                     <td class="f-15">
                     ` + ((id_captura != null && id_tramite == 3) ? '<small class="font mb-5">' + id_captura + '</small>' : '') + `
@@ -562,7 +561,7 @@
                             </a>
                         ` + ((paso == 0) ? '<div class="enlace pointer ml-2 btn-delete" data-toggle="tooltip" data-placement="top" aria-label="Eliminar trámite" title="Eliminar trámite" data-id="' + id_solicitud + '"><a href="#!"><i class="fas fa-trash c-negro"></i></a></div>' : '') + `
                         </td>
-                        <td>                
+                        <td>
                             ` + ((estatus == 'pendiente' || estatus == 'autorizado') ? '<div class="justify-content-center align-items-center ml-2" style=" display: inline-flex !important"><a href="{{url("solicitudes/consulta_solicitudes")}}/ ' + id_solicitud + ' "><button class="ab-btn b-primary-color text-white">Continuar</button></a></div>' : '') + `
                         </td>
                         </tr>

@@ -48,6 +48,14 @@ class Verificacion_Riesgos_Model extends Model
         return $folio;
     }
 
+    public static function get_count()
+    {
+        return DB::table('predios')
+            ->where('id_usuario', '=', session('id_usuario'))
+            ->count();
+    }
+
+
     public static function get_files($id_solicitud)
     {
         $terminados = DB::table('archivos as a')

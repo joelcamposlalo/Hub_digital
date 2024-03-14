@@ -31,10 +31,9 @@ class Solicitudes_model extends Model
     public static function consulta_datos_solicitud($id_solicitud, $id_tramite, $etapa)
     {
         return
-        DB::table('datos_solicitudes as ds')
+            DB::table('datos_solicitudes as ds')
             ->where('id_solicitud', '=', $id_solicitud)
             ->where('id_usuario', '=', session('id_usuario'))
-            //->where('id_tramite', '=', $id_tramite)
             ->get();
     }
 
@@ -328,13 +327,13 @@ class Solicitudes_model extends Model
 
                 //if ($filtro == 'en revision') {
 
-                    return DB::table('solicitudes as s')
-                        ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
-                        ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
-                        ->join('roles_etapas as re', 're.id_tramite', '=', 't.id_tramite')
-                        //->join('roles_etapas as ree', 'ree.id_etapa', '=', 'e.id_etapa')
-                        //->join('roles_usuarios as ru', 're.id_rol_etapa', '=', 'ru.id_rol_etapa')
-                        ->select(DB::raw('s.*,t.*,e.*,
+                return DB::table('solicitudes as s')
+                    ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
+                    ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
+                    ->join('roles_etapas as re', 're.id_tramite', '=', 't.id_tramite')
+                    //->join('roles_etapas as ree', 'ree.id_etapa', '=', 'e.id_etapa')
+                    //->join('roles_usuarios as ru', 're.id_rol_etapa', '=', 'ru.id_rol_etapa')
+                    ->select(DB::raw('s.*,t.*,e.*,
                         case
                         when s.id_tramite in(1,2,5,6,9,11,12,13,14,15)
                         then coalesce((select ds.dato from datos_solicitudes ds
@@ -363,45 +362,45 @@ class Solicitudes_model extends Model
                         ),null)
                         ) else null end as id_captura'))
 
-                        ->whereColumn('re.id_etapa', '=', 'e.id_etapa')
-                        ->where([
-                            ['t.tramite', 'ILIKE', '%' . $search . '%'],
-                            ['s.estatus', 'ILIKE', '%' . $filtro. '%'],
-                            //['s.estatus', '=', $filtro],
-                            ['s.eliminado', '=', false],
-                            ['t.id_tramite', '!=', 4],
-                            ['s.id_revisor', '=', session('id_usuario')]
-                        ])
-                        ->orWhere([
-                            ['s.eliminado', '=', false],
-                            ['s.id_solicitud', '=', intval($search)],
-                            ['s.estatus', '=', $filtro],
-                            ['t.id_tramite', '!=', 4],
-                            ['s.id_revisor', '=', session('id_usuario')]
-                        ])
-                        ->orWhere([
-                            ['s.eliminado', '=', false],
-                            ['s.id_solicitud', '=', intval($search)],
-                            ['s.estatus', '=', $filtro],
-                            ['t.id_tramite', '=', 4],
-                            ['re.id_tramite', '=', 4]
+                    ->whereColumn('re.id_etapa', '=', 'e.id_etapa')
+                    ->where([
+                        ['t.tramite', 'ILIKE', '%' . $search . '%'],
+                        ['s.estatus', 'ILIKE', '%' . $filtro . '%'],
+                        //['s.estatus', '=', $filtro],
+                        ['s.eliminado', '=', false],
+                        ['t.id_tramite', '!=', 4],
+                        ['s.id_revisor', '=', session('id_usuario')]
+                    ])
+                    ->orWhere([
+                        ['s.eliminado', '=', false],
+                        ['s.id_solicitud', '=', intval($search)],
+                        ['s.estatus', '=', $filtro],
+                        ['t.id_tramite', '!=', 4],
+                        ['s.id_revisor', '=', session('id_usuario')]
+                    ])
+                    ->orWhere([
+                        ['s.eliminado', '=', false],
+                        ['s.id_solicitud', '=', intval($search)],
+                        ['s.estatus', '=', $filtro],
+                        ['t.id_tramite', '=', 4],
+                        ['re.id_tramite', '=', 4]
 
 
-                        ])
-                        ->orWhere([
-                            ['t.tramite', 'ILIKE', '%' . $search . '%'],
-                            ['s.estatus', '=', $filtro],
-                            ['s.eliminado', '=', false],
-                            ['t.id_tramite', '=', 4],
-                            ['re.id_tramite', '=', 4]
+                    ])
+                    ->orWhere([
+                        ['t.tramite', 'ILIKE', '%' . $search . '%'],
+                        ['s.estatus', '=', $filtro],
+                        ['s.eliminado', '=', false],
+                        ['t.id_tramite', '=', 4],
+                        ['re.id_tramite', '=', 4]
 
 
-                        ])
-                        ->limit(50)
-                        ->get();
-               // } else {
+                    ])
+                    ->limit(50)
+                    ->get();
+                // } else {
 
-                    /*return DB::table('solicitudes as s')
+                /*return DB::table('solicitudes as s')
                         ->join('cat_tramites as t', 't.id_tramite', '=', 's.id_tramite')
                         ->join('cat_etapas as e', 'e.id_etapa', '=', 's.id_etapa')
                         ->join('roles_etapas as re', 're.id_tramite', '=', 't.id_tramite')
@@ -827,10 +826,11 @@ class Solicitudes_model extends Model
     public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
     {
         $num_rows = 0;
-
-        DB::table('datos_solicitudes')
-            ->where('id_solicitud', $id_solicitud)
-            ->delete();
+        if ($etapa != 173) {
+            DB::table('datos_solicitudes')
+                ->where('id_solicitud', $id_solicitud);
+                // ->delete();
+        }
 
         foreach ($request->all() as $key => $value) {
             $num_rows += DB::insert(
@@ -841,9 +841,26 @@ class Solicitudes_model extends Model
                 [$id_solicitud, session('id_usuario'), $id_tramite, $etapa, $key, $value]
             );
         }
-
         return $num_rows;
     }
+
+    // public static function actualiza_datos_solicitud_sp($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
+    // {
+
+    //     $num_rows = 0;
+
+    //     foreach ($request->all() as $key => $value) {
+    //         $num_rows += DB::insert(
+    //             'insert into datos_solicitudes
+    //             (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
+    //             dato,created_at)
+    //             values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
+    //             [$id_solicitud, session('id_usuario'), $id_tramite, $etapa, $key, $value]
+    //         );
+    //     }
+
+    //     return $num_rows;
+    // }
 
     public static function actualiza_etapa_solicitud($id_solicitud, $etapa, $estatus, $id_captura, $edo_externo)
     {

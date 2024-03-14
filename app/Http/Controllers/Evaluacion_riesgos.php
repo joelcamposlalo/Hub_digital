@@ -47,7 +47,7 @@ class Evaluacion_riesgos extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-        //Primer procedimiento almacenado
+
         if ($response = Evaluacion_riesgos_model::ingresa_solicitud($request)) {
             $obj = $response;
 
@@ -57,15 +57,14 @@ class Evaluacion_riesgos extends Controller
                 $request->request->add([
                     'id_captura' => $obj
                 ]);
-                //Temas de la table solicitud cambia el estado y datos
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $request->id_captura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 173, $request->id_captura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo ($rows);
                     echo json_encode("0");
                 } else {
-                    //Cambia el status de la etapa
+
                     Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj, null);
                     http_response_code(200);
                     echo json_encode($obj);
@@ -80,8 +79,6 @@ class Evaluacion_riesgos extends Controller
     }
 
 
-
-    //El procdimiento almacenado de actualizar el primer card
     public function actualiza_solicitud(Request $request)
     {               //SP de el actualizar informacion
         if ($response = Evaluacion_riesgos_model::actualiza_solicitud($request)) {
@@ -89,7 +86,7 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 173, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
@@ -116,13 +113,13 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 174, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 174, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }

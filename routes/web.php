@@ -596,6 +596,7 @@ Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tr
 
 
 
+
 /*
 * Rutas para tramites de rectificación de nombre
 */

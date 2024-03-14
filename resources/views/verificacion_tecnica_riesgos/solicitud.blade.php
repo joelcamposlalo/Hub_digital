@@ -11,11 +11,11 @@
 @endsection
 
 @section('container')
-    <h1 class="text-muted text-center font m-0 bold c-primary-color">
+    <h1 class="text-muted text-left font m-0 bold c-primary-color">
         Solicitud De Verificación Tecnica De Riesgos @isset($id_captura)
         @endisset
     </h1>
-    <div class="font text-center ">Folio de trámite: {{ $folio }}</div>
+    <div class="font text-left ">Folio de trámite: {{ $folio }}</div>
 
     <div class="row mt-5 etapas_info">
         <div class="col">
@@ -315,6 +315,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                
                             </table>
                         </div>
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>

@@ -14,76 +14,128 @@ class Rectificacion_model extends Model
 {
     public static function solicitud()
     {
+
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
             $result = Solicitudes_model::consulta_ultimo_folio(30);
             $folio = $result[0]->folio;
         } else {
+            //Hace un Insert para empezar el tramite como una solicitud
             $folio = DB::table('solicitudes')->insertGetId([
                 'id_tramite' => 30,
                 'id_usuario' => session('id_usuario'),
                 'id_etapa'   =>  182,
                 'estatus'    =>  'pendiente',
             ], 'id_solicitud');
-
+            //Hace un array de todos los datos
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
                 'id_tramite'    => 30,
                 'id_etapa'      => 182,
                 'estatus'       => 'pendiente',
-
             ];
-
+            //guarda los datos del array en la tabla para generar un historial
             DB::table('solicitudes_hist')
                 ->insert($data1);
         }
 
         session(['lastpage' => __FILE__]);
 
-
         return $folio;
     }
 
     public static function get_files($id_solicitud)
     {
-        $terminados = DB::table('archivos as a')
+
+        //Muestra los archivos pendientes en un solo array llamada pendientes
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+            c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
+            WHERE c.id_cat_archivo = a.id_cat_archivo
+            and a.id_solicitud =' . $id_solicitud . '
+            and a.id_usuario =' . session('id_usuario') . '
+            ) and c.id_documento>0 and c.id_tramite = 30 and c.universal=false and c.id_tramite = 30');
+
+        return [
+            'pendientes'  => $pendientes,
+
+        ];
+    }
+
+    public static function get_files_rechazado($id_solicitud)
+    {
+
+
+        $pendientes = DB::table('archivos as a')
             ->join('cat_archivo as c', 'a.id_cat_archivo', '=', 'c.id_cat_archivo')
+            ->leftJoin('archivos_rec as ao', 'ao.id_archivo', '=', 'a.id_archivo')
             ->select('a.nombre as archivo', '*')
             ->where([
                 ['a.id_usuario', '=', session('id_usuario')],
                 ['c.id_tramite', '=', 30],
                 ['a.id_solicitud', '=', $id_solicitud],
                 ['c.universal', '=', false],
-                ['c.id_documento', '>', 0]
+                ['c.id_documento', '>', 0],
+                ['ao.estatus', '=', 'rechazado'],
             ])
-            ->get();
 
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+            ->get();
+            //dd($pendientes);exit;
+        if ($pendientes->isEmpty()) {
+            $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
             c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
             WHERE c.id_cat_archivo = a.id_cat_archivo
             and a.id_solicitud =' . $id_solicitud . '
             and a.id_usuario =' . session('id_usuario') . '
-            ) and c.id_documento>0 and c.id_tramite = 30');
+            ) and c.id_documento>0 and c.id_tramite = 30 and c.universal=false and c.id_tramite = 30');
 
-        $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
-        c.id_documento,c.obligatorio FROM
-        cat_archivo c join archivos a on c.id_cat_archivo =a.id_cat_archivo
-        join archivosodt ao  on ao.id_archivo =a.id_archivo
-        where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_usuario') . ' and ao.estatus=\'validado\'');
+            return [
+                'pendientes'  => $pendientes,
 
-        $validados = array();
-
-        foreach ($resv as $validado) {
-            array_push($validados, $validado->id_documento);
+            ];
         }
+
         return [
-            'terminados'  => $terminados,
             'pendientes'  => $pendientes,
-            'validados'  => $validados
+
         ];
     }
+
+
+    public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
+    {
+        //dd($request, $id_tramite, $id_solicitud,  $etapa, $id_captura);exit;
+        $num_rows = 0;
+
+        if ($etapa == 183) {
+            DB::table('datos_solicitudes')
+                ->where('id_solicitud', $id_solicitud)
+                ->where('id_etapa', $etapa)
+                ->delete();
+        } elseif ($etapa == 184) {
+            DB::table('datos_solicitudes')
+                ->where('id_solicitud', $id_solicitud)
+                ->where('id_etapa', $etapa)
+                ->delete();
+        }
+
+
+
+
+        foreach ($request->all() as $key => $value) {
+            $num_rows += DB::insert(
+                'insert into datos_solicitudes
+                (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
+                dato,created_at)
+                values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
+                [$id_solicitud, session('id_usuario'), $id_tramite, $etapa, $key, $value]
+            );
+        }
+        return $num_rows;
+    }
+
+
 
     public static function ingresa_solicitud($request)
     {
@@ -115,6 +167,8 @@ class Rectificacion_model extends Model
 
         return $result;
     }
+
+
 
 
     public static function actualiza_solicitud($request)
@@ -270,10 +324,9 @@ class Rectificacion_model extends Model
         $sql = "EXECUTE sp_InsertarPreCapturaSeg ?, ?, ?";
 
         $idPrecaptura = $request->id_captura ?? 0;
-        $observaciones = 'Ingreso de trámite de Rectificaciones en Vdigital con el folio ' .$idPrecaptura;
+        $observaciones = 'Ingreso de trámite de Rectificaciones en Vdigital con el folio ' . $idPrecaptura;
         $usuario = 'VDigital';
         DB::connection('captura_op')->statement($sql, [$idPrecaptura, $observaciones, $usuario]);
         return "Procedimiento almacenado ejecutado con éxito";
     }
 }
-

@@ -65,7 +65,6 @@ class Capacitaciones_Model extends Model
     }
 
 
-
     public static function avanzarEtapa($request)
     {
 

@@ -13,6 +13,15 @@ use App\Mail\contactoEvaluacion;
 
 class Evaluacion_riesgos_model extends Model
 {
+
+    public static function get_count()
+    {
+        return DB::table('predios')
+            ->where('id_usuario', '=', session('id_usuario'))
+            ->count();
+    }
+
+
     public static function solicitud()
     {
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
@@ -201,12 +210,12 @@ class Evaluacion_riesgos_model extends Model
 
         $params = array(
             $request->domicilio  ?? '-',
-            $request->entreCalle_1 ?? '-',
-            $request->entreCalle_2 ?? '-',
             $request->numExt  ?? '-',
             $request->numInt  ?? '-',
             $request->colonia ?? '-',
             $request->municipio ?? '-',
+            $request->entreCalle_1 ?? '-',
+            $request->entreCalle_2 ?? '-',
             $request->problematica ?? '-',
             session('id_usuario') ?? '-',
             $request->id_captura ?? '-',
@@ -280,10 +289,11 @@ class Evaluacion_riesgos_model extends Model
             'descripcion' => $mensaje,
         ];
 
-        $emailPropietario = DB::connection('captura_op')->table('Precaptura')
-            ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
+        $emailPropietarioData = DB::connection('captura_op')->table('Precaptura')
+            ->where("IdCaptura", $request->id_captura)->first();
 
-        if ($emailPropietario) {
+        if ($emailPropietarioData) {
+            $emailPropietario = $emailPropietarioData->emailPropietario;
             if (DB::table('notificaciones')->insert($data)) {
                 Mail::to($emailPropietario)->bcc(env('MAIL_BCC'))->send(new notificacion($emailPropietario, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
                 return true;
@@ -294,12 +304,13 @@ class Evaluacion_riesgos_model extends Model
         return false;
     }
 
+
     public static function sendMail($request, $document_urls)
     {
         $correoData = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first();
 
-        
+
         Mail::to('joel.campos@zapopan.gob.mx')
             ->send(new contactoEvaluacion($correoData, $document_urls));
 

@@ -15,9 +15,12 @@ use App\model\Dictamen_img_urbana_model;
 use App\model\Dictamen_trazos_usos_model;
 use App\model\Dictamen_finca_antigua_model;
 use App\model\Dictamen_rea_Model;
+use App\model\Evaluacion_riesgos_model;
 use App\model\Notificaciones_model;
 use Illuminate\Support\Facades\Redirect;
 use App\model\Predios_model;
+use App\model\Rectificacion_model;
+use App\model\Verificacion_Riesgos_Model;
 
 class Solicitudes extends Controller
 {
@@ -444,7 +447,6 @@ class Solicitudes extends Controller
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
 
                 $vars = [
-                    'ultimo'       => Predios_model::get_count(),
                     'folio'        => $folio,
                     'notificacion' => Notificaciones_model::get_observacion($folio),
                     'id_etapa'     => $id_etapa,
@@ -458,10 +460,90 @@ class Solicitudes extends Controller
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
-                return view('bombero_uno/solicitud', $vars);
+                return view('bombero_capacitacion/solicitud', $vars);
 
-                
+
             }
+
+            else if ($id_tramite == 28) {
+
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
+
+                $vars = [
+                    'ultimo'       => Evaluacion_riesgos_model::get_count(),
+                    'folio'        => $folio,
+                    'files'        => Evaluacion_riesgos_model::get_files($folio),
+                    'notificacion' => Notificaciones_model::get_observacion($folio),
+                    'id_etapa'     => $id_etapa,
+                    'estatus'      => $estatus
+
+                ];
+
+                if ($solicitud->id_etapa >= 172) {
+                    $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
+                }
+
+                foreach ($result2 as $obj) {
+                    $vars += [$obj->campo => $obj->dato];
+                }
+                //dd($result2);exit;
+                return view('evaluacion_riesgos/solicitud', $vars);
+            }
+
+            else if ($id_tramite == 29) {
+
+
+
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
+
+                $vars = [
+                    'ultimo'       => Verificacion_Riesgos_Model::get_count(),
+                    'folio'        => $folio,
+                    'notificacion' => Notificaciones_model::get_observacion($folio),
+                    'id_etapa'     => $id_etapa,
+                    'estatus'      => $estatus
+                ];
+
+                if ($solicitud->id_etapa >= 174) {
+                    $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
+                }
+
+                foreach ($result2 as $obj) {
+                    $vars += [$obj->campo => $obj->dato];
+                }
+                return view('Verificacion_tecnica_riesgos/solicitud', $vars);
+
+
+            }
+
+
+
+
+            else if ($id_tramite == 30) {
+
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
+
+                $vars = [
+                    'files'        => Rectificacion_model::get_files_rechazado($folio),
+                    'folio'        => $folio,
+                    'notificacion' => Notificaciones_model::get_observacion($folio),
+                    'id_etapa'     => $id_etapa,
+                    'estatus'      => $estatus
+                ];
+
+                if ($solicitud->id_etapa >= 184) {
+                    $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
+                }
+
+                foreach ($result2 as $obj) {
+                    $vars += [$obj->campo => $obj->dato];
+                }
+
+                return view('rectificacion/solicitud', $vars);
+
+
+            }
+
         }
     }
 
