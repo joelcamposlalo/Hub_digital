@@ -19,7 +19,8 @@ class Rectificacion extends Controller
             //realiza un array llamado vars que tiene los archvios pendientes por subir del tramite y el numero de folio del tramite
             $vars = [
                 'files'    => Rectificacion_model::get_files($folio),
-                'folio'    => $folio
+                'folio'    => $folio,
+
             ];
             //crear result para poder revisar el numero de datos para el tramite
             $result = Solicitudes_model::consulta_solicitud(intval($folio));
@@ -27,7 +28,7 @@ class Rectificacion extends Controller
             if ($result && count($result) > 0) {
                 $solicitud  = $result[0];
                 $id_etapa   = $solicitud->id_etapa;
-                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 1, $id_etapa);
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 30, $id_etapa);
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }

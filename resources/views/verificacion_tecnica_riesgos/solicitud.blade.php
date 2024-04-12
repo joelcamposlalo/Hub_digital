@@ -111,19 +111,22 @@
                             <div class="col mt-2">
                                 <label for="nombre"><small>Nombre(s)</small></label>
                                 <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text" required>
+                                    class="ab-form background-color rounded border capitalize nombre" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="apellido_1"><small>Apellido Paterno</small></label>
                                 <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text" required>
+                                    class="ab-form background-color rounded border capitalize apellido_1" type="text"
+                                    required>
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_2"><small>Apellido Materno</small></label>
                                 <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text" required>
+                                    class="ab-form background-color rounded border capitalize apellido_2" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -137,7 +140,8 @@
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
                                     value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario" type="text" required>
+                                    class="ab-form background-color rounded border correo_propietario" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -199,12 +203,14 @@
                             <div class="col-10 mt-2">
                                 <label for="domicilio"><small>Domicilio</small></label>
                                 <input name="domicilio" id="domicilio" value="{{ isset($domicilio) ? $domicilio : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio" type="text" required>
+                                    class="ab-form background-color rounded border capitalize domicilio" type="text"
+                                    required>
                             </div>
                             <div class="col-2 mt-2">
                                 <label for="numero"><small>Número</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="text" required>
+                                    class="ab-form background-color rounded border capitalize numero" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -212,27 +218,29 @@
                                 <label for="entreCalle_1"><small>Entre Calle 1</small></label>
                                 <input name="entreCalle_1" id="entreCalle_1"
                                     value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_1"
-                                    type="text" required>
+                                    class="ab-form background-color rounded border capitalize entreCalle_1" type="text"
+                                    required>
                             </div>
                             <div class="col mt-2">
                                 <label for="entreCalle_2"><small>Entre Calle 2</small></label>
                                 <input name="entreCalle_2" id="entreCalle_2"
                                     value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_2"
-                                    type="text" required>
+                                    class="ab-form background-color rounded border capitalize entreCalle_2" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mt-2">
                                 <label for="colonia"><small>Colonia</small></label>
                                 <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text" required>
+                                    class="ab-form background-color rounded border capitalize colonia" type="text"
+                                    required>
                             </div>
                             <div class="col mt-2">
                                 <label for="municipio"><small>Municipio</small></label>
                                 <input name="municipio" id="municipio" value="{{ isset($municipio) ? $municipio : '' }}"
-                                    class="ab-form background-color rounded border capitalize municipio" type="text" required>
+                                    class="ab-form background-color rounded border capitalize municipio" type="text"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -315,7 +323,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                
+
                             </table>
                         </div>
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
@@ -323,11 +331,16 @@
                         <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
                         <input name="id_etapa" id="id_etapa" type="hidden"
                             value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
-                        <div class="row mt-4">
+                        <div class="row mt-4 justify-content-end">
                             <div class="col-md-12 mt-2 text-right">
                                 <button data-back=".card_2 .card-body" type="button"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
+                                <button class="ab-btn b-primary-color btn-form4" type="submit">
+                                    <span class="spinner-border spinner-border-sm mr-2 d-none" role="status"
+                                        aria-hidden="true"></span>
+                                    <span class="spinner-text d-none">Enviando...</span>
+                                    <span class="text-save">Guardar</span>
+                                </button>
                             </div>
                         </div>
 
@@ -362,12 +375,24 @@
     <script src="{{ asset('vendors/lightbox/dist/js/lightbox.min.js') }}"></script>
 
     <script>
+        
         $(document).ready(function() {
             $('#form_4').parsley().on('form:error', function() {
                 iziToast.error({
                     title: 'Error de validación',
                     message: 'Por favor, suba todos los documentos antes de enviar el formulario.',
                 });
+            });
+
+            $('#form_4').submit(function() {
+                // Deshabilitar el botón de "Guardar" y mostrar la animación de enviando junto con el spinner
+                $('.btn-form4').prop('disabled', true);
+                $('.spinner-border').removeClass('d-none'); // Muestra el spinner
+                $('.spinner-text').removeClass('d-none'); // Muestra el texto
+
+                // Ocultar el botón de "Regresar"
+                $('.btn-regresar').addClass('d-none');
+                $('.text-save').addClass('d-none');
             });
         });
     </script>
@@ -690,7 +715,7 @@
                 // Faltan documentos requeridos, muestra una alerta
                 alert(
                     `Faltan ${archivosRequeridosSubidos()} documentos requeridos por subir. Debes cargar todos los archivos`
-                    );
+                );
                 return false; // Evita que el formulario se envíe
             }
         });

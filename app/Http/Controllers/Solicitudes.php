@@ -531,14 +531,14 @@ class Solicitudes extends Controller
                     'estatus'      => $estatus
                 ];
 
-                if ($solicitud->id_etapa >= 184) {
+                if ($solicitud->id_etapa == 183) {
                     $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
                 }
 
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
-
+//dd($vars);exit;
                 return view('rectificacion/solicitud', $vars);
 
 

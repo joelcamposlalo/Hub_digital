@@ -6,17 +6,27 @@
     {{ menu_ciudadano('') }}
 @endsection
 
+
+
+
 @section('notification')
     {{ get_notificaciones() }}
+
 @endsection
 
+
+
+
 @section('container')
-    <h1 class="text-muted text-center font m-0 bold c-primary-color">
+    <h1 class="text-muted text-left font m-0 bold c-primary-color">
         Trámite web de rectificación de domicilio o ubicación
         @isset($id_captura)
         @endisset
     </h1>
     <div class="font text-center ">Folio de trámite: {{ $folio }}</div>
+
+    <!-- Muestra la observacion cuando se regresa al ciudadano en movil-->
+
 
     <div class="row mt-5 etapas_info">
         <div class="col">
@@ -98,6 +108,38 @@
     </div>
 
     <div class="row position-relative">
+        @if ($id_etapa >= 183)
+        <div class="card mt-3 d-block">
+            <div class="card-header">
+                <small>Observaciones del revisor</small> <br>
+                <span class="badge badge-pill badge-warning">{{ $notificacion->created_at }}</span>
+            </div>
+            <div class="card-body">
+                <small>{!! $notificacion->descripcion !!}</small>
+            </div>
+        </div>
+    @endif
+    <!-- Muestra la observacion cuando se regresa al ciudadano -->
+    <div class="row">
+        <div class="col-md-3 mt-2 position-absolute" style="right: 0;">
+            @if ($id_etapa >= 183)
+                <div class="card mt-3 d-md-block d-lg-block d-xl-block">
+                    <div class="card-header">
+                        <small>Observaciones del revisor</small> <br>
+                        <span class="badge badge-pill badge-warning">{{ $notificacion->created_at }}</span>
+                    </div>
+                    <div class="card-body">
+                        <small>{!! $notificacion->descripcion !!}</small>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+    </div>
+    <!-- Termina Muestra observaciones del revisor -->
+
+
+<div class="row position relative">
         <div class="col mt-4" id="top_1">
             <div class="card  shadow-sm card_1 rounded border-none">
                 <div class="card-header">
@@ -122,7 +164,8 @@
                             </div>
                             <div class="col mt-2">
                                 <label for="apellido_2"><small>Segundo Apellido</small></label>
-                                <input name="apellido_2" id="apellido_2" value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
+                                <input name="apellido_2" id="apellido_2"
+                                    value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
                                     class="ab-form background-color rounded border capitalize apellido_2" type="text">
                             </div>
                         </div>
@@ -213,7 +256,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col mt-4" id="top_2">
             <div class="card  shadow-sm card_2 rounded border-none">
@@ -361,11 +403,16 @@
                         <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
                         <input name="id_etapa" id="id_etapa" type="hidden"
                             value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
-                        <div class="row mt-4">
+                        <div class="row mt-4 justify-content-end">
                             <div class="col-md-12 mt-2 text-right">
                                 <button data-back=".card_2 .card-body" type="button"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
+                                <button class="ab-btn b-primary-color btn-form4" type="submit">
+                                    <span class="spinner-border spinner-border-sm mr-2 d-none" role="status"
+                                        aria-hidden="true"></span>
+                                    <span class="spinner-text d-none">Enviando...</span>
+                                    <span class="text-save">Guardar</span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -698,7 +745,16 @@
 
             // Si todos los archivos requeridos (obligatorios) han sido subidos, permite avanzar
             if (archivosFaltantes === 0) {
-                return true;
+                // Cambiar el estado del botón mientras se envía el formulario
+                $('.btn-form4').prop('disabled', true);
+                $('.spinner-border').removeClass('d-none'); // Muestra el spinner
+                $('.spinner-text').removeClass('d-none'); // Muestra el texto
+
+                // Ocultar el botón de "Regresar"
+                $('.btn-regresar').addClass('d-none');
+                $('.text-save').addClass('d-none');
+
+                return true; // Continuar con el envío del formulario
             } else {
                 // Faltan documentos requeridos, pero si son opcionales, permite avanzar
                 $('.file').each(function() {
@@ -718,6 +774,7 @@
                 });
             }
         });
+
 
 
 
@@ -775,6 +832,7 @@
             }
 
         });
+
 
 
 
@@ -908,7 +966,5 @@
             }
         });
     </script>
-
-
 
 @endsection
