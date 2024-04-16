@@ -81,7 +81,7 @@ class Rectificacion_model extends Model
             ])
 
             ->get();
-            //dd($pendientes);exit;
+        //dd($pendientes);exit;
         if ($pendientes->isEmpty()) {
             $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
             c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
@@ -141,8 +141,7 @@ class Rectificacion_model extends Model
     {
         $sql = "EXECUTE catastro_sp_vdigital_inserta
         ?,?,?,?,?,
-        ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?";
 
         $params = array(
             $request->nombre  ?? '-',
@@ -150,13 +149,6 @@ class Rectificacion_model extends Model
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
             $request->correo_propietario ?? '-',
-            $request->domicilio_p ?? '-',
-            $request->domicilio_n ?? '-',
-            $request->colonia ?? '-',
-            $request->entreCalle_1 ?? '-',
-            $request->entreCalle_2 ?? '-',
-            $request->numInt ?? '-',
-            $request->numExt ?? '-',
             session('id_usuario') ?? '-',
             intval($request->id_solicitud)  ?? 1,
 
@@ -177,8 +169,7 @@ class Rectificacion_model extends Model
 
         $sql = "EXECUTE catastro_sp_vdigital_actualiza
         ?,?,?,?,?,
-        ?,?,?,?,?,
-        ?,?,?,?";
+        ?,?";
 
         $params = array(
             $request->nombre  ?? '-',
@@ -186,13 +177,6 @@ class Rectificacion_model extends Model
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
             $request->correo_propietario ?? '-',
-            $request->domicilio_p ?? '-',
-            $request->domicilio_n ?? '-',
-            $request->colonia ?? '-',
-            $request->entreCalle_1 ?? '-',
-            $request->entreCalle_2 ?? '-',
-            $request->numInt ?? '-',
-            $request->numExt ?? '-',
             session('id_usuario') ?? '-',
             $request->id_captura ?? '-',
         );
@@ -208,11 +192,13 @@ class Rectificacion_model extends Model
 
         $sql = "EXECUTE catastro_sp_vdigital_actualiza_2
         ?,?,?,?,?,
-        ?,?";
+        ?,?,?,?";
 
         $params = array(
             $request->numero_cuenta  ?? null,
             $request->nombre_cuenta ?? null,
+            $request->domicilio_p ?? null,
+            $request->domicilio_n ?? null,
             $request->tipo_rectificacion ?? null,
             $request->rc_notificacion ?? null,
             $request->rc_ubicacion ?? null,
@@ -329,4 +315,7 @@ class Rectificacion_model extends Model
         DB::connection('captura_op')->statement($sql, [$idPrecaptura, $observaciones, $usuario]);
         return "Procedimiento almacenado ejecutado con éxito";
     }
+
+    
+
 }

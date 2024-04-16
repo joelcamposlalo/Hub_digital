@@ -12,7 +12,7 @@
 
 @section('container')
     <h1 class="text-muted text-left font m-0 bold c-primary-color">
-        Solicitud De Verificación Tecnica De Riesgos @isset($id_captura)
+        Solicitud De Verificación Técnica De Riesgos @isset($id_captura)
         @endisset
     </h1>
     <div class="font text-left ">Folio de trámite: {{ $folio }}</div>
@@ -139,14 +139,14 @@
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
-                                    value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
+                                    value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
                                     class="ab-form background-color rounded border correo_propietario" type="text"
                                     required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mt-2">
-                                <label for="personaJ"><small>Regímen Fiscal</small></label>
+                                <label for="personaJ"><small>Régimen Fiscal</small></label>
                                 <select name="personaJ" id="personaJ"
                                     class="ab-form background-color rounded border personaJ">
                                     <option value="Persona Fisica">Persona Física</option>
@@ -209,7 +209,7 @@
                             <div class="col-2 mt-2">
                                 <label for="numero"><small>Número</small></label>
                                 <input name="numero" id="numero" value="{{ isset($numero) ? $numero : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero" type="text"
+                                    class="ab-form background-color rounded border capitalize numero" type="number"
                                     required>
                             </div>
                         </div>
@@ -270,8 +270,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col mt-4" id="top_3">
             <div class="card  shadow-sm card_3 rounded border-none">
@@ -323,7 +321,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </table>
                         </div>
                         <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
@@ -343,13 +340,12 @@
                                 </button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="btnFloat" data-toggle="modal" data-target="#modal-map"><i class="fas fa-map-marker-alt text-white"></i>
     </div>
@@ -375,7 +371,6 @@
     <script src="{{ asset('vendors/lightbox/dist/js/lightbox.min.js') }}"></script>
 
     <script>
-        
         $(document).ready(function() {
             $('#form_4').parsley().on('form:error', function() {
                 iziToast.error({
@@ -403,8 +398,6 @@
         $('.card_3 .card-body').slideUp('fast');
         $('.card_4 .card-body').slideUp('fast');
 
-
-
         $(document).ready(function() {
 
             @if (isset($id_etapa) && $id_etapa == 178)
@@ -421,18 +414,10 @@
                 $('.card_4 .card-body').slideUp('fast');
             @endif
 
-
-
-            //animacion
             lightbox.option({
                 'resizeDuration': 200,
                 'wrapAround': true
             })
-
-            /**
-             * Menu de optiones en movil
-             *
-             */
 
             $('#nav .menu').click(function() {
                 $('.menu-mobile').addClass('open');
@@ -441,8 +426,6 @@
             $('.menu-mobile .close').click(function() {
                 $('.menu-mobile').removeClass('open');
             });
-
-            //Parsley de validacionn en el form
 
             $('#form_1').parsley();
             $('#form_2').parsley();
@@ -508,7 +491,7 @@
                     formdata.append('telefono', telefono);
                     formdata.append('apellido_1', apellido_1);
                     formdata.append('apellido_2', apellido_2);
-                    formdata.append('correo', correo_propietario);
+                    formdata.append('correo_propietario', correo_propietario);
                     formdata.append('giro_comercio', giro_comercio);
                     formdata.append('razonSocial', razonSocial);
                     formdata.append('id_solicitud', id_solicitud);
@@ -626,7 +609,7 @@
 
                 var id_solicitud = "{{ $folio }}";
                 var domicilio = $('.domicilio').val();
-                var numero = $('.numero').val();
+                var numero = parseInt($('.numero').val());
                 var entreCalle_1 = $('.entreCalle_1').val();
                 var entreCalle_2 = $('.entreCalle_2').val();
                 var colonia = $('.colonia').val();
@@ -708,6 +691,7 @@
         });
 
         $('#form_4').submit(function(e) {
+
             if (archivosRequeridosSubidos() === 0) {
                 // Todos los documentos requeridos han sido subidos, permite avanzar
                 return true;

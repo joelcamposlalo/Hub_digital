@@ -47,16 +47,11 @@ class Verificacion_Riesgos extends Controller
         session(['lastpage' => __FILE__]);
     }
 
-
-
-    //Aqui esta la funcion general para ingreso de solicitud y el primer procedimiento
-
     public function ingresa_solicitud(Request $request)
     {
         //Primer procedimiento almacenado
         if ($response = Verificacion_Riesgos_Model::ingresa_solicitud($request)) {
             $obj = $response;
-
 
             if ($obj > 0) {
 
@@ -167,7 +162,9 @@ class Verificacion_Riesgos extends Controller
                 }
             }
         }
+
         $document_urls = [];
+
         foreach ($_FILES as $key => $file) {
 
             if ($file["size"] > 0 && $file["name"] != "") {
@@ -197,6 +194,7 @@ class Verificacion_Riesgos extends Controller
                 );
             }
         }
+
         Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 181,  'terminado', $id_captura, null);
 
         DB::connection('pgsql')->table('solicitudes_hist')->insert([
@@ -209,14 +207,13 @@ class Verificacion_Riesgos extends Controller
             'folio_externo' => $request->id_captura,
         ]);
 
-
-
-        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000">realizado el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Verificación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has realizado </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Verificación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
         $titulo = "Notificación de Registro de Trámite en Línea";
-        $correo = session('correo');
-        Verificacion_Riesgos_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
+        $correo_propietario = session('correo_propietario');
+        Verificacion_Riesgos_model::notificarPorCorreo($request, $titulo, $mensaje, $correo_propietario);
         Verificacion_Riesgos_Model::sendMail($request, $document_urls);
 
-        return view('ciudadano/descanso_capacitacion');
+
+        return view('/ciudadano/descanso_capacitacion');
     }
 }

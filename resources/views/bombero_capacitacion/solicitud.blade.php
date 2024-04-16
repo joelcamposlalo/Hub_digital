@@ -164,7 +164,7 @@
                             <div class="col-md-6 mt-2">
                                 <label for="correo_propietario"><small>Correo Electrónico</small></label>
                                 <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
-                                    value="{{ isset($emailPropietario) ? $emailPropietario : '' }}"
+                                    value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
                                     class="ab-form background-color rounded border correo_propietario" type="text"
                                     required>
                             </div>
@@ -207,6 +207,7 @@
 
 
                         <div class="row mt-4">
+
                             <div class="col-md-12 mt-2 text-right">
                                 <button data-back=".card_1 .card-body" type="button" style="display: none;"
                                     class="ab-btn btn-cancel btn-regresar">Regresar</button>
@@ -233,10 +234,11 @@
                     <p>
                 </div>
                 <div class="card-body">
-                    <form id="form_4" method="POST" action="{{ url('/bombero_capacitacion/guardar') }}">
+                    <form id="form_4" method="POST" action="{{ url('bombero_capacitacion/guardar') }}">
                         @csrf
-                        <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
-
+                        <div class="responsive w-100" style="width: 100%;">
+                            <input name="id_captura" id="id_captura" type="hidden"
+                                value="{{ isset($id_captura) ? $id_captura : '' }}">
                             <input name="id_solicitud" id="id_solicitud" type="hidden" value="{{ $folio }}">
                             <input name="id_etapa" id="id_etapa" type="hidden"
                                 value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
@@ -258,13 +260,16 @@
                                     <input id="contador" type="hidden" name="contador" value="1">
                                 </div>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row mt-4 justify-content-end">
                                 <div class="col-md-12 mt-2 text-right">
-                                    <input name="id_captura" id="id_captura_guardar" type="hidden"
-                                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                                     <button data-back=".card_1 .card-body" type="button"
                                         class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                    <button class="ab-btn b-primary-color btn-form4" type="submit">Guardar</button>
+                                    <button class="ab-btn b-primary-color btn-form4" type="submit">
+                                        <span class="spinner-border spinner-border-sm mr-2 d-none" role="status"
+                                            aria-hidden="true"></span>
+                                        <span class="spinner-text d-none">Enviando...</span>
+                                        <span class="text-save">Guardar</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -328,6 +333,8 @@
     <script src="{{ asset('vendors/parsley/es.js') }}"></script>
     <script src="{{ asset('js/frontend.js') }}"></script>
     <script src="{{ asset('vendors/lightbox/dist/js/lightbox.min.js') }}"></script>
+
+
     <script>
         $('.card_2 .card-body').slideUp('fast');
         $('.card_3 .card-body').slideUp('fast');
@@ -471,8 +478,8 @@
                 setTimeout(() => {
                     $('html, body').animate({
                         scrollTop: $('#top-2').position().top
-                    }, 500);
-                }, 500);
+                    }, 1000);
+                }, 1000);
 
                 e.preventDefault();
 
@@ -487,8 +494,8 @@
                 setTimeout(() => {
                     $('html, body').animate({
                         scrollTop: $('#top-4').position().top
-                    }, 500);
-                }, 500);
+                    }, 1000);
+                }, 1000);
             });
 
 
@@ -538,7 +545,7 @@
                     formdata.append('apellido_uno', apellido_uno);
                     formdata.append('apellido_dos', apellido_dos);
                     formdata.append('telefono', telefono);
-                    formdata.append('correo', correo_propietario);
+                    formdata.append('correo_propietario', correo_propietario);
                     formdata.append('domicilio', domicilio);
                     formdata.append('numero', numero);
                     formdata.append('numeroint', numeroint);
@@ -638,17 +645,20 @@
 
 
             $('.btn-regresar').click(function() {
-
                 $('.btn-guardar').prop('disabled', false);
 
                 let atras = $(this).attr('data-back');
 
-                $(atras).slideDown('slow');
-                $(this).parents('.card-body').slideUp('slow');
+                $(atras).slideDown(1000);
+                $(this).parents('.card-body').slideUp(
+                    1000);
+
                 $('html, body').animate({
-                    scrollTop: $(atras).siblings('.card-header').offset().top
-                }, 500);
+                        scrollTop: $(atras).siblings('.card-header').offset().top
+                    },
+                    1000);
             });
+
         });
 
         function is_mobile() {
@@ -733,6 +743,25 @@
                 position: 'topRight'
             });
         @endif
+
+        $('#form_4').submit(function(event) {
+            // Verificar si el primer formulario está lleno o si hay errores de validación
+            var primerFormularioLleno = $('#form_4').parsley().isValid();
+
+            // Si el primer formulario no está lleno o hay errores de validación, detener el envío del formulario
+            if (!primerFormularioLleno) {
+                return;
+            }
+
+            // Deshabilitar el botón de "Guardar" y mostrar la animación de enviando junto con el spinner
+            $('.btn-form4').prop('disabled', true);
+            $('.spinner-border').removeClass('d-none'); // Muestra el spinner
+            $('.spinner-text').removeClass('d-none'); // Muestra el texto
+
+            // Ocultar el botón de "Regresar"
+            $('.btn-regresar').addClass('d-none');
+            $('.text-save').addClass('d-none');
+        });
     </script>
 
 @endsection

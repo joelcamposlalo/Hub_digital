@@ -7,6 +7,7 @@ use App\model\Solicitudes_model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Evaluacion_riesgos_model;
+use App\model\Predios_model;
 use App\Mail\contactoVerificacion;
 use PDF;
 
@@ -21,6 +22,7 @@ class Evaluacion_riesgos extends Controller
 
             $vars = [
                 'files'    => Evaluacion_riesgos_model::get_files($folio),
+                'ultimo'   => Predios_model::get_count(),
                 'folio'    => $folio
             ];
 
@@ -47,7 +49,7 @@ class Evaluacion_riesgos extends Controller
 
     public function ingresa_solicitud(Request $request)
     {
-
+        //Primer procedimiento almacenado
         if ($response = Evaluacion_riesgos_model::ingresa_solicitud($request)) {
             $obj = $response;
 
@@ -57,14 +59,15 @@ class Evaluacion_riesgos extends Controller
                 $request->request->add([
                     'id_captura' => $obj
                 ]);
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 173, $request->id_captura);
+                //Temas de la table solicitud cambia el estado y datos
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, $request->etapa, $request->id_captura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo ($rows);
                     echo json_encode("0");
                 } else {
-
+                    //Cambia el status de la etapa
                     Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj, null);
                     http_response_code(200);
                     echo json_encode($obj);
@@ -79,6 +82,8 @@ class Evaluacion_riesgos extends Controller
     }
 
 
+
+    //El procdimiento almacenado de actualizar el primer card
     public function actualiza_solicitud(Request $request)
     {               //SP de el actualizar informacion
         if ($response = Evaluacion_riesgos_model::actualiza_solicitud($request)) {
@@ -86,7 +91,7 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 173, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
@@ -113,13 +118,13 @@ class Evaluacion_riesgos extends Controller
             $obj = $response[0];
 
             if ($obj->IdCaptura > 0) {
-                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 28, $request->id_solicitud, 174, $obj->IdCaptura);
+                $rows = Solicitudes_model::actualiza_datos_solicitud($request, 1, $request->id_solicitud, 173, $obj->IdCaptura);
 
                 if ($rows == 0) {
                     http_response_code(503);
                     echo json_encode("0");
                 } else {
-                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 174, 'pendiente', $obj->IdCaptura, null);
+                    Solicitudes_model::actualiza_etapa_solicitud($request->id_solicitud, 173, 'pendiente', $obj->IdCaptura, null);
                     http_response_code(200);
                     echo json_encode($obj->IdCaptura);
                 }
@@ -206,7 +211,7 @@ class Evaluacion_riesgos extends Controller
 
 
 
-        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> realizado el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Evaluación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has realizado </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Evaluación de Riesgos de Protección Civil Y Bomberos</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu verificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
         $titulo = "Notificación de Registro de Trámite en Línea";
         $correo = session('correo');
         Evaluacion_riesgos_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);

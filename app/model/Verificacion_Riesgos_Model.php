@@ -4,9 +4,11 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\model\Solicitudes_model;
 use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
+use Psy\VersionUpdater\IntervalChecker;
 use App\Mail\contactoVerificacion;
 
 class Verificacion_Riesgos_Model extends Model
@@ -47,14 +49,6 @@ class Verificacion_Riesgos_Model extends Model
 
         return $folio;
     }
-
-    public static function get_count()
-    {
-        return DB::table('predios')
-            ->where('id_usuario', '=', session('id_usuario'))
-            ->count();
-    }
-
 
     public static function get_files($id_solicitud)
     {
@@ -145,7 +139,7 @@ class Verificacion_Riesgos_Model extends Model
             $request->apellido_1 ?? '-',
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
-            $request->correo ?? '-',
+            $request->correo_propietario ?? '-',
             $request->personaJ ?? '-',
             $request->giro_comercio ?? '-',
             $request->razonSocial ?? '-',
@@ -182,7 +176,7 @@ class Verificacion_Riesgos_Model extends Model
             $request->apellido_1 ?? '-',
             $request->apellido_2 ?? '-',
             $request->telefono ?? '-',
-            $request->correo ?? '-',
+            $request->correo_propietario ?? '-',
             $request->personaJ ?? '-',
             $request->giro_comercio ?? '-',
             $request->razonSocial ?? '-',
@@ -306,15 +300,12 @@ class Verificacion_Riesgos_Model extends Model
             'descripcion' => $mensaje,
         ];
 
-        $emailPropietario = DB::connection('captura_op')->table('Precaptura')
+        $correo_propietario = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first()->emailPropietario;
 
-
-
-
-        if ($emailPropietario) {
+        if ($correo_propietario) {
             if (DB::table('notificaciones')->insert($data)) {
-                Mail::to($emailPropietario)->bcc(env('MAIL_BCC'))->send(new notificacion($emailPropietario, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
+                Mail::to($correo_propietario)->bcc(env('MAIL_BCC'))->send(new notificacion($correo_propietario, $titulo, $mensaje, 'https://bomberos.zapopan.gob.mx/static/assets4/images/logo_PCYBZ_100x262.png'));
                 return true;
             } else {
                 return false;
@@ -328,9 +319,8 @@ class Verificacion_Riesgos_Model extends Model
         $correoData = DB::connection('captura_op')->table('Precaptura')
             ->where("IdCaptura", $request->id_captura)->first();
 
-            Mail::to('joel.campos@zapopan.gob.mx')
-            // Mail::to('oficialiapcyb@zapopan.gob.mx')
-            // ->bcc('joel.campos@zapopan.gob.mx')
+        Mail::to('vimoz@zapopan.gob.mx')
+        ->bcc('joel.campos@zapopan.gob.mx')
             ->send(new contactoVerificacion($correoData, $document_urls));
 
         }

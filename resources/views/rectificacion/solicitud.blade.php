@@ -6,27 +6,17 @@
     {{ menu_ciudadano('') }}
 @endsection
 
-
-
-
 @section('notification')
     {{ get_notificaciones() }}
-
 @endsection
 
-
-
-
 @section('container')
-    <h1 class="text-muted text-left font m-0 bold c-primary-color">
+    <h1 class="text-muted text-left font m-0 bold c-primary-color text-capitalize">
         Trámite web de rectificación de domicilio o ubicación
         @isset($id_captura)
         @endisset
     </h1>
-    <div class="font text-center ">Folio de trámite: {{ $folio }}</div>
-
-    <!-- Muestra la observacion cuando se regresa al ciudadano en movil-->
-
+    <div class="font text-left ">Folio de trámite: {{ $folio }}</div>
 
     <div class="row mt-5 etapas_info">
         <div class="col">
@@ -107,323 +97,318 @@
         </div>
     </div>
 
-    <div class="row position-relative">
-        @if ($id_etapa >= 183)
-        <div class="card mt-3 d-block">
-            <div class="card-header">
-                <small>Observaciones del revisor</small> <br>
-                <span class="badge badge-pill badge-warning">{{ $notificacion->created_at }}</span>
+
+    <!-- Termina Muestra observaciones del revisor -->
+
+    <!-- Muestra la observacion cuando se regresa al ciudadano en movil-->
+
+    <div class="row custom-flex">
+        <div class="{{ isset($notificacion) ? 'col-lg-8' : 'col col' }}">
+            <div class="row
+                postion-relative">
+                <div class="col mt-4" id="top_1">
+                    <div class="card  shadow-sm card_1 rounded border-none">
+                        <div class="card-header">
+                            <small>Datos del solicitante</small>
+                        </div>
+                        <div class="card-body">
+                            <form id=form_1 method="post">
+                                <input name="id_captura" id="id_captura" type="hidden"
+                                    value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="nombre"><small>Nombre(s)</small></label>
+                                        <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
+                                            class="ab-form background-color rounded border capitalize nombre" type="text"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="apellido_1"><small>Primer Apellido </small></label>
+                                        <input name="apellido_1" id="apellido_1"
+                                            value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
+                                            class="ab-form background-color rounded border capitalize apellido_1"
+                                            type="text" required>
+                                    </div>
+                                    <div class="col mt-2">
+                                        <label for="apellido_2"><small>Segundo Apellido</small></label>
+                                        <input name="apellido_2" id="apellido_2"
+                                            value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
+                                            class="ab-form background-color rounded border capitalize apellido_2"
+                                            type="text">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-2">
+                                        <label for="telefono"><small>Teléfono</small></label>
+                                        <input name="telefono" id="telefono"
+                                            value="{{ isset($telefono) ? $telefono : '' }}"
+                                            class="ab-form background-color rounded border capitalize telefono"
+                                            type="tel" data-parsley-length="[10, 10]" required>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="correo_propietario"><small>Correo Electrónico</small></label>
+                                        <input name="correo_propietario" id="correo_propietario"
+                                            data-parsley-type="email"
+                                            value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
+                                            class="ab-form background-color rounded border correo_propietario"
+                                            type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12 mt-2 text-right">
+                                        <button data-back=".card_1 .card-body" type="button" style="display: none;"
+                                            class="ab-btn btn-cancel btn-regresar">Regresar</button>
+                                        <input name="poligono" id="poligono" class="poligono" type="hidden"
+                                            value="{{ isset($poligono) ? $poligono : '' }}">
+                                        <input name="origen" type="hidden" value='solicitud'>
+                                        <input name="id_captura" id="id_captura_frm4" type="hidden"
+                                            value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                        <input name="id_etapa" id="id_etapa" type="hidden"
+                                            value="{{ isset($id_etapa) ? $id_etapa : '' }}">
+                                        <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
+                                            type="submit">Continuar</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <small>{!! $notificacion->descripcion !!}</small>
+            <div class="row">
+                <div class="col mt-4" id="top_2">
+                    <div class="card  shadow-sm card_2 rounded border-none">
+                        <div class="card-header">
+                            <small>Datos para la rectificación</small>
+                        </div>
+                        <div class="card-body">
+                            <form id="form_2 form_busqueda">
+                                <input name="id_captura" id="id_captura_2" type="hidden"
+                                    value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                <div class="row">
+                                </div>
+                                <div class="row">
+                                    <div class="col-10 mt-2">
+                                        <label for="numero_cuenta"><small>Número de cuenta Predial</small></label>
+                                        <input name="numero_cuenta" id="numero_cuenta"
+                                            value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
+                                            class="ab-form background-color rounded border capitalize numero_cuenta"
+                                            type="text">
+                                    </div>
+                                    <div class="col mt-2 d-flex align-items-end justify-content-end">
+                                        <button type="button" id="btn_buscar_cuenta"
+                                            class="ab-btn b-primary-color w-100 busqueda"
+                                            style="height: 50px !important;">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                aria-hidden="true" style="display: none;"></span>
+                                            Buscar Cuenta
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="nombre_cuenta"><small>Nombre completo en cuenta
+                                                Predial</small></label>
+                                        <input name="nombre_cuenta" id="nombre_cuenta"
+                                            value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
+                                            class="ab-form background-color rounded border capitalize nombre_cuenta"
+                                            type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="domicilio_p"><small>Domicilio en recibo Predial</small></label>
+                                        <input name="domicilio_p" id="domicilio_p"
+                                            value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
+                                            class="ab-form background-color rounded border domicilio_p" type="text"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="domicilio_n"><small>Domicilio de notificaciones</small></label>
+                                        <input name="domicilio_n" id="domicilio_n"
+                                            value="{{ isset($domicilio_n) ? $domicilio_n : '' }}"
+                                            class="ab-form background-color rounded border capitalize domicilio_n"
+                                            type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-2">
+                                        <label for="tipo_rectificacion"><small>Tipo de
+                                                rectificación</small></label>
+                                        <select name="tipo_rectificacion" id="tipo_rectificacion"
+                                            class="ab-form background-color rounded border tipo_rectificacion">
+                                            <option value="Rectificación de notificación">Rectificación de
+                                                notificación
+                                            </option>
+                                            <option value="Rectificación de ubicación">Rectificación de ubicación
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row campo-especifico_1" id="r_nombre">
+                                    <div class="col mt-2">
+                                        <label for="rc_nombre"><small>Nombre correcto</small></label>
+                                        <input name="rc_nombre" id="rc_nombre"
+                                            value="{{ isset($rc_nombre) ? $rc_nombre : '' }}"
+                                            class="ab-form background-color rounded border capitalize rc_nombre"
+                                            type="text">
+                                    </div>
+                                </div>
+                                <div class="row campo-especifico_2" id="r_notificacion">
+                                    <div class="col mt-2">
+                                        <label for="rc_notificacion"><small>Domicilio correcto para
+                                                notificaciones</small></label>
+                                        <input name="rc_notificacion" id="rc_notificacion"
+                                            value="{{ isset($rc_notificacion) ? $rc_notificacion : '' }}"
+                                            class="ab-form background-color rounded border capitalize rc_notificacion"
+                                            type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row campo-especifico_3" id="r_ubicacion">
+                                    <div class="col mt-2">
+                                        <label for="rc_ubicacion"><small>Ubicación correcta</small></label>
+                                        <input name="rc_ubicacion" id="rc_ubicacion"
+                                            value="{{ isset($rc_ubicacion) ? $rc_ubicacion : '' }}"
+                                            class="ab-form background-color rounded border capitalize rc_ubicacion"
+                                            type="text">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12 mt-2 text-right">
+                                        <button data-back=".card_1 .card-body" type="button" style="display: none;"
+                                            class="ab-btn btn-cancel btn-regresar">Regresar</button>
+                                        <input name="poligono" id="poligono" class="poligono" type="hidden"
+                                            value="{{ isset($poligono) ? $poligono : '' }}">
+                                        <input name="origen" type="hidden" value='solicitud'>
+                                        <input name="id_captura" id="id_captura_frm4" type="hidden"
+                                            value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                        <button data-back=".card_1 .card-body" type="button"
+                                            class="ab-btn btn-cancel btn-regresar">Regresar</button>
+                                        <button class="ab-btn b-primary-color  " id="btn_inserta_2"
+                                            type="submit">Continuar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-4" id="top_3">
+                    <div class="card  shadow-sm card_3 rounded border-none">
+                        <div class="card-header">
+                            <small>Archivos requeridos</small>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning alert-dismissible fade show mt-4 notas" role="alert">
+                                <h6 class="font">
+                                    Nota: Debes de adjuntar todos los archivos obligatorios.
+                                </h6>
+
+                            </div>
+                            <form id="form_4" action="{{ url('rectificacion/ingresa_tramite') }}" method="POST"
+                                enctype="multipart/form-data" data-parsley-validate>
+                                <input name="id_captura" id="id_captura_3" type="hidden"
+                                    value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                @csrf
+                                <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
+                                    <table class="w-100">
+
+                                        @foreach ($files['pendientes'] as $key => $file)
+                                            <tr class="w-100 predio">
+                                                <td class="f-14">
+                                                    <a class="enlace_box" href="#!">
+                                                        <img class="icono" style="transform: translateX(10px);"
+                                                            src="{{ asset('media/flaticon/archivos/upload.svg') }}"
+                                                            width="38px" alt="{{ $file->nombre }}">
+                                                    </a>
+                                                </td>
+                                                <td class="f-12 font archivo">{{ $file->descripcion_larga }} <br>
+                                                    @if ($file->obligatorio == 1)
+                                                        <small class="f-10 font text-danger error">Este archivo es
+                                                            obligatorio</small>
+                                                    @else
+                                                        <small class="f-10 font text-success success">Este archivo
+                                                            es
+                                                            opcional</small>
+                                                    @endif
+                                                </td>
+                                                <td class="f-12 font filesize">Tamaño: 0 bytes</td>
+                                                <td class="f-12 p-0"></td>
+                                                <td class="f-14 acciones">
+                                                    <label for="file_{{ $key }}"
+                                                        class="ab-btn-effect bold font btn-file">
+                                                        <small class="font bold f-10 progreso">Actualizar</small>
+                                                        <input class="file" id="file_{{ $key }}"
+                                                            type="file" name="file_{{ $file->id_documento }}"
+                                                            data-upload="0" data-required="{{ $file->obligatorio }}">
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+
+                                <div id="error-message" class="text-danger" style="display:none;">Debes subir un
+                                    documento</div>
+
+                                <input name="id_solicitud" id="id_solicitud_frm4" type="hidden"
+                                    value="{{ $folio }}">
+                                <input name="id_etapa" id="id_etapa" type="hidden"
+                                    value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
+                                <div class="row mt-4 justify-content-end">
+                                    <div class="col-md-12 mt-2 text-right">
+                                        <button data-back=".card_2 .card-body" type="button"
+                                            class="ab-btn btn-cancel btn-regresar">Regresar</button>
+                                        <button class="ab-btn b-primary-color btn-form4" type="submit">
+                                            <span class="spinner-border spinner-border-sm mr-2 d-none" role="status"
+                                                aria-hidden="true"></span>
+                                            <span class="spinner-text d-none">Enviando...</span>
+                                            <span class="text-save">Guardar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    @endif
-    <!-- Muestra la observacion cuando se regresa al ciudadano -->
-    <div class="row">
-        <div class="col-md-3 mt-2 position-absolute" style="right: 0;">
-            @if ($id_etapa >= 183)
-                <div class="card mt-3 d-md-block d-lg-block d-xl-block">
+
+        @if ($id_etapa >= 183)
+            <div class="col mt-4 tarjeta-feedback">
+                <div class="card d-block d-sm-none ">
                     <div class="card-header">
                         <small>Observaciones del revisor</small> <br>
-                        <span class="badge badge-pill badge-warning">{{ $notificacion->created_at }}</span>
+                        <span>{{ $notificacion->created_at }}</span>
                     </div>
                     <div class="card-body">
                         <small>{!! $notificacion->descripcion !!}</small>
                     </div>
                 </div>
-            @endif
-        </div>
-    </div>
-    </div>
-    <!-- Termina Muestra observaciones del revisor -->
-
-
-<div class="row position relative">
-        <div class="col mt-4" id="top_1">
-            <div class="card  shadow-sm card_1 rounded border-none">
-                <div class="card-header">
-                    <small>Datos del solicitante</small>
-                </div>
-                <div class="card-body">
-                    <form id=form_1 method="post">
-                        <input name="id_captura" id="id_captura" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}">
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="nombre"><small>Nombre(s)</small></label>
-                                <input name="nombre" id="nombre" value="{{ isset($nombre) ? $nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="apellido_1"><small>Primer Apellido </small></label>
-                                <input name="apellido_1" id="apellido_1" value="{{ isset($apellido_1) ? $apellido_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_1" type="text">
-                            </div>
-                            <div class="col mt-2">
-                                <label for="apellido_2"><small>Segundo Apellido</small></label>
-                                <input name="apellido_2" id="apellido_2"
-                                    value="{{ isset($apellido_2) ? $apellido_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize apellido_2" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label for="telefono"><small>Teléfono</small></label>
-                                <input name="telefono" id="telefono" value="{{ isset($telefono) ? $telefono : '' }}"
-                                    class="ab-form background-color rounded border capitalize telefono" type="tel"
-                                    data-parsley-length="[10, 10]">
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <label for="correo_propietario"><small>Correo Electrónico</small></label>
-                                <input name="correo_propietario" id="correo_propietario" data-parsley-type="email"
-                                    value="{{ isset($correo_propietario) ? $correo_propietario : '' }}"
-                                    class="ab-form background-color rounded border correo_propietario" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="domicilio_p"><small>Domicilio en recibo Predial</small></label>
-                                <input name="domicilio_p" id="domicilio_p"
-                                    value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
-                                    class="ab-form background-color rounded border domicilio_p" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="domicilio_n"><small>Domicilio de notificaciones</small></label>
-                                <input name="domicilio_n" id="domicilio_n"
-                                    value="{{ isset($domicilio_n) ? $domicilio_n : '' }}"
-                                    class="ab-form background-color rounded border capitalize domicilio_n" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="colonia"><small>Colonia</small></label>
-                                <input name="colonia" id="colonia" value="{{ isset($colonia) ? $colonia : '' }}"
-                                    class="ab-form background-color rounded border capitalize colonia" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="entreCalle_1"><small>Entre Calle 1</small></label>
-                                <input name="entreCalle_1" id="entreCalle_1"
-                                    value="{{ isset($entreCalle_1) ? $entreCalle_1 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_1"
-                                    type="text">
-                            </div>
-                            <div class="col mt-2">
-                                <label for="entreCalle_2"><small>Entre Calle 2</small></label>
-                                <input name="entreCalle_2" id="entreCalle_2"
-                                    value="{{ isset($entreCalle_2) ? $entreCalle_2 : '' }}"
-                                    class="ab-form background-color rounded border capitalize entreCalle_2"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="numInt"><small>Número Exterior</small></label>
-                                <input name="numInt" id="numInt" value="{{ isset($numInt) ? $numInt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numInt" type="text">
-                            </div>
-                            <div class="col mt-2">
-                                <label for="numExt"><small>Número Interior</small></label>
-                                <input name="numExt" id="numExt" value="{{ isset($numExt) ? $numExt : '' }}"
-                                    class="ab-form background-color rounded border capitalize numExt" type="text"
-                                    data-parsley-validate="" data-parsley-required="false">
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12 mt-2 text-right">
-                                <button data-back=".card_1 .card-body" type="button" style="display: none;"
-                                    class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <input name="poligono" id="poligono" class="poligono" type="hidden"
-                                    value="{{ isset($poligono) ? $poligono : '' }}">
-                                <input name="origen" type="hidden" value='solicitud'>
-                                <input name="id_captura" id="id_captura_frm4" type="hidden"
-                                    value="{{ isset($id_captura) ? $id_captura : '' }}">
-                                <input name="id_etapa" id="id_etapa" type="hidden"
-                                    value="{{ isset($id_etapa) ? $id_etapa : '' }}">
-                                <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
-                                    type="submit">Continuar</button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col mt-4" id="top_2">
-            <div class="card  shadow-sm card_2 rounded border-none">
-                <div class="card-header">
-                    <small>Datos para la rectificación</small>
-                </div>
-                <div class="card-body">
-                    <form id=form_2>
-                        <input name="id_captura" id="id_captura_2" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}">
-                        <div class="row">
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="numero_cuenta"><small>Número de cuenta Predial</small></label>
-                                <input name="numero_cuenta" id="numero_cuenta"
-                                    value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
-                                    class="ab-form background-color rounded border capitalize numero_cuenta"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="nombre_cuenta"><small>Nombre completo en cuenta Predial</small></label>
-                                <input name="nombre_cuenta" id="nombre_cuenta"
-                                    value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
-                                    class="ab-form background-color rounded border capitalize nombre_cuenta"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-2">
-                                <label for="tipo_rectificacion"><small>Tipo de rectificación</small></label>
-                                <select name="tipo_rectificacion" id="tipo_rectificacion"
-                                    class="ab-form background-color rounded border tipo_rectificacion">
-                                    <option value="Rectificación de notificación">Rectificación de notificación</option>
-                                    <option value="Rectificación de ubicación">Rectificación de ubicación</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row campo-especifico_1" id="r_nombre">
-                            <div class="col mt-2">
-                                <label for="rc_nombre"><small>Nombre correcto</small></label>
-                                <input name="rc_nombre" id="rc_nombre" value="{{ isset($rc_nombre) ? $rc_nombre : '' }}"
-                                    class="ab-form background-color rounded border capitalize rc_nombre" type="text">
-                            </div>
-                        </div>
-                        <div class="row campo-especifico_2" id="r_notificacion">
-                            <div class="col mt-2">
-                                <label for="rc_notificacion"><small>Domicilio correcto para notificaciones</small></label>
-                                <input name="rc_notificacion" id="rc_notificacion"
-                                    value="{{ isset($rc_notificacion) ? $rc_notificacion : '' }}"
-                                    class="ab-form background-color rounded border capitalize rc_notificacion"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row campo-especifico_3" id="r_ubicacion">
-                            <div class="col mt-2">
-                                <label for="rc_ubicacion"><small>Ubicación correcta</small></label>
-                                <input name="rc_ubicacion" id="rc_ubicacion"
-                                    value="{{ isset($rc_ubicacion) ? $rc_ubicacion : '' }}"
-                                    class="ab-form background-color rounded border capitalize rc_ubicacion"
-                                    type="text">
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12 mt-2 text-right">
-                                <button data-back=".card_1 .card-body" type="button" style="display: none;"
-                                    class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <input name="poligono" id="poligono" class="poligono" type="hidden"
-                                    value="{{ isset($poligono) ? $poligono : '' }}">
-                                <input name="origen" type="hidden" value='solicitud'>
-                                <input name="id_captura" id="id_captura_frm4" type="hidden"
-                                    value="{{ isset($id_captura) ? $id_captura : '' }}">
-                                <button data-back=".card_1 .card-body" type="button"
-                                    class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <button class="ab-btn b-primary-color  " id="btn_inserta_2"
-                                    type="submit">Continuar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endif
 
-
-    <div class="row">
-        <div class="col mt-4" id="top_3">
-            <div class="card  shadow-sm card_3 rounded border-none">
-                <div class="card-header">
-                    <small>Archivos requeridos</small>
-                </div>
-                <div class="card-body">
-                    <div class="alert alert-warning alert-dismissible fade show mt-4 notas" role="alert">
-                        <h6 class="font">
-                            Nota: Debes de adjuntar todos los archivos obligatorios.
-                        </h6>
-
+        @if ($id_etapa >= 183)
+            <!-- Muestra la observación cuando se regresa al ciudadano -->
+            <div class="mt-4 col position-relative" style="right: 0;">
+                <div class="card d-none d-md-block d-lg-block d-xl-block">
+                    <div class="card-header">
+                        <small>Observaciones del revisor</small> <br>
+                        <span>{{ $notificacion->created_at }}</span>
                     </div>
-                    <form id="form_4" action="{{ url('rectificacion/ingresa_tramite') }}" method="POST"
-                        enctype="multipart/form-data" data-parsley-validate>
-                        <input name="id_captura" id="id_captura_3" type="hidden"
-                            value="{{ isset($id_captura) ? $id_captura : '' }}">
-                        @csrf
-                        <div class="responsive w-100" style="width: 100%; overflow-x: auto;">
-                            <table class="w-100">
-
-                                @foreach ($files['pendientes'] as $key => $file)
-                                    <tr class="w-100 predio">
-                                        <td class="f-14">
-                                            <a class="enlace_box" href="#!">
-                                                <img class="icono" style="transform: translateX(10px);"
-                                                    src="{{ asset('media/flaticon/archivos/upload.svg') }}"
-                                                    width="38px" alt="{{ $file->nombre }}">
-                                            </a>
-                                        </td>
-                                        <td class="f-12 font archivo">{{ $file->descripcion_larga }} <br>
-                                            @if ($file->obligatorio == 1)
-                                                <small class="f-10 font text-danger error">Este archivo es
-                                                    obligatorio</small>
-                                            @else
-                                                <small class="f-10 font text-success success">Este archivo es
-                                                    opcional</small>
-                                            @endif
-                                        </td>
-                                        <td class="f-12 font filesize">Tamaño: 0 bytes</td>
-                                        <td class="f-12 p-0"></td>
-                                        <td class="f-14 acciones">
-                                            <label for="file_{{ $key }}"
-                                                class="ab-btn-effect bold font btn-file">
-                                                <small class="font bold f-10 progreso">Actualizar</small>
-                                                <input class="file" id="file_{{ $key }}" type="file"
-                                                    name="file_{{ $file->id_documento }}" data-upload="0"
-                                                    data-required="{{ $file->obligatorio }}">
-                                            </label>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-
-                        <div id="error-message" class="text-danger" style="display:none;">Debes subir un documento</div>
-
-                        <input name="id_solicitud" id="id_solicitud_frm4" type="hidden" value="{{ $folio }}">
-                        <input name="id_etapa" id="id_etapa" type="hidden"
-                            value="@if (isset($id_etapa)) {{ $id_etapa }} @endif">
-                        <div class="row mt-4 justify-content-end">
-                            <div class="col-md-12 mt-2 text-right">
-                                <button data-back=".card_2 .card-body" type="button"
-                                    class="ab-btn btn-cancel btn-regresar">Regresar</button>
-                                <button class="ab-btn b-primary-color btn-form4" type="submit">
-                                    <span class="spinner-border spinner-border-sm mr-2 d-none" role="status"
-                                        aria-hidden="true"></span>
-                                    <span class="spinner-text d-none">Enviando...</span>
-                                    <span class="text-save">Guardar</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="card-body">
+                        <small>{!! $notificacion->descripcion !!}</small>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
-
-    <div class="btnFloat" data-toggle="modal" data-target="#modal-map"><i class="fas fa-map-marker-alt text-white"></i>
+    @endif
     </div>
-
 
     <p id="parrafo"></p>
 @endsection
@@ -445,6 +430,27 @@
         div:where(.swal2-icon).swal2-warning {
             border-color: #1e636d !important;
             color: #1e636d !important;
+        }
+
+        @media (max-width: 900px) {
+            .custom-flex {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+        }
+
+        .card-body small p {
+            color: black !important;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .tarjeta-feedback {
+                display: none;
+            }
+        }
+
+        .busqueda:hover {
+            opacity: .8;
         }
     </style>
 
@@ -521,13 +527,6 @@
                 var apellido_2 = $('.apellido_2').val();
                 var telefono = $('.telefono').val();
                 var correo_propietario = $('.correo_propietario').val();
-                var domicilio_p = $('.domicilio_p').val();
-                var domicilio_n = $('.domicilio_n').val();
-                var colonia = $('.colonia').val();
-                var entreCalle_1 = $('.entreCalle_1').val();
-                var entreCalle_2 = $('.entreCalle_2').val();
-                var numInt = $('.numInt').val();
-                var numExt = $('.numExt').val();
                 var id_etapa = $('id_etapa').val();
 
                 if (id_solicitud > 0) {
@@ -540,13 +539,6 @@
                     formdata.append('apellido_2', apellido_2);
                     formdata.append('telefono', telefono);
                     formdata.append('correo_propietario', correo_propietario);
-                    formdata.append('domicilio_p', domicilio_p);
-                    formdata.append('domicilio_n', domicilio_n);
-                    formdata.append('colonia', colonia);
-                    formdata.append('entreCalle_1', entreCalle_1);
-                    formdata.append('entreCalle_2', entreCalle_2);
-                    formdata.append('numInt', numInt);
-                    formdata.append('numExt', numExt);
                     formdata.append('id_etapa', id_etapa);
 
 
@@ -571,7 +563,7 @@
                                 $('.card_3 .card-body').slideUp('slow');
                                 $('.btn-form4').prop('disabled', false);
                                 iziToast.show({
-                                    message: 'Se registró la información correctamente, puedes continuar llenando la otra información',
+                                    message: 'Se registró la información correctamente, puedes continuar llenando la otra información.',
                                     backgroundColor: '#2fd099',
                                     closeOnEscape: true
                                 });
@@ -664,6 +656,8 @@
                 var id_solicitud = "{{ $folio }}";
                 var numero_cuenta = $('.numero_cuenta').val();
                 var nombre_cuenta = $('.nombre_cuenta').val();
+                var domicilio_p = $('.domicilio_p').val();
+                var domicilio_n = $('.domicilio_n').val();
                 var tipo_rectificacion = $('.tipo_rectificacion').val();
                 var rc_notificacion = $('.rc_notificacion').val();
                 var rc_ubicacion = $('.rc_ubicacion').val();
@@ -673,6 +667,8 @@
 
                     formdata.append('numero_cuenta', numero_cuenta);
                     formdata.append('nombre_cuenta', nombre_cuenta);
+                    formdata.append('domicilio_p', domicilio_p);
+                    formdata.append('domicilio_n', domicilio_n);
                     formdata.append('tipo_rectificacion', tipo_rectificacion);
                     formdata.append('rc_notificacion', rc_notificacion);
                     formdata.append('rc_ubicacion', rc_ubicacion);
@@ -740,44 +736,6 @@
             });
         });
 
-        $('#form_4').submit(function(e) {
-            let archivosFaltantes = archivosRequeridosSubidos();
-
-            // Si todos los archivos requeridos (obligatorios) han sido subidos, permite avanzar
-            if (archivosFaltantes === 0) {
-                // Cambiar el estado del botón mientras se envía el formulario
-                $('.btn-form4').prop('disabled', true);
-                $('.spinner-border').removeClass('d-none'); // Muestra el spinner
-                $('.spinner-text').removeClass('d-none'); // Muestra el texto
-
-                // Ocultar el botón de "Regresar"
-                $('.btn-regresar').addClass('d-none');
-                $('.text-save').addClass('d-none');
-
-                return true; // Continuar con el envío del formulario
-            } else {
-                // Faltan documentos requeridos, pero si son opcionales, permite avanzar
-                $('.file').each(function() {
-                    if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
-                        // Si un archivo requerido no ha sido subido y no es opcional, muestra un SweetAlert y detiene el envío del formulario
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Oops...',
-                            text: `Falta subir los archivos obligatorios`,
-                            customClass: {
-                                closeConfirm: 'btn-close-custom-color'
-                            }
-                        });
-                        e.preventDefault();
-                        return false;
-                    }
-                });
-            }
-        });
-
-
-
-
         $('.file').change(function() {
 
             var file = event.target.files[0];
@@ -832,9 +790,6 @@
             }
 
         });
-
-
-
 
         function fileIsRequired() {
 
@@ -909,6 +864,44 @@
     </script>
 
     <script>
+        $('#form_4').submit(function(e) {
+            let archivosFaltantes = archivosRequeridosSubidos();
+
+            // Si todos los archivos requeridos (obligatorios) han sido subidos, permite avanzar
+
+            if (archivosFaltantes === 0) {
+                // Cambiar el estado del botón mientras se envía el formulario
+                $('.btn-form4').prop('disabled', true);
+                $('.spinner-border').removeClass('d-none'); // Muestra el spinner
+                $('.spinner-text').removeClass('d-none'); // Muestra el texto
+
+                // Ocultar el botón de "Regresar"
+                $('.btn-regresar').addClass('d-none');
+                $('.text-save').addClass('d-none');
+
+                return true; // Continuar con el envío del formulario
+            } else {
+                // Faltan documentos requeridos, pero si son opcionales, permite avanzar
+                $('.file').each(function() {
+                    if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
+                        // Si un archivo requerido no ha sido subido y no es opcional, muestra un SweetAlert y detiene el envío del formulario
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: `Falta subir los archivos obligatorios`,
+                            customClass: {
+                                closeConfirm: 'btn-close-custom-color'
+                            }
+                        });
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
         $(document).ready(function() {
             // Hide all specific fields initially
             $(".campo-especifico_1, .campo-especifico_2, .campo-especifico_3").hide();
@@ -923,6 +916,9 @@
 
                 // Show the specific field based on the selected option
                 showHideFields();
+
+                // Add or remove 'required' attribute based on selected option
+                toggleRequired();
             });
 
             // Handle form submission
@@ -930,12 +926,10 @@
                 // Clear fields based on the selected option
                 clearFields();
 
-                // Continue with form submission
-                // ...
-
-                // Prevent the default form submission
                 event.preventDefault();
             });
+
+            showHideFields();
 
             function showHideFields() {
                 var selectedOption = $("#tipo_rectificacion").val();
@@ -964,7 +958,24 @@
                     $("#rc_ubicacion").val("");
                 }
             }
+
+            function toggleRequired() {
+                var selectedOption = $("#tipo_rectificacion").val();
+
+                // Remove 'required' attribute from all fields
+                $("input[name^='rc_']").removeAttr("required");
+
+                // Add 'required' attribute to the currently visible field
+                if (selectedOption == "Rectificación de nombre") {
+                    $("#rc_nombre").attr("required", true);
+                } else if (selectedOption == "Rectificación de notificación") {
+                    $("#rc_notificacion").attr("required", true);
+                } else if (selectedOption == "Rectificación de ubicación") {
+                    $("#rc_ubicacion").attr("required", true);
+                }
+            }
         });
     </script>
+
 
 @endsection

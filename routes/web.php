@@ -568,6 +568,7 @@ Route::get('bombero_capacitacion/solicitud', 'Capacitaciones_Proteccion_Civil@so
 Route::post('bombero_capacitacion/ingresa_solicitud', 'Capacitaciones_Proteccion_Civil@ingresa_solicitud')->middleware('ciudadano');
 Route::post('bombero_capacitacion/actualiza_solicitud', 'Capacitaciones_Proteccion_Civil@actualiza_solicitud')->middleware('ciudadano');
 Route::post('bombero_capacitacion/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->middleware('ciudadano');
+Route::get('bombero_capacitacion/guardar', 'Capacitaciones_Proteccion_Civil@guardar')->middleware('ciudadano');
 
 
 /*
@@ -582,9 +583,6 @@ Route::post('verificacion_tecnica_riesgos/actualiza_solicitud', 'Verificacion_Ri
 Route::post('verificacion_tecnica_riesgos_2/actualiza_solicitud_2', 'Verificacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('verificacion_tecnica_riesgos/ingresa_tramite', 'Verificacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
 
-
-
-
 /*
 * Rutas para tramites de evaluación técnica de riesgos
 */
@@ -593,6 +591,7 @@ Route::post('evaluacion_riesgos/ingresa_solicitud', 'Evaluacion_Riesgos@ingresa_
 Route::post('evaluacion_riesgos/actualiza_solicitud', 'Evaluacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
 Route::post('evaluacion_riesgos_2/actualiza_solicitud_2', 'Evaluacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
+Route::post('/buscar-cuenta', 'Rectificacion@buscarCuenta')->name('buscarCuenta');
 
 
 
@@ -606,3 +605,4 @@ Route::post('rectificacion/ingresa_solicitud', 'Rectificacion@ingresa_solicitud'
 Route::post('rectificacion/actualiza_solicitud', 'Rectificacion@actualiza_solicitud')->middleware('ciudadano');
 Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('rectificacion/ingresa_tramite', 'Rectificacion@ingresa_tramite')->middleware('ciudadano');
+Route::get('rectificacion/cuenta', 'Rectificacion@cuenta')->middleware('ciudadano');

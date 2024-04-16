@@ -34,6 +34,7 @@ class Solicitudes_model extends Model
             DB::table('datos_solicitudes as ds')
             ->where('id_solicitud', '=', $id_solicitud)
             ->where('id_usuario', '=', session('id_usuario'))
+            //->where('id_tramite', '=', $id_tramite)
             ->get();
     }
 
@@ -499,6 +500,10 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
                         order by created_at desc
                         limit 1),null)
+                        when s.id_tramite=30 then coalesce((select ds.dato from datos_solicitudes ds
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_precaptura\'
+                        order by created_at des
+                        limit 1),null)
                         when s.id_tramite=3 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
@@ -823,13 +828,13 @@ class Solicitudes_model extends Model
     }
 
 
-    public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
+    public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa)
     {
         $num_rows = 0;
         if ($etapa != 173) {
             DB::table('datos_solicitudes')
-                ->where('id_solicitud', $id_solicitud);
-                // ->delete();
+                ->where('id_solicitud', $id_solicitud)
+                ->delete();
         }
 
         foreach ($request->all() as $key => $value) {
@@ -843,24 +848,6 @@ class Solicitudes_model extends Model
         }
         return $num_rows;
     }
-
-    // public static function actualiza_datos_solicitud_sp($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
-    // {
-
-    //     $num_rows = 0;
-
-    //     foreach ($request->all() as $key => $value) {
-    //         $num_rows += DB::insert(
-    //             'insert into datos_solicitudes
-    //             (id_solicitud,id_usuario,id_tramite,id_etapa,campo,
-    //             dato,created_at)
-    //             values (?,?,?,?,?,?,CURRENT_TIMESTAMP)',
-    //             [$id_solicitud, session('id_usuario'), $id_tramite, $etapa, $key, $value]
-    //         );
-    //     }
-
-    //     return $num_rows;
-    // }
 
     public static function actualiza_etapa_solicitud($id_solicitud, $etapa, $estatus, $id_captura, $edo_externo)
     {

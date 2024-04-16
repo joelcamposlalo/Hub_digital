@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Catastro_model as ModelCatastro_model;
 use Illuminate\Http\Request;
 use App\model\Solicitudes_model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\model\Rectificacion_model;
 use Illuminate\Support\Carbon;
+
+
 
 class Rectificacion extends Controller
 {
@@ -19,8 +22,7 @@ class Rectificacion extends Controller
             //realiza un array llamado vars que tiene los archvios pendientes por subir del tramite y el numero de folio del tramite
             $vars = [
                 'files'    => Rectificacion_model::get_files($folio),
-                'folio'    => $folio,
-
+                'folio'    => $folio
             ];
             //crear result para poder revisar el numero de datos para el tramite
             $result = Solicitudes_model::consulta_solicitud(intval($folio));
@@ -28,7 +30,7 @@ class Rectificacion extends Controller
             if ($result && count($result) > 0) {
                 $solicitud  = $result[0];
                 $id_etapa   = $solicitud->id_etapa;
-                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 30, $id_etapa);
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 1, $id_etapa);
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
@@ -204,7 +206,7 @@ class Rectificacion extends Controller
             ->where('estatus', 'rechazado')
             ->update(['estatus' => '',]);
 
-        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Trámite web de rectificación de domicilio y ubicación</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu rectificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
+        $mensaje = '<font color="#000000">Gracias  por utilizar esta herramienta electrónica. Has realizado </font><font color="#000000">'  . '</font><font color="#000000"> el trámite en línea  con el </font><strong><font color="#000000">No. de precaptura </font><font color="#000000">' . $request->id_captura . '</font><font color="#000000"></strong> en el proceso de revisión digital de </font><strong><font color="#000000">Trámite web de rectificación de domicilio y ubicación</strong>.</font><br><br><font color="#000000">Mantente atento a este correo, ya que a través de él te informarán sobre la validación de tu trámite y, posteriormente, te comunicarán las fechas de tu rectificación. <br><br>Al dar click de aceptación bajo esta modalidad manifiestas tu voluntad para dar seguimiento al desarrollo de tu trámite y estar al pendiente por el mismo medio electrónico, de las notificaciones y observaciones que pudieran suscitarse.  Recuerda, la terminación de tu trámite dependerá del tiempo en el que subsanes tus observaciones y documentos.  Así mismo el anexar información apócrifa o falsa y/o incorrecta será responsabilidad del titular del acto administrativo que se solicita haciéndose acreedores a las sanciones civiles, administrativas y penales que corresponda</font>.';
         $titulo = "Notificación de Registro de Trámite en Línea";
         $correo = session('correo');
         Rectificacion_model::notificarPorCorreo($request, $titulo, $mensaje, $correo);
@@ -213,4 +215,7 @@ class Rectificacion extends Controller
 
         return view('ciudadano/descanso');
     }
+
+    
+
 }

@@ -31,12 +31,12 @@ class contactoCapacitacion extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
 
-
        return $this->view('correos.solicitudCapacitacion')
-                ->subject('Capacitación Protección Civil y Bomberos')
+                ->subject('Asunto del Correo')
                 ->with([
                     'correoData' => $this->correoData['data_p'],
                     'participantes' => $this->correoData['data_participantes'],

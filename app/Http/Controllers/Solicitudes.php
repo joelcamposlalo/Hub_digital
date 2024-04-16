@@ -15,12 +15,13 @@ use App\model\Dictamen_img_urbana_model;
 use App\model\Dictamen_trazos_usos_model;
 use App\model\Dictamen_finca_antigua_model;
 use App\model\Dictamen_rea_Model;
-use App\model\Evaluacion_riesgos_model;
 use App\model\Notificaciones_model;
 use Illuminate\Support\Facades\Redirect;
 use App\model\Predios_model;
-use App\model\Rectificacion_model;
 use App\model\Verificacion_Riesgos_Model;
+use App\model\Rectificacion_model;
+use App\model\Evaluacion_riesgos_model;
+use App\model\Capacitaciones_Model;
 
 class Solicitudes extends Controller
 {
@@ -447,6 +448,7 @@ class Solicitudes extends Controller
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
 
                 $vars = [
+                    'ultimo'       => Predios_model::get_count(),
                     'folio'        => $folio,
                     'notificacion' => Notificaciones_model::get_observacion($folio),
                     'id_etapa'     => $id_etapa,
@@ -461,7 +463,6 @@ class Solicitudes extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
                 return view('bombero_capacitacion/solicitud', $vars);
-
 
             }
 
@@ -531,7 +532,7 @@ class Solicitudes extends Controller
                     'estatus'      => $estatus
                 ];
 
-                if ($solicitud->id_etapa == 183) {
+                if ($solicitud->id_etapa >= 183) {
                     $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
                 }
 
@@ -543,6 +544,7 @@ class Solicitudes extends Controller
 
 
             }
+
 
         }
     }
