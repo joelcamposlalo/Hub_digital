@@ -591,7 +591,6 @@ Route::post('evaluacion_riesgos/ingresa_solicitud', 'Evaluacion_Riesgos@ingresa_
 Route::post('evaluacion_riesgos/actualiza_solicitud', 'Evaluacion_Riesgos@actualiza_solicitud')->middleware('ciudadano');
 Route::post('evaluacion_riesgos_2/actualiza_solicitud_2', 'Evaluacion_Riesgos@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tramite')->middleware('ciudadano');
-Route::post('/buscar-cuenta', 'Rectificacion@buscarCuenta')->name('buscarCuenta');
 
 
 
@@ -606,3 +605,4 @@ Route::post('rectificacion/actualiza_solicitud', 'Rectificacion@actualiza_solici
 Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('rectificacion/ingresa_tramite', 'Rectificacion@ingresa_tramite')->middleware('ciudadano');
 Route::get('rectificacion/cuenta', 'Rectificacion@cuenta')->middleware('ciudadano');
+Route::get('rectificacion/buscar-cuenta', 'Rectificacion@buscarCuenta')->middleware('ciudadano');

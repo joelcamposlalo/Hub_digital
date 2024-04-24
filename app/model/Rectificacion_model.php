@@ -14,7 +14,7 @@ class Rectificacion_model extends Model
 {
     public static function solicitud()
     {
-
+        //echo 'fdv';exit;
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
@@ -316,6 +316,25 @@ class Rectificacion_model extends Model
         return "Procedimiento almacenado ejecutado con éxito";
     }
 
-    
+    public static function buscarCuenta($numeroCuenta)
+    {
+        // Ejecutar la consulta SQL para buscar la cuenta
+        $resultado = DB::connection('catastro')->select("
+            SELECT
+                CASE
+                    WHEN persona_razsoc IS NULL OR LENGTH(persona_razsoc) = 0 THEN CONCAT(persona_nombre, ' ', persona_apepaterno, ' ', persona_apematerno)
+                    ELSE persona_razsoc
+                END AS propietario,
+                preubicacion AS domicilio,
+                domicilionotificacion
+            FROM
+                vw_sigob_padronv2
+            WHERE
+                predial_hist = '$numeroCuenta'
+                OR curt = '$numeroCuenta'
+        ");
+
+        return $resultado;
+    }
 
 }

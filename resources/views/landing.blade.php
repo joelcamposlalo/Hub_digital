@@ -361,6 +361,8 @@
                                     <div style="height: 9.375rem" class="c-negro" aria-hidden="true">
                                         <ul class="ml-2 mt-2">
                                             <li class="font f-14">Capacitaciones</li>
+                                            <li class="font f-14">Evaluación técnica de riesgos</li>
+                                            <li class="font f-14">Verificación técnica de riesgos</li>
                                         </ul>
                                     </div>
                                 </a>

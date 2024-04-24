@@ -184,7 +184,7 @@
                             <small>Datos para la rectificación</small>
                         </div>
                         <div class="card-body">
-                            <form id="form_2 form_busqueda">
+                            <form id="form_2">
                                 <input name="id_captura" id="id_captura_2" type="hidden"
                                     value="{{ isset($id_captura) ? $id_captura : '' }}">
                                 <div class="row">
@@ -195,7 +195,7 @@
                                         <input name="numero_cuenta" id="numero_cuenta"
                                             value="{{ isset($numero_cuenta) ? $numero_cuenta : '' }}"
                                             class="ab-form background-color rounded border capitalize numero_cuenta"
-                                            type="text">
+                                            type="text" required>
                                     </div>
                                     <div class="col mt-2 d-flex align-items-end justify-content-end">
                                         <button type="button" id="btn_buscar_cuenta"
@@ -204,6 +204,13 @@
                                             <span class="spinner-border spinner-border-sm" role="status"
                                                 aria-hidden="true" style="display: none;"></span>
                                             Buscar Cuenta
+                                        </button>
+                                        <button type="button" id="btn_cambiar_valor"
+                                            class="ab-btn b-primary-color w-100 busqueda"
+                                            style="height: 50px !important;display: none;" onclick="pibote();">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                aria-hidden="true" style="display: none;"></span>
+                                            Cambiar cuenta
                                         </button>
                                     </div>
                                 </div>
@@ -214,7 +221,7 @@
                                         <input name="nombre_cuenta" id="nombre_cuenta"
                                             value="{{ isset($nombre_cuenta) ? $nombre_cuenta : '' }}"
                                             class="ab-form background-color rounded border capitalize nombre_cuenta"
-                                            type="text" required>
+                                            type="text" required readonly>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -223,7 +230,7 @@
                                         <input name="domicilio_p" id="domicilio_p"
                                             value="{{ isset($domicilio_p) ? $domicilio_p : '' }}"
                                             class="ab-form background-color rounded border domicilio_p" type="text"
-                                            required>
+                                            required readonly>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -232,7 +239,7 @@
                                         <input name="domicilio_n" id="domicilio_n"
                                             value="{{ isset($domicilio_n) ? $domicilio_n : '' }}"
                                             class="ab-form background-color rounded border capitalize domicilio_n"
-                                            type="text" required>
+                                            type="text" required readonly>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -355,7 +362,6 @@
 
                                 <div id="error-message" class="text-danger" style="display:none;">Debes subir un
                                     documento</div>
-
                                 <input name="id_solicitud" id="id_solicitud_frm4" type="hidden"
                                     value="{{ $folio }}">
                                 <input name="id_etapa" id="id_etapa" type="hidden"
@@ -379,7 +385,7 @@
             </div>
         </div>
 
-        @if ($id_etapa >= 183)
+        @if ($id_etapa >= 187)
             <div class="col mt-4 tarjeta-feedback">
                 <div class="card d-block d-sm-none ">
                     <div class="card-header">
@@ -393,7 +399,7 @@
             </div>
         @endif
 
-        @if ($id_etapa >= 183)
+        @if ($id_etapa >= 187)
             <!-- Muestra la observación cuando se regresa al ciudadano -->
             <div class="mt-4 col position-relative" style="right: 0;">
                 <div class="card d-none d-md-block d-lg-block d-xl-block">
@@ -422,16 +428,6 @@
     <link rel="stylesheet" href="{{ asset('css/trabajos_menores/solicitud.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/lightbox/dist/css/lightbox.min.css') }}">
     <style>
-        div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
-            background-color: #1E636D !important;
-            /* Cambia el color del botón de cerrar */
-        }
-
-        div:where(.swal2-icon).swal2-warning {
-            border-color: #1e636d !important;
-            color: #1e636d !important;
-        }
-
         @media (max-width: 900px) {
             .custom-flex {
                 display: flex;
@@ -884,14 +880,18 @@
                 // Faltan documentos requeridos, pero si son opcionales, permite avanzar
                 $('.file').each(function() {
                     if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
-                        // Si un archivo requerido no ha sido subido y no es opcional, muestra un SweetAlert y detiene el envío del formulario
-                        Swal.fire({
-                            icon: 'warning',
+
+                        iziToast.warning({
+                            icon: 'fa fa-exclamation-triangle',
+                            messageColor: 'white',
+                            iconColor: 'white',
+                            titleColor: 'white',
+                            color: 'rgb(30, 99, 109)',
                             title: 'Oops...',
-                            text: `Falta subir los archivos obligatorios`,
-                            customClass: {
-                                closeConfirm: 'btn-close-custom-color'
-                            }
+                            message: 'Falta subir los archivos obligatorios',
+                            position: 'bottomRight',
+                            closeOnClick: true,
+                            timeout: 5000,
                         });
                         e.preventDefault();
                         return false;
@@ -974,6 +974,119 @@
                     $("#rc_ubicacion").attr("required", true);
                 }
             }
+        });
+    </script>
+
+    <script>
+        async function pibote() {
+            var respuesta = await bCambio();
+            console.log(respuesta);
+            if (respuesta) {
+                $('#nombre_cuenta').val('');
+                $('#domicilio_p').val('');
+                $('#domicilio_n').val('');
+                $('#btn_buscar_cuenta').css('display', 'block');
+                $('#btn_cambiar_valor').css('display', 'none');
+                $('#numero_cuenta').prop('disabled', false);
+                alertaMostrada = true;
+            } else {
+                $('#btn_buscar_cuenta').css('display', 'none');
+                $('#btn_cambiar_valor').css('display', 'block');
+                $('#numero_cuenta').prop('disabled', true);
+                alertaMostrada = false;
+            }
+        }
+
+        async function bCambio() {
+            return new Promise((resolve) => {
+                iziToast.show({
+                    titleColor: 'white',
+                    messageColor: 'white',
+                    color: 'rgb(30, 99, 109)',
+                    icon: 'question-circle',
+                    title: '¿Estás seguro?',
+                    message: 'Si cambias el número de cuenta, se perderán los datos ingresados actualmente.',
+                    position: 'center',
+                    progressBarColor: 'white',
+                    buttons: [
+                        ['<button><b style="color:white;">Sí</b></button>', function(instance,
+                            toast) {
+                            resolve(true);
+                            instance.hide({
+                                transitionOut: 'fadeOut'
+                            }, toast);
+                        }],
+                        ['<button><b style="color:white;">Cancelar</b></button>', function(instance,
+                            toast) {
+                            resolve(false);
+                            instance.hide({
+                                transitionOut: 'fadeOut'
+                            }, toast);
+                        }]
+                    ]
+                });
+            });
+        }
+        $(document).ready(function() {
+
+            var alertaMostrada = false;
+
+            function mostrarIziToast(icon, title, message) {
+                iziToast.show({
+                    title: title,
+                    message: message,
+                    icon: icon,
+                    iconColor: '#ffffff',
+                    backgroundColor: '#1e636d',
+                    titleColor: '#ffffff',
+                    messageColor: '#ffffff',
+                    position: 'bottomRight',
+                    timeout: 5000
+                });
+            }
+
+
+            function buscarCuentaAjax(numeroCuenta) {
+                $.ajax({
+                    url: '/rectificacion/buscar-cuenta',
+                    method: 'GET',
+                    data: {
+                        numero_cuenta: numeroCuenta
+                    },
+                    success: function(response) {
+                        if (response.length > 0) {
+                            $('#nombre_cuenta').val(response[0].propietario);
+                            $('#domicilio_p').val(response[0].domicilio);
+                            $('#domicilio_n').val(response[0].domicilionotificacion);
+                            $('#btn_buscar_cuenta').css('display', 'none');
+                            $('#btn_cambiar_valor').css('display', 'block');
+                            $('#numero_cuenta').prop('disabled', true);
+                        } else {
+                            $('#nombre_cuenta').val('');
+                            $('#domicilio_p').val('');
+                            $('#domicilio_n').val('');
+                            $('#btn_buscar_cuenta').css('display', 'block');
+                            $('#btn_cambiar_valor').css('display', 'none');
+                            $('#numero_cuenta').prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            $('#btn_buscar_cuenta').click(function() {
+                var numeroCuenta = $('#numero_cuenta').val();
+                if (numeroCuenta.length == 0) {
+                    mostrarIziToast('error', 'Error', 'Debes ingresar un número de cuenta o CURT');
+                } else if (numeroCuenta.length == 10 || numeroCuenta.length == 31) {
+                    mostrarIziToast('success', 'Datos precargados satisfactoriamente', '');
+                    buscarCuentaAjax(numeroCuenta);
+                } else {
+                    mostrarIziToast('error', 'Error', 'El número de cuenta o CURT no es válido');
+                }
+            });
         });
     </script>
 

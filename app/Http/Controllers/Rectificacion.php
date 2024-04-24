@@ -17,13 +17,16 @@ class Rectificacion extends Controller
 
     public function solicitud()
     {
+
         //inserta el inicio de tramite en las tablas
         if ($folio = Rectificacion_model::solicitud()) {
+
             //realiza un array llamado vars que tiene los archvios pendientes por subir del tramite y el numero de folio del tramite
             $vars = [
                 'files'    => Rectificacion_model::get_files($folio),
                 'folio'    => $folio
             ];
+
             //crear result para poder revisar el numero de datos para el tramite
             $result = Solicitudes_model::consulta_solicitud(intval($folio));
             //pone la condicional que si el resultado esta en mayor a 0 entonces es un tramite empezado asi que hace la consulta
@@ -105,6 +108,7 @@ class Rectificacion extends Controller
 
     public function actualiza_solicitud_2(Request $request)
     {
+        
         if ($response = Rectificacion_model::actualiza_solicitud_2($request)) {
 
             $obj = $response[0];
@@ -216,6 +220,22 @@ class Rectificacion extends Controller
         return view('ciudadano/descanso');
     }
 
-    
+    public function buscarCuenta(Request $request)
+    {
+        // Obtener el número de cuenta ingresado por el usuario
+        $numeroCuenta = $request->input('numero_cuenta');
 
+        // Verificar si el número de cuenta está vacío
+        if (empty($numeroCuenta)) {
+            // Si está vacío, mostrar un mensaje al usuario
+            return response()->json(['message' => 'Debes ingresar un número de cuenta o CURT'], 400);
+        }
+
+        // Si el número de cuenta no está vacío, proceder con la búsqueda
+        // Utiliza el modelo Rectificacion_model para ejecutar la consulta SQL y obtener los resultados
+        $resultado = Rectificacion_model::buscarCuenta($numeroCuenta);
+
+        // Devuelve los resultados en formato JSON
+        return response()->json($resultado);
+    }
 }

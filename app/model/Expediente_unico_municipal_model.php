@@ -24,21 +24,21 @@ class Expediente_unico_municipal_model extends Model
                 ['c.universal', '=', false],
                 ['c.id_documento', '>', 0]
             ])
-            
+
             ->orderBy('c.obligatorio', 'DESC')
             ->get();
 
-        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
         WHERE c.id_cat_archivo = a.id_cat_archivo
-        and a.id_solicitud =' . $id_solicitud . '         
+        and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
         ) and c.id_documento>0 and c.id_tramite = 11 ');
 
-        $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM         
-        cat_archivo c join archivos a on c.id_cat_archivo =a.id_cat_archivo 
-join archivosodt ao  on ao.id_archivo =a.id_archivo 
+        $resv = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM
+        cat_archivo c join archivos a on c.id_cat_archivo =a.id_cat_archivo
+join archivosodt ao  on ao.id_archivo =a.id_archivo
 where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_usuario') . ' and ao.estatus=\'validado\'');
 
 
@@ -122,10 +122,10 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
 
     public static function consulta_archivos_faltantes($id_solicitud)
     {
-        return DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+        return DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
         WHERE c.id_cat_archivo = a.id_cat_archivo
-        and a.id_solicitud =' . $id_solicitud . '         
+        and a.id_solicitud =' . $id_solicitud . '
         and a.id_usuario =' . session('id_usuario') . '
         ) and c.id_documento>0 and c.obligatorio=1 and c.id_tramite = 11');
     }
@@ -140,10 +140,10 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
 
     public static function consulta_requisitos_dtu($id_solicitud)
     {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a 
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo 
-        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . " 
+        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
+        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
+        where a.id_solicitud = ? and a.id_usuario ="     . session('id_usuario') . "
         and ao.estatus='validado'";
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
@@ -151,10 +151,10 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
 
     public static function consulta_requisitos_validados($id_solicitud)
     {
-        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, 
-        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a 
-        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo 
-        where a.id_solicitud =" . $id_solicitud . " and a.id_usuario =" . session('id_usuario') . " 
+        $sql = "SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
+        c.id_documento,c.obligatorio,ao.* FROM   cat_archivo c join archivos a
+        on c.id_cat_archivo =a.id_cat_archivo join archivosodt ao  on ao.id_archivo =a.id_archivo
+        where a.id_solicitud =" . $id_solicitud . " and a.id_usuario =" . session('id_usuario') . "
         and ao.estatus='validado'";
         $result = DB::select($sql, [$id_solicitud]);
         return $result;
@@ -178,7 +178,7 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
 
 
 
-            //Cambiamos el estatus de la solicitud 
+            //Cambiamos el estatus de la solicitud
             return DB::table('solicitudes')
                 ->where('id_solicitud', $request['id_solicitud'])
                 ->update(['id_etapa' => 63, 'estatus' => 'en revision']);
@@ -188,19 +188,22 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
     }
     public static function inserta_requisito_ord($id_documento, $filename, $extension, $id_solicitud)
     {
-        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE 
+        $res1 = DB::select('SELECT c.id_cat_archivo FROM cat_archivo as c WHERE
+        
             c.id_documento = ' . $id_documento . ' and id_tramite=11');
 
         if ($res1) {
+
             $id_cat_archivo = $res1[0]->id_cat_archivo;
 
-            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a 
+            $pend_file = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga, c.id_documento FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
                 WHERE c.id_cat_archivo = a.id_cat_archivo
-                and a.id_solicitud =' . $id_solicitud . ' 
+                and a.id_solicitud =' . $id_solicitud . '
                 and a.id_usuario =' . session('id_usuario') . '
                 ) and c.id_tramite=11 and c.id_documento=' . $id_documento);
 
             if ($pend_file) {
+
                 $affected =  DB::table('archivos')->insert([
                     'id_usuario'     => session('id_usuario'),
                     'id_cat_archivo' => $id_cat_archivo,
@@ -209,7 +212,9 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
                     'created_at'     => date('Y-m-d H:i:s'),
                     'id_solicitud'   => $id_solicitud,
                 ]);
+
             } else {
+
                 $affected =  DB::table('archivos')
                     ->where('id_solicitud', $id_solicitud)
                     ->where('id_cat_archivo', $id_cat_archivo)
@@ -219,6 +224,7 @@ where a.id_solicitud =' . $id_solicitud . ' and a.id_usuario =' . session('id_us
                         'extension'      => $extension,
                         'created_at'     => date('Y-m-d H:i:s'),
                     ]);
+
 
                 $arc = DB::table('archivos')->where('nombre', $filename)->first();
 
