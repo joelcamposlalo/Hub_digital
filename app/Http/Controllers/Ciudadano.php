@@ -16,8 +16,8 @@ class Ciudadano extends Controller
 
     /**
      * Obtiene la vista de expediente del ciudadano
-     * 
-     * @return view 
+     *
+     * @return view
      */
 
     public function expediente()
@@ -35,15 +35,15 @@ class Ciudadano extends Controller
     /**
      * Obtiene todos los tramites del
      * ciudadano
-     * 
-     * @return view 
+     *
+     * @return view
      */
 
     public function tramites()
     {
 
         /**
-         * Funcion para cancelar trámites despues de 
+         * Funcion para cancelar trámites despues de
          * 3 dias habiles para trabajos menores
          */
 
@@ -59,16 +59,18 @@ class Ciudadano extends Controller
             'count_calificacion' => Ciudadano_model::get_count_calificacion()
         ];
 
+
         session(['lastpage' => __FILE__]);
 
         return view('ciudadano/tramites', $vars);
+
     }
 
     /**
      * Muestra la vista para seleccionar un
      * trámite a realizar
-     * 
-     * @return view 
+     *
+     * @return view
      */
 
     public function nuevo()
@@ -137,7 +139,7 @@ class Ciudadano extends Controller
             'hoy'        => date("Y-m-d H:i:s")
         ];
 
-        
+
         session(['lastpage' => __FILE__]);
         return view('ciudadano/obras_publicas', $vars);
     }
@@ -163,7 +165,7 @@ class Ciudadano extends Controller
             'hoy'        => date("Y-m-d H:i:s")
         ];
 
-        
+
         session(['lastpage' => __FILE__]);
         return view('ciudadano/ordenamiento_territorio', $vars);
     }
@@ -173,9 +175,9 @@ class Ciudadano extends Controller
         if(!session('primera_vista')){
             Redirect::to(url('ciudadano/expediente_unico_municipal'))->send();
         }
-        
+
             return view('ciudadano/expediente_unico_municipal');
-  
+
     }
 
     public function medio_ambiente()
@@ -189,7 +191,7 @@ class Ciudadano extends Controller
             'hoy'        => date("Y-m-d H:i:s")
         ];
 
-        
+
         session(['lastpage' => __FILE__]);
         return view('ciudadano/medio_ambiente', $vars);
     }
@@ -206,8 +208,8 @@ class Ciudadano extends Controller
 
 
     /**
-     * Función para cambiar la foto 
-     * de perfil 
+     * Función para cambiar la foto
+     * de perfil
      */
 
     public function perfil(Request $request)
@@ -237,9 +239,9 @@ class Ciudadano extends Controller
 
 
     /**
-     * 
+     *
      * Guardar datos de vista expediente
-     * 
+     *
      */
 
     public function post(Request $request)
@@ -263,9 +265,9 @@ class Ciudadano extends Controller
     }
 
     /**
-     * 
-     * Correo con notificación 
-     * 
+     *
+     * Correo con notificación
+     *
      */
 
     public function notificacion(Request $request)
@@ -289,11 +291,11 @@ class Ciudadano extends Controller
 
     /**
      * Administrador
-     * 
+     *
      * Obtiene usuarios segun su nombre
-     * 
+     *
      * @return json
-     * 
+     *
      */
 
     public function get_by_name(Request $request)
@@ -350,8 +352,8 @@ class Ciudadano extends Controller
     }
 
     /**
-     * Calificar la plataforma 
-     * 
+     * Calificar la plataforma
+     *
      */
 
 

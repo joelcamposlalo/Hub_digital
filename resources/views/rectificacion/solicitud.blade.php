@@ -385,7 +385,7 @@
             </div>
         </div>
 
-        @if ($id_etapa >= 187)
+        {{-- @if ($id_etapa >= 187)
             <div class="col mt-4 tarjeta-feedback">
                 <div class="card d-block d-sm-none ">
                     <div class="card-header">
@@ -413,7 +413,7 @@
                 </div>
             </div>
     </div>
-    @endif
+    @endif --}}
     </div>
 
     <p id="parrafo"></p>
@@ -999,24 +999,21 @@
 
         async function bCambio() {
             return new Promise((resolve) => {
-                iziToast.show({
-                    titleColor: 'white',
-                    messageColor: 'white',
-                    color: 'rgb(30, 99, 109)',
-                    icon: 'question-circle',
+                iziToast.question({
                     title: '¿Estás seguro?',
                     message: 'Si cambias el número de cuenta, se perderán los datos ingresados actualmente.',
                     position: 'center',
-                    progressBarColor: 'white',
+                    close: false,
+                    overlay: true,
                     buttons: [
-                        ['<button><b style="color:white;">Sí</b></button>', function(instance,
+                        ['<button><b>Sí</b></button>', function(instance,
                             toast) {
                             resolve(true);
                             instance.hide({
                                 transitionOut: 'fadeOut'
                             }, toast);
                         }],
-                        ['<button><b style="color:white;">Cancelar</b></button>', function(instance,
+                        ['<button><b>Cancelar</b></button>', function(instance,
                             toast) {
                             resolve(false);
                             instance.hide({
@@ -1032,21 +1029,25 @@
             var alertaMostrada = false;
 
             function mostrarIziToast(icon, title, message) {
-                iziToast.show({
+                iziToast.success({
                     title: title,
                     message: message,
-                    icon: icon,
-                    iconColor: '#ffffff',
-                    backgroundColor: '#1e636d',
-                    titleColor: '#ffffff',
-                    messageColor: '#ffffff',
                     position: 'bottomRight',
                     timeout: 5000
                 });
             }
 
+            function mostrarIziToastError(icon, title, message) {
+                iziToast.error({
+                    title: title,
+                    message: message,
+                    titleColor: '#ffffff',
+                    messageColor: '#ffffff',
+                });
+            }
 
             function buscarCuentaAjax(numeroCuenta) {
+            
                 $.ajax({
                     url: '/rectificacion/buscar-cuenta',
                     method: 'GET',
@@ -1079,12 +1080,12 @@
             $('#btn_buscar_cuenta').click(function() {
                 var numeroCuenta = $('#numero_cuenta').val();
                 if (numeroCuenta.length == 0) {
-                    mostrarIziToast('error', 'Error', 'Debes ingresar un número de cuenta o CURT');
+                    mostrarIziToastError('error', 'Error', 'Debes ingresar un número de cuenta o CURT');
                 } else if (numeroCuenta.length == 10 || numeroCuenta.length == 31) {
                     mostrarIziToast('success', 'Datos precargados satisfactoriamente', '');
                     buscarCuentaAjax(numeroCuenta);
                 } else {
-                    mostrarIziToast('error', 'Error', 'El número de cuenta o CURT no es válido');
+                    mostrarIziToastError('error', 'Error', 'El número de cuenta o CURT no es válido');
                 }
             });
         });

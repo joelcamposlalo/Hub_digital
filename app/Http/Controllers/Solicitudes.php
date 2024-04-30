@@ -63,33 +63,29 @@ class Solicitudes extends Controller
                 }
 
                 return view('trabajos_menores/solicitud', $vars);
+            } else if ($id_tramite == 11) {
+
+                $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
+
+                $vars = [
+                    'files'        => Dictamen_trazos_usos_model::get_files($folio),
+                    'folio'        => $folio,
+                    'notificacion' => Notificaciones_model::get_observacion($folio),
+                    'id_etapa'     => $id_etapa,
+                    'estatus'      => $estatus
+
+                ];
 
 
-             } else if ($id_tramite == 11) {
+                if ($solicitud->id_etapa == 71) {
+                    $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
+                }
 
-                    $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
+                foreach ($result2 as $obj) {
+                    $vars += [$obj->campo => $obj->dato];
+                }
 
-                    $vars = [
-                        'files'        => Dictamen_trazos_usos_model::get_files($folio),
-                        'folio'        => $folio,
-                        'notificacion' => Notificaciones_model::get_observacion($folio),
-                        'id_etapa'     => $id_etapa,
-                        'estatus'      => $estatus
-
-                    ];
-
-
-                    if ($solicitud->id_etapa == 71) {
-                        $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
-                    }
-
-                    foreach ($result2 as $obj) {
-                        $vars += [$obj->campo => $obj->dato];
-                    }
-
-                    return view('dictamen_trazos_usos/solicitud', $vars);
-
-
+                return view('dictamen_trazos_usos/solicitud', $vars);
             } else if ($id_tramite == 9) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
@@ -113,9 +109,7 @@ class Solicitudes extends Controller
                 }
 
                 return view('expediente_unico_municipal/solicitud', $vars);
-
-
-        } else if ($id_tramite == 2) {
+            } else if ($id_tramite == 2) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
 
@@ -138,7 +132,6 @@ class Solicitudes extends Controller
                 }
 
                 return view('licencia_construccion/solicitud', $vars);
-
             } else if ($id_tramite == 3) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($id_solicitud, $id_tramite, 3);
@@ -164,7 +157,6 @@ class Solicitudes extends Controller
                 }
 
                 return view('acreditaciones/solicitud', $vars);
-
             } else if ($id_tramite == 4) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, 4);
@@ -189,7 +181,6 @@ class Solicitudes extends Controller
 
 
                 return view('prelicencias/solicitud', $vars);
-
             } else if ($id_tramite == 5) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, 27);
@@ -243,7 +234,6 @@ class Solicitudes extends Controller
                 $vars += ["id_etapa" => $id_etapa];
 
                 return view('revision_proyecto/solicitud', $vars);
-
             } else if ($id_tramite == 7) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, 7);
@@ -283,7 +273,6 @@ class Solicitudes extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
                 return view('horas_extras/solicitud', $vars);
-
             } else if ($id_tramite == 10) { //Dictamen de imagen urbana
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 10, $id_etapa);
@@ -308,8 +297,7 @@ class Solicitudes extends Controller
                 $vars += ["id_etapa" => $id_etapa];
 
                 return view('dictamen_img_urbana/solicitud', $vars);
-
-            }else  if ($id_tramite == 13) {
+            } else  if ($id_tramite == 13) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
 
@@ -334,7 +322,7 @@ class Solicitudes extends Controller
                 }
 
                 return view('certificado_habitabilidad/solicitud', $vars);
-            }else  if ($id_tramite == 14) {
+            } else  if ($id_tramite == 14) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
 
@@ -359,8 +347,7 @@ class Solicitudes extends Controller
                 }
 
                 return view('constancia_habitabilidad/solicitud', $vars);
-            }
-            else if ($id_tramite == 12) {
+            } else if ($id_tramite == 12) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
 
@@ -383,7 +370,6 @@ class Solicitudes extends Controller
 
 
                 return view('dictamen_finca_antigua/solicitud', $vars);
-
             } else  if ($id_tramite == 15) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, 15, $id_etapa);
@@ -409,7 +395,6 @@ class Solicitudes extends Controller
                 $vars += ["id_etapa" => $id_etapa];
 
                 return view('revision_proyectoot/solicitud', $vars);
-
             }
 
             //MEDIO AMBIENTE
@@ -438,7 +423,6 @@ class Solicitudes extends Controller
 
 
                 return view('dictamen_rea/solicitud', $vars);
-
             }
 
             ///Proteccion Civil
@@ -463,10 +447,7 @@ class Solicitudes extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
                 return view('bombero_capacitacion/solicitud', $vars);
-
-            }
-
-            else if ($id_tramite == 28) {
+            } else if ($id_tramite == 28) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
 
@@ -489,9 +470,7 @@ class Solicitudes extends Controller
                 }
                 //dd($result2);exit;
                 return view('evaluacion_riesgos/solicitud', $vars);
-            }
-
-            else if ($id_tramite == 29) {
+            } else if ($id_tramite == 29) {
 
 
 
@@ -513,14 +492,7 @@ class Solicitudes extends Controller
                     $vars += [$obj->campo => $obj->dato];
                 }
                 return view('Verificacion_tecnica_riesgos/solicitud', $vars);
-
-
-            }
-
-
-
-
-            else if ($id_tramite == 30) {
+            } else if ($id_tramite == 30) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $solicitud->id_etapa);
 
@@ -532,6 +504,8 @@ class Solicitudes extends Controller
                     'estatus'      => $estatus
                 ];
 
+
+
                 if ($solicitud->id_etapa >= 183) {
                     $vars += ['notificacion' => Notificaciones_model::get_observacion($id_solicitud)];
                 }
@@ -539,13 +513,9 @@ class Solicitudes extends Controller
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
-//dd($vars);exit;
+                
                 return view('rectificacion/solicitud', $vars);
-
-
             }
-
-
         }
     }
 

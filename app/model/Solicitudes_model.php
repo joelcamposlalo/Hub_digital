@@ -30,12 +30,14 @@ class Solicitudes_model extends Model
 
     public static function consulta_datos_solicitud($id_solicitud, $id_tramite, $etapa)
     {
+
         return
             DB::table('datos_solicitudes as ds')
             ->where('id_solicitud', '=', $id_solicitud)
             ->where('id_usuario', '=', session('id_usuario'))
             //->where('id_tramite', '=', $id_tramite)
             ->get();
+
     }
 
     public static function detalles($id_solicitud)
@@ -61,8 +63,6 @@ class Solicitudes_model extends Model
 
     public static function get_all($rol, $search = '', $filtro = '', $filtro_2 = '')
     {
-
-
 
         switch ($rol) {
             case 'ciudadano':
@@ -117,6 +117,9 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=9 then coalesce((select ds.dato from datos_solicitudes ds
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
+                        limit 1 ),null)
+                        when s.id_tramite=30 then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\' order by created_at desc
                         limit 1 ),null)
                         when s.id_tramite=3 then
@@ -213,7 +216,11 @@ class Solicitudes_model extends Model
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)
-                        when s.id_tramite=3 then
+                        when s.id_tramite=30 then coalesce((select ds.dato from datos_solicitudes ds
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
+                        order by created_at desc
+                        limit 1),null)
+                        when s.id_tramite=30 then
                         coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'folio_expediente\'
                         order by created_at desc
@@ -292,6 +299,10 @@ class Solicitudes_model extends Model
                         order by created_at desc
                         limit 1),null)
                         when s.id_tramite=14 then coalesce((select ds.dato from datos_solicitudes ds
+                        where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
+                        order by created_at desc
+                        limit 1),null)
+                        when s.id_tramite=30 then coalesce((select ds.dato from datos_solicitudes ds
                         where ds.id_solicitud=s.id_solicitud and ds.campo=\'id_captura\'
                         order by created_at desc
                         limit 1),null)

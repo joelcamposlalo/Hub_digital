@@ -333,7 +333,6 @@ class Rectificacion_model extends Model
                 predial_hist = '$numeroCuenta'
                 OR curt = '$numeroCuenta'
         ");
-
         return $resultado;
     }
 

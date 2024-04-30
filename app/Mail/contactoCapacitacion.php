@@ -36,7 +36,7 @@ class contactoCapacitacion extends Mailable
     {
 
        return $this->view('correos.solicitudCapacitacion')
-                ->subject('Asunto del Correo')
+                ->subject('Capacitación')
                 ->with([
                     'correoData' => $this->correoData['data_p'],
                     'participantes' => $this->correoData['data_participantes'],
