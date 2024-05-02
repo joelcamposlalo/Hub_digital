@@ -428,15 +428,15 @@
     <link rel="stylesheet" href="{{ asset('css/trabajos_menores/solicitud.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/lightbox/dist/css/lightbox.min.css') }}">
     <style>
+        .card-body small p {
+            color: black !important;
+        }
+
         @media (max-width: 900px) {
             .custom-flex {
                 display: flex;
                 flex-direction: column-reverse;
             }
-        }
-
-        .card-body small p {
-            color: black !important;
         }
 
         @media only screen and (min-width: 600px) {
@@ -448,11 +448,13 @@
         .busqueda:hover {
             opacity: .8;
         }
+
     </style>
 
 @endsection
 
 @section('js')
+
     @parent
     <script src="{{ asset('vendors/parsley/parsley.min.js') }}"></script>
     <script src="{{ asset('vendors/parsley/es.js') }}"></script>
@@ -536,7 +538,6 @@
                     formdata.append('telefono', telefono);
                     formdata.append('correo_propietario', correo_propietario);
                     formdata.append('id_etapa', id_etapa);
-
 
                     if ($('#id_captura').val() == "") {
 
@@ -672,7 +673,9 @@
                     formdata.append('id_captura', $('#id_captura').val());
 
                     var res = await axios.post(
+
                         '{{ url('rectificacion_2/actualiza_solicitud_2') }}',
+
                         formdata, {
                             data: {
                                 "_token": "{{ csrf_token() }}"
@@ -700,6 +703,7 @@
                             });
                         }
                     });
+
                 } else {
                     iziToast.show({
                         title: 'Ups ☹️',
@@ -715,20 +719,17 @@
                 }
             });
 
-
             $('.btn-regresar').click(function() {
 
                 $('.btn-guardar').prop('disabled', false);
 
                 let atras = $(this).attr('data-back');
-
                 $(atras).slideDown('slow');
                 $(this).parents('.card-body').slideUp('slow');
                 $('html, body').animate({
                     scrollTop: $(atras).siblings('.card-header').offset()
                         .top
                 }, 500);
-
             });
         });
 
@@ -753,7 +754,6 @@
                 'JPG' || get_extension(file
                     .name) == 'JPEG' || get_extension(file.name) == 'dwg' ||
                 get_extension(file.name) == 'DWG') {
-
                 me.attr('data-upload', '1');
                 me.siblings('.progreso').text("Actualizar");
                 me.parents('.acciones').siblings('td').find('.icono').attr('src',
@@ -784,7 +784,6 @@
                     closeOnEscape: true
                 });
             }
-
         });
 
         function fileIsRequired() {
@@ -798,6 +797,7 @@
                     countFileRequired += 1;
                 }
             });
+
             return countFileRequired;
         }
 
@@ -813,13 +813,11 @@
             } else {
                 return false;
             }
-
         }
 
 
         function archivosRequeridosSubidos() {
             let archivosFaltantes = 0;
-
 
             $('.file').each(function() {
                 if ($(this).attr('data-required') == 1 && $(this).attr('data-upload') != 1) {
@@ -858,13 +856,11 @@
             return archivosFaltantes;
         }
     </script>
-
     <script>
         $('#form_4').submit(function(e) {
             let archivosFaltantes = archivosRequeridosSubidos();
 
             // Si todos los archivos requeridos (obligatorios) han sido subidos, permite avanzar
-
             if (archivosFaltantes === 0) {
                 // Cambiar el estado del botón mientras se envía el formulario
                 $('.btn-form4').prop('disabled', true);
@@ -900,7 +896,6 @@
             }
         });
     </script>
-
     <script>
         $(document).ready(function() {
             // Hide all specific fields initially
@@ -1024,6 +1019,7 @@
                 });
             });
         }
+
         $(document).ready(function() {
 
             var alertaMostrada = false;
@@ -1047,7 +1043,7 @@
             }
 
             function buscarCuentaAjax(numeroCuenta) {
-            
+
                 $.ajax({
                     url: '/rectificacion/buscar-cuenta',
                     method: 'GET',
@@ -1090,6 +1086,5 @@
             });
         });
     </script>
-
 
 @endsection
