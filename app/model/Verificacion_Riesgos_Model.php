@@ -187,6 +187,8 @@ class Verificacion_Riesgos_Model extends Model
 
 
         return DB::connection('captura_op')->select($sql, $params);
+
+
     }
 
 

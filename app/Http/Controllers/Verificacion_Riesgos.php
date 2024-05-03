@@ -20,6 +20,7 @@ class Verificacion_Riesgos extends Controller
     public function solicitud()
     {
 
+
         if ($folio = Verificacion_Riesgos_Model::solicitud()) {
 
             $vars = [
