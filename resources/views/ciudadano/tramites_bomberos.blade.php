@@ -74,9 +74,7 @@
                                 <span class="badge badge-warning mt-4" aria-hidden="true">Evaluación técnica de riesgos</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">Solicitud de evaluación por
-                                    fenómenos perturbadores
-                                    mediante ventanilla virtual</small>
+                                <small class="text-center mt-2">Solicitud de evaluación de riesgos mediante ventanilla.</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -98,7 +96,7 @@
                                 <span class="badge badge-warning mt-4" aria-hidden="true">Verificación técnica de riesgos</span>
                             </div>
                             <div class="card-bombero d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">Solicitud de verificación técnica de riesgos mediante ventanilla digital </small>
+                                <small class="text-center mt-2">Solicitud de verificación de riesgos por fenómenos perturbadores  mediante ventanilla</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -108,8 +106,6 @@
                     </div>
                 </a>
             </div>
-
-
         </div>
     </div>
 

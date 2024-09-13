@@ -280,7 +280,7 @@
                 <div class="card-body">
                     <div class="alert alert-warning alert-dismissible fade show mt-4 notas" role="alert">
                         <h6 class="font">
-                            Nota: Debes de adjuntar todos los archivos obligatorios.
+                            Nota: Debes de adjuntar todos los archivos obligatorios. <br><br>Solo se aceptan archivos en formato pdf y jpg.
                         </h6>
 
                     </div>

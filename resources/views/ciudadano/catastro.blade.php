@@ -116,8 +116,9 @@
                 </a>
             </div>
 
-            {{-- Rectificacion de nombre --}}
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Rectificación de nombre"
+            {{-- Rectificacion de domicilio --}}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite"
+                data-tramite="Rectificación de ubicación y domicilio"
                 data-img="{{ asset('media/ilustrator/catastro.svg') }}" data-url="rectificacion/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
@@ -131,8 +132,34 @@
                             </div>
                             <div style="height: 150px"
                                 class="d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">Trámite web de rectificación de domicilio o
+                                <small class="text-center mt-2">Trámite web de rectificación de domicilio y
                                     ubicación</small>
+                                <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
+                                    class="circle mt-4 d-flex justify-content-center align-items-center">
+                                    <i class="fas fa-arrow-right text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Rectificacion de nombre --}}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite" data-tramite="Rectificación de nombre"
+                data-img="{{ asset('media/ilustrator/catastro.svg') }}" data-url="rectificacion_nombre/solicitud">
+                <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
+                    data-target="#modal-carta">
+                    <div style="height: 260px;" class="card card-hover-effect">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div style="height: 150px"
+                                class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="{{ asset('media/ilustrator/catastro.svg') }}"width="90px"
+                                    alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                                <span class="badge badge-warning mt-4" aria-hidden="true">Dirección de Catastro</span>
+                            </div>
+                            <div style="height: 150px"
+                                class="d-flex flex-column justify-content-center align-items-center">
+                                <small class="text-center mt-2">Trámite web de rectificación de nombre</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>
@@ -164,7 +191,7 @@
                 <div class="modal-body">
                     <div class="d-flex justify-content-center">
                         <img src="{{ asset('media/ilustrator/catastro.svg') }}"width="90px"
-                                    alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
+                            alt="Dirección de Proteccion civil y bomberos" aria-hidden="true">
                     </div>
 
                     <div class="text-center mb-4">
@@ -424,13 +451,10 @@
                 $('#form').attr('action', ruta);
                 $('.img-tramite').html(
                     `<img src="{{ asset('media/ilustrator/${img}') }}" width="120px" alt="${tramite}">`
-                    );
+                );
 
             });
 
         });
     </script>
 @endsection
-
-
-

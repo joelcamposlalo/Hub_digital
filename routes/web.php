@@ -596,13 +596,28 @@ Route::post('evaluacion_riesgos/ingresa_tramite', 'Evaluacion_Riesgos@ingresa_tr
 
 
 /*
-* Rutas para tramites de rectificación de nombre
+* Rutas para tramites de rectificación de ubicación
 */
 
 Route::get('rectificacion/solicitud', 'rectificacion@solicitud')->middleware('ciudadano');
 Route::post('rectificacion/ingresa_solicitud', 'Rectificacion@ingresa_solicitud')->middleware('ciudadano');
 Route::post('rectificacion/actualiza_solicitud', 'Rectificacion@actualiza_solicitud')->middleware('ciudadano');
-Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion@actualiza_solicitud_2')->middleware('ciudadano');
+Route::post('rectificacion/actualiza_solicitud_2', 'Rectificacion@actualiza_solicitud_2')->middleware('ciudadano');
 Route::post('rectificacion/ingresa_tramite', 'Rectificacion@ingresa_tramite')->middleware('ciudadano');
 Route::get('rectificacion/cuenta', 'Rectificacion@cuenta')->middleware('ciudadano');
 Route::get('rectificacion/buscar-cuenta', 'Rectificacion@buscarCuenta')->middleware('ciudadano');
+
+
+
+
+/*
+* Rutas para tramites de rectificación de nombre
+*/
+
+Route::get('rectificacion_nombre/solicitud', 'Rectificacion_nombre@solicitud')->middleware('ciudadano');
+Route::post('rectificacion_nombre/ingresa_solicitud', 'Rectificacion_nombre@ingresa_solicitud')->middleware('ciudadano');
+Route::post('rectificacion_nombre/actualiza_solicitud', 'Rectificacion_nombre@actualiza_solicitud')->middleware('ciudadano');
+Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion_nombre@actualiza_solicitud_2')->middleware('ciudadano');
+Route::post('rectificacion_nombre/ingresa_tramite', 'Rectificacion_nombre@ingresa_tramite')->middleware('ciudadano');
+Route::get('rectificacion_nombre/cuenta', 'Rectificacion_nombre@cuenta')->middleware('ciudadano');
+Route::get('rectificacion_nombre/buscar-cuenta', 'Rectificacion_nombre@buscarCuenta')->middleware('ciudadano');

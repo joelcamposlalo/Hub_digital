@@ -26,6 +26,7 @@ use App\model\Capacitaciones_Model;
 class Solicitudes extends Controller
 {
     public function consulta_solicitudes($id_solicitud)
+
     {
 
         $result = Solicitudes_model::consulta_solicitud(intval($id_solicitud));
@@ -63,6 +64,7 @@ class Solicitudes extends Controller
                 }
 
                 return view('trabajos_menores/solicitud', $vars);
+
             } else if ($id_tramite == 11) {
 
                 $result2 = Solicitudes_model::consulta_datos_solicitud($folio, $id_tramite, $id_etapa);
@@ -513,7 +515,7 @@ class Solicitudes extends Controller
                 foreach ($result2 as $obj) {
                     $vars += [$obj->campo => $obj->dato];
                 }
-                
+
                 return view('rectificacion/solicitud', $vars);
             }
         }

@@ -12,7 +12,7 @@
 
 @section('container')
     <h1 class="text-muted text-left font m-0 bold c-primary-color text-capitalize">
-        Trámite web de rectificación de domicilio y ubicación
+        Trámite web de rectificación de nombre
         @isset($id_captura)
         @endisset
     </h1>
@@ -23,7 +23,7 @@
             <div class="etapas d-flex justify-content-center align-items-center">
                 <div style="width: 60px;" class="d-flex flex-column justify-content-center align-items-center">
                     <div
-                        class="etapa border @if ($id_etapa == 182) process @else active @endif d-flex justify-content-center align-items-center">
+                        class="etapa border @if ($id_etapa == 18) process @else active @endif d-flex justify-content-center align-items-center">
                         @if ($id_etapa != 182 && $id_etapa != 182)
                             <div class="success d-flex justify-content-center align-items-center">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2 bold text-white"
@@ -177,6 +177,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col mt-4" id="top_2">
                     <div class="card  shadow-sm card_2 rounded border-none">
@@ -385,7 +386,7 @@
             </div>
         </div>
 
-        @if ($id_etapa >= 187)
+        {{-- @if ($id_etapa >= 187)
             <div class="col mt-4 tarjeta-feedback">
                 <div class="card d-block d-sm-none ">
                     <div class="card-header">
@@ -413,7 +414,7 @@
                 </div>
             </div>
     </div>
-    @endif
+    @endif --}}
     </div>
 
     <p id="parrafo"></p>
@@ -542,7 +543,7 @@
                     if ($('#id_captura').val() == "") {
 
                         var res = await axios.post(
-                            '{{ url('rectificacion/ingresa_solicitud') }}',
+                            '{{ url('rectificacion_nombre/ingresa_solicitud') }}',
                             formdata, {
                                 data: {
                                     "_token": "{{ csrf_token() }}"
@@ -581,7 +582,7 @@
 
                         formdata.append('id_captura', $('#id_captura').val());
                         var res = await axios.post(
-                            '{{ url('rectificacion/actualiza_solicitud') }}',
+                            '{{ url('rectificacion_nombre/actualiza_solicitud') }}',
 
                             formdata, {
                                 data: {
@@ -674,7 +675,7 @@
 
                     var res = await axios.post(
 
-                        '{{ url('rectificacion/actualiza_solicitud_2') }}',
+                        '{{ url('rectificacion_2/actualiza_solicitud_2') }}',
 
                         formdata, {
                             data: {
@@ -920,6 +921,7 @@
             $("#form_2").submit(function(event) {
                 // Clear fields based on the selected option
                 clearFields();
+
                 event.preventDefault();
             });
 

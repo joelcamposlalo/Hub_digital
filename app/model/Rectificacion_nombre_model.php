@@ -10,11 +10,11 @@ use App\Mail\Notificacion;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\contactoRectificacion;
 
-class Rectificacion_model extends Model
+class Rectificacion_nombre_model extends Model
 {
     public static function solicitud()
     {
-        //echo 'fdv';exit;
+
         $pageWasRefreshed =  isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
         if (session('lastpage') !== null && session('lastpage') == __FILE__) {
@@ -23,17 +23,17 @@ class Rectificacion_model extends Model
         } else {
             //Hace un Insert para empezar el tramite como una solicitud
             $folio = DB::table('solicitudes')->insertGetId([
-                'id_tramite' => 30,
+                'id_tramite' => 31,
                 'id_usuario' => session('id_usuario'),
-                'id_etapa'   =>  182,
+                'id_etapa'   =>  188,
                 'estatus'    =>  'pendiente',
             ], 'id_solicitud');
             //Hace un array de todos los datos
             $data1 = [
                 'id_solicitud'  => $folio,
                 'id_usuario'    => session('id_usuario'),
-                'id_tramite'    => 30,
-                'id_etapa'      => 182,
+                'id_tramite'    => 31,
+                'id_etapa'      => 188,
                 'estatus'       => 'pendiente',
             ];
             //guarda los datos del array en la tabla para generar un historial
@@ -81,7 +81,7 @@ class Rectificacion_model extends Model
             ])
 
             ->get();
-        //dd($pendientes);exit;
+
         if ($pendientes->isEmpty()) {
             $pendientes = DB::select('SELECT c.id_cat_archivo, c.nombre, c.id_tramite, c.descripcion_larga,
             c.id_documento,c.obligatorio FROM cat_archivo as c WHERE NOT EXISTS (SELECT 1 FROM archivos as a
@@ -139,7 +139,7 @@ class Rectificacion_model extends Model
 
     public static function ingresa_solicitud($request)
     {
-        $sql = "EXECUTE catastro_sp_vdigital_inserta
+        $sql = "EXECUTE catastro_nombre_vdigital_inserta
         ?,?,?,?,?,
         ?,?";
 
@@ -167,7 +167,7 @@ class Rectificacion_model extends Model
     {
 
 
-        $sql = "EXECUTE catastro_sp_vdigital_actualiza
+        $sql = "EXECUTE catastro_nombre_vdigital_actualiza
         ?,?,?,?,?,
         ?,?";
 
@@ -296,21 +296,9 @@ class Rectificacion_model extends Model
 
     public static function sendMail($request, $document_urls)
     {
-        $correoData = DB::connection('captura_op')
-            ->table('Precaptura')
-            ->where('IdCaptura', $request->id_captura)
-            ->first();
+        $correoData = DB::connection('captura_op')->table('Precaptura')
+            ->where("IdCaptura", $request->id_captura)->first();
 
-        if (!$correoData)
-            return false;
-
-        if (!DB::connection('captura_op')
-            ->table('Precaptura')
-            ->where('IdCaptura', $request->id_captura)
-            ->update([
-                'EdoAct' => 1,
-                ]))
-            return false;
 
         Mail::to('joel.campos@zapopan.gob.mx')
             ->send(new contactoRectificacion($correoData, $document_urls));
@@ -347,4 +335,5 @@ class Rectificacion_model extends Model
         ");
         return $resultado;
     }
+
 }
