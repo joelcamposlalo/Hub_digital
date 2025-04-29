@@ -4,6 +4,8 @@ use App\Http\Controllers\Dictamen_finca_antigua;
 use Illuminate\Support\Facades\Route;
 use app\Mail\contactoCapacitacion;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Dictamenes_daiu;
+
 
 
 /*
@@ -621,3 +623,17 @@ Route::post('rectificacion_2/actualiza_solicitud_2', 'Rectificacion_nombre@actua
 Route::post('rectificacion_nombre/ingresa_tramite', 'Rectificacion_nombre@ingresa_tramite')->middleware('ciudadano');
 Route::get('rectificacion_nombre/cuenta', 'Rectificacion_nombre@cuenta')->middleware('ciudadano');
 Route::get('rectificacion_nombre/buscar-cuenta', 'Rectificacion_nombre@buscarCuenta')->middleware('ciudadano');
+
+
+
+/*
+* Rutas para tramites de Dictamen de adecuación de Imagen urbana DAIUW
+*/
+
+
+Route::middleware(['ciudadano'])->group(function () {
+    Route::get('Dictamenes_daiu/solicitud', [Dictamenes_daiu::class, 'solicitud']);
+    Route::post('Dictamenes_daiu/consulta_predial', [Dictamenes_daiu::class, 'consultaCuenta'])->name('consulta_predial');
+    Route::post('Dictamenes_daiu/informacion_inmueble', [Dictamenes_daiu::class, 'informacion_inmueble'])->name('informacion_inmueble');
+
+});

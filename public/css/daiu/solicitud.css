@@ -1,0 +1,105 @@
+.btn-style {
+    width: 250px;
+    height: 45px !important;
+    background-color: #1e636d;
+    font-size: 18px;
+}
+
+.btn-style:hover {
+    background-color: #154249 !important;
+    color: white !important;
+}
+.categoria-card {
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    background-color: white;
+    color: #212529;
+    min-width: 200px;
+    flex: 1 1 30%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Activa y hover */
+.categoria-card.active,
+.categoria-card:hover {
+    background-color: #1e636d;
+    color: white;
+    border-color: #1e636d;
+}
+
+.categoria-card i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Fix para los checkboxes que ponen cursor "not-allowed" */
+.form-check-input,
+.form-check-label {
+    cursor: pointer !important;
+}
+
+/* Alineación bonita de íconos en los checkboxes */
+.checkbox-icon {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    color: #1e636d;
+}
+
+.form-check-label {
+    display: flex;
+    align-items: center;
+}
+
+.categoria-card img,
+.categoria-card .flaticon-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto 8px;
+}
+
+input[type="checkbox"] {
+    cursor: pointer !important;
+}
+
+#body.swal2-height-auto {
+    height: 100vh !important;
+}
+
+
+.iconos-lista{
+    gap: 10px;
+}
+
+
+.iconos-lista-min{
+    gap: 6px;
+}
+
+
+#map {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 500px; /* Ajusta la altura según lo que necesites */
+    margin: 0 auto; /* Centra el mapa si está dentro de un contenedor */
+    border-radius: 8px; /* Opcional: agrega bordes redondeados */
+}
+
+
+.mapboxgl-ctrl-top-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+}
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 280px !important;
+}

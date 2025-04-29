@@ -172,6 +172,8 @@ class Verificacion_Riesgos extends Controller
 
                 $ext = pathinfo($file["name"], PATHINFO_EXTENSION);
 
+                
+
                 $uploadedFile = $request->file($key);
 
                 $id_documento = str_replace("file_", "", $key);
