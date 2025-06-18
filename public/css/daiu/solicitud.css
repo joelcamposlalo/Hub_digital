@@ -92,14 +92,3 @@ input[type="checkbox"] {
     border-radius: 8px; /* Opcional: agrega bordes redondeados */
 }
 
-
-.mapboxgl-ctrl-top-left {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 999;
-}
-
-.mapboxgl-ctrl-geocoder {
-    min-width: 280px !important;
-}

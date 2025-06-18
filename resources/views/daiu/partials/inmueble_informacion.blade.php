@@ -78,7 +78,7 @@
                         <button type="button" id="btn_regresar_card4" class="ab-btn btn-primary-color btn-style me-2">
                             Regresar a adecuaciones
                         </button>
-                        <button type="submit" class="ab-btn b-primary-color btn-style" id="btn_inserta_4">
+                        <button type="button" class="ab-btn b-primary-color btn-style" id="btn_inserta_4">
                             Continuar
                         </button>
                     </div>

@@ -145,7 +145,7 @@
                             class="ab-btn btn-primary-color btn-style me-2">
                             Regresar a la verificación
                         </button>
-                        <button type="submit" class="ab-btn b-primary-color btn-style" id="btn_inserta_3">
+                        <button type="button" class="ab-btn b-primary-color btn-style" id="btn_inserta_3">
                             Continuar
                         </button>
                     </div>
@@ -154,6 +154,3 @@
         </div>
     </div>
 </div>
-
-
-

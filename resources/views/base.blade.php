@@ -66,9 +66,9 @@
         <div class="aside left bg-white m-0 border-right b-primary-color">
             <div class="profile-img mt-5">
                 @if(Storage::disk('s3')->exists('public/'.session('id_usuario').'/perfil.jpg'))
-                <img src="{{ Storage::disk('s3')->url('public/'.session('id_usuario')) }}/perfil.jpg" alt="foto de perfil">
+                    <img src="{{ Storage::disk('s3')->url('public/'.session('id_usuario')) }}/perfil.jpg" alt="foto de perfil">
                 @else
-                <img src="{{asset('media/flaticon/avatar.svg')}}" alt="foto de perfil predeterminada">
+                    <img src="{{ asset('media/gif/cat.gif') }}" alt="foto de perfil predeterminada">
                 @endif
                 <label for="profile">
                     <i class="fas fa-camera"></i>
@@ -76,9 +76,9 @@
                 </label>
             </div>
             @section('aside')
-
             @show
         </div>
+
         <div class="right m-0 p-0">
             <div id="nav" class="bg-white border-bottom">
                 <div class="container d-flex flex-row justify-content-between align-items-center">
@@ -184,7 +184,6 @@
 <script src="{{asset('vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('vendors/bootstrap/js/popper.js')}}"></script>
 <script src="{{asset('vendors/toast/js/iziToast.min.js')}}"></script>
-<script src="https://kit.fontawesome.com/e44ca10330.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>

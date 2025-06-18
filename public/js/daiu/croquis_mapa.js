@@ -1,114 +1,197 @@
-let map;
-let marker;
-
+let map, view, marker, searchWidget;
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
-const MAPBOX_TOKEN =
-    "pk.eyJ1Ijoiam9lbGNhbXBvc2xhbG8iLCJhIjoiY21hMnFzZ2czMnRsYTJqcHdlM21vbzFrNSJ9.tDX4hUtXX-IHUxtujEctuA";
+const DEFAULT_ZOOM = 15;
+const MARKER_COLOR = "#1e636d";
+const MARKER_OUTLINE = "#000000";
 
-mapboxgl.accessToken = MAPBOX_TOKEN;
-
-// --- Inicializa el mapa
 function initMap() {
-    map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/mapbox/streets-v12",
-        center: DEFAULT_CENTER,
-        zoom: 13
-    });
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/Search",
+        "esri/Graphic",
+        "esri/core/reactiveUtils",
+        "esri/widgets/Expand",
+        "esri/geometry/Point"
+    ], function(Map, MapView, Search, Graphic, reactiveUtils, Expand, Point) {
+        map = new Map({
+            basemap: "streets-navigation-vector"
+        });
 
-    addGeocoderControl();
-    map.on("click", handleMapClick);
-}
+        view = new MapView({
+            container: "map",
+            map: map,
+            center: DEFAULT_CENTER,
+            zoom: DEFAULT_ZOOM
+        });
 
-// --- Añade el buscador
-function addGeocoderControl() {
-    const geocoder = new MapboxGeocoder({
-        accessToken: MAPBOX_TOKEN,
-        mapboxgl,
-        placeholder: "Buscar dirección...",
-        bbox: [-118.5996, 14.3895, -86.8123, 32.7187] // Limita búsqueda a México
-    });
+        view.when()
+            .then(function() {
+                console.log("MapView está listo y completamente cargado");
 
-    map.addControl(geocoder);
+                setupSearchWidget();
+                setupMapEvents();
+                setupUIButtons();
+            })
+            .catch(function(error) {
+                console.error("Error al cargar MapView:", error);
+                alert("Error al cargar el mapa. Por favor recarga la página.");
+            });
 
-    geocoder.on("result", e => {
-        const place = e.result;
-        const coords = place.geometry.coordinates;
+        // Configurar el widget de búsqueda
+        function setupSearchWidget() {
+            searchWidget = new Search({
+                view: view,
+                placeholder: "Buscar dirección...",
+                popupEnabled: false,
+                includeDefaultSources: true
+            });
 
-        if (!isInZapopan(place.context)) {
-            alert("Solo se permiten ubicaciones dentro de Zapopan, Jalisco.");
-            return;
+            // Crear un widget expandible para la búsqueda
+            const searchExpand = new Expand({
+                view: view,
+                content: searchWidget,
+                expandIconClass: "esri-icon-search",
+                expandTooltip: "Buscar dirección",
+                expanded: false
+            });
+
+            view.ui.add(searchExpand, "top-right");
+
+            searchWidget.on("search-complete", function(event) {
+                handleSearchResults(event);
+            });
         }
 
-        map.setCenter(coords);
-        placeMarker(coords);
-    });
-}
+        function setupMapEvents() {
+            view.on("click", function(event) {
+                const coords = event.mapPoint;
+                console.log("Click en:", coords);
+                placeMarker(coords);
+                updateCoordinatesDisplay(coords);
+            });
 
-// --- Valida si un lugar pertenece a Zapopan
-function isInZapopan(context) {
-    return context?.some(
-        ctx =>
-            ctx.id.includes("place") &&
-            ctx.text.toLowerCase().includes("zapopan")
-    );
-}
+            reactiveUtils.watch(
+                () => view.stationary,
+                isStationary => {
+                    if (isStationary && marker) {
+                        updateCoordinatesDisplay(marker.geometry);
+                    }
+                }
+            );
+        }
 
-// --- Maneja clics en el mapa
-function handleMapClick(e) {
-    const coords = [e.lngLat.lng, e.lngLat.lat];
+        function setupUIButtons() {
+            window.placeMarker = function(coords) {
+                if (!coords) return;
 
-    // Validación básica por coordenadas (puedes mejorar con reverse geocoding si quieres)
-    const [lng, lat] = coords;
-    const dentroDeZapopan =
-        lng >= -103.5 && lng <= -103.25 && lat >= 20.6 && lat <= 20.8;
+                if (marker) {
+                    marker.geometry = coords;
+                } else {
+                    marker = new Graphic({
+                        geometry: coords,
+                        symbol: {
+                            type: "simple-marker",
+                            color: MARKER_COLOR,
+                            outline: {
+                                color: MARKER_OUTLINE,
+                                width: 1
+                            }
+                        }
+                    });
+                    view.graphics.add(marker);
+                }
 
-    if (!dentroDeZapopan) {
-        alert("Solo se permiten ubicaciones dentro de Zapopan, Jalisco.");
-        return;
-    }
+                // Crear un objeto Point válido (en caso de que no lo sea ya)
+                const point =
+                    coords.type === "point"
+                        ? coords
+                        : new Point({
+                              longitude: coords.longitude ?? coords.x,
+                              latitude: coords.latitude ?? coords.y
+                          });
 
-    placeMarker(coords);
-}
+                view.goTo({
+                    target: point,
+                    zoom: 16
+                }).catch(function(error) {
+                    if (error.name !== "view:goto-interrupted") {
+                        console.warn("Error real en animación goTo:", error);
+                        view.center = [point.longitude, point.latitude];
+                        view.zoom = 12;
+                    }
+                });
 
-// --- Coloca o mueve el marcador
-function placeMarker(coords) {
-    if (marker) {
-        marker.setLngLat(coords);
-    } else {
-        marker = new mapboxgl.Marker({ color: "#1e636d", draggable: true })
-            .setLngLat(coords)
-            .addTo(map);
+                updateCoordinatesDisplay(coords);
+            };
 
-        marker.on("dragend", () => {
-            const { lng, lat } = marker.getLngLat();
-            console.log("Nueva posición:", lng, lat);
-        });
-    }
-}
+            window.getMarkerCoords = function() {
+                return marker ? marker.geometry : null;
+            };
 
-// --- Busca y geolocaliza una dirección ingresada
-function geocodeAddress(direccion) {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-        direccion
-    )}.json?access_token=${MAPBOX_TOKEN}`;
+            window.clearMap = function() {
+                if (marker) {
+                    view.graphics.remove(marker);
+                    marker = null;
+                }
+                document.getElementById("coordinates-display").textContent = "";
+                view.goTo({
+                    center: DEFAULT_CENTER,
+                    zoom: DEFAULT_ZOOM
+                });
+            };
+        }
 
-    $.getJSON(url, function(data) {
-        if (data.features && data.features.length > 0) {
-            const result = data.features[0];
-            const coords = result.geometry.coordinates;
-
-            if (!isInZapopan(result.context)) {
+        function handleSearchResults(event) {
+            if (
+                !event.results ||
+                event.results.length === 0 ||
+                !event.results[0].results ||
+                event.results[0].results.length === 0
+            ) {
                 alert(
-                    "Solo se permiten ubicaciones dentro de Zapopan, Jalisco."
+                    "No se encontró la dirección. Intenta con términos más específicos."
                 );
                 return;
             }
 
-            map.setCenter(coords);
-            placeMarker(coords);
-        } else {
-            alert("No se pudo encontrar la dirección.");
+            const result = event.results[0].results[0];
+            if (!result?.feature?.geometry) {
+                alert("No se pudo obtener la ubicación de los resultados.");
+                return;
+            }
+
+            const geometry = result.feature.geometry;
+            console.log("Coordenadas encontradas:", geometry);
+
+            const point =
+                geometry.type === "point"
+                    ? geometry
+                    : new Point({
+                          longitude: geometry.longitude ?? geometry.x,
+                          latitude: geometry.latitude ?? geometry.y
+                      });
+
+            placeMarker(point);
+            updateCoordinatesDisplay(point);
+            view.goTo({
+                target: point,
+                zoom: 10
+            }).catch(function(error) {
+                console.warn("Error en animación goTo:", error);
+                view.center = [point.longitude, point.latitude];
+                view.zoom = 20;
+            });
+        }
+
+        function updateCoordinatesDisplay(coords) {
+            const display = document.getElementById("coordinates-display");
+            if (coords && display) {
+                const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
+                const lng =
+                    coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+                display.textContent = `Latitud: ${lat}, Longitud: ${lng}`;
+            }
         }
     });
 }
@@ -118,33 +201,69 @@ $(document).ready(function() {
         e.preventDefault();
         mostrarCard("card_4", "card_5");
 
-        $("#map").css("display", "block");
+        $("#map").css({
+            display: "flex",
+            height: "400px"
+        });
 
-        if (!map) {
-            initMap();
-        }
-
-        setTimeout(() => {
-            map.resize();
-        }, 300);
-
-        const domicilio = $("#domicilio")
-            .val()
-            .trim();
-        if (!domicilio) {
-            alert("Por favor, ingresa un domicilio antes de continuar.");
-            return;
-        }
-
-        geocodeAddress(domicilio);
-    });
-
-    $("#btn_guardar_mapa").click(function() {
-        if (marker) {
-            const { lng, lat } = marker.getLngLat();
-            alert(`Ubicación guardada: Longitud ${lng}, Latitud ${lat}`);
+        if (!map || !view) {
+            if (!window.require) {
+                loadArcGISScript()
+                    .then(initMap)
+                    .catch(function(error) {
+                        console.error("Error al cargar ArcGIS API:", error);
+                        alert(
+                            "Error al cargar el mapa. Por favor recarga la página."
+                        );
+                    });
+            } else {
+                initMap();
+            }
         } else {
-            alert("Por favor, selecciona una ubicación en el mapa.");
+            setTimeout(() => {
+                view.goTo({
+                    center: DEFAULT_CENTER,
+                    zoom: DEFAULT_ZOOM
+                }).catch(function(error) {
+                    console.warn("Error al centrar mapa:", error);
+                });
+            }, 100);
         }
     });
+
+    $("#btn_guardar_mapa").click(function(e) {
+        e.preventDefault();
+        const coords = window.getMarkerCoords();
+        if (coords) {
+            const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
+            const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+
+            alert(`Ubicación guardada:\nLatitud: ${lat}\nLongitud: ${lng}`);
+        } else {
+            alert(
+                "Por favor, selecciona una ubicación en el mapa haciendo click o usando la búsqueda."
+            );
+        }
+    });
+
+    $("#btn_limpiar_mapa").click(function(e) {
+        e.preventDefault();
+        if (window.clearMap) {
+            window.clearMap();
+        } else {
+            alert(
+                "El mapa no está listo aún. Espera un momento e intenta de nuevo."
+            );
+        }
+    });
+
+    function loadArcGISScript() {
+        return new Promise(function(resolve, reject) {
+            const script = document.createElement("script");
+            script.src = "https://js.arcgis.com/4.25/";
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
 });

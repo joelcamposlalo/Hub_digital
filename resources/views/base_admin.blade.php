@@ -167,7 +167,6 @@
     <script src="{{asset('vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendors/bootstrap/js/popper.js')}}"></script>
     <script src="{{asset('vendors/toast/js/iziToast.min.js')}}"></script>
-    <script src="https://kit.fontawesome.com/e44ca10330.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{asset('js/frontend.js')}}"></script>
     <script src="{{asset('vendors/parsley/parsley.min.js')}}"></script>
