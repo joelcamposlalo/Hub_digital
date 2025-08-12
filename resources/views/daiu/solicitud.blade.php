@@ -1,34 +1,25 @@
 @extends('base')
-
 @section('title', 'Solicitud')
-
 @section('aside')
     {{ menu_ciudadano('') }}
 @endsection
-
 @section('notification')
     {{ get_notificaciones() }}
 @endsection
-
 @section('container')
 
     <h1 class="text-muted font m-0 bold c-primary-color">
         Dictaminación de Imagen Urbana
     </h1>
     <small class="font text-muted mb-5 f-15">Folio de trámite: {{ $folio }}</small>
-
-
     <input name="id_etapa" id="id_etapa" type="hidden" value="{{ $id_etapa ?? '' }}">
-
     {{-- Visualización de las etapas --}}
     @include('daiu.partials.etapas')
     @include('daiu.partials.consulta_predial', ['id_solicitud' => $id_solicitud])
-     @include('daiu.partials.datos_solicitante', ['id_solicitud' => $id_solicitud])
+    @include('daiu.partials.datos_solicitante', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.selector_adecuaciones', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.inmueble_informacion', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.croquis_mapa', ['id_solicitud' => $id_solicitud])
-
-
 
 @endsection
 
