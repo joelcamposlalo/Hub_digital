@@ -4,7 +4,7 @@ use App\Http\Controllers\Dictamen_finca_antigua;
 use Illuminate\Support\Facades\Route;
 use app\Mail\contactoCapacitacion;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\Dictamenes_daiu;
+use App\Http\Controllers\DAIUController;
 
 
 
@@ -632,8 +632,7 @@ Route::get('rectificacion_nombre/buscar-cuenta', 'Rectificacion_nombre@buscarCue
 
 
 Route::middleware(['ciudadano'])->group(function () {
-    Route::get('Dictamenes_daiu/solicitud', [Dictamenes_daiu::class, 'solicitud']);
-    Route::post('Dictamenes_daiu/consulta_predial', [Dictamenes_daiu::class, 'consultaCuenta'])->name('consulta_predial');
-    Route::post('Dictamenes_daiu/informacion_inmueble', [Dictamenes_daiu::class, 'informacion_inmueble'])->name('informacion_inmueble');
-
+    Route::get('daiu/solicitud', [DAIUController::class, 'solicitud'])->name('daiu.solicitud');
+    Route::post('daiu/consulta_predial', [DAIUController::class, 'consultaCuenta'])->name('consulta_predial');
+    Route::post('daiu/store', [DAIUController::class, 'store'])->name('daiu.store');
 });

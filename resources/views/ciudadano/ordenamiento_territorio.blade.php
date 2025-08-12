@@ -146,8 +146,8 @@
                 </a>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 card-tramite"
-                data-tramite="Dictamen de Adeucuación de Imagen Urbana" data-img="icono-daiu.png"
-                data-url="Dictamenes_daiu/solicitud">
+                data-tramite="Dictamen de Adecuación de Imagen Urbana Web" data-img="icono-daiu.png"
+                data-url="daiu/solicitud">
                 <a style="text-decoration: none; color: gray;" href="#!" data-toggle="modal"
                     data-target="#modal-carta">
                     <div style="height: 260px;" class="card card-hover-effect">
@@ -161,7 +161,7 @@
                             </div>
                             <div style="height: 150px"
                                 class="d-flex flex-column justify-content-center align-items-center">
-                                <small class="text-center mt-2">Dictamen de Adeucuación de Imagen Urbana</small>
+                                <small class="text-center mt-2">Dictamen de Adecuación de Imagen Urbana Web</small>
                                 <div style="width: 50px; height: 50px; background-color: #ffc107; border-radius: 50%;"
                                     class="circle mt-4 d-flex justify-content-center align-items-center">
                                     <i class="fas fa-arrow-right text-white"></i>

@@ -9,7 +9,7 @@
 @section('container')
 
     <h1 class="text-muted font m-0 bold c-primary-color">
-        Dictaminación de Imagen Urbana
+        Dictamen de Adecuación de Imagen Urbana Web
     </h1>
     <small class="font text-muted mb-5 f-15">Folio de trámite: {{ $folio }}</small>
     <input name="id_etapa" id="id_etapa" type="hidden" value="{{ $id_etapa ?? '' }}">
