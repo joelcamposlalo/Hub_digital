@@ -16,8 +16,20 @@
                             <button type="button" id="btn_guardar_mapa" class="ab-btn b-primary-color btn-style">
                                 Guardar Croquis
                             </button>
-                            <button type="button" id="btn_limpiar_mapa" class="ab-btn b-secondary-color btn-style ml-2">
+                            <button type="button" id="btn_limpiar_mapa"
+                                class="ab-btn b-secondary-color btn-style ml-2">
                                 Limpiar Mapa
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12 text-right">
+                            <button type="button" id="btn_regresar_card5" class="ab-btn btn-primary-color btn-style me-2">
+                                Regresar a información del inmueble
+                            </button>
+                            <button type="button" id="btn_inserta_5" class="ab-btn b-primary-color btn-style">
+                                Continuar con anexos
                             </button>
                         </div>
                     </div>
