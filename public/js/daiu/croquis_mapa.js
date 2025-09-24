@@ -257,6 +257,16 @@ $(document).ready(function() {
         }
     });
 
+    $("#btn_regresar_card5").on("click", function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_4");
+    });
+
+    $("#btn_inserta_5").on("click", function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_6");
+    });
+
     function loadArcGISScript() {
         return new Promise(function(resolve, reject) {
             const script = document.createElement("script");

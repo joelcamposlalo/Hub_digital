@@ -85,6 +85,21 @@ input[type="checkbox"] {
 }
 
 
+.anexos-check {
+    gap: 10px;
+}
+
+.anexos-check i {
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+.anexos-check .form-check-label {
+    margin-left: 10px;
+    line-height: 1.2;
+}
+
+
 #map {
     width: 100%; /* Ocupa todo el ancho disponible */
     height: 500px; /* Ajusta la altura según lo que necesites */
