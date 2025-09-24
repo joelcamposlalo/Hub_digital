@@ -13,11 +13,13 @@
                     {{-- Botón para guardar la ubicación --}}
                     <div class="row mt-4">
                         <div class="col-md-12 text-right">
-                            <button type="button" id="btn_guardar_mapa" class="ab-btn b-primary-color btn-style">
-                                Guardar Croquis
+                            <button type="button" id="btn_limpiar_mapa"
+                                class="ab-btn b-secondary-color btn-style">
+                                Limpiar mapa y reiniciar el punto original
                             </button>
-                            <button type="button" id="btn_limpiar_mapa" class="ab-btn b-secondary-color btn-style ml-2">
-                                Limpiar Mapa
+                            <button type="button" id="btn_guardar_mapa"
+                                class="ab-btn b-primary-color btn-style ml-2">
+                                Guardar croquis y avanzar a anexos
                             </button>
                         </div>
                     </div>

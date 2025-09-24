@@ -81,14 +81,13 @@
                         <div class="col mt-2">
                             <label for="telefono"><small>Teléfono</small></label>
                             <input name="telefono" id="telefono"
-                                class="ab-form background-color rounded border capitalize editable" type="text"
+                                class="ab-form background-color rounded border editable" type="text"
                                 required>
                         </div>
                         <div class="col mt-2">
                             <label for="correo"><small>Correo Electrónico</small></label>
                             <input name="correo" id="correo"
-                                class="ab-form background-color rounded border capitalize editable" type="email"
-                                required>
+                                class="ab-form background-color rounded border editable" type="email" required>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -97,19 +96,13 @@
                             <input name="id_captura" id="id_captura_frm4" type="hidden"
                                 value="{{ isset($id_captura) ? $id_captura : '' }}">
 
-                            <!-- Botón para habilitar la edición -->
-                            <button type="button" id="btn_editar_campos" class="ab-btn btn-warning-color btn-style">
-                                Editar campos
-                            </button>
-
                             <!-- Botón para regresar -->
                             <button type="button" id="btn_regresar" class="ab-btn btn-primary-color mt-4 btn-style">
                                 Regresar a la consulta
                             </button>
 
                             <!-- Botón para continuar -->
-                            <button type="submit" class="ab-btn b-primary-color btn-style" id="btn_inserta_2"
-                                disabled>
+                            <button type="submit" class="ab-btn b-primary-color btn-style" id="btn_inserta_2">
                                 Continuar
                             </button>
                         </div>
