@@ -2,15 +2,12 @@
     <div class="col mt-4" id="top_6">
         <div class="card shadow-sm card_6 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-
                 <div class="step-card-title">
-                    <span class="step-card-number">6</span>
                     <small class="step-card-label">Anexos y memoria</small>
                 </div>
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_6">
-
                     {{-- Memoria descriptiva --}}
                     <div class="form-group">
                         <label for="memoria_descriptiva"><strong>Memoria descriptiva</strong></label>
@@ -59,13 +56,11 @@
                         </div>
                     </div>
 
-                    <div class="text-right mt-4">
-
-                        <button type="button" id="btn_regresar_card6" class="ab-btn btn-primary-color me-2">
+                    <div class="step-card-actions mt-4">
+                        <button type="button" id="btn_regresar_card6" class="ab-btn btn-secondary-color">
                             Regresar al croquis
                         </button>
                         <button type="submit" class="ab-btn b-primary-color" id="btn_finalizar_solicitud">
-
                             Guardar información
                         </button>
                     </div>

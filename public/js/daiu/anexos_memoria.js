@@ -7,6 +7,7 @@ $(document).ready(function() {
     $("#form_6").on("submit", function(e) {
         e.preventDefault();
 
+        const resumen = [
             $("#memoria_descriptiva").val().trim()
                 ? "Memoria descriptiva capturada"
                 : "Sin memoria descriptiva",
@@ -17,7 +18,6 @@ $(document).ready(function() {
             $("#dim_fondo").val().trim()
                 ? "Dimensiones registradas"
                 : "Sin dimensiones de fachada"
-
         ].join("<br>");
 
         iziToast.success({

@@ -25,25 +25,21 @@ $(document).ready(function() {
         $("#otro_section").toggle(selectedValues.includes("otro"));
 
         const dropdownElement = document.getElementById("dropdownCategoria");
-
         if (dropdownElement) {
             const dropdownInstance =
                 bootstrap.Dropdown.getInstance(dropdownElement) ||
                 new bootstrap.Dropdown(dropdownElement);
             dropdownInstance.hide();
         }
-
     }
 
     window.actualizarDropdownCategorias = actualizarDropdownCategorias;
-
 
     $("#btn_regresar").on("click", function() {
         mostrarCard("card_2", "card_1");
     });
 
     $("#form_2").on("submit", function(e) {
-
         e.preventDefault();
 
         const formulario = $(this);
@@ -89,8 +85,6 @@ $(document).ready(function() {
             ]
         });
     });
-
-
 
     $(".categoria_trigger").on("click", function() {
         const categoria = $(this).data("categoria");

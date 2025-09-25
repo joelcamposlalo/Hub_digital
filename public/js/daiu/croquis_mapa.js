@@ -7,40 +7,42 @@ const MARKER_COLOR = "#1e636d";
 const MARKER_OUTLINE = "#000000";
 
 function initMap() {
-    require([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/widgets/Search",
-        "esri/Graphic",
-        "esri/core/reactiveUtils",
-        "esri/widgets/Expand",
-        "esri/geometry/Point"
-    ], function(Map, MapView, Search, Graphic, reactiveUtils, Expand, Point) {
-        map = new Map({
-            basemap: "streets-navigation-vector"
-        });
+    if (map && view) {
+        return view.when();
+    }
 
-        view = new MapView({
-            container: "map",
-            map: map,
-            center: DEFAULT_CENTER,
-            zoom: DEFAULT_ZOOM
-        });
-
-        view.when()
-            .then(function() {
-                setupSearchWidget();
-                setupMapEvents();
-                setupUIButtons();
-            })
-            .catch(function(error) {
-                console.error("Error al cargar MapView:", error);
-                iziToast.error({
-                    title: "Error",
-                    message: "No se pudo inicializar el mapa. Recarga la página e inténtalo nuevamente.",
-                    backgroundColor: "#ff9b93"
-                });
+    return new Promise(function(resolve, reject) {
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/widgets/Search",
+            "esri/Graphic",
+            "esri/core/reactiveUtils",
+            "esri/widgets/Expand",
+            "esri/geometry/Point"
+        ], function(Map, MapView, Search, Graphic, reactiveUtils, Expand, Point) {
+            map = new Map({
+                basemap: "streets-navigation-vector"
             });
+
+            view = new MapView({
+                container: "map",
+                map: map,
+                center: DEFAULT_CENTER,
+                zoom: DEFAULT_ZOOM
+            });
+
+            view.when()
+                .then(function() {
+                    setupSearchWidget();
+                    setupMapEvents();
+                    setupUIButtons();
+                    resolve();
+                })
+                .catch(function(error) {
+                    console.error("Error al cargar MapView:", error);
+                    reject(error);
+                });
 
         // Configurar el widget de búsqueda
         function setupSearchWidget() {
@@ -166,8 +168,6 @@ function initMap() {
 
                 const zoomLevel = options.zoom ?? 16;
 
-                const zoomLevel = options.zoom ?? 16;
-
                 view.goTo({
                     target: point,
                     zoom: zoomLevel
@@ -191,7 +191,6 @@ function initMap() {
                     longitude: DEFAULT_CENTER[0],
                     latitude: DEFAULT_CENTER[1],
                     spatialReference: { wkid: 4326 }
-
                 });
 
                 placeMarker(defaultPoint, { zoom: DEFAULT_ZOOM });
@@ -250,9 +249,7 @@ function initMap() {
                 return;
             }
 
-
             focusOnGeometry(result.feature.geometry, 18);
-
         }
 
         function updateCoordinatesDisplay(coords) {
@@ -264,6 +261,7 @@ function initMap() {
                 display.textContent = `Latitud: ${lat}, Longitud: ${lng}`;
             }
         }
+        }, reject);
     });
 }
 
@@ -272,37 +270,44 @@ $(document).ready(function() {
         e.preventDefault();
         mostrarCard("card_4", "card_5");
 
-        $("#map").css({
-            display: "flex",
-            height: "400px"
-        });
+        const mostrarMapa = function() {
+            $("#map").css({
+                display: "block",
+                height: "400px"
+            });
 
-        if (!map || !view) {
-            if (!window.require) {
-                loadArcGISScript()
-                    .then(initMap)
-                    .catch(function(error) {
-                        console.error("Error al cargar ArcGIS API:", error);
-                        iziToast.error({
-                            title: "Error",
-                            message:
-                                "No fue posible cargar el mapa. Recarga la página e inténtalo nuevamente.",
-                            backgroundColor: "#ff9b93"
-                        });
-                    });
-            } else {
-                initMap();
-            }
-        } else {
-            setTimeout(() => {
+            if (view) {
+                view.resize();
                 view.goTo({
                     center: DEFAULT_CENTER,
                     zoom: DEFAULT_ZOOM
                 }).catch(function(error) {
                     console.warn("Error al centrar mapa:", error);
                 });
-            }, 100);
-        }
+            }
+        };
+
+        const inicializarMapa = function() {
+            const cargarAPI = window.require ? Promise.resolve() : loadArcGISScript();
+
+            return cargarAPI.then(function() {
+                return initMap();
+            });
+        };
+
+        setTimeout(function() {
+            inicializarMapa()
+                .then(mostrarMapa)
+                .catch(function(error) {
+                    console.error("Error al cargar ArcGIS API:", error);
+                    iziToast.error({
+                        title: "Error",
+                        message:
+                            "No fue posible cargar el mapa. Recarga la página e inténtalo nuevamente.",
+                        backgroundColor: "#ff9b93"
+                    });
+                });
+        }, 550);
     });
 
        $("#btn_guardar_mapa").click(function(e) {
@@ -310,20 +315,17 @@ $(document).ready(function() {
         const coords = window.getMarkerCoords();
 
         if (!coords) {
-
             iziToast.warning({
                 title: "Selecciona una ubicación",
                 message:
                     "Coloca un punto en el mapa haciendo clic o utiliza la búsqueda para posicionarte.",
                 backgroundColor: "#ffd66b"
-
             });
             return;
         }
 
         const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
         const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
-
 
         iziToast.success({
             title: "Croquis guardado",
