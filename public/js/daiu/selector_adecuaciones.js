@@ -40,7 +40,6 @@ $(document).ready(function() {
             const value = $(selector).val();
             return typeof value === "string" ? value.trim() : "";
         };
-
         const payload = {
             mantenimiento: $("input[name='mantenimiento[]']:checked")
                 .map(function() {
@@ -57,6 +56,7 @@ $(document).ready(function() {
                     return $(this).val();
                 })
                 .get(),
+
             gama: safeTrim("#gama"),
             molduras: safeTrim("#molduras"),
             macizo: safeTrim("#macizo"),
@@ -64,6 +64,7 @@ $(document).ready(function() {
             otro_mantenimiento: safeTrim("#otro_mantenimiento"),
             dimensiones_toldo: safeTrim("#dimensiones_toldo"),
             otro_otro: safeTrim("#otro_otro")
+
         };
 
         postDaiuPaso(rutasDaiu.guardarAdecuaciones, payload)

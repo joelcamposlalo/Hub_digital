@@ -72,7 +72,6 @@ function initMap() {
                 center: DEFAULT_CENTER,
                 zoom: DEFAULT_ZOOM
             });
-
             view.when()
                 .then(function() {
                     setupSearchWidget();
@@ -353,7 +352,8 @@ $(document).ready(function() {
         }, 550);
     };
 
-    $("#btn_guardar_mapa").click(function(e) {
+
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
@@ -416,5 +416,4 @@ $(document).ready(function() {
             });
         }
     });
-
 });

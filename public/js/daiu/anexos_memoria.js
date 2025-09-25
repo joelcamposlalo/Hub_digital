@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     $("#form_6").on("submit", function(e) {
         e.preventDefault();
-
         const payload = {};
         $(this)
             .serializeArray()
