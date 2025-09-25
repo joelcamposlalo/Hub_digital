@@ -1,3 +1,4 @@
+
 if (!window.postDaiuPaso) {
     window.postDaiuPaso = function(url, payload = {}) {
         if (!url) {
@@ -73,6 +74,7 @@ if (!window.mostrarCard) {
 
 function guardarConsulta(cuenta) {
     return postDaiuPaso(rutasDaiu.guardarConsulta, { cuenta });
+
 }
 
 // Función para consultar la cuenta predial
@@ -98,7 +100,6 @@ function consultarPredial(cuenta) {
             if (respuestaPredial.length > 0) {
                 const predio = respuestaPredial[0];
                 fillFields(predio);
-
                 guardarConsulta(cuenta)
                     .done(function() {
                         iziToast.success({
@@ -120,6 +121,7 @@ function consultarPredial(cuenta) {
                             backgroundColor: "#ff9b93"
                         });
                     });
+
             } else {
                 iziToast.warning({
                     title: "Ups",
@@ -207,6 +209,7 @@ $(document).ready(function() {
 
     // Manejo del botón "Continuar sin consultar"
     $("#continuar_sin_consulta").click(function() {
+
         const cuenta = $("#cuenta")
             .val()
             .trim();
@@ -246,6 +249,7 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
+
     });
 
     window.updateStepProgress(1);

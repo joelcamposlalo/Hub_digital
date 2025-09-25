@@ -2,6 +2,7 @@ let map, view, marker, searchWidget, searchExpandControl;
 let isMarkerDragging = false;
 let skipNextSearchComplete = false;
 let arcgisLoaderPromise = null;
+
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
 const DEFAULT_ZOOM = 15;
 const MARKER_COLOR = "#1e636d";
@@ -72,6 +73,7 @@ function initMap() {
                 center: DEFAULT_CENTER,
                 zoom: DEFAULT_ZOOM
             });
+
 
             view.when()
                 .then(function() {
@@ -334,6 +336,7 @@ $(document).ready(function() {
 
         const inicializarMapa = function() {
             return loadArcGISScript().then(function() {
+
                 return initMap();
             });
         };
@@ -353,7 +356,8 @@ $(document).ready(function() {
         }, 550);
     };
 
-    $("#btn_guardar_mapa").click(function(e) {
+
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
@@ -369,6 +373,7 @@ $(document).ready(function() {
 
         const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
         const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+
 
         postDaiuPaso(rutasDaiu.guardarCroquis, {
             latitud: lat,
@@ -416,5 +421,4 @@ $(document).ready(function() {
             });
         }
     });
-
 });

@@ -7,12 +7,14 @@ $(document).ready(function() {
     $("#form_6").on("submit", function(e) {
         e.preventDefault();
 
+
         const payload = {};
         $(this)
             .serializeArray()
             .forEach(function(item) {
                 payload[item.name] = item.value;
             });
+
 
         const resumen = [
             $("#memoria_descriptiva").val().trim()
@@ -26,7 +28,7 @@ $(document).ready(function() {
                 ? "Dimensiones registradas"
                 : "Sin dimensiones de fachada"
         ].join("<br>");
-
+      
         postDaiuPaso(rutasDaiu.guardarAnexos, payload)
             .done(function() {
                 iziToast.success({
@@ -48,5 +50,6 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
+
     });
 });

@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     $("#form_7").on("submit", function(e) {
         e.preventDefault();
-
         const payload = {};
         const archivos = [];
 
@@ -20,6 +19,7 @@ $(document).ready(function() {
                     archivos.push(nombre);
                 }
             });
+
 
         const mensaje = archivos.length
             ? `Archivos seleccionados:<br><strong>${archivos.join(", ")}</strong>`
@@ -45,5 +45,6 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
+
     });
 });
