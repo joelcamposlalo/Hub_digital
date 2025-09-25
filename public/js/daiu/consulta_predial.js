@@ -1,8 +1,78 @@
-// Función para mostrar y ocultar cards
-function mostrarCard(origen, destino) {
-    $(`.${origen} .card-body`).slideUp("slow", function() {
-        $(`.${destino} .card-body`).slideDown("slow");
-    });
+if (!window.postDaiuPaso) {
+    window.postDaiuPaso = function(url, payload = {}) {
+        if (!url) {
+            return $.Deferred().reject().promise();
+        }
+
+        const data = Object.assign(
+            {
+                _token: csrfToken,
+                id_solicitud: idSolicitud
+            },
+            payload || {}
+        );
+
+        return $.ajax({
+            url: url,
+            method: "POST",
+            data: data,
+            dataType: "json"
+        });
+    };
+}
+
+if (!window.updateStepProgress) {
+    window.updateStepProgress = function(activeStep) {
+        const steps = document.querySelectorAll(".step-item");
+        steps.forEach(stepElement => {
+            const stepNumber = parseInt(stepElement.dataset.step, 10);
+            const isCurrent = stepNumber === activeStep;
+            const isComplete = stepNumber <= activeStep;
+
+            stepElement.classList.toggle("is-current", isCurrent);
+            stepElement.classList.toggle("is-complete", isComplete);
+        });
+
+        const connectors = document.querySelectorAll(".step-line");
+        connectors.forEach(line => {
+            const lineStep = parseInt(line.dataset.stepLine, 10);
+            line.classList.toggle("is-complete", lineStep < activeStep);
+        });
+    };
+}
+
+if (!window.mostrarCard) {
+    window.mostrarCard = function(origen, destino) {
+        const $origenBody = $(`.${origen} .card-body`);
+        const $destinoBody = $(`.${destino} .card-body`);
+        const stepSegment = destino.split("_")[1];
+        const destinoIndex = parseInt(stepSegment, 10);
+
+        const revealDestino = function() {
+            if ($destinoBody.length) {
+                $destinoBody.slideDown("slow");
+            }
+
+            if (!Number.isNaN(destinoIndex)) {
+                window.updateStepProgress(destinoIndex);
+            }
+
+            const $target = $(`#top_${stepSegment}`);
+            if ($target.length) {
+                $("html, body").animate({ scrollTop: $target.offset().top }, 500);
+            }
+        };
+
+        if ($origenBody.length && $origenBody.is(":visible")) {
+            $origenBody.slideUp("slow", revealDestino);
+        } else {
+            revealDestino();
+        }
+    };
+}
+
+function guardarConsulta(cuenta) {
+    return postDaiuPaso(rutasDaiu.guardarConsulta, { cuenta });
 }
 
 // Función para consultar la cuenta predial
@@ -29,17 +99,27 @@ function consultarPredial(cuenta) {
                 const predio = respuestaPredial[0];
                 fillFields(predio);
 
-                iziToast.success({
-                    message:
-                        "Predio encontrado: " +
-                        (predio.catcalle_nombre || "Sin calle"),
-                    closeOnEscape: true
-                });
+                guardarConsulta(cuenta)
+                    .done(function() {
+                        iziToast.success({
+                            message:
+                                "Predio encontrado: " +
+                                (predio.catcalle_nombre || "Sin calle"),
+                            closeOnEscape: true
+                        });
 
-                mostrarCard("card_1", "card_2");
-
-                $(".editable").prop("disabled", true);
-                $("#btn_editar_campos").show();
+                        mostrarCard("card_1", "card_2");
+                    })
+                    .fail(function(xhr) {
+                        const mensaje =
+                            xhr?.responseJSON?.message ||
+                            "No fue posible guardar la cuenta consultada.";
+                        iziToast.error({
+                            title: "Error", 
+                            message: mensaje,
+                            backgroundColor: "#ff9b93"
+                        });
+                    });
             } else {
                 iziToast.warning({
                     title: "Ups",
@@ -98,27 +178,75 @@ $(document).ready(function() {
             return;
         }
 
-        Swal.fire({
-            title: "¿Deseas hacer una consulta con esta cuenta?",
-            text: `Cuenta o CURT: ${cuenta}`,
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Sí, consultar",
-            cancelButtonText: "Cancelar",
-            confirmButtonColor: "#1E636D",
-            cancelButtonColor: "#d33"
-        }).then(result => {
-            if (result.isConfirmed) {
-                consultarPredial(cuenta);
-            }
+        iziToast.question({
+            timeout: false,
+            close: false,
+            overlay: true,
+            displayMode: "once",
+            title: "Confirmar consulta",
+            message: `¿Deseas consultar la cuenta?<br><strong>${cuenta}</strong>`,
+            position: "center",
+            buttons: [
+                [
+                    '<button class="btn btn-link text-muted">Cancelar</button>',
+                    function(instance, toast) {
+                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                    },
+                    true
+                ],
+                [
+                    '<button class="btn btn-primary">Sí, consultar</button>',
+                    function(instance, toast) {
+                        consultarPredial(cuenta);
+                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                    }
+                ]
+            ]
         });
     });
 
     // Manejo del botón "Continuar sin consultar"
     $("#continuar_sin_consulta").click(function() {
-        mostrarCard("card_1", "card_2");
-        $(".editable").prop("disabled", false);
-        $("#btn_inserta_2").prop("disabled", false);
-        $("#btn_editar_campos").hide();
+        const cuenta = $("#cuenta")
+            .val()
+            .trim();
+
+        if (cuenta.length === 0) {
+            mostrarCard("card_1", "card_2");
+            return;
+        }
+
+        if (cuenta.length !== 10 && cuenta.length !== 31) {
+            iziToast.warning({
+                title: "Formato incorrecto",
+                message:
+                    "Ingresa una cuenta de 10 dígitos o una CURT de 31 dígitos para guardarla.",
+                backgroundColor: "#ffd66b"
+            });
+            return;
+        }
+
+        guardarConsulta(cuenta)
+            .done(function() {
+                iziToast.success({
+                    title: "Cuenta registrada",
+                    message: "La referencia catastral se guardó correctamente.",
+                    position: "topRight",
+                    timeout: 2500
+                });
+                mostrarCard("card_1", "card_2");
+            })
+            .fail(function(xhr) {
+                const mensaje =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible guardar la cuenta. Intenta nuevamente.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensaje,
+                    backgroundColor: "#ff9b93"
+                });
+            });
     });
+
+    window.updateStepProgress(1);
 });
