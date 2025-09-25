@@ -276,12 +276,14 @@ $(document).ready(function() {
                 height: "400px"
             });
 
+
             if (view) {
                 if (typeof view.resize === "function") {
                     view.resize();
                 } else if (typeof view.requestRender === "function") {
                     view.requestRender();
                 }
+
 
                 view.goTo({
                     center: DEFAULT_CENTER,
@@ -315,7 +317,7 @@ $(document).ready(function() {
         }, 550);
     });
 
-    $("#btn_guardar_mapa").click(function(e) {
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
@@ -361,6 +363,11 @@ $(document).ready(function() {
                 position: "topRight"
             });
         }
+    });
+
+    $("#btn_inserta_5").on("click", function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_6");
     });
 
     function loadArcGISScript() {

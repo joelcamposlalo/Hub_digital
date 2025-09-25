@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     gap: 0;
     row-gap: 12px;
+
 }
 
 .step-item {
@@ -36,6 +37,7 @@
     border-color: #2fd099;
     color: #fff;
     box-shadow: 0 2px 4px rgba(47, 208, 153, 0.25);
+
 }
 
 .step-label {
@@ -53,6 +55,7 @@
     color: #1e636d;
     font-weight: 600;
 }
+
 
 .step-line {
     flex: 1 1 40px;
@@ -158,6 +161,7 @@ input[type="checkbox"] {
 }
 
 
+
 .document-note {
     background-color: #fff3cd;
     border: 1px solid #ffe69c;
@@ -206,12 +210,14 @@ input[type="checkbox"] {
 
 .document-description {
     min-width: 220px;
+
 }
 
 .document-title {
     display: block;
     font-weight: 600;
     color: #1e636d;
+
     margin-bottom: 4px;
 }
 
@@ -237,12 +243,14 @@ input[type="checkbox"] {
 
 .document-upload {
     text-align: right;
+
 }
 
 .document-upload-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     gap: 6px;
     padding: 8px 16px;
     border-radius: 4px;
@@ -257,6 +265,7 @@ input[type="checkbox"] {
 .document-upload-btn:hover {
     background-color: #f4a6b4;
     color: #96281b;
+
 }
 
 .document-upload-btn input {
@@ -298,10 +307,12 @@ input[type="checkbox"] {
 .map-actions {
     display: flex;
     justify-content: flex-end;
+
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
     text-align: center;
+
 }
 
 #map {
