@@ -88,9 +88,6 @@ $(document).ready(function() {
                     });
 
                     mostrarCard("card_1", "card_2");
-
-                    $(".editable").prop("disabled", true);
-                    $("#btn_editar_campos").show();
                 } else {
                     iziToast.warning({
                         title: "Ups",
@@ -114,18 +111,6 @@ $(document).ready(function() {
     }
 
     // ==== Eventos principales ====
-
-    // Deshabilitar campos inicialmente
-    $(".editable").prop("disabled", true);
-
-    $("#btn_editar_campos").click(function() {
-        $(".editable").prop("disabled", false);
-        $("#btn_inserta_2").prop("disabled", false);
-        iziToast.info({
-            message: "Ahora puedes editar los campos.",
-            position: "topRight"
-        });
-    });
 
     $("#form_1").submit(function(e) {
         e.preventDefault();
@@ -162,15 +147,10 @@ $(document).ready(function() {
 
     $("#continuar_sin_consulta").click(function() {
         mostrarCard("card_1", "card_2");
-        $(".editable").prop("disabled", false);
-        $("#btn_inserta_2").prop("disabled", false);
-        $("#btn_editar_campos").hide();
     });
 
     $("#btn_regresar").click(function() {
         mostrarCard("card_2", "card_1");
-        $(".editable").prop("disabled", true);
-        $("#btn_editar_campos").hide();
     });
 
     $("#form_2").submit(function(e) {

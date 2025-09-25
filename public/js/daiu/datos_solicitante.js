@@ -1,13 +1,4 @@
 $(document).ready(function() {
-    $("#btn_editar_campos").click(function() {
-        $(".editable").prop("disabled", false);
-        $("#btn_inserta_2").prop("disabled", false);
-        iziToast.info({
-            message: "Ahora puedes editar los campos.",
-            position: "topRight"
-        });
-    });
-
     $("#form_2").submit(function(e) {
         e.preventDefault();
 
@@ -44,7 +35,5 @@ $(document).ready(function() {
 
     $("#btn_regresar").click(function() {
         mostrarCard("card_2", "card_1");
-        $(".editable").prop("disabled", true);
-        $("#btn_editar_campos").hide();
     });
 });

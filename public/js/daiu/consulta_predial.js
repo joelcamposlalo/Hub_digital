@@ -37,9 +37,6 @@ function consultarPredial(cuenta) {
                 });
 
                 mostrarCard("card_1", "card_2");
-
-                $(".editable").prop("disabled", true);
-                $("#btn_editar_campos").show();
             } else {
                 iziToast.warning({
                     title: "Ups",
@@ -117,8 +114,5 @@ $(document).ready(function() {
     // Manejo del botón "Continuar sin consultar"
     $("#continuar_sin_consulta").click(function() {
         mostrarCard("card_1", "card_2");
-        $(".editable").prop("disabled", false);
-        $("#btn_inserta_2").prop("disabled", false);
-        $("#btn_editar_campos").hide();
     });
 });

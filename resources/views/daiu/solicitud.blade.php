@@ -20,6 +20,8 @@
     @include('daiu.partials.selector_adecuaciones', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.inmueble_informacion', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.croquis_mapa', ['id_solicitud' => $id_solicitud])
+    @include('daiu.partials.anexos_memoria', ['id_solicitud' => $id_solicitud])
+    @include('daiu.partials.documentacion', ['id_solicitud' => $id_solicitud])
 
 @endsection
 
@@ -49,4 +51,6 @@
     <script src="{{ asset('js/daiu/inmueble_informacion.js') }}"></script>
     <script src="https://js.arcgis.com/4.25/"></script>
     <script src="{{ asset('js/daiu/croquis_mapa.js') }}"></script>
+    <script src="{{ asset('js/daiu/anexos_memoria.js') }}"></script>
+    <script src="{{ asset('js/daiu/documentacion.js') }}"></script>
 @endsection

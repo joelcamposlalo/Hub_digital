@@ -2,7 +2,10 @@
     <div class="col mt-4" id="top_5">
         <div class="card shadow-sm card_5 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <small>Croquis del Mapa</small>
+                <div class="step-header">
+                    <span class="step-badge">5</span>
+                    <small class="step-title">Croquis</small>
+                </div>
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_5">
@@ -12,12 +15,23 @@
 
                     {{-- Botón para guardar la ubicación --}}
                     <div class="row mt-4">
-                        <div class="col-md-12 text-right">
-                            <button type="button" id="btn_guardar_mapa" class="ab-btn b-primary-color btn-style">
-                                Guardar Croquis
+                        <div class="col-md-12 d-flex justify-content-center flex-wrap gap-3">
+                            <button type="button" id="btn_limpiar_mapa"
+                                class="ab-btn b-secondary-color btn-style">
+                                Limpiar mapa y reiniciar el punto original
                             </button>
-                            <button type="button" id="btn_limpiar_mapa" class="ab-btn b-secondary-color btn-style ml-2">
-                                Limpiar Mapa
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 d-flex justify-content-center flex-wrap gap-3">
+                            <button type="button" id="btn_regresar_card5"
+                                class="ab-btn btn-primary-color btn-style">
+                                Regresar
+                            </button>
+                            <button type="button" id="btn_guardar_mapa"
+                                class="ab-btn b-primary-color btn-style">
+                                Continuar con anexos
                             </button>
                         </div>
                     </div>

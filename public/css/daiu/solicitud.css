@@ -9,6 +9,73 @@
     background-color: #154249 !important;
     color: white !important;
 }
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #1e636d;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.step-title {
+    font-weight: 600;
+    color: #1e636d;
+    font-size: 0.95rem;
+}
+
+.step-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.step-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #1e636d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #1e636d;
+    background-color: #fff;
+}
+
+.step-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.1;
+}
+
+.step-line {
+    flex: 0 0 50px;
+    height: 2px;
+    background-color: #d1d1d1;
+}
+
 .categoria-card {
     cursor: pointer;
     text-align: center;
@@ -82,6 +149,21 @@ input[type="checkbox"] {
 
 .iconos-lista-min{
     gap: 6px;
+}
+
+
+.anexos-check {
+    gap: 10px;
+}
+
+.anexos-check i {
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+.anexos-check .form-check-label {
+    margin-left: 10px;
+    line-height: 1.2;
 }
 
 
