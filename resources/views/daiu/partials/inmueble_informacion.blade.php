@@ -2,7 +2,10 @@
     <div class="col mt-4" id="top_4">
         <div class="card shadow-sm card_4 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <small>Información del inmueble</small>
+                <div class="step-header">
+                    <span class="step-badge">4</span>
+                    <small class="step-title">Inmueble</small>
+                </div>
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_4">

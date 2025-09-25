@@ -2,7 +2,12 @@
     <div class="col mt-4" id="top_6">
         <div class="card shadow-sm card_6 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <small>Anexos y memoria descriptiva</small>
+
+                <div class="step-header">
+                    <span class="step-badge">6</span>
+                    <small class="step-title">Anexos</small>
+                </div>
+
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_6">

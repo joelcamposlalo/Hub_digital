@@ -2,7 +2,10 @@
     <div class="col mt-4" id="top_2">
         <div class="card shadow-sm card_2 rounded border-none">
             <div class="card-header">
-                <small>Datos para la Verificación</small>
+                <div class="step-header">
+                    <span class="step-badge">2</span>
+                    <small class="step-title">Verificación</small>
+                </div>
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_2" data-parsley-validate="">

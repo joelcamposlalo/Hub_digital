@@ -2,7 +2,10 @@
     <div class="col mt-4" id="top_1">
         <div class="card  shadow-sm card_1 rounded border-none">
             <div class="card-header">
-                <small>Consulta Cuenta Predial</small>
+                <div class="step-header">
+                    <span class="step-badge">1</span>
+                    <small class="step-title">Consulta</small>
+                </div>
             </div>
             <div class="card-body">
                 <form id="form_1" method="POST" action="{{ route('consulta_predial') }}" data-parsley-validate="">

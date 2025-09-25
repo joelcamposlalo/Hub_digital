@@ -40,6 +40,9 @@ $(document).ready(function() {
             customClass: {
                 confirmButton: "ab-btn b-primary-color"
             }
+        }).then(() => {
+            mostrarCard("card_6", "card_7");
+
         });
     });
 });
