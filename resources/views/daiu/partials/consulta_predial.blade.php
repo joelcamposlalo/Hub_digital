@@ -2,7 +2,9 @@
     <div class="col mt-4" id="top_1">
         <div class="card  shadow-sm card_1 rounded border-none">
             <div class="card-header">
-                <small>Consulta Cuenta Predial</small>
+                <div class="step-card-title">
+                    <small class="step-card-label">Consulta</small>
+                </div>
             </div>
             <div class="card-body">
                 <form id="form_1" method="POST" action="{{ route('consulta_predial') }}" data-parsley-validate="">
@@ -17,12 +19,12 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-md-12 mt-2 text-right">
+                        <div class="col-md-12 mt-2 step-card-actions">
                             <button type="button" id="continuar_sin_consulta"
-                                class="ab-btn btn-secondary-color btn-style">
+                                class="ab-btn btn-secondary-color">
                                 Continuar sin consultar
                             </button>
-                            <button class="ab-btn b-primary-color continuar btn_inserta btn-style" id="btn_inserta"
+                            <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
                                 type="submit">
                                 Consulta Cuenta
                             </button>
