@@ -9,6 +9,7 @@
             <div class="card-body" style="display: none;">
                 <form id="form_7">
 
+
                     <div class="document-note mb-4">
                         <p class="mb-1">
                             <strong>Nota:</strong> Debes adjuntar todos los archivos obligatorios cuando la carga esté habilitada.
@@ -67,6 +68,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+
 
                     </div>
 

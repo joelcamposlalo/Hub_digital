@@ -5,7 +5,6 @@
     flex-wrap: wrap;
     gap: 0;
     row-gap: 12px;
-
 }
 
 .step-item {
@@ -37,7 +36,6 @@
     border-color: #2fd099;
     color: #fff;
     box-shadow: 0 2px 4px rgba(47, 208, 153, 0.25);
-
 }
 
 .step-label {
@@ -56,7 +54,6 @@
     font-weight: 600;
 }
 
-
 .step-line {
     flex: 1 1 40px;
     height: 2px;
@@ -69,6 +66,7 @@
 .step-line.is-complete {
     background-color: #2fd099;
 }
+
 
 .categoria-card {
     cursor: pointer;

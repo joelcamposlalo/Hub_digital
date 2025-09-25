@@ -1,10 +1,53 @@
 let map, view, marker, searchWidget, searchExpandControl;
 let isMarkerDragging = false;
 let skipNextSearchComplete = false;
+
+let arcgisLoaderPromise = null;
+
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
 const DEFAULT_ZOOM = 15;
 const MARKER_COLOR = "#1e636d";
 const MARKER_OUTLINE = "#000000";
+
+function loadArcGISScript() {
+    if (window.require && window.require.on && window.require.toUrl) {
+        return Promise.resolve();
+    }
+
+    if (arcgisLoaderPromise) {
+        return arcgisLoaderPromise;
+    }
+
+    arcgisLoaderPromise = new Promise(function(resolve, reject) {
+        const existingScript = document.querySelector("script[data-arcgis-loader]");
+
+        if (existingScript) {
+            existingScript.addEventListener("load", resolve, { once: true });
+            existingScript.addEventListener("error", function(event) {
+                arcgisLoaderPromise = null;
+                reject(event);
+            }, { once: true });
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://js.arcgis.com/4.25/";
+        script.async = true;
+        script.defer = true;
+        script.dataset.arcgisLoader = "true";
+        script.onload = function() {
+            resolve();
+        };
+        script.onerror = function(error) {
+            arcgisLoaderPromise = null;
+            reject(error);
+        };
+
+        document.head.appendChild(script);
+    });
+
+    return arcgisLoaderPromise;
+}
 
 function initMap() {
     if (map && view) {
@@ -295,9 +338,9 @@ $(document).ready(function() {
         };
 
         const inicializarMapa = function() {
-            const cargarAPI = window.require ? Promise.resolve() : loadArcGISScript();
 
-            return cargarAPI.then(function() {
+            return loadArcGISScript().then(function() {
+
                 return initMap();
             });
         };
@@ -364,19 +407,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    $("#btn_inserta_5").on("click", function(e) {
-        e.preventDefault();
-        mostrarCard("card_5", "card_6");
-    });
-
-    function loadArcGISScript() {
-        return new Promise(function(resolve, reject) {
-            const script = document.createElement("script");
-            script.src = "https://js.arcgis.com/4.25/";
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
-        });
-    }
 });
