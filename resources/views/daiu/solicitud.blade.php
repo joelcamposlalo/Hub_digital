@@ -55,5 +55,4 @@
     <script src="{{ asset('js/daiu/croquis_mapa.js') }}"></script>
     <script src="{{ asset('js/daiu/anexos_memoria.js') }}"></script>
     <script src="{{ asset('js/daiu/documentacion.js') }}"></script>
-
 @endsection

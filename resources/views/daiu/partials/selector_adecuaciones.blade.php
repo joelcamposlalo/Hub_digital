@@ -2,9 +2,11 @@
     <div class="col mt-4" id="top_3">
         <div class="card shadow-sm card_3 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="step-header">
-                    <span class="step-badge">3</span>
-                    <small class="step-title">Adecuaciones</small>
+
+                <div class="step-card-title">
+                    <span class="step-card-number">3</span>
+                    <small class="step-card-label">Adecuaciones</small>
+
                 </div>
             </div>
             <div class="card-body" style="display: none;">
@@ -145,10 +147,10 @@
 
                     <div class="text-right mt-4">
                         <button type="button" id="btn_regresar_card3"
-                            class="ab-btn btn-primary-color btn-style me-2">
+                            class="ab-btn btn-primary-color me-2">
                             Regresar a la verificación
                         </button>
-                        <button type="button" class="ab-btn b-primary-color btn-style" id="btn_inserta_3">
+                        <button type="button" class="ab-btn b-primary-color" id="btn_inserta_3">
                             Continuar
                         </button>
                     </div>

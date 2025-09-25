@@ -3,55 +3,13 @@
         <div class="card shadow-sm card_6 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
 
-                <div class="step-header">
-                    <span class="step-badge">6</span>
-                    <small class="step-title">Anexos</small>
+                <div class="step-card-title">
+                    <span class="step-card-number">6</span>
+                    <small class="step-card-label">Anexos y memoria</small>
                 </div>
-
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_6">
-                    {{-- Anexos --}}
-                    <div class="mb-4">
-                        <label class="d-block mb-2"><strong>Anexos requeridos</strong></label>
-                        <div class="row">
-                            @foreach ([
-                                'levantamiento_fotografico' => [
-                                    'label' => 'Levantamiento fotográfico',
-                                    'icon' => 'fa-camera'
-                                ],
-                                'cedula_licencia' => [
-                                    'label' => 'Cédula de licencia municipal para giro o anuncio (copia)',
-                                    'icon' => 'fa-id-card'
-                                ],
-                                'memoria_acciones' => [
-                                    'label' => 'Memoria descriptiva de las acciones a realizar',
-                                    'icon' => 'fa-file-lines'
-                                ],
-                                'plano_proyecto' => [
-                                    'label' => 'Plano a escala del proyecto arquitectónico (escala, digital o formato DWG versión 2018)',
-                                    'icon' => 'fa-drafting-compass'
-                                ],
-                                'fotografias_inmueble' => [
-                                    'label' => 'Fotografías digitales del inmueble y anexos de intervención',
-                                    'icon' => 'fa-images'
-                                ],
-                                'cotizacion_proveedor' => [
-                                    'label' => 'Cotización o presupuesto del proveedor (justificación)',
-                                    'icon' => 'fa-file-invoice-dollar'
-                                ],
-                            ] as $id => $item)
-                                <div class="col-md-6 col-lg-4 mb-3">
-                                    <div class="form-check anexos-check d-flex align-items-center">
-                                        <input type="checkbox" class="form-check-input" id="{{ $id }}" name="anexos[]"
-                                            value="{{ $id }}">
-                                        <i class="fas {{ $item['icon'] }} text-muted"></i>
-                                        <label class="form-check-label" for="{{ $id }}">{{ $item['label'] }}</label>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
 
                     {{-- Memoria descriptiva --}}
                     <div class="form-group">
@@ -102,10 +60,12 @@
                     </div>
 
                     <div class="text-right mt-4">
-                        <button type="button" id="btn_regresar_card6" class="ab-btn btn-primary-color btn-style me-2">
+
+                        <button type="button" id="btn_regresar_card6" class="ab-btn btn-primary-color me-2">
                             Regresar al croquis
                         </button>
-                        <button type="submit" class="ab-btn b-primary-color btn-style" id="btn_finalizar_solicitud">
+                        <button type="submit" class="ab-btn b-primary-color" id="btn_finalizar_solicitud">
+
                             Guardar información
                         </button>
                     </div>

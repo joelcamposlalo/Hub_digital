@@ -7,19 +7,6 @@ $(document).ready(function() {
     $("#form_6").on("submit", function(e) {
         e.preventDefault();
 
-        const anexosSeleccionados =
-            $("input[name='anexos[]']:checked").map(function() {
-                return $(this)
-                    .closest(".anexos-check")
-                    .find("label")
-                    .text()
-                    .trim();
-            }).get();
-
-        const resumen = [
-            anexosSeleccionados.length
-                ? `Anexos seleccionados: ${anexosSeleccionados.join(", ")}`
-                : "Sin anexos seleccionados",
             $("#memoria_descriptiva").val().trim()
                 ? "Memoria descriptiva capturada"
                 : "Sin memoria descriptiva",
@@ -30,19 +17,16 @@ $(document).ready(function() {
             $("#dim_fondo").val().trim()
                 ? "Dimensiones registradas"
                 : "Sin dimensiones de fachada"
-        ].join("\n");
 
-        Swal.fire({
-            icon: "success",
+        ].join("<br>");
+
+        iziToast.success({
             title: "Información guardada",
-            text: resumen,
-            confirmButtonText: "Aceptar",
-            customClass: {
-                confirmButton: "ab-btn b-primary-color"
-            }
-        }).then(() => {
-            mostrarCard("card_6", "card_7");
-
+            message: resumen,
+            position: "topRight",
+            timeout: 4000
         });
+
+        mostrarCard("card_6", "card_7");
     });
 });

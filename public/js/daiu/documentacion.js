@@ -17,17 +17,17 @@ $(document).ready(function() {
             .filter(Boolean);
 
         const mensaje = archivos.length
-            ? `Archivos seleccionados: ${archivos.join(", ")}`
+
+            ? `Archivos seleccionados:<br><strong>${archivos.join(", ")}</strong>`
             : "Aún no se han seleccionado archivos.";
 
-        Swal.fire({
-            icon: "info",
+        iziToast.info({
             title: "Documentación en maqueta",
-            text: `${mensaje} La carga final se habilitará próximamente.`,
-            confirmButtonText: "Entendido",
-            customClass: {
-                confirmButton: "ab-btn b-primary-color"
-            }
+            message: `${mensaje}<br>La carga final se habilitará próximamente.`,
+            position: "topRight",
+            timeout: 5000,
+            closeOnClick: true
+
         });
     });
 });

@@ -7,29 +7,40 @@ $(document).ready(function() {
                 .parsley()
                 .isValid()
         ) {
-            Swal.fire({
-                icon: "warning",
+            iziToast.warning({
                 title: "Campos incompletos",
-                text:
+                message:
                     "Por favor, llena todos los campos requeridos antes de continuar.",
-                confirmButtonColor: "#1E636D"
+                backgroundColor: "#ff9b93"
             });
             return;
         }
 
-        Swal.fire({
-            title: "¿Confirmas que los datos son correctos?",
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonText: "Sí, continuar",
-            cancelButtonText: "Revisar",
-            confirmButtonColor: "#1E636D",
-            cancelButtonColor: "#d33"
-        }).then(result => {
-            if (result.isConfirmed) {
-                mostrarCard("card_2", "card_3");
-                $("#btn_regresar_card3").show();
-            }
+        iziToast.question({
+            timeout: false,
+            close: false,
+            overlay: true,
+            displayMode: "once",
+            title: "Confirmar datos",
+            message: "¿Confirmas que los datos son correctos?",
+            position: "center",
+            buttons: [
+                [
+                    '<button class="btn btn-link text-muted">Revisar</button>',
+                    function(instance, toast) {
+                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                    },
+                    true
+                ],
+                [
+                    '<button class="btn btn-primary">Sí, continuar</button>',
+                    function(instance, toast) {
+                        mostrarCard("card_2", "card_3");
+                        $("#btn_regresar_card3").show();
+                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                    }
+                ]
+            ]
         });
     });
 
