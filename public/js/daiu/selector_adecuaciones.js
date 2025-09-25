@@ -52,14 +52,15 @@ $(document).ready(function() {
                     return $(this).val();
                 })
                 .get(),
-            gama: $("#gama").val().trim(),
-            molduras: $("#molduras").val().trim(),
-            macizo: $("#macizo").val().trim(),
-            marca_pintura: $("#marca_pintura").val().trim(),
-            otro_mantenimiento: $("#otro_mantenimiento").val().trim(),
-            dimensiones_toldo: $("#dimensiones_toldo").val().trim(),
-            otro_otro: $("#otro_otro").val().trim()
+            gama: ($("#gama").val() || "").trim(),
+            molduras: ($("#molduras").val() || "").trim(),
+            macizo: ($("#macizo").val() || "").trim(),
+            marca_pintura: ($("#marca_pintura").val() || "").trim(),
+            otro_mantenimiento: ($("#otro_mantenimiento").val() || "").trim(),
+            dimensiones_toldo: ($("#dimensiones_toldo").val() || "").trim(),
+            otro_otro: ($("#otro_otro").val() || "").trim()
         };
+
 
         postDaiuPaso(rutasDaiu.guardarAdecuaciones, payload)
             .done(function() {
