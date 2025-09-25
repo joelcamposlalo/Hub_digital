@@ -28,6 +28,7 @@
     color: #6c757d;
     background-color: #fff;
     transition: all 0.2s ease;
+
 }
 
 .step-item.is-current .step-circle,
@@ -157,7 +158,6 @@ input[type="checkbox"] {
     margin-left: 10px;
     line-height: 1.2;
 }
-
 
 
 .document-note {
