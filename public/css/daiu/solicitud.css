@@ -28,7 +28,6 @@
     color: #6c757d;
     background-color: #fff;
     transition: all 0.2s ease;
-
 }
 
 .step-item.is-current .step-circle,
@@ -63,7 +62,6 @@
     border-radius: 999px;
     transition: background-color 0.2s ease;
 }
-
 
 .step-line.is-complete {
     background-color: #2fd099;
@@ -134,16 +132,13 @@ input[type="checkbox"] {
     height: 100vh !important;
 }
 
-
-.iconos-lista{
+.iconos-lista {
     gap: 10px;
 }
 
-
-.iconos-lista-min{
+.iconos-lista-min {
     gap: 6px;
 }
-
 
 .anexos-check {
     gap: 10px;
@@ -158,7 +153,6 @@ input[type="checkbox"] {
     margin-left: 10px;
     line-height: 1.2;
 }
-
 
 .document-note {
     background-color: #fff3cd;
@@ -208,7 +202,6 @@ input[type="checkbox"] {
 
 .document-description {
     min-width: 220px;
-
 }
 
 .document-title {
@@ -241,7 +234,6 @@ input[type="checkbox"] {
 
 .document-upload {
     text-align: right;
-
 }
 
 .document-upload-btn {
@@ -263,7 +255,6 @@ input[type="checkbox"] {
 .document-upload-btn:hover {
     background-color: #f4a6b4;
     color: #96281b;
-
 }
 
 .document-upload-btn input {
@@ -287,6 +278,7 @@ input[type="checkbox"] {
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 12px;
+    align-items: baseline;
 }
 
 .btn-secondary-color,
@@ -310,7 +302,6 @@ input[type="checkbox"] {
     flex-wrap: wrap;
     gap: 12px;
     text-align: center;
-
 }
 
 #map {
@@ -332,4 +323,3 @@ input[type="checkbox"] {
 .esri-ui .esri-widget {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
-
