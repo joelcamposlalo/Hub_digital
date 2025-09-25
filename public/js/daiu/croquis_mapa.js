@@ -82,7 +82,7 @@ function initMap() {
         }
 
         function setupUIButtons() {
-            window.placeMarker = function(coords) {
+            window.placeMarker = function(coords, options = {}) {
                 if (!coords) return;
 
                 if (marker) {
@@ -111,14 +111,16 @@ function initMap() {
                               latitude: coords.latitude ?? coords.y
                           });
 
+                const zoomLevel = options.zoom ?? 16;
+
                 view.goTo({
                     target: point,
-                    zoom: 16
+                    zoom: zoomLevel
                 }).catch(function(error) {
                     if (error.name !== "view:goto-interrupted") {
                         console.warn("Error real en animación goTo:", error);
                         view.center = [point.longitude, point.latitude];
-                        view.zoom = 12;
+                        view.zoom = zoomLevel;
                     }
                 });
 
@@ -130,15 +132,13 @@ function initMap() {
             };
 
             window.clearMap = function() {
-                if (marker) {
-                    view.graphics.remove(marker);
-                    marker = null;
-                }
-                document.getElementById("coordinates-display").textContent = "";
-                view.goTo({
-                    center: DEFAULT_CENTER,
-                    zoom: DEFAULT_ZOOM
+                const defaultPoint = new Point({
+                    longitude: DEFAULT_CENTER[0],
+                    latitude: DEFAULT_CENTER[1]
                 });
+
+                placeMarker(defaultPoint, { zoom: DEFAULT_ZOOM });
+                updateCoordinatesDisplay(defaultPoint);
             };
         }
 
@@ -172,16 +172,8 @@ function initMap() {
                           latitude: geometry.latitude ?? geometry.y
                       });
 
-            placeMarker(point);
+            placeMarker(point, { zoom: 18 });
             updateCoordinatesDisplay(point);
-            view.goTo({
-                target: point,
-                zoom: 10
-            }).catch(function(error) {
-                console.warn("Error en animación goTo:", error);
-                view.center = [point.longitude, point.latitude];
-                view.zoom = 20;
-            });
         }
 
         function updateCoordinatesDisplay(coords) {
@@ -234,16 +226,30 @@ $(document).ready(function() {
     $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
-        if (coords) {
-            const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
-            const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
 
-            alert(`Ubicación guardada:\nLatitud: ${lat}\nLongitud: ${lng}`);
-        } else {
-            alert(
-                "Por favor, selecciona una ubicación en el mapa haciendo click o usando la búsqueda."
-            );
+        if (!coords) {
+            Swal.fire({
+                icon: "warning",
+                title: "Selecciona una ubicación",
+                text:
+                    "Por favor, coloca un punto en el mapa haciendo clic o utilizando la búsqueda.",
+                confirmButtonColor: "#1E636D"
+            });
+            return;
         }
+
+        const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
+        const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+
+        Swal.fire({
+            icon: "success",
+            title: "Croquis guardado",
+            text: `Latitud: ${lat}, Longitud: ${lng}`,
+            confirmButtonText: "Continuar",
+            confirmButtonColor: "#1E636D"
+        }).then(() => {
+            mostrarCard("card_5", "card_6");
+        });
     });
 
     $("#btn_limpiar_mapa").click(function(e) {
