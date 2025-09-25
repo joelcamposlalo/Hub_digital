@@ -35,6 +35,51 @@ $(document).ready(function() {
     // Al hacer clic en "Continuar", abrir la card de información del inmueble
     $("#btn_inserta_3").click(function(e) {
         e.preventDefault(); // Evitar el comportamiento por defecto del formulario
-        mostrarCard("card_3", "card_4"); // Mostrar la card de información del inmueble
+
+        const payload = {
+            mantenimiento: $("input[name='mantenimiento[]']:checked")
+                .map(function() {
+                    return $(this).val();
+                })
+                .get(),
+            anuncio: $("input[name='anuncio[]']:checked")
+                .map(function() {
+                    return $(this).val();
+                })
+                .get(),
+            otro: $("input[name='otro[]']:checked")
+                .map(function() {
+                    return $(this).val();
+                })
+                .get(),
+            gama: $("#gama").val().trim(),
+            molduras: $("#molduras").val().trim(),
+            macizo: $("#macizo").val().trim(),
+            marca_pintura: $("#marca_pintura").val().trim(),
+            otro_mantenimiento: $("#otro_mantenimiento").val().trim(),
+            dimensiones_toldo: $("#dimensiones_toldo").val().trim(),
+            otro_otro: $("#otro_otro").val().trim()
+        };
+
+        postDaiuPaso(rutasDaiu.guardarAdecuaciones, payload)
+            .done(function() {
+                iziToast.success({
+                    title: "Adecuaciones guardadas",
+                    message: "Tus selecciones se registraron correctamente.",
+                    position: "topRight",
+                    timeout: 3000
+                });
+                mostrarCard("card_3", "card_4"); // Mostrar la card de información del inmueble
+            })
+            .fail(function(xhr) {
+                const mensaje =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible guardar las adecuaciones. Intenta nuevamente.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensaje,
+                    backgroundColor: "#ff9b93"
+                });
+            });
     });
 });

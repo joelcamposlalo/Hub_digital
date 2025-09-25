@@ -20,6 +20,8 @@
     @include('daiu.partials.selector_adecuaciones', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.inmueble_informacion', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.croquis_mapa', ['id_solicitud' => $id_solicitud])
+    @include('daiu.partials.anexos_memoria', ['id_solicitud' => $id_solicitud])
+    @include('daiu.partials.documentacion', ['id_solicitud' => $id_solicitud])
 
 @endsection
 
@@ -42,6 +44,16 @@
     <script>
         const rutaConsultaPredial = "{{ route('consulta_predial') }}";
         const csrfToken = "{{ csrf_token() }}";
+        const idSolicitud = {{ $id_solicitud }};
+        const rutasDaiu = {
+            guardarConsulta: "{{ route('daiu.guardar.consulta') }}",
+            guardarVerificacion: "{{ route('daiu.guardar.verificacion') }}",
+            guardarAdecuaciones: "{{ route('daiu.guardar.adecuaciones') }}",
+            guardarInmueble: "{{ route('daiu.guardar.inmueble') }}",
+            guardarCroquis: "{{ route('daiu.guardar.croquis') }}",
+            guardarAnexos: "{{ route('daiu.guardar.anexos') }}",
+            guardarDocumentacion: "{{ route('daiu.guardar.documentacion') }}"
+        };
     </script>
     <script src="{{ asset('js/daiu/consulta_predial.js') }}"></script>
     <script src="{{ asset('js/daiu/datos_solicitante.js') }}"></script>
@@ -49,4 +61,6 @@
     <script src="{{ asset('js/daiu/inmueble_informacion.js') }}"></script>
     <script src="https://js.arcgis.com/4.25/"></script>
     <script src="{{ asset('js/daiu/croquis_mapa.js') }}"></script>
+    <script src="{{ asset('js/daiu/anexos_memoria.js') }}"></script>
+    <script src="{{ asset('js/daiu/documentacion.js') }}"></script>
 @endsection
