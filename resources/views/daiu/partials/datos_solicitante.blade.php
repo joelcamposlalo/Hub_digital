@@ -2,9 +2,11 @@
     <div class="col mt-4" id="top_2">
         <div class="card shadow-sm card_2 rounded border-none">
             <div class="card-header">
+
                 <div class="step-card-title">
                     <span class="step-card-number">2</span>
                     <small class="step-card-label">Verificación</small>
+
                 </div>
             </div>
             <div class="card-body" style="display: none;">
@@ -105,7 +107,9 @@
                             </button>
 
                             <!-- Botón para continuar -->
+
                             <button type="submit" class="ab-btn b-primary-color" id="btn_inserta_2">
+
                                 Continuar
                             </button>
                         </div>

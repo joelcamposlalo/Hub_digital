@@ -166,6 +166,8 @@ function initMap() {
 
                 const zoomLevel = options.zoom ?? 16;
 
+                const zoomLevel = options.zoom ?? 16;
+
                 view.goTo({
                     target: point,
                     zoom: zoomLevel
@@ -189,6 +191,7 @@ function initMap() {
                     longitude: DEFAULT_CENTER[0],
                     latitude: DEFAULT_CENTER[1],
                     spatialReference: { wkid: 4326 }
+
                 });
 
                 placeMarker(defaultPoint, { zoom: DEFAULT_ZOOM });
@@ -247,7 +250,9 @@ function initMap() {
                 return;
             }
 
+
             focusOnGeometry(result.feature.geometry, 18);
+
         }
 
         function updateCoordinatesDisplay(coords) {
@@ -300,22 +305,25 @@ $(document).ready(function() {
         }
     });
 
-    $("#btn_guardar_mapa").click(function(e) {
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
         if (!coords) {
+
             iziToast.warning({
                 title: "Selecciona una ubicación",
                 message:
                     "Coloca un punto en el mapa haciendo clic o utiliza la búsqueda para posicionarte.",
                 backgroundColor: "#ffd66b"
+
             });
             return;
         }
 
         const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
         const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+
 
         iziToast.success({
             title: "Croquis guardado",
@@ -346,6 +354,11 @@ $(document).ready(function() {
                 position: "topRight"
             });
         }
+    });
+
+    $("#btn_inserta_5").on("click", function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_6");
     });
 
     function loadArcGISScript() {

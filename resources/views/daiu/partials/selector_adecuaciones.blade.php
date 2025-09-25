@@ -2,9 +2,11 @@
     <div class="col mt-4" id="top_3">
         <div class="card shadow-sm card_3 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
+
                 <div class="step-card-title">
                     <span class="step-card-number">3</span>
                     <small class="step-card-label">Adecuaciones</small>
+
                 </div>
             </div>
             <div class="card-body" style="display: none;">

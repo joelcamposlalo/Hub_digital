@@ -21,7 +21,9 @@
     @include('daiu.partials.inmueble_informacion', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.croquis_mapa', ['id_solicitud' => $id_solicitud])
     @include('daiu.partials.anexos_memoria', ['id_solicitud' => $id_solicitud])
+
     @include('daiu.partials.documentacion', ['id_solicitud' => $id_solicitud])
+
 
 @endsection
 

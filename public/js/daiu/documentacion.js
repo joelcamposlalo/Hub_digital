@@ -17,6 +17,7 @@ $(document).ready(function() {
             .filter(Boolean);
 
         const mensaje = archivos.length
+
             ? `Archivos seleccionados:<br><strong>${archivos.join(", ")}</strong>`
             : "Aún no se han seleccionado archivos.";
 
@@ -26,6 +27,7 @@ $(document).ready(function() {
             position: "topRight",
             timeout: 5000,
             closeOnClick: true
+
         });
     });
 });
