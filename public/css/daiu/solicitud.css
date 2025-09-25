@@ -64,10 +64,10 @@
     transition: background-color 0.2s ease;
 }
 
+
 .step-line.is-complete {
     background-color: #2fd099;
 }
-
 
 .categoria-card {
     cursor: pointer;

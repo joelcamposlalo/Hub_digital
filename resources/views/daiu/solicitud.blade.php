@@ -44,6 +44,16 @@
     <script>
         const rutaConsultaPredial = "{{ route('consulta_predial') }}";
         const csrfToken = "{{ csrf_token() }}";
+        const idSolicitud = {{ $id_solicitud }};
+        const rutasDaiu = {
+            guardarConsulta: "{{ route('daiu.guardar.consulta') }}",
+            guardarVerificacion: "{{ route('daiu.guardar.verificacion') }}",
+            guardarAdecuaciones: "{{ route('daiu.guardar.adecuaciones') }}",
+            guardarInmueble: "{{ route('daiu.guardar.inmueble') }}",
+            guardarCroquis: "{{ route('daiu.guardar.croquis') }}",
+            guardarAnexos: "{{ route('daiu.guardar.anexos') }}",
+            guardarDocumentacion: "{{ route('daiu.guardar.documentacion') }}"
+        };
     </script>
     <script src="{{ asset('js/daiu/consulta_predial.js') }}"></script>
     <script src="{{ asset('js/daiu/datos_solicitante.js') }}"></script>

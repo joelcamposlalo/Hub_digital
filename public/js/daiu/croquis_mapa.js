@@ -1,7 +1,6 @@
 let map, view, marker, searchWidget, searchExpandControl;
 let isMarkerDragging = false;
 let skipNextSearchComplete = false;
-
 let arcgisLoaderPromise = null;
 
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
@@ -74,6 +73,7 @@ function initMap() {
                 center: DEFAULT_CENTER,
                 zoom: DEFAULT_ZOOM
             });
+
 
             view.when()
                 .then(function() {
@@ -309,8 +309,7 @@ function initMap() {
 }
 
 $(document).ready(function() {
-    $("#btn_inserta_4").click(function(e) {
-        e.preventDefault();
+    window.mostrarCroquisCard = function() {
         mostrarCard("card_4", "card_5");
 
         const mostrarMapa = function() {
@@ -319,14 +318,12 @@ $(document).ready(function() {
                 height: "400px"
             });
 
-
             if (view) {
                 if (typeof view.resize === "function") {
                     view.resize();
                 } else if (typeof view.requestRender === "function") {
                     view.requestRender();
                 }
-
 
                 view.goTo({
                     center: DEFAULT_CENTER,
@@ -338,7 +335,6 @@ $(document).ready(function() {
         };
 
         const inicializarMapa = function() {
-
             return loadArcGISScript().then(function() {
 
                 return initMap();
@@ -358,7 +354,8 @@ $(document).ready(function() {
                     });
                 });
         }, 550);
-    });
+    };
+
 
        $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
@@ -377,16 +374,33 @@ $(document).ready(function() {
         const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
         const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
 
-        iziToast.success({
-            title: "Croquis guardado",
-            message: `Latitud: ${lat}, Longitud: ${lng}`,
-            position: "topRight",
-            timeout: 3500
-        });
 
-        setTimeout(function() {
-            mostrarCard("card_5", "card_6");
-        }, 400);
+        postDaiuPaso(rutasDaiu.guardarCroquis, {
+            latitud: lat,
+            longitud: lng
+        })
+            .done(function() {
+                iziToast.success({
+                    title: "Croquis guardado",
+                    message: `Latitud: ${lat}, Longitud: ${lng}`,
+                    position: "topRight",
+                    timeout: 3500
+                });
+
+                setTimeout(function() {
+                    mostrarCard("card_5", "card_6");
+                }, 400);
+            })
+            .fail(function(xhr) {
+                const mensaje =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible guardar la ubicación seleccionada.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensaje,
+                    backgroundColor: "#ff9b93"
+                });
+            });
     });
 
     $("#btn_regresar_card5").click(function(e) {

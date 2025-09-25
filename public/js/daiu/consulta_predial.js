@@ -1,3 +1,27 @@
+
+if (!window.postDaiuPaso) {
+    window.postDaiuPaso = function(url, payload = {}) {
+        if (!url) {
+            return $.Deferred().reject().promise();
+        }
+
+        const data = Object.assign(
+            {
+                _token: csrfToken,
+                id_solicitud: idSolicitud
+            },
+            payload || {}
+        );
+
+        return $.ajax({
+            url: url,
+            method: "POST",
+            data: data,
+            dataType: "json"
+        });
+    };
+}
+
 if (!window.updateStepProgress) {
     window.updateStepProgress = function(activeStep) {
         const steps = document.querySelectorAll(".step-item");
@@ -48,6 +72,11 @@ if (!window.mostrarCard) {
     };
 }
 
+function guardarConsulta(cuenta) {
+    return postDaiuPaso(rutasDaiu.guardarConsulta, { cuenta });
+
+}
+
 // Función para consultar la cuenta predial
 function consultarPredial(cuenta) {
     $.ajax({
@@ -71,15 +100,28 @@ function consultarPredial(cuenta) {
             if (respuestaPredial.length > 0) {
                 const predio = respuestaPredial[0];
                 fillFields(predio);
+                guardarConsulta(cuenta)
+                    .done(function() {
+                        iziToast.success({
+                            message:
+                                "Predio encontrado: " +
+                                (predio.catcalle_nombre || "Sin calle"),
+                            closeOnEscape: true
+                        });
 
-                iziToast.success({
-                    message:
-                        "Predio encontrado: " +
-                        (predio.catcalle_nombre || "Sin calle"),
-                    closeOnEscape: true
-                });
+                        mostrarCard("card_1", "card_2");
+                    })
+                    .fail(function(xhr) {
+                        const mensaje =
+                            xhr?.responseJSON?.message ||
+                            "No fue posible guardar la cuenta consultada.";
+                        iziToast.error({
+                            title: "Error", 
+                            message: mensaje,
+                            backgroundColor: "#ff9b93"
+                        });
+                    });
 
-                mostrarCard("card_1", "card_2");
             } else {
                 iziToast.warning({
                     title: "Ups",
@@ -167,7 +209,47 @@ $(document).ready(function() {
 
     // Manejo del botón "Continuar sin consultar"
     $("#continuar_sin_consulta").click(function() {
-        mostrarCard("card_1", "card_2");
+
+        const cuenta = $("#cuenta")
+            .val()
+            .trim();
+
+        if (cuenta.length === 0) {
+            mostrarCard("card_1", "card_2");
+            return;
+        }
+
+        if (cuenta.length !== 10 && cuenta.length !== 31) {
+            iziToast.warning({
+                title: "Formato incorrecto",
+                message:
+                    "Ingresa una cuenta de 10 dígitos o una CURT de 31 dígitos para guardarla.",
+                backgroundColor: "#ffd66b"
+            });
+            return;
+        }
+
+        guardarConsulta(cuenta)
+            .done(function() {
+                iziToast.success({
+                    title: "Cuenta registrada",
+                    message: "La referencia catastral se guardó correctamente.",
+                    position: "topRight",
+                    timeout: 2500
+                });
+                mostrarCard("card_1", "card_2");
+            })
+            .fail(function(xhr) {
+                const mensaje =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible guardar la cuenta. Intenta nuevamente.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensaje,
+                    backgroundColor: "#ff9b93"
+                });
+            });
+
     });
 
     window.updateStepProgress(1);

@@ -7,6 +7,15 @@ $(document).ready(function() {
     $("#form_6").on("submit", function(e) {
         e.preventDefault();
 
+
+        const payload = {};
+        $(this)
+            .serializeArray()
+            .forEach(function(item) {
+                payload[item.name] = item.value;
+            });
+
+
         const resumen = [
             $("#memoria_descriptiva").val().trim()
                 ? "Memoria descriptiva capturada"
@@ -19,14 +28,28 @@ $(document).ready(function() {
                 ? "Dimensiones registradas"
                 : "Sin dimensiones de fachada"
         ].join("<br>");
+      
+        postDaiuPaso(rutasDaiu.guardarAnexos, payload)
+            .done(function() {
+                iziToast.success({
+                    title: "Información guardada",
+                    message: resumen,
+                    position: "topRight",
+                    timeout: 4000
+                });
 
-        iziToast.success({
-            title: "Información guardada",
-            message: resumen,
-            position: "topRight",
-            timeout: 4000
-        });
+                mostrarCard("card_6", "card_7");
+            })
+            .fail(function(xhr) {
+                const mensaje =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible guardar la información de anexos.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensaje,
+                    backgroundColor: "#ff9b93"
+                });
+            });
 
-        mostrarCard("card_6", "card_7");
     });
 });

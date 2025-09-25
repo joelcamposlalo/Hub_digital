@@ -6,26 +6,45 @@ $(document).ready(function() {
 
     $("#form_7").on("submit", function(e) {
         e.preventDefault();
+        const payload = {};
+        const archivos = [];
 
-        const archivos = $(this)
+        $(this)
             .find("input[type='file']")
-            .map(function() {
+            .each(function(index) {
                 const files = $(this)[0].files;
-                return files && files.length ? files[0].name : null;
-            })
-            .get()
-            .filter(Boolean);
+                const nombre = files && files.length ? files[0].name : "";
+                payload[`documento_${index}`] = nombre;
+                if (nombre) {
+                    archivos.push(nombre);
+                }
+            });
+
 
         const mensaje = archivos.length
             ? `Archivos seleccionados:<br><strong>${archivos.join(", ")}</strong>`
             : "Aún no se han seleccionado archivos.";
 
-        iziToast.info({
-            title: "Documentación en maqueta",
-            message: `${mensaje}<br>La carga final se habilitará próximamente.`,
-            position: "topRight",
-            timeout: 5000,
-            closeOnClick: true
-        });
+        postDaiuPaso(rutasDaiu.guardarDocumentacion, payload)
+            .done(function() {
+                iziToast.info({
+                    title: "Documentación en maqueta",
+                    message: `${mensaje}<br>La carga final se habilitará próximamente.`,
+                    position: "topRight",
+                    timeout: 5000,
+                    closeOnClick: true
+                });
+            })
+            .fail(function(xhr) {
+                const mensajeError =
+                    xhr?.responseJSON?.message ||
+                    "No fue posible registrar la documentación.";
+                iziToast.error({
+                    title: "Error",
+                    message: mensajeError,
+                    backgroundColor: "#ff9b93"
+                });
+            });
+
     });
 });
