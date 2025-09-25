@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     gap: 0;
     row-gap: 12px;
+
 }
 
 .step-item {
@@ -36,6 +37,7 @@
     border-color: #2fd099;
     color: #fff;
     box-shadow: 0 2px 4px rgba(47, 208, 153, 0.25);
+
 }
 
 .step-label {
@@ -53,6 +55,7 @@
     color: #1e636d;
     font-weight: 600;
 }
+
 
 .step-line {
     flex: 1 1 40px;
@@ -158,56 +161,111 @@ input[type="checkbox"] {
 }
 
 
-.document-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
 
-.document-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 16px;
-    border: 1px solid #e5e7eb;
+.document-note {
+    background-color: #fff3cd;
+    border: 1px solid #ffe69c;
     border-radius: 6px;
-    background-color: #fff;
+    padding: 16px 18px;
+    color: #856404;
 }
 
-.document-info {
-    flex: 1 1 260px;
+.document-note strong,
+.document-note a {
+    color: inherit;
+}
+
+.document-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.document-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.document-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.document-table td {
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+.document-icon {
+    width: 64px;
+    text-align: center;
+}
+
+.document-icon img {
+    width: 42px;
+    height: 42px;
+}
+
+.document-description {
+    min-width: 220px;
+
 }
 
 .document-title {
     display: block;
     font-weight: 600;
     color: #1e636d;
+
+    margin-bottom: 4px;
 }
 
-.document-hint {
+.document-required {
+    display: block;
     font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.document-required.text-danger {
+    color: #d9534f !important;
+}
+
+.document-required.text-success {
+    color: #28a745 !important;
+}
+
+.document-size {
+    font-size: 0.85rem;
     color: #6c757d;
+    min-width: 120px;
+}
+
+.document-upload {
+    text-align: right;
+
 }
 
 .document-upload-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 8px 18px;
+
+    gap: 6px;
+    padding: 8px 16px;
     border-radius: 4px;
-    background-color: #1e636d;
-    color: #fff;
+    background-color: #f7cad0;
+    color: #c0392b;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid #f1a7b0;
 }
 
 .document-upload-btn:hover {
-    background-color: #154249;
-    color: #fff;
+    background-color: #f4a6b4;
+    color: #96281b;
+
 }
 
 .document-upload-btn input {
@@ -249,8 +307,12 @@ input[type="checkbox"] {
 .map-actions {
     display: flex;
     justify-content: flex-end;
+
+    align-items: center;
     flex-wrap: wrap;
     gap: 12px;
+    text-align: center;
+
 }
 
 #map {

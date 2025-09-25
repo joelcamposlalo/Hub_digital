@@ -8,26 +8,66 @@
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_7">
-                    <p class="text-muted">Carga de documentos de prueba. En próximas iteraciones se añadirá la funcionalidad de almacenamiento.</p>
-                    <div class="document-list">
-                        @foreach ([
-                            'Identificación oficial',
-                            'Comprobante de domicilio',
-                            'Plano arquitectónico firmado',
-                            'Memoria descriptiva firmada'
-                        ] as $index => $label)
-                            <div class="document-item">
-                                <div class="document-info">
-                                    <span class="document-title">{{ $label }}</span>
-                                    <span class="document-hint">Sólo maqueta visual, sin carga real.</span>
-                                </div>
-                                <label for="documento_{{ $index }}" class="document-upload-btn">
-                                    <i class="fas fa-upload"></i>
-                                    <span>Seleccionar archivo</span>
-                                    <input type="file" id="documento_{{ $index }}" name="documento_{{ $index }}">
-                                </label>
-                            </div>
-                        @endforeach
+
+                    <div class="document-note mb-4">
+                        <p class="mb-1">
+                            <strong>Nota:</strong> Debes adjuntar todos los archivos obligatorios cuando la carga esté habilitada.
+                        </p>
+                        <p class="mb-0">Por ahora sólo es una maqueta visual, sin envío real de documentos.</p>
+                    </div>
+
+                    @php
+                        $documentos = [
+                            [
+                                'label' => 'Identificación oficial',
+                                'descripcion' => 'Credencial vigente del representante o propietario.',
+                                'obligatorio' => true,
+                            ],
+                            [
+                                'label' => 'Comprobante de domicilio',
+                                'descripcion' => 'Documento con antigüedad no mayor a 3 meses.',
+                                'obligatorio' => true,
+                            ],
+                            [
+                                'label' => 'Plano arquitectónico firmado',
+                                'descripcion' => 'Archivo en formato PDF o imagen con firmas correspondientes.',
+                                'obligatorio' => true,
+                            ],
+                            [
+                                'label' => 'Memoria descriptiva firmada',
+                                'descripcion' => 'Documento que describe la intervención propuesta.',
+                                'obligatorio' => false,
+                            ],
+                        ];
+                    @endphp
+
+                    <div class="document-table-wrapper">
+                        <table class="document-table">
+                            <tbody>
+                                @foreach ($documentos as $index => $documento)
+                                    <tr>
+                                        <td class="document-icon">
+                                            <img src="{{ asset('media/flaticon/archivos/upload.svg') }}" alt="Icono documento">
+                                        </td>
+                                        <td class="document-description">
+                                            <span class="document-title">{{ $documento['label'] }}</span>
+                                            <span class="text-muted d-block small">{{ $documento['descripcion'] }}</span>
+                                            <span class="document-required {{ $documento['obligatorio'] ? 'text-danger' : 'text-success' }}">
+                                                {{ $documento['obligatorio'] ? 'Este archivo es obligatorio' : 'Este archivo es opcional' }}
+                                            </span>
+                                        </td>
+                                        <td class="document-size">Tamaño: 0 bytes</td>
+                                        <td class="document-upload">
+                                            <label for="documento_{{ $index }}" class="document-upload-btn">
+                                                <span>Subir archivo</span>
+                                                <input type="file" id="documento_{{ $index }}" name="documento_{{ $index }}">
+                                            </label>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
 
                     <div class="step-card-actions mt-4">

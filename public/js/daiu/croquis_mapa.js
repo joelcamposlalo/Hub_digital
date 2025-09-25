@@ -276,8 +276,15 @@ $(document).ready(function() {
                 height: "400px"
             });
 
+
             if (view) {
-                view.resize();
+                if (typeof view.resize === "function") {
+                    view.resize();
+                } else if (typeof view.requestRender === "function") {
+                    view.requestRender();
+                }
+
+
                 view.goTo({
                     center: DEFAULT_CENTER,
                     zoom: DEFAULT_ZOOM
