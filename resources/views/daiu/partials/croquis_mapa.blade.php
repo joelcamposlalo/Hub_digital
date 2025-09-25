@@ -15,11 +15,14 @@
 
                     {{-- Botón para guardar la ubicación --}}
                     <div class="row mt-4">
+
                         <div class="col-md-12 d-flex justify-content-center flex-wrap gap-3">
+
                             <button type="button" id="btn_limpiar_mapa"
                                 class="ab-btn b-secondary-color btn-style">
                                 Limpiar mapa y reiniciar el punto original
                             </button>
+
                         </div>
                     </div>
 

@@ -42,6 +42,7 @@ $(document).ready(function() {
             }
         }).then(() => {
             mostrarCard("card_6", "card_7");
+
         });
     });
 });

@@ -223,7 +223,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#btn_guardar_mapa").click(function(e) {
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
@@ -252,6 +252,7 @@ $(document).ready(function() {
         });
     });
 
+    // 👉 Versión nueva de codex
     $("#btn_regresar_card5").click(function(e) {
         e.preventDefault();
         mostrarCard("card_5", "card_4");
@@ -266,6 +267,11 @@ $(document).ready(function() {
                 "El mapa no está listo aún. Espera un momento e intenta de nuevo."
             );
         }
+    });
+
+    $("#btn_inserta_5").on("click", function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_6");
     });
 
     function loadArcGISScript() {
