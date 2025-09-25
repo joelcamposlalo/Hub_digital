@@ -1,42 +1,48 @@
-let map, view, marker, searchWidget;
+let map, view, marker, searchWidget, searchExpandControl;
+let isMarkerDragging = false;
+let skipNextSearchComplete = false;
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
 const DEFAULT_ZOOM = 15;
 const MARKER_COLOR = "#1e636d";
 const MARKER_OUTLINE = "#000000";
 
 function initMap() {
-    require([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/widgets/Search",
-        "esri/Graphic",
-        "esri/core/reactiveUtils",
-        "esri/widgets/Expand",
-        "esri/geometry/Point"
-    ], function(Map, MapView, Search, Graphic, reactiveUtils, Expand, Point) {
-        map = new Map({
-            basemap: "streets-navigation-vector"
-        });
+    if (map && view) {
+        return view.when();
+    }
 
-        view = new MapView({
-            container: "map",
-            map: map,
-            center: DEFAULT_CENTER,
-            zoom: DEFAULT_ZOOM
-        });
-
-        view.when()
-            .then(function() {
-                console.log("MapView está listo y completamente cargado");
-
-                setupSearchWidget();
-                setupMapEvents();
-                setupUIButtons();
-            })
-            .catch(function(error) {
-                console.error("Error al cargar MapView:", error);
-                alert("Error al cargar el mapa. Por favor recarga la página.");
+    return new Promise(function(resolve, reject) {
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/widgets/Search",
+            "esri/Graphic",
+            "esri/core/reactiveUtils",
+            "esri/widgets/Expand",
+            "esri/geometry/Point"
+        ], function(Map, MapView, Search, Graphic, reactiveUtils, Expand, Point) {
+            map = new Map({
+                basemap: "streets-navigation-vector"
             });
+
+            view = new MapView({
+                container: "map",
+                map: map,
+                center: DEFAULT_CENTER,
+                zoom: DEFAULT_ZOOM
+            });
+
+            view.when()
+                .then(function() {
+                    setupSearchWidget();
+                    setupMapEvents();
+                    setupUIButtons();
+                    resolve();
+                })
+                .catch(function(error) {
+                    console.error("Error al cargar MapView:", error);
+                    reject(error);
+                });
 
         // Configurar el widget de búsqueda
         function setupSearchWidget() {
@@ -48,7 +54,7 @@ function initMap() {
             });
 
             // Crear un widget expandible para la búsqueda
-            const searchExpand = new Expand({
+            searchExpandControl = new Expand({
                 view: view,
                 content: searchWidget,
                 expandIconClass: "esri-icon-search",
@@ -56,19 +62,64 @@ function initMap() {
                 expanded: false
             });
 
-            view.ui.add(searchExpand, "top-right");
+            view.ui.add(searchExpandControl, "top-right");
 
             searchWidget.on("search-complete", function(event) {
                 handleSearchResults(event);
+            });
+
+            searchWidget.on("select-result", function(event) {
+                if (event.result?.feature?.geometry) {
+                    skipNextSearchComplete = true;
+                    focusOnGeometry(event.result.feature.geometry, 18);
+                }
             });
         }
 
         function setupMapEvents() {
             view.on("click", function(event) {
                 const coords = event.mapPoint;
-                console.log("Click en:", coords);
                 placeMarker(coords);
                 updateCoordinatesDisplay(coords);
+            });
+
+            view.on("pointer-down", function(event) {
+                if (!marker) return;
+
+                view.hitTest(event).then(function(response) {
+                    const hitMarker = response.results.some(result => result.graphic === marker);
+
+                    if (hitMarker) {
+                        isMarkerDragging = true;
+                        view.container.style.cursor = "grabbing";
+                        event.stopPropagation();
+                    }
+                });
+            });
+
+            view.on("pointer-move", function(event) {
+                if (!isMarkerDragging) return;
+
+                event.stopPropagation();
+                const point = view.toMap({ x: event.x, y: event.y });
+                if (point && marker) {
+                    marker.geometry = point;
+                    updateCoordinatesDisplay(point);
+                }
+            });
+
+            view.on("pointer-up", function(event) {
+                if (!isMarkerDragging) return;
+
+                event.stopPropagation();
+                const point = view.toMap({ x: event.x, y: event.y });
+                if (point && marker) {
+                    marker.geometry = point;
+                    updateCoordinatesDisplay(point);
+                }
+
+                isMarkerDragging = false;
+                view.container.style.cursor = "default";
             });
 
             reactiveUtils.watch(
@@ -82,14 +133,23 @@ function initMap() {
         }
 
         function setupUIButtons() {
-            window.placeMarker = function(coords) {
+            window.placeMarker = function(coords, options = {}) {
                 if (!coords) return;
 
+                const point =
+                    coords.type === "point"
+                        ? coords
+                        : new Point({
+                              longitude: coords.longitude ?? coords.x,
+                              latitude: coords.latitude ?? coords.y,
+                              spatialReference: coords.spatialReference || { wkid: 4326 }
+                          });
+
                 if (marker) {
-                    marker.geometry = coords;
+                    marker.geometry = point;
                 } else {
                     marker = new Graphic({
-                        geometry: coords,
+                        geometry: point,
                         symbol: {
                             type: "simple-marker",
                             color: MARKER_COLOR,
@@ -102,23 +162,20 @@ function initMap() {
                     view.graphics.add(marker);
                 }
 
-                // Crear un objeto Point válido (en caso de que no lo sea ya)
-                const point =
-                    coords.type === "point"
-                        ? coords
-                        : new Point({
-                              longitude: coords.longitude ?? coords.x,
-                              latitude: coords.latitude ?? coords.y
-                          });
+                if (view?.container) {
+                    view.container.style.cursor = "grab";
+                }
+
+                const zoomLevel = options.zoom ?? 16;
 
                 view.goTo({
                     target: point,
-                    zoom: 16
+                    zoom: zoomLevel
                 }).catch(function(error) {
                     if (error.name !== "view:goto-interrupted") {
                         console.warn("Error real en animación goTo:", error);
                         view.center = [point.longitude, point.latitude];
-                        view.zoom = 12;
+                        view.zoom = zoomLevel;
                     }
                 });
 
@@ -130,58 +187,69 @@ function initMap() {
             };
 
             window.clearMap = function() {
-                if (marker) {
-                    view.graphics.remove(marker);
-                    marker = null;
-                }
-                document.getElementById("coordinates-display").textContent = "";
-                view.goTo({
-                    center: DEFAULT_CENTER,
-                    zoom: DEFAULT_ZOOM
+                const defaultPoint = new Point({
+                    longitude: DEFAULT_CENTER[0],
+                    latitude: DEFAULT_CENTER[1],
+                    spatialReference: { wkid: 4326 }
                 });
+
+                placeMarker(defaultPoint, { zoom: DEFAULT_ZOOM });
+                updateCoordinatesDisplay(defaultPoint);
             };
         }
 
-        function handleSearchResults(event) {
-            if (
-                !event.results ||
-                event.results.length === 0 ||
-                !event.results[0].results ||
-                event.results[0].results.length === 0
-            ) {
-                alert(
-                    "No se encontró la dirección. Intenta con términos más específicos."
-                );
-                return;
-            }
-
-            const result = event.results[0].results[0];
-            if (!result?.feature?.geometry) {
-                alert("No se pudo obtener la ubicación de los resultados.");
-                return;
-            }
-
-            const geometry = result.feature.geometry;
-            console.log("Coordenadas encontradas:", geometry);
+        function focusOnGeometry(geometry, zoomLevel = 16) {
+            if (!geometry) return;
 
             const point =
                 geometry.type === "point"
                     ? geometry
                     : new Point({
                           longitude: geometry.longitude ?? geometry.x,
-                          latitude: geometry.latitude ?? geometry.y
+                          latitude: geometry.latitude ?? geometry.y,
+                          spatialReference: geometry.spatialReference || { wkid: 4326 }
                       });
 
-            placeMarker(point);
+            placeMarker(point, { zoom: zoomLevel });
             updateCoordinatesDisplay(point);
-            view.goTo({
-                target: point,
-                zoom: 10
-            }).catch(function(error) {
-                console.warn("Error en animación goTo:", error);
-                view.center = [point.longitude, point.latitude];
-                view.zoom = 20;
-            });
+
+            if (searchExpandControl) {
+                searchExpandControl.expanded = false;
+            }
+        }
+
+        function handleSearchResults(event) {
+            if (skipNextSearchComplete) {
+                skipNextSearchComplete = false;
+                return;
+            }
+
+            if (
+                !event.results ||
+                event.results.length === 0 ||
+                !event.results[0].results ||
+                event.results[0].results.length === 0
+            ) {
+                iziToast.warning({
+                    title: "Sin resultados",
+                    message:
+                        "No se encontró la dirección. Intenta con términos más específicos.",
+                    backgroundColor: "#ffd66b"
+                });
+                return;
+            }
+
+            const result = event.results[0].results[0];
+            if (!result?.feature?.geometry) {
+                iziToast.error({
+                    title: "Sin ubicación",
+                    message: "No se pudo obtener la ubicación de los resultados.",
+                    backgroundColor: "#ff9b93"
+                });
+                return;
+            }
+
+            focusOnGeometry(result.feature.geometry, 18);
         }
 
         function updateCoordinatesDisplay(coords) {
@@ -193,6 +261,7 @@ function initMap() {
                 display.textContent = `Latitud: ${lat}, Longitud: ${lng}`;
             }
         }
+        }, reject);
     });
 }
 
@@ -201,49 +270,78 @@ $(document).ready(function() {
         e.preventDefault();
         mostrarCard("card_4", "card_5");
 
-        $("#map").css({
-            display: "flex",
-            height: "400px"
-        });
+        const mostrarMapa = function() {
+            $("#map").css({
+                display: "block",
+                height: "400px"
+            });
 
-        if (!map || !view) {
-            if (!window.require) {
-                loadArcGISScript()
-                    .then(initMap)
-                    .catch(function(error) {
-                        console.error("Error al cargar ArcGIS API:", error);
-                        alert(
-                            "Error al cargar el mapa. Por favor recarga la página."
-                        );
-                    });
-            } else {
-                initMap();
-            }
-        } else {
-            setTimeout(() => {
+            if (view) {
+                view.resize();
                 view.goTo({
                     center: DEFAULT_CENTER,
                     zoom: DEFAULT_ZOOM
                 }).catch(function(error) {
                     console.warn("Error al centrar mapa:", error);
                 });
-            }, 100);
-        }
+            }
+        };
+
+        const inicializarMapa = function() {
+            const cargarAPI = window.require ? Promise.resolve() : loadArcGISScript();
+
+            return cargarAPI.then(function() {
+                return initMap();
+            });
+        };
+
+        setTimeout(function() {
+            inicializarMapa()
+                .then(mostrarMapa)
+                .catch(function(error) {
+                    console.error("Error al cargar ArcGIS API:", error);
+                    iziToast.error({
+                        title: "Error",
+                        message:
+                            "No fue posible cargar el mapa. Recarga la página e inténtalo nuevamente.",
+                        backgroundColor: "#ff9b93"
+                    });
+                });
+        }, 550);
     });
 
     $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
-        if (coords) {
-            const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
-            const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
 
-            alert(`Ubicación guardada:\nLatitud: ${lat}\nLongitud: ${lng}`);
-        } else {
-            alert(
-                "Por favor, selecciona una ubicación en el mapa haciendo click o usando la búsqueda."
-            );
+        if (!coords) {
+            iziToast.warning({
+                title: "Selecciona una ubicación",
+                message:
+                    "Coloca un punto en el mapa haciendo clic o utiliza la búsqueda para posicionarte.",
+                backgroundColor: "#ffd66b"
+            });
+            return;
         }
+
+        const lat = coords.latitude?.toFixed(6) || coords.y?.toFixed(6);
+        const lng = coords.longitude?.toFixed(6) || coords.x?.toFixed(6);
+
+        iziToast.success({
+            title: "Croquis guardado",
+            message: `Latitud: ${lat}, Longitud: ${lng}`,
+            position: "topRight",
+            timeout: 3500
+        });
+
+        setTimeout(function() {
+            mostrarCard("card_5", "card_6");
+        }, 400);
+    });
+
+    $("#btn_regresar_card5").click(function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_4");
     });
 
     $("#btn_limpiar_mapa").click(function(e) {
@@ -251,9 +349,12 @@ $(document).ready(function() {
         if (window.clearMap) {
             window.clearMap();
         } else {
-            alert(
-                "El mapa no está listo aún. Espera un momento e intenta de nuevo."
-            );
+            iziToast.info({
+                title: "Cargando mapa",
+                message:
+                    "El mapa aún se está inicializando. Espera un momento e intenta nuevamente.",
+                position: "topRight"
+            });
         }
     });
 
