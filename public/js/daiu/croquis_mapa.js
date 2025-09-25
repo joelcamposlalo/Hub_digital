@@ -1,7 +1,9 @@
 let map, view, marker, searchWidget, searchExpandControl;
 let isMarkerDragging = false;
 let skipNextSearchComplete = false;
+
 let arcgisLoaderPromise = null;
+
 const DEFAULT_CENTER = [-103.3918, 20.7236]; // Zapopan
 const DEFAULT_ZOOM = 15;
 const MARKER_COLOR = "#1e636d";
@@ -317,12 +319,14 @@ $(document).ready(function() {
                 height: "400px"
             });
 
+
             if (view) {
                 if (typeof view.resize === "function") {
                     view.resize();
                 } else if (typeof view.requestRender === "function") {
                     view.requestRender();
                 }
+
 
                 view.goTo({
                     center: DEFAULT_CENTER,
@@ -334,7 +338,9 @@ $(document).ready(function() {
         };
 
         const inicializarMapa = function() {
+
             return loadArcGISScript().then(function() {
+
                 return initMap();
             });
         };
@@ -354,7 +360,7 @@ $(document).ready(function() {
         }, 550);
     });
 
-    $("#btn_guardar_mapa").click(function(e) {
+       $("#btn_guardar_mapa").click(function(e) {
         e.preventDefault();
         const coords = window.getMarkerCoords();
 
@@ -401,5 +407,4 @@ $(document).ready(function() {
             });
         }
     });
-
 });
