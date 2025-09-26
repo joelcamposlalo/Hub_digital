@@ -22,7 +22,7 @@ $(document).ready(function() {
             .forEach(function(item) {
                 payload[item.name] = item.value;
             });
-
+      
         iziToast.question({
             timeout: false,
             close: false,

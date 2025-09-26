@@ -152,6 +152,14 @@ function consultarPredial(cuenta) {
             if (respuestaPredial.length > 0) {
                 const predio = respuestaPredial[0];
                 fillFields(predio);
+                guardarConsulta(cuenta)
+                    .done(function() {
+                        iziToast.success({
+                            message:
+                                "Predio encontrado: " +
+                                (predio.catcalle_nombre || "Sin calle"),
+                            closeOnEscape: true
+                        });
 
                 guardarConsulta(cuenta)
                     .done(function() {

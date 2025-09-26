@@ -73,6 +73,7 @@ class Dictamenes_daiu extends Controller
             'id_solicitud' => 'required|integer',
             'cuenta' => 'required|string',
             'id_captura' => 'nullable|integer'
+
         ]);
 
         $this->asegurarSolicitudDelUsuario((int) $datos['id_solicitud']);
@@ -124,6 +125,7 @@ class Dictamenes_daiu extends Controller
             'telefono' => 'nullable|string',
             'correo' => 'nullable|string',
             'id_captura' => 'nullable|integer'
+
         ]);
 
         $this->asegurarSolicitudDelUsuario((int) $datos['id_solicitud']);
@@ -409,6 +411,7 @@ class Dictamenes_daiu extends Controller
         $this->asegurarSolicitudDelUsuario((int) $datos['id_solicitud']);
 
         $campos = $request->except(['_token', 'id_solicitud']);
+      
         try {
             $idCaptura = $this->obtenerOcrearPrecarga((int) $datos['id_solicitud'], $request->input('id_captura'));
 
@@ -645,6 +648,7 @@ class Dictamenes_daiu extends Controller
 
         return implode(' ', $limpios);
     }
+
 
     private function limpiarValor($valor): string
     {
