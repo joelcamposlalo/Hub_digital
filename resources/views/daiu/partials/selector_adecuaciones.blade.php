@@ -2,10 +2,14 @@
     <div class="col mt-4" id="top_3">
         <div class="card shadow-sm card_3 rounded border-none">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <small>Selector de Adecuaciones</small>
+                <div class="step-card-title">
+                    <small class="step-card-label">Adecuaciones</small>
+                </div>
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_3">
+                    <input type="hidden" name="id_captura" class="daiu-id-captura"
+                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                     {{-- Selector de categorías --}}
                     <div class="form-group">
                         <label for="categoria_selector"><small>Selecciona una categoría:</small></label>
@@ -50,7 +54,7 @@
     ] as $id => $item)
                             <div class="form-check d-flex align-items-center iconos-lista mb-2">
                                 <input type="checkbox" class="form-check-input" id="{{ $id }}"
-                                    name="mantenimiento[]">
+                                    name="mantenimiento[]" value="{{ $id }}">
                                 <i class="fas {{ $item['icon'] }} text-muted"></i>
                                 <label class="form-check-label" for="{{ $id }}">{{ $item['label'] }}</label>
                             </div>
@@ -58,7 +62,8 @@
 
                         {{-- Pintura en fachada con inputs adicionales --}}
                         <div class="form-check d-flex align-items-center mb-2 iconos-lista-min ">
-                            <input type="checkbox" class="form-check-input" id="pintura_fachada" name="mantenimiento[]">
+                            <input type="checkbox" class="form-check-input" id="pintura_fachada" name="mantenimiento[]"
+                                value="pintura_fachada">
                             <i class="fas fa-paint-roller text-muted"></i>
                             <label class="form-check-label" for="pintura_fachada">Pintura en fachada</label>
                         </div>
@@ -100,14 +105,15 @@
     ] as $id => $item)
                             <div class="form-check d-flex align-items-center iconos-lista  mb-2">
                                 <input type="checkbox" class="form-check-input" id="{{ $id }}"
-                                    name="anuncio[]">
+                                    name="anuncio[]" value="{{ $id }}">
                                 <i class="fas {{ $item['icon'] }} text-muted"></i>
                                 <label class="form-check-label" for="{{ $id }}">{{ $item['label'] }}</label>
                             </div>
                         @endforeach
 
                         <div class="form-check d-flex align-items-center iconos-lista-min mb-2">
-                            <input type="checkbox" id="toldo_check" class="form-check-input" name="anuncio[]">
+                            <input type="checkbox" id="toldo_check" class="form-check-input" name="anuncio[]"
+                                value="toldo">
                             <i class="fas fa-umbrella text-muted"></i>
                             <label class="form-check-label" for="toldo_check">Toldo (previa obtención)</label>
                         </div>
@@ -128,7 +134,8 @@
         'adecuacion_general' => ['label' => 'Adecuación a la imagen urbana', 'icon' => 'fa-paint-roller'],
     ] as $id => $item)
                             <div class="form-check d-flex align-items-center iconos-lista  mb-2">
-                                <input type="checkbox" class="form-check-input" id="{{ $id }}" name="otro[]">
+                                <input type="checkbox" class="form-check-input" id="{{ $id }}" name="otro[]"
+                                    value="{{ $id }}">
                                 <i class="fas {{ $item['icon'] }} text-muted"></i>
                                 <label class="form-check-label" for="{{ $id }}">{{ $item['label'] }}</label>
                             </div>
@@ -140,12 +147,12 @@
                         </div>
                     </div>
 
-                    <div class="text-right mt-4">
+                    <div class="step-card-actions mt-4">
                         <button type="button" id="btn_regresar_card3"
-                            class="ab-btn btn-primary-color btn-style me-2">
+                            class="ab-btn btn-secondary-color">
                             Regresar a la verificación
                         </button>
-                        <button type="button" class="ab-btn b-primary-color btn-style" id="btn_inserta_3">
+                        <button type="button" class="ab-btn b-primary-color" id="btn_inserta_3">
                             Continuar
                         </button>
                     </div>
