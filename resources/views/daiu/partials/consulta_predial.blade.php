@@ -10,7 +10,7 @@
                 <form id="form_1" method="POST" action="{{ route('consulta_predial') }}" data-parsley-validate="">
                     @csrf
                     <input name="id_captura" id="id_captura" type="hidden"
-                        value="{{ isset($id_captura) ? $id_captura : '' }}">
+                        class="daiu-id-captura" value="{{ isset($id_captura) ? $id_captura : '' }}">
                     <div class="row">
                         <div class="col mt-2">
                             <label for="cuenta"><small>Consulta cuenta Predial O CURT</small></label>

@@ -8,6 +8,8 @@
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_6">
+                    <input type="hidden" name="id_captura" class="daiu-id-captura"
+                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                     {{-- Memoria descriptiva --}}
                     <div class="form-group">
                         <label for="memoria_descriptiva"><strong>Memoria descriptiva</strong></label>

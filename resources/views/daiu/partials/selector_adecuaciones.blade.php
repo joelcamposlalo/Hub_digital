@@ -8,6 +8,8 @@
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_3">
+                    <input type="hidden" name="id_captura" class="daiu-id-captura"
+                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                     {{-- Selector de categorías --}}
                     <div class="form-group">
                         <label for="categoria_selector"><small>Selecciona una categoría:</small></label>

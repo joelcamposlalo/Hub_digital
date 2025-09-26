@@ -9,7 +9,7 @@
             <div class="card-body" style="display: none;">
                 <form id="form_2" data-parsley-validate="">
                     <input name="id_captura" id="id_captura_2" type="hidden"
-                        value="{{ isset($id_captura) ? $id_captura : '' }}">
+                        class="daiu-id-captura" value="{{ isset($id_captura) ? $id_captura : '' }}">
                     <div class="row">
                         <div class="col mt-2">
                             <label for="nombre"><small>Nombre</small></label>
@@ -96,7 +96,8 @@
                         <div class="col-md-12 mt-2 step-card-actions">
                             <input name="origen" type="hidden" value="solicitud">
                             <input name="id_captura" id="id_captura_frm4" type="hidden"
-                                value="{{ isset($id_captura) ? $id_captura : '' }}">
+                                class="daiu-id-captura" value="{{ isset($id_captura) ? $id_captura : '' }}">
+
 
                             <!-- Botón para regresar -->
                             <button type="button" id="btn_regresar" class="ab-btn btn-secondary-color mt-4">

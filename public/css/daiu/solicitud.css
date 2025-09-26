@@ -304,12 +304,186 @@ input[type="checkbox"] {
     text-align: center;
 }
 
+.anexos-check {
+    gap: 10px;
+}
+
+.anexos-check i {
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+.anexos-check .form-check-label {
+    margin-left: 10px;
+    line-height: 1.2;
+}
+
+
+.document-note {
+    background-color: #fff3cd;
+    border: 1px solid #ffe69c;
+    border-radius: 6px;
+    padding: 16px 18px;
+    color: #856404;
+}
+
+.document-note strong,
+.document-note a {
+    color: inherit;
+}
+
+.document-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.document-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.document-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.document-table td {
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+.document-icon {
+    width: 64px;
+    text-align: center;
+}
+
+.document-icon img {
+    width: 42px;
+    height: 42px;
+}
+
+.document-description {
+    min-width: 220px;
+}
+
+.document-title {
+    display: block;
+    font-weight: 600;
+    color: #1e636d;
+    margin-bottom: 4px;
+}
+
+.document-required {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.document-required.text-danger {
+    color: #d9534f !important;
+}
+
+.document-required.text-success {
+    color: #28a745 !important;
+}
+
+.document-size {
+    font-size: 0.85rem;
+    color: #6c757d;
+    min-width: 120px;
+}
+
+.document-upload {
+    text-align: right;
+}
+
+.document-upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #f7cad0;
+    color: #c0392b;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid #f1a7b0;
+}
+
+.document-upload-btn:hover {
+    background-color: #f4a6b4;
+    color: #96281b;
+}
+
+.document-upload-btn input {
+    display: none;
+}
+
+.step-card-title {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+}
+
+.step-card-label {
+    font-weight: 600;
+    color: #1e636d;
+    font-size: 0.95rem;
+}
+
+.step-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn-secondary-color,
+.b-secondary-color {
+    background-color: #f2f4f8 !important;
+    color: #5f6b7a !important;
+    border: 1px solid #d7dfe3 !important;
+}
+
+.btn-secondary-color:hover,
+.b-secondary-color:hover {
+    background-color: #e2e7ef !important;
+    color: #334155 !important;
+}
+
+.map-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    text-align: center;
+}
+
 #map {
     width: 100%;
     min-height: 400px;
     background-color: #f0f0f0;
     border: 1px solid #ddd;
     border-radius: 8px;
+}
+
+#coordinates-display {
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    display: inline-block;
+}
+
+.esri-ui .esri-widget {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 #coordinates-display {

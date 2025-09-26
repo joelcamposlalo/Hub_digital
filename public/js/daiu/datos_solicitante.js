@@ -22,8 +22,7 @@ $(document).ready(function() {
             .forEach(function(item) {
                 payload[item.name] = item.value;
             });
-
-
+      
         iziToast.question({
             timeout: false,
             close: false,
@@ -65,7 +64,6 @@ $(document).ready(function() {
                                     backgroundColor: "#ff9b93"
                                 });
                             });
-
                     }
                 ]
             ]

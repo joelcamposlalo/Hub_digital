@@ -36,6 +36,10 @@ $(document).ready(function() {
     $("#btn_inserta_3").click(function(e) {
         e.preventDefault(); // Evitar el comportamiento por defecto del formulario
 
+        const safeTrim = function(selector) {
+            const value = $(selector).val();
+            return typeof value === "string" ? value.trim() : "";
+        };
         const payload = {
             mantenimiento: $("input[name='mantenimiento[]']:checked")
                 .map(function() {
@@ -52,15 +56,14 @@ $(document).ready(function() {
                     return $(this).val();
                 })
                 .get(),
-            gama: ($("#gama").val() || "").trim(),
-            molduras: ($("#molduras").val() || "").trim(),
-            macizo: ($("#macizo").val() || "").trim(),
-            marca_pintura: ($("#marca_pintura").val() || "").trim(),
-            otro_mantenimiento: ($("#otro_mantenimiento").val() || "").trim(),
-            dimensiones_toldo: ($("#dimensiones_toldo").val() || "").trim(),
-            otro_otro: ($("#otro_otro").val() || "").trim()
+            gama: safeTrim("#gama"),
+            molduras: safeTrim("#molduras"),
+            macizo: safeTrim("#macizo"),
+            marca_pintura: safeTrim("#marca_pintura"),
+            otro_mantenimiento: safeTrim("#otro_mantenimiento"),
+            dimensiones_toldo: safeTrim("#dimensiones_toldo"),
+            otro_otro: safeTrim("#otro_otro")
         };
-
 
         postDaiuPaso(rutasDaiu.guardarAdecuaciones, payload)
             .done(function() {

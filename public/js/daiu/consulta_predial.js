@@ -1,3 +1,36 @@
+const DAIU_CAPTURA_SELECTOR = "input.daiu-id-captura";
+
+function leerCapturaDesdeInputs() {
+    let captura = null;
+
+    document.querySelectorAll(DAIU_CAPTURA_SELECTOR).forEach(function(input) {
+        if (captura) {
+            return;
+        }
+
+        const valor = (input.value || "").trim();
+        if (valor !== "") {
+            captura = valor;
+        }
+    });
+
+    return captura;
+}
+
+function sincronizarCapturaInputs(idCaptura) {
+    const valor = idCaptura ? String(idCaptura) : "";
+    window.daiuCapturaId = valor !== "" ? valor : null;
+
+    document.querySelectorAll(DAIU_CAPTURA_SELECTOR).forEach(function(input) {
+        input.value = valor;
+    });
+}
+
+if (typeof window.daiuCapturaId === "undefined" || window.daiuCapturaId === null) {
+    window.daiuCapturaId = leerCapturaDesdeInputs();
+}
+
+window.sincronizarCapturaInputs = sincronizarCapturaInputs;
 
 if (!window.postDaiuPaso) {
     window.postDaiuPaso = function(url, payload = {}) {
@@ -13,12 +46,32 @@ if (!window.postDaiuPaso) {
             payload || {}
         );
 
-        return $.ajax({
+        if (
+            !Object.prototype.hasOwnProperty.call(data, "id_captura") ||
+            data.id_captura === null ||
+            data.id_captura === "" ||
+            typeof data.id_captura === "undefined"
+        ) {
+            const capturaActual = window.daiuCapturaId || leerCapturaDesdeInputs();
+            if (capturaActual) {
+                data.id_captura = capturaActual;
+            }
+        }
+
+        const request = $.ajax({
             url: url,
             method: "POST",
             data: data,
             dataType: "json"
         });
+
+        request.done(function(respuesta) {
+            if (respuesta && Object.prototype.hasOwnProperty.call(respuesta, "id_captura")) {
+                sincronizarCapturaInputs(respuesta.id_captura);
+            }
+        });
+
+        return request;
     };
 }
 
@@ -74,7 +127,6 @@ if (!window.mostrarCard) {
 
 function guardarConsulta(cuenta) {
     return postDaiuPaso(rutasDaiu.guardarConsulta, { cuenta });
-
 }
 
 // Función para consultar la cuenta predial
@@ -109,6 +161,15 @@ function consultarPredial(cuenta) {
                             closeOnEscape: true
                         });
 
+                guardarConsulta(cuenta)
+                    .done(function() {
+                        iziToast.success({
+                            message:
+                                "Predio encontrado: " +
+                                (predio.catcalle_nombre || "Sin calle"),
+                            closeOnEscape: true
+                        });
+
                         mostrarCard("card_1", "card_2");
                     })
                     .fail(function(xhr) {
@@ -121,7 +182,6 @@ function consultarPredial(cuenta) {
                             backgroundColor: "#ff9b93"
                         });
                     });
-
             } else {
                 iziToast.warning({
                     title: "Ups",
@@ -209,7 +269,6 @@ $(document).ready(function() {
 
     // Manejo del botón "Continuar sin consultar"
     $("#continuar_sin_consulta").click(function() {
-
         const cuenta = $("#cuenta")
             .val()
             .trim();
@@ -249,7 +308,6 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
-
     });
 
     window.updateStepProgress(1);

@@ -8,6 +8,8 @@
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_4">
+                    <input type="hidden" name="id_captura" class="daiu-id-captura"
+                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                     <div class="row">
                         <div class="col-md-6">
                             {{-- Dimensión total de la fachada --}}

@@ -8,6 +8,8 @@
             </div>
             <div class="card-body" style="display: none;">
                 <form id="form_5">
+                    <input type="hidden" name="id_captura" class="daiu-id-captura"
+                        value="{{ isset($id_captura) ? $id_captura : '' }}">
                     {{-- Contenedor del mapa --}}
                     <div id="map"></div>
                     <div id="coordinates-display" class="mt-2 text-muted small"></div>
