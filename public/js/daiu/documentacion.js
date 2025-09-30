@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     $("#form_7").on("submit", function(e) {
         e.preventDefault();
-
         const payload = {};
         const archivos = [];
 

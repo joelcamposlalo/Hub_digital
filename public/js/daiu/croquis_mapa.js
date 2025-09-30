@@ -93,6 +93,10 @@ function initMap() {
                 popupEnabled: false,
                 includeDefaultSources: true
             });
+            view.graphics.add(marker);
+        } else {
+            marker.geometry = point;
+        }
 
             // Crear un widget expandible para la búsqueda
             searchExpandControl = new Expand({
@@ -116,6 +120,7 @@ function initMap() {
                 }
             });
         }
+    });
 
         function setupMapEvents() {
             view.on("click", function(event) {
@@ -304,7 +309,6 @@ function initMap() {
         }
         }, reject);
     });
-}
 
 $(document).ready(function() {
     window.mostrarCroquisCard = function() {
@@ -396,6 +400,13 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
+
+    });
+
+    $("#btn_regresar_card5").click(function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_4");
+
     });
 
     $("#btn_regresar_card5").click(function(e) {
@@ -403,8 +414,10 @@ $(document).ready(function() {
         mostrarCard("card_5", "card_4");
     });
 
+    // Botón limpiar mapa
     $("#btn_limpiar_mapa").click(function(e) {
         e.preventDefault();
+
         if (window.clearMap) {
             window.clearMap();
         } else {
