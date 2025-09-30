@@ -54,7 +54,7 @@ class Dictamenes_daiu extends Controller
         } else {
             return response()->json(['msg' => 'La cuenta debe tener 10 o 31 dígitos.'], 422);
         }
-       
+
         if ($result && count($result) > 0) {
 
             return response()->json($result);
@@ -69,6 +69,7 @@ class Dictamenes_daiu extends Controller
 
     public function guardarConsulta(Request $request)
     {
+     
         $datos = $request->validate([
             'id_solicitud' => 'required|integer',
             'cuenta' => 'required|string',
@@ -167,6 +168,7 @@ class Dictamenes_daiu extends Controller
 
     public function guardarAdecuaciones(Request $request)
     {
+
         $datos = $request->validate([
             'id_solicitud' => 'required|integer',
             'mantenimiento' => 'nullable|array',

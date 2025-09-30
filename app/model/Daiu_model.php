@@ -48,7 +48,7 @@ class Daiu_model extends Model
     }
 
 
-    
+
 
     public static function get_files($id_solicitud)
     {
@@ -118,24 +118,6 @@ class Daiu_model extends Model
             'estatus' => 'pendiente',
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static function actualiza_datos_solicitud($request, $id_tramite, $id_solicitud,  $etapa, $id_captura)
     {

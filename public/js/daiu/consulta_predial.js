@@ -161,15 +161,6 @@ function consultarPredial(cuenta) {
                             closeOnEscape: true
                         });
 
-                guardarConsulta(cuenta)
-                    .done(function() {
-                        iziToast.success({
-                            message:
-                                "Predio encontrado: " +
-                                (predio.catcalle_nombre || "Sin calle"),
-                            closeOnEscape: true
-                        });
-
                         mostrarCard("card_1", "card_2");
                     })
                     .fail(function(xhr) {
@@ -177,7 +168,7 @@ function consultarPredial(cuenta) {
                             xhr?.responseJSON?.message ||
                             "No fue posible guardar la cuenta consultada.";
                         iziToast.error({
-                            title: "Error", 
+                            title: "Error",
                             message: mensaje,
                             backgroundColor: "#ff9b93"
                         });
