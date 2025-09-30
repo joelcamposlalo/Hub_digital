@@ -635,5 +635,12 @@ Route::middleware(['ciudadano'])->group(function () {
     Route::get('Dictamenes_daiu/solicitud', [Dictamenes_daiu::class, 'solicitud']);
     Route::post('Dictamenes_daiu/consulta_predial', [Dictamenes_daiu::class, 'consultaCuenta'])->name('consulta_predial');
     Route::post('Dictamenes_daiu/informacion_inmueble', [Dictamenes_daiu::class, 'informacion_inmueble'])->name('informacion_inmueble');
+    Route::post('Dictamenes_daiu/guardar-consulta', [Dictamenes_daiu::class, 'guardarConsulta'])->name('daiu.guardar.consulta');
+    Route::post('Dictamenes_daiu/guardar-verificacion', [Dictamenes_daiu::class, 'guardarVerificacion'])->name('daiu.guardar.verificacion');
+    Route::post('Dictamenes_daiu/guardar-adecuaciones', [Dictamenes_daiu::class, 'guardarAdecuaciones'])->name('daiu.guardar.adecuaciones');
+    Route::post('Dictamenes_daiu/guardar-inmueble', [Dictamenes_daiu::class, 'guardarInmueble'])->name('daiu.guardar.inmueble');
+    Route::post('Dictamenes_daiu/guardar-croquis', [Dictamenes_daiu::class, 'guardarCroquis'])->name('daiu.guardar.croquis');
+    Route::post('Dictamenes_daiu/guardar-anexos', [Dictamenes_daiu::class, 'guardarAnexos'])->name('daiu.guardar.anexos');
+    Route::post('Dictamenes_daiu/guardar-documentacion', [Dictamenes_daiu::class, 'guardarDocumentacion'])->name('daiu.guardar.documentacion');
 
 });
