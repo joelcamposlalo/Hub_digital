@@ -25,7 +25,7 @@
                                 Continuar sin consultar
                             </button>
                             <button class="ab-btn b-primary-color continuar btn_inserta" id="btn_inserta"
-                                type="submit">
+                                type="button">
                                 Consulta Cuenta
                             </button>
                         </div>

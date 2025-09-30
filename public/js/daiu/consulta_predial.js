@@ -220,51 +220,59 @@ function fillFields(predio) {
     $("#correo").val("");
 }
 
+function solicitarConsultaCuenta() {
+    const cuenta = $("#cuenta")
+        .val()
+        .trim();
+    const cuentaValida = cuenta.length === 10 || cuenta.length === 31;
+
+    if (!cuentaValida) {
+        iziToast.show({
+            title: "⚠️",
+            message: "Debes ingresar una cuenta de 10 dígitos o una CURT de 31 dígitos.",
+            backgroundColor: "#ff9b93"
+        });
+        return;
+    }
+
+    iziToast.question({
+        timeout: false,
+        close: false,
+        overlay: true,
+        displayMode: "once",
+        title: "Confirmar consulta",
+        message: `¿Deseas consultar la cuenta?<br><strong>${cuenta}</strong>`,
+        position: "center",
+        buttons: [
+            [
+                '<button class="btn btn-link text-muted">Cancelar</button>',
+                function(instance, toast) {
+                    instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                },
+                true
+            ],
+            [
+                '<button class="btn btn-primary">Sí, consultar</button>',
+                function(instance, toast) {
+                    consultarPredial(cuenta);
+                    instance.hide({ transitionOut: "fadeOut" }, toast, "button");
+                }
+            ]
+        ]
+    });
+}
+
 // Eventos principales
 $(document).ready(function() {
     // Manejo del formulario de consulta
-    $("#form_1").submit(function(e) {
+    $("#form_1").on("submit", function(e) {
         e.preventDefault();
-        const cuenta = $("#cuenta")
-            .val()
-            .trim();
-        const cuentaValida = cuenta.length === 10 || cuenta.length === 31;
+        solicitarConsultaCuenta();
+    });
 
-        if (!cuentaValida) {
-            iziToast.show({
-                title: "⚠️",
-                message:
-                    "Debes ingresar una cuenta de 10 dígitos o una CURT de 31 dígitos.",
-                backgroundColor: "#ff9b93"
-            });
-            return;
-        }
-
-        iziToast.question({
-            timeout: false,
-            close: false,
-            overlay: true,
-            displayMode: "once",
-            title: "Confirmar consulta",
-            message: `¿Deseas consultar la cuenta?<br><strong>${cuenta}</strong>`,
-            position: "center",
-            buttons: [
-                [
-                    '<button class="btn btn-link text-muted">Cancelar</button>',
-                    function(instance, toast) {
-                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
-                    },
-                    true
-                ],
-                [
-                    '<button class="btn btn-primary">Sí, consultar</button>',
-                    function(instance, toast) {
-                        consultarPredial(cuenta);
-                        instance.hide({ transitionOut: "fadeOut" }, toast, "button");
-                    }
-                ]
-            ]
-        });
+    $("#btn_inserta").on("click", function(e) {
+        e.preventDefault();
+        solicitarConsultaCuenta();
     });
 
     // Manejo del botón "Continuar sin consultar"
@@ -309,6 +317,5 @@ $(document).ready(function() {
                 });
             });
     });
-
     window.updateStepProgress(1);
 });

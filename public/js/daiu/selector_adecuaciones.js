@@ -40,6 +40,7 @@ $(document).ready(function() {
             const value = $(selector).val();
             return typeof value === "string" ? value.trim() : "";
         };
+
         const payload = {
             mantenimiento: $("input[name='mantenimiento[]']:checked")
                 .map(function() {

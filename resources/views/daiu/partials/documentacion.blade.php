@@ -10,7 +10,6 @@
                 <form id="form_7">
                     <input type="hidden" name="id_captura" class="daiu-id-captura"
                         value="{{ isset($id_captura) ? $id_captura : '' }}">
-
                     <div class="document-note mb-4">
                         <p class="mb-1">
                             <strong>Nota:</strong> Debes adjuntar todos los archivos obligatorios cuando la carga esté habilitada.

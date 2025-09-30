@@ -98,7 +98,6 @@
                             <input name="id_captura" id="id_captura_frm4" type="hidden"
                                 class="daiu-id-captura" value="{{ isset($id_captura) ? $id_captura : '' }}">
 
-
                             <!-- Botón para regresar -->
                             <button type="button" id="btn_regresar" class="ab-btn btn-secondary-color mt-4">
                                 Regresar a la consulta

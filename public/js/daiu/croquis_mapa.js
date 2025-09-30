@@ -119,7 +119,6 @@ function initMap() {
                     focusOnGeometry(event.result.feature.geometry, 18);
                 }
             });
-
         }
     });
 
@@ -401,6 +400,13 @@ $(document).ready(function() {
                     backgroundColor: "#ff9b93"
                 });
             });
+
+    });
+
+    $("#btn_regresar_card5").click(function(e) {
+        e.preventDefault();
+        mostrarCard("card_5", "card_4");
+
     });
 
     $("#btn_regresar_card5").click(function(e) {
