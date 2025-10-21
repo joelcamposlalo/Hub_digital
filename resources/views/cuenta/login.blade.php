@@ -56,7 +56,7 @@
 
     <div class="contenedor border shadow-sm">
         <form id="form" action="{{url('cuenta/auth')}}" method="post" class="left">
-            <h2 class="font font-500" style="color: #090910;">Iniciar sesión</h4>
+            <h2 class="font font-500" style="color: #090910; margin-bottom: 50px;">Iniciar sesión</h4>
                 @csrf
 
                 <!-- Alert -->
